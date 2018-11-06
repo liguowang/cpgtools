@@ -1,0 +1,6 @@
+cython>=0.17
+numpy
+pysam
+bx-python
+pyBigWig
+sklearn

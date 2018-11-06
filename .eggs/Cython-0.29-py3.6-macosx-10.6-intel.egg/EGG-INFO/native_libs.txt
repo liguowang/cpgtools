@@ -1,0 +1,8 @@
+Cython/Compiler/FlowControl.cpython-36m-darwin.so
+Cython/Compiler/FusedNode.cpython-36m-darwin.so
+Cython/Compiler/Scanning.cpython-36m-darwin.so
+Cython/Compiler/Visitor.cpython-36m-darwin.so
+Cython/Plex/Actions.cpython-36m-darwin.so
+Cython/Plex/Scanners.cpython-36m-darwin.so
+Cython/Runtime/refnanny.cpython-36m-darwin.so
+Cython/Tempita/_tempita.cpython-36m-darwin.so
