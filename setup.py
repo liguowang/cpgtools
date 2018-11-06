@@ -6,11 +6,10 @@ from setuptools import *
 Setup script for CpGtools  -- Tools to analyze and visualize DNA methylation data (WGBS, RRBS, 850K/450K array).
 """
 
-	
-
 def main():
 	setup(  name = "CpGtools",
 			version = "0.1.0",
+                        python_requires='>=3.5',
 			py_modules = [ 'psyco_full' ],
 			packages = find_packages( 'lib' ),
 			package_dir = { '': 'lib' },
