@@ -1,0 +1,582 @@
+#!/usr/bin/env python
+'''DNA/protein motif visualization and scan'''
+
+#import built-in modules
+import sys,os
+import string
+from collections import defaultdict
+from scipy import stats 
+import itertools
+
+#import third-party modules
+import numpy as np
+from MI import Mutual_information2,Mutual_information1
+#changes to the paths
+
+#changing history to this module
+
+
+__author__ = "Liguo Wang"
+__copyright__ = ""
+__credits__ = []
+__license__ = "GPLv2"
+__version__ = "1.0.0"
+__maintainer__ = "Liguo Wang"
+__email__ = "Wang.Liguo@mayo.edu"
+__status__ = "Development" #Prototype or Production
+
+class PSSM (object):
+	'''
+	Description: provides functions to manipulate Position-Specific Scoring Matrix (PSSM) 
+	such as PFM, PPM, PWM matrix.
+	'''
+	
+	def __init__(self, sites, dna = True, name = None, rv = False):
+		'''
+		Initialize object.
+		Must be DNA or protein (dna = False) sequences.
+		dna = True: DNA sequence
+		dna = False: protein sequence
+		rv (reverse complementary): only applied to DNA sequence. 
+		
+		Each row contains a single sequence and each sequence has the same length.
+		Lowercase in sequence is automatically converted into uppercase.
+
+		Input example (test.sites):
+			GAGGTAAAC
+			TCCGTAAGT
+			CAGGTTGGA
+			ACAGTCAGT
+			TAGGTCATT
+			TAGGTACTG
+			ATGGTAACT
+			CAGGTATAC
+			TGTGTGAGT
+			AAGGTAAGT	
+		'''
+		if dna:
+			self.seq_type = 'DNA'
+		else:
+			self.seq_type = 'PROTEIN'
+		if name is None:
+			self.motif_name = 'Unknown'
+		else:
+			self.motif_name = name
+		if rv:
+			tab = string.maketrans('ACGT','TGCA')
+		self.seq_count = 0.0
+		self.data = defaultdict(dict)	#base_position (column of .sites): base_type : base_count
+		self.raw_data = defaultdict(list)	#base_position: list of ACGT in each column
+		self.seq_lengths = set()
+		self.DNA_bases = ['A','C','G','T']
+		self.protein_bases = ['A','R','N','D','C','Q','E','G','H','I','L','K','M','F','P','S','T','W','Y','V']
+		
+		for l in open(sites,'r'):
+			if l.startswith('#'):continue
+			if l.startswith('>'):continue
+			l = l.strip(' \r\n').upper()
+			
+			# check if all bases are valid symbols
+			skip = False
+			if self.seq_type == 'DNA':
+				for b in l:
+					if b not in  self.DNA_bases:
+						print >>sys.stderr, "Uncognize DNA base: \"%s\" in %s. Skipped." % (b,l)
+						skip = True
+						break
+			elif self.seq_type == 'PROTEIN':
+				for b in l:
+					if b not in  self.protein_bases:
+						print >>sys.stderr, "Uncognize DNA base: \"%s\" in %s. Skipped." % (b,l)
+						skip = True
+						break
+			if skip:
+				continue			
+			
+			self.seq_lengths.add(len(l))
+			self.seq_count += 1
+			
+			if rv:
+				l = l.translate(tab)[::-1]
+			
+			# read sites into dict(dict)
+			for i,v in enumerate(l):
+				self.raw_data[i].append(v)
+				if v not in self.data[i]:
+					self.data[i][v] = 1.0
+				else:
+					self.data[i][v] += 1.0
+		
+		# check if all sequences have the same length
+		if len(self.seq_lengths) != 1:
+			print >>sys.stderr, "Sequence lengths are not equal!"
+			sys.exit(1)
+		else:
+			self.motif_length =self.seq_lengths.pop()
+	
+	def motif_length(self):
+		'''
+		Return the motif length (nt)
+		'''
+		return self.motif_length	
+	
+	def toPFM(self,print_it=False):
+		'''
+		Convert motif sites data into position frequency matrix (PFM)	
+		'''	
+		pfm = []
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases		
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.transpose(np.array(pfm))
+		if print_it:
+			print "\n\n# PSSM matrix"
+			print 'Base\t' + '\t'.join([str(i+1) for i in range(self.motif_length)])
+			for i,name in enumerate(bases):
+				print name + '\t' + '\t'.join([str(j) for j in pfm[i]])
+		return pfm		
+
+	def toJaspar(self):
+		'''
+		Convert motif sites data into Jaspar format (.pfm)
+		
+		Jaspar format example:
+			> Mycn
+			A [ 0 29 0 2 0 0 ]
+			C [31 0 30 1 3 0 ]
+			G [ 0 0 0 28 0 31]
+			T [ 0 2 1 0 28 0 ]		
+		'''	
+		pfm = []
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases		
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.transpose(np.array(pfm))
+		print '> %s' % self.motif_name
+		for i,b in enumerate(bases):
+			print b + ' [ ' + ' '.join([str(j) for j in pfm[i]]) + ']'
+	
+	def toRawPSSM(self):
+		'''
+		Convert motif sites data into raw PSSM format (.pfm)
+		
+		raw PSSM format example:
+			>Mync
+			0 31 0 0
+			29 0 0 2
+			0 30 0 1
+			2 1 28 0
+			0 3 0 28
+			0 0 31 0		
+		'''	
+		pfm = []
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases		
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.array(pfm)
+		print '>%s' % self.motif_name
+		for i in range(self.motif_length):
+			print ' '.join([str(j) for j in pfm[i]])
+
+	def toMEME(self,pseudocount=0.8):
+		'''
+		Convert motif sites data into meme's position-specific probability matrix
+		
+		MEME format example:
+			------------------------
+			Motif 2 position-specific probability matrix
+			------------------------
+			letter-probability matrix: alength= 4 w= 6 nsites= 31
+			0 31 0 0
+			29 0 0 2
+			0 30 0 1
+			2 1 28 0
+			0 3 0 28
+			0 0 31 0		
+		'''	
+		pfm = []
+		ppm = []
+
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file			
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.transpose(np.array(pfm))
+		pfm = pfm + pseudocount/4.0
+		ppm = pfm/pfm.sum(axis=0)			
+		
+		ppm = np.transpose(ppm)
+		
+		print '-'*40
+		print  self.motif_name + ' position-specific probability matrix'
+		print '-'*40
+		print 'letter-probability matrix: alength= %d w= %d nsites= %d' % (len(bases), self.motif_length, self.seq_count)
+		for i in ppm:
+			print ' ' + ' '.join([str(j) for j in i])
+		
+	def toPPM(self,print_it=False,pseudocount=0.8):
+		'''
+		Convert motif sites data into position probability matrix (PPM)
+		Default pseudocount of 0.8 is determined from this paper:
+		http://nar.oxfordjournals.org/content/37/3/939.full
+		'''	
+		pfm = []
+		ppm = []
+
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file			
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.transpose(np.array(pfm))
+		pfm = pfm + pseudocount/4.0
+		ppm = pfm/pfm.sum(axis=0)			
+		if print_it:
+			print "\n\n# PPM matrix"
+			print 'Base\t' + '\t'.join([str(i+1) for i in range(self.motif_length)])
+			for i,name in enumerate(bases):
+				print name + '\t' + '\t'.join([str(j) for j in ppm[i]])
+		return ppm		
+
+	def toPWM(self,print_it=False,pseudocount=0.8, bg=None):
+		'''
+		Convert motif sites data into position weight matrix (PWM)
+		PWM is a matrix of log likelihood between sites and background.
+		
+		Default pseudocount of 0.8 is determined from this paper:
+		http://nar.oxfordjournals.org/content/37/3/939.full
+		
+		if bg is "None", universal background will be used:
+		 * DNA:
+		 	A = C = G = T = 0.25 (i.e. 1/4)
+		 * Protein
+		 	A = R = N = ... = V = 0.05 (i.e. 1/20)
+		 
+		 Otherwise, bg is a dictionary with base as key and the corresponding
+		 base frequency as value. eg
+		 
+		 bg = {'A':0.23, 'C':0.26,'G':0.29,'T':0.22}
+		
+		'''	
+		pwm = []
+		pfm = []
+		ppm = []
+		background = {}
+		
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases
+		
+		#determine background frequency
+		if bg is None:
+			for b in bases:
+				background[b] = 1.0/len(bases)
+						
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.transpose(np.array(pfm))
+		pfm = pfm + pseudocount/4.0
+		ppm = pfm/pfm.sum(axis=0)		
+		
+		for i,name in enumerate(bases):
+			tmp = [np.log(j/background[name]) for j in ppm[i]]
+			pwm.append(tmp)
+		
+		if print_it:
+			print "\n\n# PWM matrix"
+			print 'Base\t' + '\t'.join([str(i+1) for i in range(self.motif_length)])
+			for i,name in enumerate(bases):
+				print name + '\t' + '\t'.join([str(np.log(j/background[name])) for j in ppm[i]])
+		return pwm		
+
+	def toEntropy(self,pseudocount=0.8,print_it=False):
+		'''
+		Calculate Shannon's entropy for each position of motif
+		'''	
+		pfm = []
+		ppm = []
+		entropy = []
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases
+		
+		
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file			
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+			
+		pfm = np.array(pfm)
+		#print pfm
+		pfm = pfm + pseudocount/4.0
+		#print pfm
+		ppm = pfm/pfm.sum(axis=1)[:,None]		
+		#print ppm	
+		#en = (1.0/(np.log(2))) * ((len(bases) - 1.0)/(2* self.seq_count))
+		en = 0
+		for i in range(self.motif_length):
+			tmp = []
+			H = -np.sum([f * np.log2(f) for f in ppm[i]])
+			R = np.log2(len(bases)) - (H + en)
+			tmp = [R* v for v in ppm[i]]
+			entropy.append(tmp)
+		if print_it:
+			print "\n\n# entropy matrix"
+			print '\t'.join(['Position','H(A)','H(C)','H(G)','H(T)'])
+			for i in range(self.motif_length):
+				print str(i+1) +'\t' + '\t'.join([str(j) for j in entropy[i]])
+		return np.array(entropy)		
+	
+	def calc_MI(self, print_it=False):
+		'''
+		Calculate mutual information between any two columns of motif
+		'''
+		matMI = np.zeros((self.motif_length,self.motif_length))
+
+		for i in np.arange(self.motif_length):
+			for j in np.arange(i+1,self.motif_length):
+				matMI[i,j] =  Mutual_information2(self.raw_data[i],self.raw_data[j])
+		
+		
+		if print_it:
+			print '\t'+'\t'.join([str(i) for i in range(1,self.motif_length+1)])
+			for i in range(self.motif_length):
+				print str(i+1) + '\t',
+				print  '\t'.join([str(j) for j in matMI[i]])
+
+	
+	def calc_chisquare1(self, print_it=False,pseudocount=0.8,debug=False):
+		'''
+		Use Chi-square test to evaluate the independency between any two columns of motif
+		return two matric:
+			-log10(P-value). if P-value = 0, let -log10(P-value) = 1000.0
+			Chi-square statistics
+		Chi-square P-value is calculated based on single nucleotide frequencies of two positions.
+		'''
+		mat_p = np.zeros((self.motif_length,self.motif_length))	#matrix of pvalues calculated from chi-square test
+		mat_s = np.zeros((self.motif_length,self.motif_length))	#matrix of statistics calculated from chi-square test
+		
+		pfm = []
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+		else:
+			bases = self.protein_bases		
+			
+		for i in range(self.motif_length):	# i is motif position starting from 0
+			tmp = []	# list of base_count for each column of sites file
+			for b in bases:
+				if b in self.data[i]:
+					tmp.append(self.data[i][b])
+				else:
+					tmp.append(0.0)
+			pfm.append(tmp)
+		pfm = np.array(pfm)
+		pfm = pfm + pseudocount/4.0		
+		# fill mat_p
+		for i in np.arange(self.motif_length):
+			for j in np.arange(i+1,self.motif_length):
+				tmp = stats.chi2_contingency([pfm[i],pfm[j]])		#chi2, p, dof, ex = chi2_contingency(obs, correction=False)
+				
+				s = tmp[0]
+				mat_s[i,j] = s
+				
+				p = tmp[1]
+				if p > 0:
+					mat_p[i,j] = -np.log10(p)
+				elif p == 0:
+					mat_p[i,j] = 1000
+				
+				if debug:
+					print >>sys.stderr, i, pfm[i]
+					print >>sys.stderr, j,pfm[j]
+					a =  -np.log10(p)
+					print >>sys.stderr, a
+
+		if print_it:
+			print "\n\n# Pvalues matrix"
+			print '\t'+'\t'.join([str(i) for i in range(1,self.motif_length+1)])
+			for i in range(self.motif_length):
+				print str(i+1) + '\t',
+				print  '\t'.join([str(j) for j in mat_p[i]])
+			
+			print "\n\n# Statistics matrix"
+			print '\t'+'\t'.join([str(i) for i in range(1,self.motif_length+1)])
+			for i in range(self.motif_length):
+				print str(i+1) + '\t',
+				print  '\t'.join([str(j) for j in mat_s[i]])
+			
+		return(mat_p, mat_s)
+
+	def calc_chisquare2(self, print_it=False,debug=False):
+		'''
+		Use Chi-square test to evaluate the independency between any two columns of motif
+		return two matric:
+			-log10(P-value). if P-value = 0, let -log10(P-value) = 1000.0
+			Chi-square statistics
+		
+		Chi-square P-value is calculated based on di-nucleotide frequencies.
+		
+		'''
+		mat_p = np.zeros((self.motif_length,self.motif_length))	#matrix of pvalues calculated from chi-square test
+		mat_s = np.zeros((self.motif_length,self.motif_length))	#matrix of statistics calculated from chi-square test
+		
+		dinucleotide_freq_init = {}
+		if self.seq_type == 'DNA':
+			bases = self.DNA_bases
+			for i in self.DNA_bases:
+				for j in self.DNA_bases:
+					dinucleotide_freq_init[i + j] = 0
+		else:
+			bases = self.protein_bases		
+			for i in self.protein_bases:
+				for j in self.protein_bases:
+					dinucleotide_freq_init[i + j] = 0			
+		
+		
+		# fill mat_p
+		for i in np.arange(self.motif_length):
+			for j in np.arange(i+1,self.motif_length):
+				#dinucleotide_freq = dinucleotide_freq_init.copy()
+				dinucleotide_freq = defaultdict(int)
+				for m,n in zip(self.raw_data[i],self.raw_data [j]):
+					dinucleotide_freq[m + n] += 1
+				
+				tmp = stats.chisquare(dinucleotide_freq.values())	#chi2, p, dof, ex = chi2_contingency(obs, correction=False)
+				
+				#print i + 1
+				#print j +1
+				#print dinucleotide_freq
+				
+				mat_s[i,j] = tmp[0] / len(dinucleotide_freq)	#chi-square score
+				#mat_s[i,j] = tmp[0] 	#chi-square score
+				
+				p = tmp[1]
+				if p > 0:
+					mat_p[i,j] = -np.log10(p)
+				elif p == 0:
+					mat_p[i,j] = 1000
+				
+				if debug:
+					print >>sys.stderr, i, pfm[i]
+					print >>sys.stderr, j,pfm[j]
+					a =  -np.log10(p)
+					print >>sys.stderr, a
+				
+		if print_it:
+			print "\n\n# Pvalues matrix"
+			print '\t'+'\t'.join([str(i) for i in range(1,self.motif_length+1)])
+			for i in range(self.motif_length):
+				print str(i+1) + '\t',
+				print  '\t'.join([str(j) for j in mat_p[i]])
+			
+			print "\n\n# Statistics matrix"
+			print '\t'+'\t'.join([str(i) for i in range(1,self.motif_length+1)])
+			for i in range(self.motif_length):
+				print str(i+1) + '\t',
+				print  '\t'.join([str(j) for j in mat_s[i]])
+			
+		return(mat_p, mat_s)
+
+	
+from imotif import PSSM
+if __name__=='__main__':
+	
+	#print PFM matrix for test.sites
+	#a.toPFM(print_it=True)	
+	
+	#print PPM matrix for test.sites
+	#a.toPPM(print_it=True)	
+	
+	#print PWM matrix for test.sites
+	#b = a.toPWM(print_it=True)	
+	
+	#print entropy
+	#a.toEntropy(print_it=True)
+	
+	#convert .sites into Jaspar format
+	#a.toJaspar()
+	
+	#convert .sites into raw PSSM format
+	#a.toRawPSSM()
+	
+	#convert .sites into MEME format
+	#a.toMEME()
+	
+	
+	a = PSSM(sites='JasparCTCF.sites',name='CTCF')
+	entropy = a.toEntropy(print_it=True)
+	ppm = a.toPPM(print_it=True)
+	#(pmat,smat) = a.calc_chisquare(print_it=False)	#pmat: matrix of -log10(p); smat: matrix of chi-square statistics
+	#print entropy	# nested python list [[a,b,c],[d,e,f],...]
+	
+	#print pmat		# nested python list [[a,b,c],[d,e,f],...]
+	#print smat			# nested python list [[a,b,c],[d,e,f],...]
+	#print np.shape(smat)
+
+		

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program calculates the overall methylation level (i.e. average beta value) across 
-intragenic regions (5'UTR exon, CDS exon, intron, 3'UTR exon) and the neighboring up- and
-down-stream intergenic regions.
+This program calculates the average methylation level (i.e. average beta value) across 
+regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
+intron,  up-stream intergenic and down-stream intergenic.
 #=========================================================================================
 """
 

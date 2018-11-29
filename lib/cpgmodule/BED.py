@@ -13,10 +13,29 @@ from itertools import groupby
 
 
 #import third-party modules
+from bx.bitset import *
+from bx.bitset_builders import *
 from bx.intervals import *
+
 #from itertools import *
 from cpgmodule import ireader
 
+BED12 = '''
+1. chrom - The name of the chromosome (e.g. chr3, chrY, chr2_random) or scaffold (e.g. scaffold10671).
+2. chromStart - The starting position of the feature in the chromosome or scaffold. The first base in a chromosome is numbered 0.
+3. chromEnd - The ending position of the feature in the chromosome or scaffold. 
+4. name - Defines the name of the BED line. 
+5. score.
+6. strand - Defines the strand. Either "." (=no strand) or "+" or "-".	 	 	 	 	 	 	 	 	 
+7. thickStart - The starting position at which the feature is drawn thickly (for example, the start codon in gene displays). 
+8. thickEnd - The ending position at which the feature is drawn thickly (for example the stop codon in gene displays).
+9. itemRgb - An RGB value of the form R,G,B (e.g. 255,0,0). 
+10. blockCount - The number of blocks (exons) in the BED line.
+11. blockSizes - A comma-separated list of the block sizes. 
+12. blockStarts - A comma-separated list of block starts.
+
+Detailed description of BED format: https://genome.ucsc.edu/FAQ/FAQformat.html#format1
+'''
 
 
 __author__ = "Liguo Wang"
@@ -42,7 +61,7 @@ class ParseBED:
 		self.fileName=os.path.basename(bedFile)
 		self.ABS_fileName=bedFile
 
-	def getExons(self,uniquify=True):
+	def getExons(self,uniquify = True, stranded = True):
 		'''
 		Get all exons (including both coding exons and UTR exons) from BED-12 file.
 		uniquify: if the returned blocks should be uniquify. 
@@ -53,6 +72,9 @@ class ParseBED:
 			l = l.strip()
 			if l.startswith(('#','track','browser')):continue
 			f = l.split()
+			if len(f) < 12:
+				print ("Standard BED format has 12 columns.\n%s" % (BED), file=sys.stderr)
+				sys.exit(1)
 			chrom = f[0]
 			chrom_start = int(f[1])
 			name = f[4]
@@ -63,14 +85,17 @@ class ParseBED:
 			blockSizes = [ int(i) for i in f[10].strip(',').split(',') ]
 			blockStarts = [ chrom_start + int(i) for i in f[11].strip(',').split(',') ]
 			for base,offset in zip( blockStarts, blockSizes ):
-				reblocks.append((chrom, base, base+offset))
+				if stranded:
+					reblocks.append((chrom, base, base+offset, strand))
+				else:
+					reblocks.append((chrom, base, base+offset))
 		#self.f.seek(0)
 		if uniquify:
 			return list(set(reblocks))
 		else:
 			return reblocks
 		
-	def getCDSExons(self,uniquify=True):
+	def getCDSExons(self,uniquify=True, stranded = True):
 		
 		'''
 		Get only CDS exon regions from BED-12 file. Both 5' and 3' UTR parts are removed.
@@ -81,6 +106,10 @@ class ParseBED:
 			l = l.strip()
 			if l.startswith(('#','track','browser')):continue
 			f = l.split()
+			if len(f) < 12:
+				print ("\nInput error!\nStandard BED format has 12 columns.\n%s" % (BED12), file=sys.stderr)
+				sys.exit(1)
+
 			chrom = f[0]
 			chrom_start = int(f[1])
 			name = f[4]
@@ -97,14 +126,17 @@ class ParseBED:
 				if base > cdsEnd: continue
 				exon_start = max( base, cdsStart )
 				exon_end = min( base+offset, cdsEnd ) 
-				reblocks.append((chrom,exon_start,exon_end, strand))
+				if stranded:
+					reblocks.append((chrom,exon_start,exon_end, strand))
+				else:
+					reblocks.append((chrom,exon_start,exon_end))
 		#self.f.seek(0)
 		if uniquify:
 			return list(set(reblocks))
 		else:
 			return reblocks
 
-	def getUTRs(self,utr=35, uniquify=True):
+	def getUTRs(self,utr=35, uniquify=True, stranded = True):
 		'''
 		Get UTR regions from BED-12 file.
 		When utr=35 [default], extract both 5' and 3' UTR.
@@ -118,6 +150,10 @@ class ParseBED:
 			l = l.strip()
 			if l.startswith(('#','track','browser')):continue
 			f = l.split()
+			if len(f) < 12:
+				print ("\nInput error!\nStandard BED format has 12 columns.\n%s" % (BED12), file=sys.stderr)
+				sys.exit(1)
+
 			chrom = f[0]
 			chrom_start = int(f[1])
 			name = f[4]
@@ -138,38 +174,51 @@ class ParseBED:
 						if st < cdsStart:
 							utr_st = st
 							utr_end = min(end,cdsStart)
-							reblocks.append((chrom,utr_st,utr_end,strand))					
+							if stranded:
+								reblocks.append((chrom,utr_st,utr_end,strand))
+							else:
+								reblocks.append((chrom,utr_st,utr_end))				
 				if (utr==35 or utr==3):
 					for st,end in zip(exon_start,exon_end):
 						if end > cdsEnd:
 							utr_st = max(st, cdsEnd)
 							utr_end = end
-							reblocks.append((chrom,utr_st,utr_end,strand))
+							if stranded:
+								reblocks.append((chrom,utr_st,utr_end,strand))
+							else:
+								reblocks.append((chrom,utr_st,utr_end))				
 			if strand == '-':
 				if (utr==35 or utr==3):
 					for st,end in zip(exon_start,exon_end):
 						if st < cdsStart:
 							utr_st = st
 							utr_end = min(end,cdsStart)
-							reblocks.append((chrom,utr_st,utr_end,strand))					
+							if stranded:
+								reblocks.append((chrom,utr_st,utr_end,strand))
+							else:
+								reblocks.append((chrom,utr_st,utr_end))				
 				if (utr==35 or utr==5):
 					for st,end in zip(exon_start,exon_end):
 						if end > cdsEnd:
 							utr_st = max(st, cdsEnd)
 							utr_end = end
-							reblocks.append((chrom,utr_st,utr_end,strand))
+							if stranded:
+								reblocks.append((chrom,utr_st,utr_end,strand))
+							else:
+								reblocks.append((chrom,utr_st,utr_end))				
 		#self.f.seek(0)
 		if uniquify:
 			return list(set(reblocks))
 		else:
 			return reblocks
 				
-	def getIntrons(self, itype, uniquify=True):
+	def getIntrons(self, itype, uniquify=True, stranded=True):
 		'''
 		Get Intron regions from BED-12 file. 
 		separated bed file, each row represents one intron
 		
 		itype = :
+		* 'all': all introns
 		* 'first': Only return the first intron of each gene. The gene should have at least 1 intron. 
 		* 'internal': return all internal introns. The gene should have at least 3 introns. 
 		* 'last': Return the last intron. The gene should have at least 2 introns. 
@@ -203,38 +252,70 @@ class ParseBED:
 			
 			intron_list = list(zip(intron_start,intron_end))
 			intron_number = len(intron_list)
-			if itype == 'first':
+			
+			if itype == 'all':
+				for (st,end) in intron_list:
+					if stranded:
+						reblocks.append((chrom,st,end, strand))
+					else:
+						reblocks.append((chrom,st,end))
+
+			elif itype == 'first':
 				if intron_number == 0:
 					continue
 				if strand == '-':
-					reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
+					if stranded:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
+					else:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
 				else:
-					reblocks.append((chrom, intron_list[0][0], intron_list[0][1], strand))
+					if stranded:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
+					else:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
 			
 			elif itype == 'last':
 				if intron_number < 2:
 					continue
 				if strand == '-':
-					reblocks.append((chrom, intron_list[0][0], intron_list[0][1], strand))
+					if stranded:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
+					else:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
 				else:
-					reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
-			
+					if stranded:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
+					else:
+						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))			
 			elif itype == 'internal':
 				if intron_number < 3:
 					continue
 				for (st,end) in intron_list[1:-1]:
-					reblocks.append((chrom,st,end, strand))
+					if stranded:
+						reblocks.append((chrom,st,end, strand))
+					else:
+						reblocks.append((chrom,st,end))
 			
 			elif itype == 'cds':
 				for (st,end) in  intron_list:
 					if end < cdsStart: continue
 					if st > cdsEnd: continue
-					reblocks.append((chrom,st,end, strand))
+					if stranded:
+						reblocks.append((chrom,st,end, strand))
+					else:
+						reblocks.append((chrom,st,end))
 			elif itype == 'utr':
 				for (st,end) in  intron_list:
-					if end < cdsStart: reblocks.append((chrom,st,end, strand))
-					if st > cdsEnd: reblocks.append((chrom,st,end, strand))
-				
+					if end < cdsStart:
+						if stranded:
+							reblocks.append((chrom,st,end, strand))
+						else:
+							reblocks.append((chrom,st,end))
+					if st > cdsEnd:
+						if stranded:
+							reblocks.append((chrom,st,end, strand))
+						else:
+							reblocks.append((chrom,st,end))
 									
 		#self.f.seek(0)
 		if uniquify:
@@ -243,7 +324,7 @@ class ParseBED:
 			return reblocks
 
 
-	def getIntergenic(self,direction='up', size=2000, uniquify=True):
+	def getIntergenic(self,direction='up', size=2000, uniquify=True, stranded = True):
 		'''get intergenic regions. direction=up or down or both.'''
 		
 		reblocks=[]
@@ -270,7 +351,10 @@ class ParseBED:
 				else:
 					region_st = tx_end
 					region_end = tx_end+size
-				reblocks.append((chrom,region_st,region_end, strand))
+				if stranded:
+					reblocks.append((chrom,region_st,region_end, strand))
+				else:
+					reblocks.append((chrom,region_st,region_end))
 		#self.f.seek(0)
 		if uniquify:
 			return list(set(reblocks))

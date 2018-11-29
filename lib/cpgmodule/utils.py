@@ -6,6 +6,10 @@ from bx.intervals import *
 import numpy as np
 from cpgmodule import ireader
 
+def revcomp(dna):
+	'''reverse complement DNA sequences'''
+	tab = str.maketrans('ACGTNX*-','TGCANX*-')
+	return dna.upper().translate(tab)[::-1]
 
 def colors(n):
 	'''
@@ -15,7 +19,7 @@ def colors(n):
 		print("n must be in [1,12]", file=sys.stderr)
 		return None
 		
-	color_12=["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"]
+	color_12=['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']
 	color_11=['#276419','#4d9221','#7fbc41','#b8e186','#e6f5d0','#f7f7f7','#fde0ef','#f1b6da','#de77ae','#c51b7d','#8e0152']
 	color_10=['#276419','#4d9221','#7fbc41','#b8e186','#e6f5d0','#fde0ef','#f1b6da','#de77ae','#c51b7d','#8e0152']
 	color_9 =['#c51b7d','#de77ae','#f1b6da','#fde0ef','#f7f7f7','#e6f5d0','#b8e186','#7fbc41','#4d9221']
@@ -29,7 +33,7 @@ def colors(n):
 	color_1 =['blue']
 	
 	tmp=[color_1,color_2,color_3,color_4,color_5,color_6,color_7,color_8,color_9,color_10,color_11,color_12]
-	return tmp[n-1]
+	return ["'" + i + "'" for i in tmp[n-1]]
 
 def printlog (mesg):
 	'''print progress message'''
@@ -121,18 +125,25 @@ def read_CpG_bed(cpgfile):
 		if l.startswith('browser'):
 			continue
 		f = l.split()
-		
-		try:
-			chrom = f[0]
-			start = int(f[1])
-			end = int(f[2])
-			beta = float(f[4])
-			strand = f[5]
-			if start > end:
-				print ("'Start' cannot be larger than 'End'. Skip: " + l, file=sys.stderr)
-				continue		
-		except:
+		if len(f) < 3:
 			print ("BED has at lesat 6 columns. Skip: " + l, file=sys.stderr)
+			continue
+		
+		chrom = f[0]
+		start = int(f[1])
+		end = int(f[2])
+		if start > end:
+			print ("'Start' cannot be larger than 'End'. Skip: " + l, file=sys.stderr)
+			continue		
+
+		try:
+			beta = float(f[4])
+		except:
+			beta = 1.0
+		try:
+			strand = f[5]
+		except:
+			strand = '+'		
 
 		if chrom not in cpg_ranges:
 			cpg_ranges[chrom] = IntervalTree()
@@ -175,10 +186,38 @@ def read_region_bed(bedfile):
 		
 		yield(chrom, start, end, strand)
 
+def read_bed_as_list(bedfile):
+	'''
+	bedfile file should have at least 3 columns (Chrom, chromStart, chromEnd).
+	if no strand information found in the 6th column. All regions will be 
+	considered on "+" strand. 
+	'''
+	lst = []
+	for l in ireader.reader(bedfile):
+		if l.startswith('#'):
+			continue
+		if l.startswith('track'):
+			continue
+		if l.startswith('browser'):
+			continue
+		f = l.split()
+		
+		try:
+			chrom = f[0]
+			start = int(f[1])
+			end = int(f[2])
+			if start > end:
+				print ("'Start' cannot be larger than 'End'. Skip: " + l, file=sys.stderr)
+				continue		
+		except:
+			print ("BED has at lesat 3 columns. Skip: " + l, file=sys.stderr)		
+		lst.append([chrom, start, end])
+	return lst
+
 def coverage_over_range(lst, cpg_ranges):
 	'''
 	Calculate relative methylation density
-	lst = list of (chr,start,end)
+	lst = list of (chr,start,end, strand)
 	cpg_ranges is returned by read_CpG_bed
 	'''
 	
@@ -201,6 +240,66 @@ def coverage_over_range(lst, cpg_ranges):
 		beta_signals[k] = round(np.mean(v),4)
 	return beta_signals
 
+
+def count_over_range(lst, cpg_ranges):
+	'''
+	Calculate how many CpGs are located in lst
+	lst = list of (chr,start,end)
+	cpg_ranges is returned by read_CpG_bed
+	'''
+	
+	total_size = 0	#total nucleotides of list of genomic regions
+	total_count = 0 #total CpGs in list of genomic regions
+	for (chr,st,end) in lst:
+		total_size += (end - st)
+		if chr not in cpg_ranges:
+			continue
+		tmp = cpg_ranges[chr].find(st, end)	#eg: [Interval(3, 40, value=3), Interval(13, 50, value=4)]
+		total_count += len(tmp)
+	return(total_size,total_count)
+
+def read_grp_file(gfile):
+	'''
+	read group file. Group file define the biological groups of beta matrix file. It must
+	have at least two columns:
+	1st column: sample names. samples names should be unique, and they must be exactly the same as
+	   the first row of beta matrix file.
+	2nd column: group IDs. 
+	additional columns can be included to indicate co-variables. 
+	
+	For example:
+	
+	#ID			Group	Sex(Male=1,Female=2)	...
+	Normal_1	1		1
+	Normal_2	1		2
+	Normal_3	1		1	
+	Tumor_1		2		1
+	Tumor_2		2		2
+	Tumor_3		2		1
+	...
+	...
+	'''
+	samples = []
+	groups = []
+	covars = []
+	for l in ireader.reader(gfile): 
+		if l.startswith('#'):
+			continue
+		f = l.split()
+		if len(f) < 2:
+			print ("Group fle has at lesat 2 columns. Skip: " + l, file=sys.stderr)
+			continue
+		samples.append(f[0])
+		groups.append(f[1])
+		if len(f) > 2:
+			covars.append(f[2:])
+	tmp = collections.Counter(samples)
+	if tmp.most_common(1)[0][1] > 1:
+		print ("Sample names are not unique!", file=sys.stderr)
+		sys.exit(0)
+	
+	return(samples, groups, covars)
+	
 def stats_over_range(cpg_ranges, chrom, st, end):
 	'''
 	Basic statistics about range

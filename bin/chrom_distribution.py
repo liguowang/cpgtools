@@ -115,7 +115,7 @@ def main():
 			print ("%s = c(%s)" % (n2, ','.join([str(i) for i in tmp])), file=ROUT)
 	
 		my_col = colors(len(input_names))
-		print ('cols = c(%s)' % (','.join(['"' + i + '"' for i in my_col])),file=ROUT)
+		print ('cols = c(%s)' % ','.join(my_col),file=ROUT)
 	
 	
 		print ('pdf(\"%s\", width=12, height=6)' %  (options.out_file + '.CpG_total.pdf'), file=ROUT)
