@@ -43,8 +43,8 @@ Note that **pip** is actualy a soft link to the same executable file path with *
 
 You can run the following command to install CpGtools and all its dependencies. 
 	
-	pip install cpgtools 		
+	pip install cpgtools (not ready)		
 
 You can run the following command to **upgrade** CpGtools and all its dependencies. 	
 	
-	pip install cpgtools --upgrade
+	pip install cpgtools --upgrade (not ready)
