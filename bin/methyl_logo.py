@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program DNA sequence logo around methylated Cs.
+This program generates DNA sequence logo around methylated Cs.
 #=========================================================================================
 """
 

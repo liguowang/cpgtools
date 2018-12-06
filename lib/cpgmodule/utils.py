@@ -258,48 +258,100 @@ def count_over_range(lst, cpg_ranges):
 		total_count += len(tmp)
 	return(total_size,total_count)
 
-def read_grp_file(gfile):
+def read_grp_file1(gfile):
 	'''
-	read group file. Group file define the biological groups of beta matrix file. It must
-	have at least two columns:
-	1st column: sample names. samples names should be unique, and they must be exactly the same as
-	   the first row of beta matrix file.
-	2nd column: group IDs. 
-	additional columns can be included to indicate co-variables. 
+	read group file. Group file define the biological groups of data matrix file. 
+	(1) It must has header
+	(2) It must have two columns:
+		* 1st column: sample names. samples names should be unique, and they must be exactly the same as the first row of beta matrix file.
+		* 2nd column: group IDs. 
+	(3) columns must be separated by ","
 	
 	For example:
 	
-	#ID			Group	Sex(Male=1,Female=2)	...
-	Normal_1	1		1
-	Normal_2	1		2
-	Normal_3	1		1	
-	Tumor_1		2		1
-	Tumor_2		2		2
-	Tumor_3		2		1
-	...
-	...
+	sampleID,groupID
+	Normal_1,1
+	Normal_2,1
+	Normal_3,1
+	Tumor_1,2
+	Tumor_2,2
+	Tumor_3,2
 	'''
 	samples = []
 	groups = []
-	covars = []
-	for l in ireader.reader(gfile): 
-		if l.startswith('#'):
-			continue
-		f = l.split()
+	line_num = 0
+	for l in ireader.reader(gfile):
+		l = l.replace(' ','')
+		line_num += 1
+		f = l.split(',')
 		if len(f) < 2:
-			print ("Group fle has at lesat 2 columns. Skip: " + l, file=sys.stderr)
+			print ("Group fle must have 2 columns!", file=sys.stderr)
+			sys.exit(1)
+		if line_num == 1:
 			continue
-		samples.append(f[0])
-		groups.append(f[1])
-		if len(f) > 2:
-			covars.append(f[2:])
+		else:		
+			samples.append(f[0])
+			groups.append(f[1])
+	
 	tmp = collections.Counter(samples)
 	if tmp.most_common(1)[0][1] > 1:
 		print ("Sample names are not unique!", file=sys.stderr)
 		sys.exit(0)
+		
+	return(samples, groups)
+
+def read_grp_file2(gfile):
+	'''
+	read group file. Group file define the biological groups of data matrix file. 
+	(1) It must has header
+	(2) It must have at least two columns:
+		* 1st column: sample names. samples names should be unique, and they must be exactly the same as the first row of beta matrix file.
+		* 2nd column: group IDs. 
+		* additional columns can be included to indicate co-variables. 
+	(3) columns must be separated by ","
 	
-	return(samples, groups, covars)
+	For example:
 	
+	sampleID,survival,Sex
+	Normal_1,1,1
+	Normal_2,1,2
+	Normal_3,1,1	
+	Tumor_1,2,1
+	Tumor_2,2,2
+	Tumor_3,2,1
+	...
+	...
+	'''
+	samples = []
+	covar_values = []
+	covar_names = []
+	covars = collections.defaultdict(dict)
+	line_num = 0
+	for l in ireader.reader(gfile):
+		l = l.replace(' ','')
+		line_num += 1
+		f = l.split(',')
+		if len(f) < 2:
+			print ("Group fle has at lesat 2 columns!", file=sys.stderr)
+			sys.exit(1)
+		if line_num == 1:
+			covar_names = f[1:]
+		else:
+			sample_id = f[0]
+			samples.append(sample_id)
+			covar_values = f[1:]
+			
+			for a,b in zip(covar_names, covar_values):
+				covars[a][sample_id] = b
+		
+		
+	tmp = collections.Counter(samples)
+	if tmp.most_common(1)[0][1] > 1:
+		print ("Sample names are not unique!", file=sys.stderr)
+		sys.exit(0)
+		
+	return(samples, covar_names, covars)
+			
 def stats_over_range(cpg_ranges, chrom, st, end):
 	'''
 	Basic statistics about range

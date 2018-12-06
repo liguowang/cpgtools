@@ -88,7 +88,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). Except for the 1st row and 1st column, any non-numerical values will be considered as \"missing values\" and ignored. This file can be regular or compressed by 'gzip' or 'bz'.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples. It must have 2 columns with the 1st column containing sample IDs, and the 2nd column containing group IDs. Sample IDs shoud match to the \"Data file\". Note: automatically switch to use ANOVA if more than 2 groups were defined in this file.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs shoud match to the \"Data file\". Note: automatically switch to use ANOVA if more than 2 groups were defined in this file.")
 	parser.add_option("-p","--paired",action="store_true",default=False,dest="paired",help="If '-p/--paired' flag was specified, use paired t-test which requires the equal number of samples in both group. Paired sampels are matched by the order. This option will be ignored for multiple group analysis.")
 	parser.add_option("-w","--welch",action="store_true",default=False,dest="welch_ttest",help="If '-w/--welch' flag was specified, using Welch's t-test which does not assume the two samples have equal variance.  If omited , use standard two sample t-test (i.e. assuming the two samples have equal variance). This option will be ignored for paired t-test and multiple group analysis.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
@@ -116,7 +116,7 @@ def main():
 	#ROUT = open(options.out_file + '.r','w')
 	
 	printlog("Read group file \"%s\" ..." % (options.group_file))
-	(s,g,v) = read_grp_file(options.group_file)
+	(s,g) = read_grp_file1(options.group_file)
 	s2g = dict(zip(s,g))
 	g2s = collections.defaultdict(list)
 	
@@ -190,7 +190,7 @@ def main():
 			p_list.append(pval)
 		line_num += 1
 	
-	printlog("Perfrom Benjamini-Hochberg (a.k.a FDR) correction ...")
+	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
 	adjusted_p = {}
 	q_list =  padjust.multiple_testing_correction(p_list)
 	for id,p,q in zip(probe_list, p_list, q_list):

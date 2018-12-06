@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program assigns CpG to gene's regulatory domain. Follows the "Basel plus extension" 
-rules used by GREAT:
+This program annotate CpGs by assigning them to gene's regulatory domains. Follows the 
+"Basel plus extension" rules used by GREAT:
 
 Basal regulatory domain:
 Each gene is assigned a basal regulatory domain of a minimum distance upstream
@@ -46,7 +46,7 @@ def main():
 	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
 	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")
 	parser.add_option("-e","--extension",action="store",type="int",dest="extension_size",default=1000000,help="Size of extension to both up- and down-stream of TSS (used to define gene's \"extended regulatory domain\"). default=%default (bp)")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file. [required]")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file. Two addtional columns will be appended to the orignal BED file with the last column indicating \"genes whose extended regulatory domain are overlapped with the CpG\", the 2nd last column indicating \"genes whose basal regulatory domain are overlapped with the CpG\". [required]")
 	(options,args)=parser.parse_args()
 	
 	print ()

@@ -3,12 +3,12 @@ from bx.intervals import *
 import numpy as np
 from cpgmodule import ireader
 
-def basal_domain(bedfile, up = 5000, down = 1000, printit = False):
+def getBasalDomains(bedfile, up = 5000, down = 1000, printit = False):
 	'''
 	Define gene's basal regulatory domain. 
 	bedfile: one gene one TSS (could use the canonical (longest) isoform, or merge all isoforms into a super transcript.
-	up: size of extension to upstream
-	down: size of extension to downstream
+	up: size of extension to upstream of TSS
+	down: size of extension to downstream of TSS
 	'''
 	basal_ranges = {}
 	
@@ -51,15 +51,18 @@ def basal_domain(bedfile, up = 5000, down = 1000, printit = False):
 			print('\t'.join([str(i) for i in (chrom, basal_st, basal_end, symbol, '0', strand)]), file = sys.stdout)
 	return basal_ranges
 
-def extended_domain(basal_ranges, bedfile, up = 5000, down = 1000, ext=1000000, printit = False):
+def geteExtendedDomains(basal_ranges, bedfile, up = 5000, down = 1000, ext=1000000, printit = False):
 	'''
-	Define gene's basal regulatory domain. 
-	bedfile: one gene one TSS (could use the canonical (longest) isoform, or merge all isoforms into a super transcript.
-	ext: maximum size of extension (default 1000Kb)
+	Define gene's extended regulatory domain. 
+	bedfile:one gene one TSS (could use the canonical (longest) isoform, or merge all
+			isoforms into a super transcript.
+	ext: 	maximum size of extension (default 1000Kb)
 	
-	Each gene is assigned a basal regulatory domain of a minimum distance upstream and downstream of the TSS
-	(regardless of other nearby genes). The gene regulatory domain is extended in both directions to the
-	nearest gene's basal domain but no more than the maximum extension in one direction.
+	Two step process:
+	1) Each gene is assigned a basal regulatory domain of a minimum distance upstream and
+	   downstream of the TSS (regardless of other nearby genes). 
+	2) The gene regulatory domain is extended in both directions to the nearest gene's
+	    basal domain but no more than the maximum extension in one direction.
 	'''	
 	domain_ranges = {}	#gene's regulatory domain range
 	for l in ireader.reader(bedfile):
@@ -123,8 +126,8 @@ def extended_domain(basal_ranges, bedfile, up = 5000, down = 1000, ext=1000000, 
 		if printit:
 			print('\t'.join([str(i) for i in (chrom, extension_st, extension_end, symbol, '0', strand,  basal_st, basal_end, '255,0,0', 1, extension_end - extension_st, 0)]), file = sys.stdout)
 		
-		
-		"""
+	return domain_ranges
+	"""
 		if len(overlaps) == 1:
 			domain_ranges[chrom].insert_interval(Interval(extension_st, extension_end, strand = strand, value=symbol))
 			if printit:
@@ -155,7 +158,7 @@ def extended_domain(basal_ranges, bedfile, up = 5000, down = 1000, ext=1000000, 
 			
 			if printit:
 				print('\t'.join([str(i) for i in (chrom, truncaed_ext_st, truncaed_ext_end, symbol + '_extended', '0', strand)]), file = sys.stdout)
-		"""
+	"""
 								
 if __name__=='__main__': 		
 	tmp = basal_domain(sys.argv[1], printit = False)	
