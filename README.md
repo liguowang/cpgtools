@@ -123,17 +123,16 @@ Options:
                         overlapped with the CpG". [required]
 ```	                        
 
-### Input and output files
-
-#### Input files
+### Input files
 - BED3+ file specifying the C position. Download test file [test_01.bed6](https://github.com/liguowang/cpgtools/blob/master/test/test_01.bed6)
 - Reference gene model in BED12 format. Download test file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
 
-#### Output file
-Two addtional columns will be appended to the orignal BED file:
+### Output file
+Two addtional columns will be appended to the orignal BED file (-i):
 - the last column indicating genes whose **extended regulatory domain** are overlapped with the CpG
 -  the 2nd last column indicating genes whose **basal regulatory domain** are overlapped with the CpG
 
+### Example
 
 ```
 
