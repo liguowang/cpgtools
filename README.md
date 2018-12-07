@@ -1,5 +1,5 @@
 ## CpGtools -- Tools to analyze and visualize DNA methylation data
----
+
 ## Installation
 
 ### Prerequisites
@@ -11,7 +11,7 @@ run generalized linear model (GLM).
 - [R](https://www.r-project.org/)
 
 ### Python Dependencies
-Note: these packages will be automatically downloaded installed when you use [pip3](https://pip.pypa.io/en/stable/installing/)
+Note: these packages will be automatically installed when you use [pip3](https://pip.pypa.io/en/stable/installing/)
 to install CpGtools.
 
 - [numpy](http://www.numpy.org/)
@@ -48,3 +48,59 @@ You can run the following command to install CpGtools and all its dependencies.
 You can run the following command to **upgrade** CpGtools and all its dependencies. 	
 	
 	pip install cpgtools --upgrade (not ready)
+
+## Usage
+
+### annotate_CpG.py
+---
+
+#### Overview
+This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
+"[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by GREAT:
+
+**Basal regulatory domain**:
+A gene's basal regulatory domain is a window around its TSS (transcription start site). In 
+particular, basal regulatory domain is obtained by extending '-u' basepairs (default = 5 kb)
+to the upstream and '-d' basepairs (default = 1 kb) to the downstream of TSS regardless of
+other nearby genes.
+
+**Extended regulatory domain**:
+The gene's basal regulatory domain is further extended in both directions to the nearest gene's
+basal regulatory domain but no more than the maximum extension (specified by '-e', default =
+1000 kb) in one direction.	
+
+#### Basic usage
+
+```text
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED file specifying the C position. Must have at least
+                        3 columns (chrom start end). Note: the first base in a
+                        chromosome is numbered 0. BED file can be regular or
+                        compressed by 'gzip' or 'bz'. The barplot figures will
+                        NOT be generated if you provide more than 12 samples
+                        (bed files). [required]
+  -r GENE_FILE, --refgene=GENE_FILE
+                        Reference gene model in standard BED-6 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+  -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
+                        Size of extension to upstream of TSS (used to define
+                        gene's "basal regulatory domain"). default=5000 (bp)
+  -d BASAL_DOWN_SIZE, --basal-down=BASAL_DOWN_SIZE
+                        Size of extension to downstream of TSS (used to define
+                        gene's basal regulatory domain). default=1000 (bp)
+  -e EXTENSION_SIZE, --extension=EXTENSION_SIZE
+                        Size of extension to both up- and down-stream of TSS
+                        (used to define gene's "extended regulatory domain").
+                        default=1000000 (bp)
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file. Two addtional columns will be
+                        appended to the orignal BED file with the last column
+                        indicating "genes whose extended regulatory domain are
+                        overlapped with the CpG", the 2nd last column
+                        indicating "genes whose basal regulatory domain are
+                        overlapped with the CpG". [required]
+```	                        
