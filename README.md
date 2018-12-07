@@ -215,6 +215,7 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 ```
 
 #### Output
+- The red curve represents average profile of beta values, aggregated from all regions. 
 - Upstream: intergenic region (defined by '-u' ) before TSS (transcription start site)
 - Downstream: intergenic region (defined by '-d') after TES (transcription end site)
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
