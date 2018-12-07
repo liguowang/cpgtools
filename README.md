@@ -72,7 +72,7 @@ Note:
 ### annotate_CpG.py
 ---
 
-### Overview
+#### Overview
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by GREAT:
 
@@ -89,7 +89,7 @@ basal regulatory domain but no more than the maximum extension (specified by '-e
 
 ![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
 
-### Basic usage
+#### Basic usage
 
 ```text
 
@@ -123,16 +123,16 @@ Options:
                         overlapped with the CpG". [required]
 ```	                        
 
-### Input files
+#### Input files
 - BED3+ file specifying the C position. Download test file [test_01.bed6](https://github.com/liguowang/cpgtools/blob/master/test/test_01.bed6)
 - Reference gene model in BED12 format. Download test file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
 
-### Output file
+#### Output file
 Two addtional columns will be appended to the orignal BED file (-i):
 - the last column indicating genes whose **extended regulatory domain** are overlapped with the CpG
 -  the 2nd last column indicating genes whose **basal regulatory domain** are overlapped with the CpG
 
-### Example
+#### Example
 
 ```
 
