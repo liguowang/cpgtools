@@ -72,7 +72,7 @@ Note:
 ### annotate_CpG.py
 ---
 
-#### Overview
+### Overview
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by GREAT:
 
@@ -89,7 +89,7 @@ basal regulatory domain but no more than the maximum extension (specified by '-e
 
 ![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
 
-#### Basic usage
+### Basic usage
 
 ```text
 
@@ -125,7 +125,32 @@ Options:
 
 ### Input and output files
 
+#### Input files
 - BED3+ file specifying the C position. Download test file [test_01.bed6](https://github.com/liguowang/cpgtools/blob/master/test/test_01.bed6)
-
 - Reference gene model in BED12 format. Download test file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
 
+#### Output file
+Two addtional columns will be appended to the orignal BED file:
+- the last column indicating genes whose **extended regulatory domain** are overlapped with the CpG
+-  the 2nd last column indicating genes whose **basal regulatory domain** are overlapped with the CpG
+
+
+```
+
+$ python3 ../bin/annotate_CpG.py -r hg19.RefSeq.union.bed -i test_01.bed6 -o OUT1
+
+$ head OUT1.annotatio.txt
+
+#Chrom	Start	End	Name	Beta	Strand
+chr1	10847	10848	cg26928153	0.8965	+	DDX11L1	//
+chr1	10849	10850	cg16269199	0.7915	+	DDX11L1	//
+chr1	15864	15865	cg13869341	0.9325	+	//	MIR6859-1;MIR6859-2
+chr1	534241	534242	cg24669183	0.7941	+	//	OR4F29;OR4F3;LOC101928626;OR4F16
+chr1	564500	564501	cg26679879	0.3746	+	LOC101928626	//
+chr1	564503	564504	cg22519184	0.395	+	LOC101928626	//
+chr1	710096	710097	cg15560884	0.8106	+	//	LOC100133331;LOC100288069
+chr1	714176	714177	cg01014490	0.0275	+	LOC100288069	//
+chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
+
+```
+	
