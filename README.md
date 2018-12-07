@@ -53,7 +53,21 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 	
 	pip install cpgtools --upgrade (not ready)
 
-## Part 2: Usage Information
+## Part 2: BED (Browser Extensible Data) format conventions
+
+BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
+
+- **BED12** file (also called the standarded BED file) which has 12 fields. It is used to describe gene models. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
+- **BED3** file only has the first 3 required columns (chrom, chromStart, chromEnd). It is commonly used to represent genomic regions when "score" and "strand" are not important. 
+- **BED3+** file has at least 3 columns (chrom, chromStart, chromEnd). It could have additional columns, but these additional columns will be ignored.
+- **BED6** file has the first 6 columns (chrom, chromStart, chromEnd, name, score, stand). It can be used to represent genomic regions and their associated scores, or in cases where "stand" information is important.  
+- **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
+
+Note:
+1. The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
+2. A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
+
+## Part 3: Usage Information
 
 ### annotate_CpG.py
 ---
