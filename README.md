@@ -74,7 +74,7 @@ Note:
 
 #### Overview
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
-"[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by GREAT:
+"[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
 **Basal regulatory domain**:
 A gene's basal regulatory domain is a window around its TSS (transcription start site). In 
@@ -215,7 +215,7 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 ```
 
 #### Output
-- The red curve represents average profile of beta values, aggregated from all regions. 
+- The red curve represents average profile of beta values, aggregated from all regions in each class. 
 - Upstream: intergenic region (defined by '-u' ) before TSS (transcription start site)
 - Downstream: intergenic region (defined by '-d') after TES (transcription end site)
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
