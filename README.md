@@ -73,6 +73,8 @@ The gene's basal regulatory domain is further extended in both directions to the
 basal regulatory domain but no more than the maximum extension (specified by '-e', default =
 1000 kb) in one direction.	
 
+![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
+
 #### Basic usage
 
 ```text
