@@ -138,6 +138,10 @@ Two addtional columns will be appended to the orignal BED file (-i):
 
 $ python3 ../bin/annotate_CpG.py -r hg19.RefSeq.union.bed -i test_01.bed6 -o OUT1
 
+@ 2018-12-07 12:49:21: Calculate basal regulatory domain from: "hg19.RefSeq.union.bed" ...
+@ 2018-12-07 12:49:21: Calculate extended regulatory domain from: "hg19.RefSeq.union.bed" ...
+@ 2018-12-07 12:49:22: Assigning CpG to gene ...
+
 $ head OUT1.annotatio.txt
 
 #Chrom	Start	End	Name	Beta	Strand
@@ -152,4 +156,64 @@ chr1	714176	714177	cg01014490	0.0275	+	LOC100288069	//
 chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 
 ```
-	
+
+
+### beta_profile.py
+---	
+
+#### Overview
+beta_profile.py calculates the average methylation level (i.e. average beta value) across
+regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
+intron,  up-stream intergenic and down-stream intergenic.
+
+#### Basic usage
+
+```text
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED6+ file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, Name, Beta_value, Strand). BED file can be
+                        regular or compressed by 'gzip' or 'bz'.
+  -r GENE_FILE, --refgene=GENE_FILE
+                        Reference gene model in standard BED12 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
+                        Size of down-stream genomic region added to gene.
+                        default=2000 (bp)
+  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
+                        Size of up-stream genomic region added to gene.
+                        default=2000 (bp)
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+                        
+```
+
+#### Input files
+- BED3+ file specifying the C position. Download test file [test_02.bed6.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_02.bed6.gz)
+- Reference gene model in BED12 format. Download test file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
+
+#### Example
+
+```
+$ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o OUT2
+
+@ 2018-12-07 13:43:00: Reading CpG file: "test_02.bed6.gz"
+@ 2018-12-07 13:43:09: Reading reference gene model: "hg19.RefSeq.union.bed"
+@ 2018-12-07 13:43:09: Process upstream regions ...
+@ 2018-12-07 13:43:10: Process 5' UTR exons ...
+@ 2018-12-07 13:43:10: Process Coding exons ...
+@ 2018-12-07 13:43:11: Process first introns ...
+@ 2018-12-07 13:43:12: Process internal introns ...
+@ 2018-12-07 13:43:13: Process last introns ...
+@ 2018-12-07 13:43:14: Process 3' UTR exons ...
+@ 2018-12-07 13:43:15: Process downstream regions ...
+
+```
+
+#### Output
+![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
+
