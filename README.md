@@ -220,3 +220,42 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 - Downstream: intergenic region (defined by '-d') after TES (transcription end site)
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
 
+
+### chrom_distribution.py
+---	
+
+#### Overview
+This program calculates the distribution of CpG over chromosomes.
+
+#### Basic usage
+
+```text
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILES, --input-files=INPUT_FILES
+                        Input CpG file(s) in BED3+ format. Multiple BED files
+                        should be separated by "," (eg: "-i
+                        file_1.bed,file_2.bed,file_3.bed"). BED file can be
+                        regular or compressed by 'gzip' or 'bz'. The barplot
+                        figures will NOT be generated if you provide more than
+                        12 samples (bed files). [required]
+  -n FILE_NAMES, --names=FILE_NAMES
+                        Shorter and meaningful names to label samples. Should
+                        be separated by "," and match CpG BED files in number.
+                        If not provided, basenames of CpG BED files will be
+                        used to label samples. [optional]
+  -s CHROM_SIZE, --chrom-size=CHROM_SIZE
+                        Chromosome size file. Tab or space separated text file
+                        with 2 columns: first column is chromosome name/ID,
+                        second column is chromosome size. This file will
+                        determine: (1) which chromosomes are included in the
+                        final barplots, so do NOT inlude 'unplaced',
+                        'alternative' contigs in this file. (2) The order of
+                        chrosomes in the final barplots.  [required]
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file. [required]
+
+```
+ 
