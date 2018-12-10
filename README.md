@@ -321,10 +321,11 @@ Data file. Below example showing input data on 2 CpGs of 2 groups (A,B) with eac
 |CpG_2 |0,7     |2,18     |4,39    |32,37   |14,15   |20,23   |
 
 Group file. Below example specified two variables:
-1. survival:
+** survival**
  - 1=long-term survival
  - 2=short-term survival)
-2. sex:
+
+**sex**
  - 1=Male
  - 2=Female
 
