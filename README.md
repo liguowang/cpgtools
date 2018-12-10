@@ -325,13 +325,8 @@ Download data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgto
 
 
 **Group file**.
-Below example specified two variables:
-survival
- - 1=long-term survival
- - 2=short-term survival)
-sex
- - 1=Male
- - 2=Female
+Below example specified two variables. "survival" (1=long-term survival, 2=short-term survival), and "sex" (1=Male, 2=Female)
+
 
 ```text
 sampleID,survival,Sex
