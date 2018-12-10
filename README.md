@@ -278,4 +278,66 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 ![chromDist.CpG_percent.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_percent.png)
 3. CpG per Mb 
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
+
+### dmc_glm.py
+---
+
+#### Overview
+This program performs differential CpG analysis using logistic regression model based on
+methylation proportions (in the form of "c,n", where "c" indicates "Number of reads with
+methylated C", and "n" indicates "Number of total reads". Both c and n are  non-negative
+integers and c <= n). 
+allow for covariables.
+
+#### Basic usage
+
+```text
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Data file containing beta values (represented by
+                        "methyl_count,total_count", eg. "20,30") with the 1st
+                        row containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). This file can be regular or compressed by
+                        'gzip' or 'bz'.
+  -g GROUP_FILE, --group=GROUP_FILE
+                        Group file define the biological groups of each
+                        samples as well as other covariables such as gender,
+                        age.  Sample IDs shoud match to the "Data file".
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+                        
+```
+
+#### Input file
+1. Data file:
+
+Below example showing input data on 2 CpGs of 3 groups (A,B, and C)
+with each group has 3 replicates:
+
+|cgID  | A_1    |A_2      |A_3     |B_1     |B_2     |   
+|:---- |:-------|:-------:|:------:|:------:|-------:|   
+|CpG_1 |129,170 |166,178  |7,9     |8,16    |11,15   |   
+|CpG_2 |0,7     |2,18     |4,39    |32,37   |14,15   |   
+
+[/test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)
+
+2. Group file:
+
+```text
+
+sampleID,survival,Sex
+A_1,1,1
+A_2,1,2
+A_3,1,2
+B_1,2,1
+B_2,2,1
+B_3,2,2
+
+```
+
+[test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz)
  
