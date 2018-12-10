@@ -322,7 +322,7 @@ Data file. Below example showing input data on 2 CpGs of 2 groups (A,B) with eac
 
 Group file. Below example specified two variables:
 
-** survival**
+**survival**
  - 1=long-term survival
  - 2=short-term survival)
 
