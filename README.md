@@ -313,10 +313,7 @@ Options:
 ```
 
 #### Input file
-1. Data file (test file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)):
-
-Below example showing input data on 2 CpGs of 2 groups (A,B)
-with each group has 3 replicates:
+1. Data file. Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has 3 replicates: (test file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)):
 
 |cgID  | A_1    |A_2      |A_3     |B_1     |B_2     |B_3     |
 |:---- |:-------|:-------:|:------:|:------:|:------:|-------:|
@@ -328,7 +325,6 @@ with each group has 3 replicates:
 2. Group file (test file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz))
 
 ```text
-
 sampleID,survival,Sex
 A_1,1,1
 A_2,1,2
