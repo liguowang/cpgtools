@@ -320,6 +320,7 @@ Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has
 |:---- |:-------|:-------:|:------:|:------:|:------:|-------:|
 |CpG_1 |129,170 |166,178  |7,9     |8,16    |11,15   |100,230 |
 |CpG_2 |0,7     |2,18     |4,39    |32,37   |14,15   |20,23   |
+
 Download data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)):
 
 
