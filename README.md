@@ -309,12 +309,12 @@ Options:
                         
 ```
 
-#### Input file
+#### Input files
 **Data file**.
 Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has 3 replicates.
-methylation proportions is represented by two non-negative integers (in the form of "c,n", 
+methylation proportions is represented by two non-negative integers separated by "," (in the form of "c,n", 
 where "c" indicates "Number of reads with methylated C", and "n" indicates "Number of total
-reads", c <= n).
+reads", c <= n). Any other forms will be considered as "missing values".
 
 |cgID  | A_1    |A_2      |A_3     |B_1     |B_2     |B_3     |
 |:---- |:-------|:-------:|:------:|:------:|:------:|-------:|
@@ -339,7 +339,7 @@ Download test group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguo
 
 #### Example
 ```text
-python3 ../bin/dmc_glm.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+$ python3 ../bin/dmc_glm.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
 ```
 
 #### Output file
@@ -350,3 +350,68 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - Sex.pval
 - survival.coef
 - Sex.coef
+
+### dmc_nonparametric.py
+---
+
+#### Overview
+This program performs differential CpG analysis based on **beta values**.
+- use Mann-Whitney rank test for two group comparison.
+- use Kruskal-Wallis H-test for multiple groups comparison.
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Data file containing beta values with the 1st row
+                        containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). Except for the 1st row and 1st column, any
+                        non-numerical values will be considered as "missing
+                        values" and ignored. This file can be regular or
+                        compressed by 'gzip' or 'bz'.
+  -g GROUP_FILE, --group=GROUP_FILE
+                        Group file define the biological groups of each
+                        samples. It is a comma-separated 2 columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs. It must have a header
+                        row. Sample IDs shoud match to the "Data file". Note:
+                        automatically switch to use  Kruskal-Wallis H-test if
+                        more than 2 groups were defined in this file.
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```
+
+#### Input files
+- [test_05_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_05_TwoGroup.tsv.gz) 
+- [test_05_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_05_TwoGroup.grp.csv.gz)      
+- [test_06_ThreeGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_06_ThreeGroup.tsv.gz)    
+- [test_06_ThreeGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_06_ThreeGroup.grp.csv.gz)          
+
+#### Example
+```text
+$ python3 ../bin/dmc_nonparametric.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv.gz -o OUT_05
+@ 2018-12-11 11:17:42: Read group file "test_05_TwoGroup.grp.csv.gz" ...
+	Group 1 has 10 samples:
+		Normal_01,Normal_02,Normal_03,Normal_04,Normal_05,Normal_06,Normal_07,Normal_08,Normal_09,Normal_10
+	Group 2 has 10 samples:
+		CirrHCV_01,CirrHCV_02,CirrHCV_03,CirrHCV_04,CirrHCV_05,CirrHCV_06,CirrHCV_07,CirrHCV_08,CirrHCV_09,CirrHCV_10
+@ 2018-12-11 11:17:42: Perfrom Mann-Whitney rank test of two samples ...
+@ 2018-12-11 11:17:45: Perfrom Benjamini-Hochberg (aka FDR) correction ...
+@ 2018-12-11 11:17:46: Writing to OUT_05.pval.txt
+
+$ python3 ../bin/dmc_nonparametric.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv.gz -o OUT_06
+@ 2018-12-11 11:18:34: Read group file "test_06_ThreeGroup.grp.csv.gz" ...
+	Group 1 has 10 samples:
+		Normal_01,Normal_02,Normal_03,Normal_04,Normal_05,Normal_06,Normal_07,Normal_08,Normal_09,Normal_10
+	Group 2 has 10 samples:
+		CirrHCV_01,CirrHCV_02,CirrHCV_03,CirrHCV_04,CirrHCV_05,CirrHCV_06,CirrHCV_07,CirrHCV_08,CirrHCV_09,CirrHCV_10
+	Group 3 has 10 samples:
+		HCCHCV_01,HCCHCV_02,HCCHCV_03,HCCHCV_04,HCCHCV_05,HCCHCV_06,HCCHCV_07,HCCHCV_08,HCCHCV_09,HCCHCV_10
+@ 2018-12-11 11:18:34: Perfrom Kruskal-Wallis H-test ...
+@ 2018-12-11 11:18:40: Perfrom Benjamini-Hochberg (aka FDR) correction ...
+@ 2018-12-11 11:18:40: Writing to OUT_06.pval.txt
+
+```   
