@@ -10,6 +10,16 @@
 - [Usage information](#p3)
 	- [annotate_CpG.py](#p3.1)
 	- [beta_profile.py](#p3.2)
+	- [chrom_distribution.py](#p3.3)
+	- [dmc_glm.py](#p3.4)
+	- [dmc_nonparametric.py](#p3.5)
+	- [dmc_ttest.py](#p3.6)
+	- [genomic_distribution_1.py](#p3.7)
+	- [genomic_distribution_2.py](#p3.8)
+	- [methyl_logo.py](#p3.9)
+	- [region_profile.py](#p3.10)
+	- [region_stat.py](#p3.11)
+	- [trichotmize.py](#p3.12)
 
 
 
@@ -236,7 +246,7 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
 
 
-chrom_distribution.py
+<a name="p3.3"></a>chrom_distribution.py
 ---	
 This program calculates the distribution of CpG over chromosomes.
 
@@ -292,7 +302,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 3. CpG per Mb 
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
-dmc_glm.py
+<a name="p3.4"></a>dmc_glm.py
 ---
 This program performs differential CpG analysis using logistic regression model based on
 methylation proportions. It allows for covariable analysis.
@@ -362,7 +372,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - survival.coef
 - Sex.coef
 
-dmc_nonparametric.py
+<a name="p3.5"></a>dmc_nonparametric.py
 ---
 This program performs differential CpG analysis based on **beta values**.
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
@@ -430,7 +440,7 @@ $ python3 ../bin/dmc_nonparametric.py -i test_06_ThreeGroup.tsv.gz -g test_06_Th
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
 
 
-dmc_ttest.py
+<a name="p3.6"></a>dmc_ttest.py
 ---
 This program performs differential CpG analysis based on beta values.
 
@@ -513,7 +523,7 @@ $ python3 ../bin/dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup
 #### Output file
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
 
-genomic_distribution_1.py
+<a name="p3.7"></a>genomic_distribution_1.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **genes** (5 groups):
 
@@ -581,7 +591,7 @@ The barplot "OUT_7.pdf" was also generated.
 ```         
 ![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)  
 
-genomic_distribution_2.py
+<a name="p3.8"></a>genomic_distribution_2.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **users**.
 A maximum of 10 BED files (define 10 different genomic regions) can be analyzed.
@@ -640,7 +650,7 @@ $ python3 ../bin/genomic_distribution_2.py -i test_03b.bed3.gz  -b  hg19_H3K4me3
 #### Output files
 Similar to "genomic_distribution_1.py"      
 
-methyl_logo.py
+<a name="p3.9"></a>methyl_logo.py
 ----
 This program generates DNA sequence logo around methylated Cs in 3 steps:
 
@@ -717,7 +727,7 @@ letter-probability matrix: alength= 4 w= 11 nsites= 2932
  0.36933987997817785 0.29330332787779595 0.15759683578832515 0.17975995635570105
 ```
 
-region_profile.py
+<a name="p3.10"></a>region_profile.py
 ----
 This program calculates the overall methylation level (i.e. average beta value) over
 particular genomic regions (eg. promoters, TF bindings). 
@@ -757,7 +767,7 @@ actual genomic sizes.
 
 ![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
 
-region_stat.py
+<a name="p3.11"></a>region_stat.py
 ----
 This program gives basic statistics for each genomic region. Add 6 columns to the input BED file:
 
@@ -806,4 +816,8 @@ chr1	916996	917997	PERM1	0	-	8	0.2443	0.6882	0.4772	0.481	0.1363
 chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
 
 
-```                             
+```     
+
+<a name="p3.12"></a>trichotmize.py
+----
+                        
