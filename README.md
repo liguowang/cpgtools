@@ -638,7 +638,8 @@ Similar to "genomic_distribution_1.py"
 
 methyl_logo.py
 ----
-This program generates DNA sequence logo around methylated Cs.
+This program generates DNA sequence logo around methylated Cs. 
+**input file** must provide correct stand information. 
 
 #### Overview
 1. Extract genomic sequences around methylated C postion
@@ -648,10 +649,64 @@ This program generates DNA sequence logo around methylated Cs.
  - position weight matrix (PWM)
  - [MEME](http://meme-suite.org/doc/meme-format.html) format matrix
  - [Jaspar](http://jaspar.genereg.net/) format matrix
-3. Generate motif logo 
+3. Generate motif logo using [weblogo](https://github.com/WebLogo/weblogo)
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED file specifying the methylated C position. This
+                        BED file should have at least 6 columns (Chrom,
+                        ChromStart, ChromeEnd, name, score, strand).  Note:
+                        Must provide correct *strand* information. BED file
+                        can be regular or compressed by 'gzip' or 'bz'.
+  -r GENOME_FILE, --refgenome=GENOME_FILE
+                        Reference genome seqeunces in FASTA format.
+  -e EXTEND_SIZE, --extend=EXTEND_SIZE
+                        Number of bases extended to up- and down-stream.
+                        default=5 (bp)
+  -n MOTIF_NAME, --name=MOTIF_NAME
+                        Motif name. default=motif
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```                        
+#### Input file
+[test_07_450K_CH.bed](https://github.com/liguowang/cpgtools/blob/master/test/test_07_450K_CH.bed)
 
 #### Example
 ```text
+$ python3 ../bin/methyl_logo.py -i test_07_450K_CH.bed -r /database/hg19.fa -o OUT_9
+```
 
+#### Output
+![methyl_logo.png](https://github.com/liguowang/cpgtools/blob/master/img/methyl_logo.png)
+
+Motif marices
+```text
+$ cat OUT_9.pfm
+Base	1	2	3	4	5	6	7	8	9	10	11
+A	969.0	979.0	299.0	211.0	2838.0	26.0	2891.0	262.0	81.0	1122.0	1083.0
+C	412.0	447.0	831.0	190.0	22.0	2898.0	1.0	168.0	1291.0	1242.0	860.0
+G	876.0	571.0	194.0	35.0	48.0	7.0	9.0	2477.0	739.0	58.0	462.0
+T	675.0	935.0	1608.0	2496.0	24.0	1.0	31.0	25.0	821.0	510.0	527.0
+
+$ cat OUT_9.meme
+----------------------------------------
+motif position-specific probability matrix
+----------------------------------------
+letter-probability matrix: alength= 4 w= 11 nsites= 2932
+ 0.3304691762138571 0.1405482815057283 0.2987588652482269 0.23022367703218768
+ 0.33387888707037644 0.1524822695035461 0.19476268412438624 0.3188761593016912
+ 0.10201854882705945 0.2834151663938898 0.0662165848336061 0.5483496999454446
+ 0.07201309328968904 0.06485270049099837 0.012002182214948174 0.8511320240043645
+ 0.967744135297327 0.007569558101472996 0.016434806328423354 0.00825150027277687
+ 0.008933442444080744 0.9882024004364431 0.0024549918166939452 0.00040916530278232413
+ 0.9858156028368796 0.00040916530278232413 0.0031369339879978183 0.010638297872340429
+ 0.0894026186579378 0.057351336606655756 0.8446535733769777 0.008592471358428807
+ 0.02768685215493726 0.4402618657937807 0.2520458265139116 0.28000545553737044
+ 0.3826377523186034 0.42355428259683586 0.01984451718494272 0.17396344789961812
+ 0.36933987997817785 0.29330332787779595 0.15759683578832515 0.17975995635570105
 ```
       
