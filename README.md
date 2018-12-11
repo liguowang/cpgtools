@@ -11,17 +11,17 @@
 |Program                              |Description                              
 |-------------------------------------|---------------------------------------------------------------------------------------------
 |[annotate_CpG.py](#p3.1)             |Assign CpG into gene's **basal** and **extended** regulatory domain
-|[beta_profile.py](#p3.2)             |Calculate average beta profile for exons, introns, intergenic regions, etc. 
+|[beta_profile.py](#p3.2)             |Calculate average beta profile genomic regions defined by genes (eg. exons, introns, intergenic regions) 
 |[chrom_distribution.py](#p3.3)       |Calculates the distribution of CpG frequencies over chromosomes
-|[dmc_glm.py](#p3.4)                  |Differential CpG analysis using logistic regression model based on methylation proportions
-|[dmc_nonparametric.py](#p3.5)        |Differential CpG analysis using MannWhitney U test/KruskalWallis Htest based on beta values
-|[dmc_ttest.py](#p3.6)                |Differential CpG analysis using T test/ANOVA based on beta values
+|[dmc_glm.py](#p3.4)                  |Differential CpG analysis using **logistic regression model** based on methylation proportions (RRBS/WGBS)
+|[dmc_nonparametric.py](#p3.5)        |Differential CpG analysis using **MannWhitney U test** (two group comparison)or **KruskalWallis H-test** ((three group comparison)) based on beta values (450K/850K, RRBS/WGBS)
+|[dmc_ttest.py](#p3.6)                |Differential CpG analysis using **T test** (two group comparison) or **ANOVA** (three group comparison) based on beta values (450K/850K, RRBS/WGBS)
 |[genomic_distribution_1.py](#p3.7)   |Calculates the distribution of CpG frequencies over genomic regions defined by gene model. 
 |[genomic_distribution_2.py](#p3.8)   |Calculates the distribution of CpG frequencies over genomic regions defined by user
-|[methyl_logo.py](#p3.9)              |Generate motif logo and motif matrices around cytosin
+|[methyl_logo.py](#p3.9)              |Generate motif logo and motif matrices around cytosine
 |[region_profile.py](#p3.10)          |Calculate average beta profile for user specified genomic regions
 |[region_stat.py](#p3.11)             |Calculate basic statistics of CpGs located in each genomic region
-|[trichotmize.py](#p3.12)             |Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model. 
+|[trichotmize.py](#p3.12)             |Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using **Gaussian Mixture Model**. 
 
 
 
