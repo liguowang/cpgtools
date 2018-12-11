@@ -627,11 +627,11 @@ This program generates DNA sequence logo around methylated Cs in 3 steps:
 
 1. Extract genomic sequences around methylated C postion
 2. Generate [motif matrices](https://en.wikipedia.org/wiki/Position_weight_matrix) include:
- - position frequency matrix (PFM)
- - position probability matrix (PPM)
- - position weight matrix (PWM)
- - [MEME](http://meme-suite.org/doc/meme-format.html) format matrix
- - [Jaspar](http://jaspar.genereg.net/) format matrix
+	- position frequency matrix (PFM)
+	- position probability matrix (PPM)
+	- position weight matrix (PWM)
+	- [MEME](http://meme-suite.org/doc/meme-format.html) format matrix
+	- [Jaspar](http://jaspar.genereg.net/) format matrix
 3. Generate motif logo using [weblogo](https://github.com/WebLogo/weblogo)
 
 Note: **input file** must provide correct stand information. 
