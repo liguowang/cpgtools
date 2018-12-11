@@ -430,9 +430,9 @@ This program performs differential CpG analysis based on beta values.
 * use ANOVA for multiple groups comparison.
 * Notes: The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
 
- 1. The samples are independent.
- 2. Each sample is from a normally distributed population.
- 3. The population standard deviations of the groups are all equal.  This property is known as homoscedasticity.
+	* The samples are independent.
+	* Each sample is from a normally distributed population.
+	* The population standard deviations of the groups are all equal.  This property is known as homoscedasticity.
 
     If these assumptions are not true for a given set of data, it may still be
     possible to use the Kruskal-Wallis H-test although with some loss of power.
