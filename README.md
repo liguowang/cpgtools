@@ -6,15 +6,15 @@
 	- [Python Dependencies](#p1.2)
 	- [Install pip3](#p1.3)
 	- [Install CpGtools](#p1.4)
-- [BED files](#p1)
+- [BED files](#p2)
 
 
 
-<a name="p1"></a>
-## Part 1: Installation
 
-<a name="p1.1"></a>
-### Part 1.1: Prerequisites
+## <a name="p1"></a>Part 1: Installation
+
+
+### <a name="p1.1"></a>Part 1.1: Prerequisites
 CpGtools are written in [Python](https://www.python.org/). In particular,  **Python3 (v3.5.x)**
 is required to run all scripts in CpGtools. Some scripts also need **R** to generate graphs and 
 run generalized linear model (GLM).  
@@ -22,8 +22,8 @@ run generalized linear model (GLM).
 - [Python 3](https://www.python.org/downloads/) and [pip3](https://pip.pypa.io/en/stable/installing/)
 - [R](https://www.r-project.org/)
 
-<a name="p1.2"></a>
-### Part 1.2: Python Dependencies
+
+### <a name="p1.2"></a>Part 1.2: Python Dependencies
 Note: these packages will be automatically installed when you use [pip3](https://pip.pypa.io/en/stable/installing/)
 to install CpGtools.
 
@@ -35,8 +35,8 @@ to install CpGtools.
 - [sklearn](https://www.scilearn.com/)
 - [weblogo](https://pypi.org/project/weblogo/)
 
-<a name="p1.3"></a>
-### Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have [pip3](https://pip.pypa.io/en/stable/installing/))
+
+### <a name="p1.3"></a>Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have [pip3](https://pip.pypa.io/en/stable/installing/))
 
 1. First, download **[get-pip.py](https://bootstrap.pypa.io/get-pip.py)**
 		
@@ -57,8 +57,8 @@ to install CpGtools.
 		/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
-<a name="p1.4"></a>
-### Part 1.4: Install CpGtools
+
+### <a name="p1.4"></a>Part 1.4: Install CpGtools
 
 You can run the following command to install CpGtools and all its dependencies. 
 	
@@ -68,8 +68,8 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 	
 	pip install cpgtools --upgrade (not ready)
 
-<a name="p2"></a>
-## Part 2: BED (Browser Extensible Data) format conventions
+
+## <a name="p2"></a>Part 2: BED (Browser Extensible Data) format conventions
 
 BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
 
