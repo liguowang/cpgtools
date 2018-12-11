@@ -873,3 +873,26 @@ $ python3 ../bin/trichotmize.py -r -i test_08.tsv.gz
 @ 2018-12-11 16:26:50: Writing to "TCGA-BC-A10U.results.txt" ...
 
 ```                        
+#### Output
+
+```text
+$ head TCGA-BC-A10Q.results.txt
+
+#Prob_of_0: Probability of CpG belonging to un-methylation group
+#Prob_of_1: Probability of CpG belonging to semi-methylation group
+#Prob_of_2: Probability of CpG belonging to full-methylation group
+#Assigned_lable: -1 = 'unsigned', 0 = 'un-methylation', 1 = 'semi-methylation', 2 = 'full-methylation'
+Probe_ID	Beta_value	Prob_of_1	Prob_of_0	Prob_of_2	Assigned_lable
+cg00000029	0.3469	1.0	5.8450778777948285e-31	1.894620863516962e-21	1
+cg00000165	0.1517	0.997490700482822	0.0025092995171780517	4.9721760843021214e-39	-1
+cg00000236	0.8479	0.08997964310682534	5.321555209091369e-221	0.9100203568931747	2
+cg00000289	0.6658	0.9989955857078533	1.3294534692696416e-131	0.0010044142921467462	-1
+cg00000292	0.6913	0.9932743887459475	1.2610051357010536e-142	0.006725611254052414	-1
+```
+
+####
+Below histogram and piechart showed the proportion of CpGs assigned to "Un-methylated", 
+"Semi-methylated" and "Full-methylated".
+
+![trichotmize.png](https://github.com/liguowang/cpgtools/blob/master/img/trichotmize.png)
+```
