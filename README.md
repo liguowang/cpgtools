@@ -284,10 +284,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 #### Overview
 This program performs differential CpG analysis using logistic regression model based on
-methylation proportions (in the form of "c,n", where "c" indicates "Number of reads with
-methylated C", and "n" indicates "Number of total reads". Both c and n are  non-negative
-integers and c <= n). 
-allow for covariables.
+methylation proportions. It allows for covariable analysis.
 
 #### Basic usage
 
@@ -314,14 +311,17 @@ Options:
 
 #### Input file
 **Data file**.
-Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has 3 replicates:
+Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has 3 replicates.
+methylation proportions is represented by two non-negative integers (in the form of "c,n", 
+where "c" indicates "Number of reads with methylated C", and "n" indicates "Number of total
+reads", c <= n).
 
 |cgID  | A_1    |A_2      |A_3     |B_1     |B_2     |B_3     |
 |:---- |:-------|:-------:|:------:|:------:|:------:|-------:|
 |CpG_1 |129,170 |166,178  |7,9     |8,16    |11,15   |100,230 |
 |CpG_2 |0,7     |2,18     |4,39    |32,37   |14,15   |20,23   |
 
-Download data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)):
+Download test data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)):
 
 
 **Group file**.
@@ -336,6 +336,19 @@ A_3,1,2
 B_1,2,1
 B_2,2,1
 B_3,2,2
-
 ```
-Download group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz)
+Download test group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz)
+
+#### Example
+```text
+python3 ../bin/dmc_glm.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+```
+
+#### Output file
+Additional columns (pvalue and coefficient) will be appended to the original data file. In the example above, 
+4 additional columns were added to "test_04_TwoGroup.tsv":
+
+- survival.pval
+- Sex.pval
+- survival.coef
+- Sex.coef
