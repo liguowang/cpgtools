@@ -702,4 +702,36 @@ region_profile.py
 ----
 This program calculates the overall methylation level (i.e. average beta value) over
 particular genomic regions (eg. promoters, TF bindings). 
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED6 file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, Name, Beta_value, Strand).  Note: the first
+                        base in a chromosome is numbered 0. BED file can be
+                        regular or compressed by 'gzip' or 'bz'.
+  -r REGION_FILE, --region=REGION_FILE
+                        BED file specificy genomic regions. This BED file
+                        should have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd). If the 6-th column does not exist, all
+                        regions will be considered as on "+" strand.
+  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
+                        Size of extension to downstream. default=2000 (bp)
+  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
+                        Size of extension to upstream. default=2000 (bp)
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```                        
+#### Example
+```text
+python3 ../bin/region_profile.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromoter.bed -o OUT_10
+```
+
+#### Output
+Average methylation profile over upstream, user-specified, and down-stream genomic regions. 
+![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
      
