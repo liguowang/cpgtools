@@ -1,24 +1,12 @@
 ## CpGtools -- Tools to analyze and visualize DNA methylation data
 
-- [Installation](#p1)
-	- [Prerequisites](#p1.1)
-	- [Python Dependencies](#p1.2)
-	- [Install pip3](#p1.3)
-	- [Install CpGtools](#p1.4)
-- [BED file format](#p2)
-- [Usage information](#p3)
-	- [annotate_CpG.py](#p3.1)
-	- [beta_profile.py](#p3.2)
-	- [chrom_distribution.py](#p3.3)
-	- [dmc_glm.py](#p3.4)
-	- [dmc_nonparametric.py](#p3.5)
-	- [dmc_ttest.py](#p3.6)
-	- [genomic_distribution_1.py](#p3.7)
-	- [genomic_distribution_2.py](#p3.8)
-	- [methyl_logo.py](#p3.9)
-	- [region_profile.py](#p3.10)
-	- [region_stat.py](#p3.11)
-	- [trichotmize.py](#p3.12)
+[Installation](#p1)
+- [Prerequisites](#p1.1)
+- [Python Dependencies](#p1.2)
+- [Install pip3](#p1.3)
+- [Install CpGtools](#p1.4)
+[BED file format](#p2)
+[Usage information](#p3)
 
 |Program                              |Description                              
 |-------------------------------------|---------------------------------------------------------------------------------------------
