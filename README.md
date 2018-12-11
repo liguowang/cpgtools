@@ -558,32 +558,6 @@ Options:
 
 $ python3 ../bin/genomic_distribution_1.py -i test_03b.bed3.gz -r hg19.RefSeq.union.bed -o OUT_7
 
-@ 2018-12-11 13:33:31: Reading CpG file: "test_03b.bed3.gz"
-@ 2018-12-11 13:33:42: Reading reference gene model: "hg19.RefSeq.union.bed"
-@ 2018-12-11 13:33:42: Extract Coding exons ...
-@ 2018-12-11 13:33:42: Merge Coding exons ...
-@ 2018-12-11 13:33:43: Count CpGs in Coding exons ...
-@ 2018-12-11 13:33:43: Extract UTR exons ...
-@ 2018-12-11 13:33:44: Merge UTR exons ...
-@ 2018-12-11 13:33:45: Subtract regions with higher priority from UTR exons ...
-@ 2018-12-11 13:33:46: Count CpGs in UTR exons ...
-@ 2018-12-11 13:33:46: Extract introns ...
-@ 2018-12-11 13:33:46: Merge introns ...
-@ 2018-12-11 13:33:48: Subtract regions with higher priority from introns ...
-@ 2018-12-11 13:33:51: Count CpGs in introns ...
-@ 2018-12-11 13:33:51: Extract upstream intergenic regions ...
-@ 2018-12-11 13:33:51: Merge upstream intergenic regions ...
-@ 2018-12-11 13:33:52: Subtract regions with higher priority from upstream intergenic regions...
-@ 2018-12-11 13:33:55: Count CpGs in upstream regions ...
-@ 2018-12-11 13:33:55: Extract downstream intergenic regions ...
-@ 2018-12-11 13:33:55: Merge downstream intergenic regions ...
-@ 2018-12-11 13:33:55: Subtract regions with higher priority from downstream intergenic regions...
-@ 2018-12-11 13:33:58: Count CpGs in downstream regions ...
-
-
-@ 2018-12-11 13:33:58: Running R script ...
-null device
-          1
 ```
 
 #### Output files
@@ -657,32 +631,6 @@ Options:
 ```text
 $ python3 ../bin/genomic_distribution_2.py -i test_03b.bed3.gz  -b  hg19_H3K4me3.bed4,hg19_CGI.bed4,hg19_H3K27ac_with_H3K4me1.bed4,hg19_H3K27me3.bed4 -o OUT_8
 
-@ 2018-12-11 13:31:23: Reading CpG file: "test_03b.bed3.gz"
-@ 2018-12-11 13:31:34: Checking BED files: "hg19_H3K4me3.bed4,hg19_CGI.bed4,hg19_H3K27ac_with_H3K4me1.bed4,hg19_H3K27me3.bed4"
-	hg19_H3K4me3.bed4
-	hg19_CGI.bed4
-	hg19_H3K27ac_with_H3K4me1.bed4
-	hg19_H3K27me3.bed4
-@ 2018-12-11 13:31:34: Reading BED file: "hg19_H3K4me3.bed4"
-@ 2018-12-11 13:31:35: Merging overlap entries in BED file: "hg19_H3K4me3.bed4"
-@ 2018-12-11 13:31:35: Counting CpGs ...
-@ 2018-12-11 13:31:35: Reading BED file: "hg19_CGI.bed4"
-@ 2018-12-11 13:31:35: Merging overlap entries in BED file: "hg19_CGI.bed4"
-@ 2018-12-11 13:31:36: Subtract "hg19_H3K4me3.bed4" from "hg19_CGI.bed4"
-@ 2018-12-11 13:31:37: Reading BED file: "hg19_H3K27ac_with_H3K4me1.bed4"
-@ 2018-12-11 13:31:37: Merging overlap entries in BED file: "hg19_H3K27ac_with_H3K4me1.bed4"
-@ 2018-12-11 13:31:37: Subtract "hg19_H3K4me3.bed4" from "hg19_H3K27ac_with_H3K4me1.bed4"
-@ 2018-12-11 13:31:38: Subtract "hg19_CGI.bed4" from "hg19_H3K27ac_with_H3K4me1.bed4"
-@ 2018-12-11 13:31:39: Reading BED file: "hg19_H3K27me3.bed4"
-@ 2018-12-11 13:31:40: Merging overlap entries in BED file: "hg19_H3K27me3.bed4"
-@ 2018-12-11 13:31:40: Subtract "hg19_H3K4me3.bed4" from "hg19_H3K27me3.bed4"
-@ 2018-12-11 13:31:41: Subtract "hg19_CGI.bed4" from "hg19_H3K27me3.bed4"
-@ 2018-12-11 13:31:43: Subtract "hg19_H3K27ac_with_H3K4me1.bed4" from "hg19_H3K27me3.bed4"
-
-
-@ 2018-12-11 13:31:44: Running R script ...
-null device
-          1
 ```
 
 #### Output files
@@ -702,4 +650,8 @@ This program generates DNA sequence logo around methylated Cs.
  - [Jaspar](http://jaspar.genereg.net/) format matrix
 3. Generate motif logo 
 
+#### Example
+```text
+
+```
       
