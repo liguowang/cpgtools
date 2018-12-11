@@ -522,11 +522,7 @@ because most genes have multiple transcripts, and different genes could overlap 
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
 this issue, we define the following priority order:
 
-1) Coding exons
-2) UTR exons
-3) Introns
-4) Upstream intergenic regions
-5) Downsteam intergenic regions
+Coding exons > UTR exons > Introns > Upstream intergenic regions > Downsteam intergenic regions
 
 Higher-priority group override the low-priority group. For example, if a certain part
 of a **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
@@ -583,4 +579,13 @@ $ python3 ../bin/genomic_distribution_1.py -i test_02.bed6.gz -r hg19.RefSeq.uni
 @ 2018-12-11 12:54:33: Merge downstream intergenic regions ...
 @ 2018-12-11 12:54:34: Subtract regions with higher priority from downstream intergenic regions...
 @ 2018-12-11 12:54:38: Count CpGs in downstream regions ...
+
+$ cat OUT_7.txt
+
+Priority_order	Name	Number_of_regions	Size_of_regions(bp)	CpG_raw_count	CpG_count_per_KB
+0	Coding exons	204685	39119881	65488	1.674033722137345
+1	UTR exons	69937	38385741	61510	1.6024179395156133
+2	Introns	214085	1228745034	329012	0.26776262845103793
+3	Upstream of TSS	20507	37014855	120353	3.251478359161477
+4	Downstream of TES	18790	35709088	10999	0.3080168275370124
 ```                       
