@@ -681,6 +681,7 @@ $ python3 ../bin/methyl_logo.py -i test_07_450K_CH.bed -r /database/hg19.fa -o O
 ```
 
 #### Output
+Motif logo
 ![methyl_logo.png](https://github.com/liguowang/cpgtools/blob/master/img/methyl_logo.png)
 
 Motif marices
