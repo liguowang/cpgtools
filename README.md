@@ -6,8 +6,10 @@
 	- [Python Dependencies](#p1.2)
 	- [Install pip3](#p1.3)
 	- [Install CpGtools](#p1.4)
-- [BED files](#p2)
-
+- [BED file format](#p2)
+- [Usage information](#p3)
+	- [annotate_CpG.py](#p3.1)
+	- [beta_profile.py](#p3.2)
 
 
 
@@ -83,10 +85,10 @@ Note:
 1. The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
 2. A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
 
-<a name="p3"></a>
-## Part 3: Usage Information
 
-annotate_CpG.py
+## <a name="p3"></a>Part 3: Usage Information
+
+<a name="p3.1"></a>annotate_CpG.py
 ---
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
@@ -173,7 +175,7 @@ chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 ```
 
 
-beta_profile.py
+<a name="p3.2"></a>beta_profile.py
 ---	
 beta_profile.py calculates the average methylation level (i.e. average beta value) across
 regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
