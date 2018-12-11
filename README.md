@@ -5,7 +5,9 @@
 - [Python Dependencies](#p1.2)
 - [Install pip3](#p1.3)
 - [Install CpGtools](#p1.4)
+
 [BED file format](#p2)
+
 [Usage information](#p3)
 
 |Program                              |Description                              
