@@ -428,13 +428,14 @@ This program performs differential CpG analysis based on beta values.
 
 * use Student's t-test for two group comparison.
 * use ANOVA for multiple groups comparison.
-* Notes: The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
 
-	* The samples are independent.
-	* Each sample is from a normally distributed population.
-	* The population standard deviations of the groups are all equal.  This property is known as homoscedasticity.
+Notes: The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
 
-    If these assumptions are not true for a given set of data, it may still be
+* The samples are independent.
+* Each sample is from a normally distributed population.
+* The population standard deviations of the groups are all equal.  This property is known as homoscedasticity.
+
+If these assumptions are not true for a given set of data, it may still be
     possible to use the Kruskal-Wallis H-test although with some loss of power.
 
 #### Basic usage
@@ -503,3 +504,83 @@ $ python3 ../bin/dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup
 ```
 #### Output file
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
+
+genomic_distribution_1.py
+----
+
+#### Overview
+This program counts number of CpGs falling into genomic regions defined by genes (5 groups):
+
+1. Coding exons
+2. UTR exons
+3. Introns
+4. Upstream intergenic regions (regions upstream of TSS)
+5. Downsteam intergenic regions (regions downstream of TES)
+
+Please note, a particular genomic region can be assigned to different groups listed above,
+because most genes have multiple transcripts, and different genes could overlap on the
+genome. For example, a exon of gene A could be located in a intron of gene B. To address
+this issue, we define the following priority order:
+
+1) Coding exons
+2) UTR exons
+3) Introns
+4) Upstream intergenic regions
+5) Downsteam intergenic regions
+
+Higher-priority group override the low-priority group. For example, if a certain part
+of a **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
+be considered as exon (i.e. removed from intron) since "exon" has higher priority.
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED file specifying the methylated C position. This
+                        BED file should have at least 3 columns (Chrom,
+                        ChromStart, ChromeEnd).  Note: the first base in a
+                        chromosome is numbered 0. BED file can be regular or
+                        compressed by 'gzip' or 'bz'.
+  -r GENE_FILE, --refgene=GENE_FILE
+                        Reference gene model in standard BED-12 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
+                        Size of down-stream intergenic region w.r.t. TES
+                        (transcription end site). default=2000 (bp)
+  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
+                        Size of up-stream intergenic region w.r.t. TSS
+                        (transcription start site). default=2000 (bp)
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+
+```
+
+#### Example
+```text
+
+$ python3 ../bin/genomic_distribution_1.py -i test_02.bed6.gz -r hg19.RefSeq.union.bed -o OUT_7
+
+@ 2018-12-11 12:54:11: Reading CpG file: "test_02.bed6.gz"
+@ 2018-12-11 12:54:20: Reading reference gene model: "hg19.RefSeq.union.bed"
+@ 2018-12-11 12:54:20: Extract Coding exons ...
+@ 2018-12-11 12:54:21: Merge Coding exons ...
+@ 2018-12-11 12:54:23: Count CpGs in Coding exons ...
+@ 2018-12-11 12:54:23: Extract UTR exons ...
+@ 2018-12-11 12:54:23: Merge UTR exons ...
+@ 2018-12-11 12:54:24: Subtract regions with higher priority from UTR exons ...
+@ 2018-12-11 12:54:25: Count CpGs in UTR exons ...
+@ 2018-12-11 12:54:25: Extract introns ...
+@ 2018-12-11 12:54:26: Merge introns ...
+@ 2018-12-11 12:54:27: Subtract regions with higher priority from introns ...
+@ 2018-12-11 12:54:30: Count CpGs in introns ...
+@ 2018-12-11 12:54:30: Extract upstream intergenic regions ...
+@ 2018-12-11 12:54:30: Merge upstream intergenic regions ...
+@ 2018-12-11 12:54:30: Subtract regions with higher priority from upstream intergenic regions...
+@ 2018-12-11 12:54:33: Count CpGs in upstream regions ...
+@ 2018-12-11 12:54:33: Extract downstream intergenic regions ...
+@ 2018-12-11 12:54:33: Merge downstream intergenic regions ...
+@ 2018-12-11 12:54:34: Subtract regions with higher priority from downstream intergenic regions...
+@ 2018-12-11 12:54:38: Count CpGs in downstream regions ...
+```                       
