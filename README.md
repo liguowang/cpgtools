@@ -1,7 +1,19 @@
 ## CpGtools -- Tools to analyze and visualize DNA methylation data
 
+
+##[Installation](#p1)
+###[Prerequisites](#p1.1)
+###[Python Dependencies](#p1.2)
+###[Install pip3](#p1.3)
+###[Install CpGtools](#p1.4)
+##[BED files](#p1)
+
+
+
+<a name="p1"></a>
 ## Part 1: Installation
 
+<a name="p1.1"></a>
 ### Part 1.1: Prerequisites
 CpGtools are written in [Python](https://www.python.org/). In particular,  **Python3 (v3.5.x)**
 is required to run all scripts in CpGtools. Some scripts also need **R** to generate graphs and 
@@ -10,6 +22,7 @@ run generalized linear model (GLM).
 - [Python 3](https://www.python.org/downloads/) and [pip3](https://pip.pypa.io/en/stable/installing/)
 - [R](https://www.r-project.org/)
 
+<a name="p1.2"></a>
 ### Part 1.2: Python Dependencies
 Note: these packages will be automatically installed when you use [pip3](https://pip.pypa.io/en/stable/installing/)
 to install CpGtools.
@@ -22,6 +35,7 @@ to install CpGtools.
 - [sklearn](https://www.scilearn.com/)
 - [weblogo](https://pypi.org/project/weblogo/)
 
+<a name="p1.3"></a>
 ### Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have [pip3](https://pip.pypa.io/en/stable/installing/))
 
 1. First, download **[get-pip.py](https://bootstrap.pypa.io/get-pip.py)**
@@ -43,6 +57,7 @@ to install CpGtools.
 		/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
+<a name="p1.4"></a>
 ### Part 1.4: Install CpGtools
 
 You can run the following command to install CpGtools and all its dependencies. 
@@ -53,6 +68,7 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 	
 	pip install cpgtools --upgrade (not ready)
 
+<a name="p2"></a>
 ## Part 2: BED (Browser Extensible Data) format conventions
 
 BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
@@ -67,6 +83,7 @@ Note:
 1. The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
 2. A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
 
+<a name="p3"></a>
 ## Part 3: Usage Information
 
 annotate_CpG.py
@@ -774,7 +791,7 @@ Options:
 
 $ python3 ../bin/region_stat.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromoter.bed -o OUT_11
 
-$ 
+$ grep -v "NA" OUT_11.txt |head
 chr1	563888	564889	LOC101928626	0	-	2	0.3746	0.395	0.3848	0.3848	0.0144
 chr1	752250	753251	FAM87B	0	+	2	0.4641	0.6485	0.5563	0.5563	0.1304
 chr1	811681	812682	FAM41C	0	-	3	0.7784	0.8494	0.8228	0.8407	0.0387
