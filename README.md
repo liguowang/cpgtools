@@ -579,8 +579,11 @@ $ python3 ../bin/genomic_distribution_1.py -i test_02.bed6.gz -r hg19.RefSeq.uni
 @ 2018-12-11 12:54:33: Merge downstream intergenic regions ...
 @ 2018-12-11 12:54:34: Subtract regions with higher priority from downstream intergenic regions...
 @ 2018-12-11 12:54:38: Count CpGs in downstream regions ...
+```
 
-$ cat OUT_7.txt
+#### Output files
+```text
+$ cat OUT_7.tsv
 
 Priority_order	Name	Number_of_regions	Size_of_regions(bp)	CpG_raw_count	CpG_count_per_KB
 0	Coding exons	204685	39119881	65488	1.674033722137345
@@ -588,4 +591,5 @@ Priority_order	Name	Number_of_regions	Size_of_regions(bp)	CpG_raw_count	CpG_coun
 2	Introns	214085	1228745034	329012	0.26776262845103793
 3	Upstream of TSS	20507	37014855	120353	3.251478359161477
 4	Downstream of TES	18790	35709088	10999	0.3080168275370124
-```                       
+```         
+![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)              
