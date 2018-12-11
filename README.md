@@ -20,6 +20,7 @@
 	- [region_profile.py](#p3.10)
 	- [region_stat.py](#p3.11)
 	- [trichotmize.py](#p3.12)
+		- Trichotmize beta values into "methyl", "semi-methyl" and "unmethyl" status using Gaussian Mixture Model. 
 
 
 
