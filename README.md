@@ -822,4 +822,54 @@ chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
 
 <a name="p3.12"></a>trichotmize.py
 ----
-                        
+This program uses Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into
+three status:
+ * Un-methylated (labeled as "0" in result file)
+ * Semi-methylated (labeled as "1" in result file)
+ * Full-methylated (labeled as "2" in result file)
+ 
+#### Input files
+[test_08.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_08.tsv.gz) 
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Input plain text file containing beta values with the
+                        1st row containing sample IDs (must be unique) and the
+                        1st column containing probe IDs (must be unique).
+                        [required]
+  -c PROB_CUTOFF, --prob-cut=PROB_CUTOFF
+                        Probability cutoff to assign a probe into "semi-
+                        methylated" class. default=0.9999
+  -r, --report          Presense of this flag renders program to generate
+                        "summary_report.txt" file.
+  -s RANDOM_STATE, --seed=RANDOM_STATE
+                        Random_state is the seed used by the random number
+                        generator. You get exactly the same results when
+                        running multiple times with the same random_state.
+                        default=1
+``` 
+#### Example
+```text
+$ python3 ../bin/trichotmize.py -r -i test_08.tsv.gz
+
+@ 2018-12-11 16:25:39: Reading test_08.tsv.gz ...
+	Total samples: 5
+	Total probes: 386958
+@ 2018-12-11 16:25:42: Building Bayesian Gaussian Mixture model for subject: TCGA-BC-A10Q ...
+@ 2018-12-11 16:25:50: Building Bayesian Gaussian Mixture model for subject: TCGA-BC-A10R ...
+@ 2018-12-11 16:25:58: Building Bayesian Gaussian Mixture model for subject: TCGA-BC-A10S ...
+@ 2018-12-11 16:26:07: Building Bayesian Gaussian Mixture model for subject: TCGA-BC-A10T ...
+@ 2018-12-11 16:26:16: Building Bayesian Gaussian Mixture model for subject: TCGA-BC-A10U ...
+@ 2018-12-11 16:26:24: Summerzie GMM models ...
+@ 2018-12-11 16:26:24: Reports were saved into "summary_report.txt".
+@ 2018-12-11 16:26:24: Writing to "TCGA-BC-A10Q.results.txt" ...
+@ 2018-12-11 16:26:31: Writing to "TCGA-BC-A10R.results.txt" ...
+@ 2018-12-11 16:26:38: Writing to "TCGA-BC-A10S.results.txt" ...
+@ 2018-12-11 16:26:44: Writing to "TCGA-BC-A10T.results.txt" ...
+@ 2018-12-11 16:26:50: Writing to "TCGA-BC-A10U.results.txt" ...
+
+```                        
