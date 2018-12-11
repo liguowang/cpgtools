@@ -509,7 +509,7 @@ genomic_distribution_1.py
 ----
 
 #### Overview
-This program counts number of CpGs falling into genomic regions defined by genes (5 groups):
+This program counts number of CpGs falling into genomic regions defined by **genes** (5 groups):
 
 1. Coding exons
 2. UTR exons
@@ -591,5 +591,54 @@ Priority_order	Name	Number_of_regions	Size_of_regions(bp)	CpG_raw_count	CpG_coun
 2	Introns	214085	1228745034	329012	0.26776262845103793
 3	Upstream of TSS	20507	37014855	120353	3.251478359161477
 4	Downstream of TES	18790	35709088	10999	0.3080168275370124
+
+The barplot "OUT_7.pdf" was also generated.
 ```         
-![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)              
+![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)  
+
+genomic_distribution_2.py
+----
+
+#### Overview
+This program counts number of CpGs falling into genomic regions defined by **users**.
+A maximum of 10 BED files (define 10 different genomic regions) can be analyzed.
+
+Please note:
+The **order** of BED files is important (i.e. considered as "priority order"). Overlapped
+genomic regions will be kept only in the BED file with the highest priority and removed from
+BED files of lower priority.  For example, users provided 3 BED files via
+"-i promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
+with promoters, **the overlapped part** will be removed from "enhancers.bed".
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i CPG_FILE, --cpg=CPG_FILE
+                        BED file specifying the methylated C position. This
+                        BED file should have at least 3 columns (Chrom,
+                        ChromStart, ChromeEnd).  Note: the first base in a
+                        chromosome is numbered 0. BED file can be regular or
+                        compressed by 'gzip' or 'bz'.
+  -b BED_FILES, --bed=BED_FILES
+                        List of BED files specifying the genomic regions.
+                        Note: (1) This program can only analyze a maximum of
+                        10 BED files. (2) BED files should be separated by
+                        comma (eg. " -i
+                        promoters.bed,enhancers.bed,intergenic.bed"). (3) The
+                        *order* of BED files is used to determine the
+                        *priority* of BED files, and overlapped genomic
+                        regions will be kept only in the BED file of the
+                        highest priority and removed from BED files of lower
+                        priority. For example, if an enhancer region is
+                        overlapped with promoters, the *overlapped part* will
+                        be removed from "enhancers.bed". (4) Each BED file
+                        should have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd), and the first base in a chromosome is
+                        numbered 0. (5) BED files can be regular or compressed
+                        by 'gzip' or 'bz'.
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```
+            
