@@ -1,17 +1,12 @@
 ## CpGtools -- Tools to analyze and visualize DNA methylation data
 
 
-##[Installation](#p1)
-
-###[Prerequisites](#p1.1)
-
-###[Python Dependencies](#p1.2)
-
-###[Install pip3](#p1.3)
-
-###[Install CpGtools](#p1.4)
-
-##[BED files](#p1)
+- [Installation](#p1)
+	- [Prerequisites](#p1.1)
+	- [Python Dependencies](#p1.2)
+	- [Install pip3](#p1.3)
+	- [Install CpGtools](#p1.4)
+- [BED files](#p1)
 
 
 
