@@ -732,6 +732,59 @@ python3 ../bin/region_profile.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromo
 ```
 
 #### Output
-Average methylation profile over upstream, user-specified, and down-stream genomic regions. 
+Average methylation profile over "upstream"(left), "user-specified" (center), and "down-stream"(right) genomic regions. 
+Note: All groups ("upstream", "user-specified", and "down-stream") were scaled into 100 nt long, regardless of their 
+actual genomic sizes.   
+
 ![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
-     
+
+region_stat.py
+----
+This program gives basic statistics for each genomic region. Add 6 columns to the input BED file:
+
+1. Number of CpGs detected in the genomic region
+2. Min methylation level
+3. Max methylation level
+4. Average methylation level across all CpGs
+5. Median methylation level across all CpGs
+6. Standard deviation
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        BED file specifying the methylated C position. This
+                        BED file should have at least 6 columns (Chrom,
+                        ChromStart, ChromeEnd, Name, Beta_value, Strand).
+                        Note: the first base in a chromosome is numbered 0.
+                        BED file can be regular or compressed by 'gzip' or
+                        'bz'.
+  -r REGION_FILE, --region=REGION_FILE
+                        BED file specificy genomic regions. This BED file
+                        should have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd).
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```
+
+#### Example
+```text
+
+$ python3 ../bin/region_stat.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromoter.bed -o OUT_11
+
+$ 
+chr1	563888	564889	LOC101928626	0	-	2	0.3746	0.395	0.3848	0.3848	0.0144
+chr1	752250	753251	FAM87B	0	+	2	0.4641	0.6485	0.5563	0.5563	0.1304
+chr1	811681	812682	FAM41C	0	-	3	0.7784	0.8494	0.8228	0.8407	0.0387
+chr1	854571	855572	LOC100130417	0	-	11	0.4197	0.9319	0.8018	0.8744	0.1602
+chr1	860620	861621	SAMD11	0	+	8	0.0252	0.5	0.1595	0.0505	0.1972
+chr1	894178	895179	NOC2L	0	-	4	0.0571	0.234	0.137	0.1285	0.0755
+chr1	895466	896467	KLHL17	0	+	7	0.0339	0.4091	0.1589	0.0924	0.1405
+chr1	901376	902377	PLEKHN1	0	+	7	0.0294	0.7146	0.2418	0.1511	0.2615
+chr1	916996	917997	PERM1	0	-	8	0.2443	0.6882	0.4772	0.481	0.1363
+chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
+
+
+```                             
