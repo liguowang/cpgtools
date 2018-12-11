@@ -71,8 +71,6 @@ Note:
 
 annotate_CpG.py
 ---
-
-#### Overview
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
@@ -160,8 +158,6 @@ chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 
 beta_profile.py
 ---	
-
-#### Overview
 beta_profile.py calculates the average methylation level (i.e. average beta value) across
 regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
 intron,  up-stream intergenic and down-stream intergenic.
@@ -223,8 +219,6 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 
 chrom_distribution.py
 ---	
-
-#### Overview
 This program calculates the distribution of CpG over chromosomes.
 
 #### Basic usage
@@ -281,8 +275,6 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 dmc_glm.py
 ---
-
-#### Overview
 This program performs differential CpG analysis using logistic regression model based on
 methylation proportions. It allows for covariable analysis.
 
@@ -353,8 +345,6 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 
 dmc_nonparametric.py
 ---
-
-#### Overview
 This program performs differential CpG analysis based on **beta values**.
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
 - use [Kruskal-Wallis H-test](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance) for multiple groups comparison.
@@ -423,7 +413,6 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
 dmc_ttest.py
 ---
-#### Overview
 This program performs differential CpG analysis based on beta values.
 
 * use Student's t-test for two group comparison.
@@ -507,8 +496,6 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
 genomic_distribution_1.py
 ----
-
-#### Overview
 This program counts number of CpGs falling into genomic regions defined by **genes** (5 groups):
 
 1. Coding exons
@@ -577,8 +564,6 @@ The barplot "OUT_7.pdf" was also generated.
 
 genomic_distribution_2.py
 ----
-
-#### Overview
 This program counts number of CpGs falling into genomic regions defined by **users**.
 A maximum of 10 BED files (define 10 different genomic regions) can be analyzed.
 
@@ -638,10 +623,8 @@ Similar to "genomic_distribution_1.py"
 
 methyl_logo.py
 ----
-This program generates DNA sequence logo around methylated Cs. 
-**input file** must provide correct stand information. 
+This program generates DNA sequence logo around methylated Cs in 3 steps:
 
-#### Overview
 1. Extract genomic sequences around methylated C postion
 2. Generate [motif matrices](https://en.wikipedia.org/wiki/Position_weight_matrix) include:
  - position frequency matrix (PFM)
@@ -650,6 +633,8 @@ This program generates DNA sequence logo around methylated Cs.
  - [MEME](http://meme-suite.org/doc/meme-format.html) format matrix
  - [Jaspar](http://jaspar.genereg.net/) format matrix
 3. Generate motif logo using [weblogo](https://github.com/WebLogo/weblogo)
+
+Note: **input file** must provide correct stand information. 
 
 #### Basic usage
 ```text
@@ -681,7 +666,9 @@ $ python3 ../bin/methyl_logo.py -i test_07_450K_CH.bed -r /database/hg19.fa -o O
 ```
 
 #### Output
+
 Motif logo
+
 ![methyl_logo.png](https://github.com/liguowang/cpgtools/blob/master/img/methyl_logo.png)
 
 Motif marices
@@ -710,4 +697,9 @@ letter-probability matrix: alength= 4 w= 11 nsites= 2932
  0.3826377523186034 0.42355428259683586 0.01984451718494272 0.17396344789961812
  0.36933987997817785 0.29330332787779595 0.15759683578832515 0.17975995635570105
 ```
-      
+
+region_profile.py
+----
+This program calculates the overall methylation level (i.e. average beta value) over
+particular genomic regions (eg. promoters, TF bindings). 
+     
