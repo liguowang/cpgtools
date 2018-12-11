@@ -69,7 +69,7 @@ Note:
 
 ## Part 3: Usage Information
 
-### annotate_CpG.py
+annotate_CpG.py
 ---
 
 #### Overview
@@ -158,7 +158,7 @@ chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 ```
 
 
-### beta_profile.py
+beta_profile.py
 ---	
 
 #### Overview
@@ -221,7 +221,7 @@ $ python3 ../bin/beta_profile.py -r hg19.RefSeq.union.bed -i test_02.bed6.gz -o 
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
 
 
-### chrom_distribution.py
+chrom_distribution.py
 ---	
 
 #### Overview
@@ -279,7 +279,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 3. CpG per Mb 
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
-### dmc_glm.py
+dmc_glm.py
 ---
 
 #### Overview
@@ -351,7 +351,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - survival.coef
 - Sex.coef
 
-### dmc_nonparametric.py
+dmc_nonparametric.py
 ---
 
 #### Overview
@@ -421,15 +421,14 @@ $ python3 ../bin/dmc_nonparametric.py -i test_06_ThreeGroup.tsv.gz -g test_06_Th
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
 
 
-### dmc_ttest.py
+dmc_ttest.py
 ---
 #### Overview
 This program performs differential CpG analysis based on beta values.
  * use Student's t-test for two group comparison.
  * use ANOVA for multiple groups comparison.
 
-    Notes
-    -----
+    Notes:
     The ANOVA test has important assumptions that must be satisfied in order
     for the associated p-value to be valid.
 
