@@ -827,7 +827,7 @@ This program uses Gaussian Mixture model (GMM) to trichotmize each CpG into thre
  * Semi-methylated (labeled as "1" in result file)
  * Full-methylated (labeled as "2" in result file)
 
-Basically, GMM will first calculate probability p (p = p0 + p1 + p2 = 1) for each CpG based on its beta value
+Basically, GMM will first calculate probability p (p = {p0 + p1 + p2}, p0 + p1 + p2 = 1) for each CpG based on its beta value
 - p0: the probability that the CpG is un-methylated
 - p1: the probability that the CpG is semi-methylated
 - p2: the probability that the CpG is full-methylated
