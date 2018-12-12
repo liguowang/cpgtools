@@ -835,11 +835,11 @@ Basically, GMM will first calculate probability p (p = {p0 + p1 + p2}, p0 + p1 +
 
 The classification will be made using rules: 
 
-- if p0 = max(p): un-methylated
-- if p2 = max(p): full-methylated
-- if p1 = max(p):
+- if p0 == max(p): un-methylated
+- if p2 == max(p): full-methylated
+- if p1 == max(p):
 	- if p1 <= prob_cutoff: semi-methylated
-	- if p1 > prob_cutoff: unknown
+	- else: unknown
  
 #### Input files
 [test_08.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_08.tsv.gz) 
