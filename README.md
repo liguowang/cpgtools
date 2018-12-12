@@ -14,8 +14,8 @@
     |[beta_profile.py](#p3.2)             |Calculate average beta profile genomic regions defined by genes (eg. exons, introns, intergenic regions) 
     |[chrom_distribution.py](#p3.3)       |Calculates the distribution of CpG frequencies over chromosomes
     |[dmc_glm.py](#p3.4)                  |Differential CpG analysis using **logistic regression model** based on methylation proportions (RRBS/WGBS)
-    |[dmc_nonparametric.py](#p3.5)        |Differential CpG analysis using **MannWhitney U test** (two group comparison)or **KruskalWallis H-test** ((three group comparison)) based on beta values (450K/850K, RRBS/WGBS)
-    |[dmc_ttest.py](#p3.6)                |Differential CpG analysis using **T test** (two group comparison) or **ANOVA** (three group comparison) based on beta values (450K/850K, RRBS/WGBS)
+    |[dmc_nonparametric.py](#p3.5)        |Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** ((3+ groups comparison)) based on beta values (450K/850K, RRBS/WGBS)
+    |[dmc_ttest.py](#p3.6)                |Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) based on beta values (450K/850K, RRBS/WGBS)
     |[genomic_distribution_1.py](#p3.7)   |Calculates the distribution of CpG frequencies over genomic regions defined by gene model. 
     |[genomic_distribution_2.py](#p3.8)   |Calculates the distribution of CpG frequencies over genomic regions defined by user
     |[methyl_logo.py](#p3.9)              |Generate motif logo and motif matrices around cytosine
@@ -827,6 +827,19 @@ three status:
  * Un-methylated (labeled as "0" in result file)
  * Semi-methylated (labeled as "1" in result file)
  * Full-methylated (labeled as "2" in result file)
+
+Basically, BGMM will first calculate probability p (p = p0 + p1 + p2 = 1) for each CpG based on its beta value
+- p0: the probability that the CpG is un-methylated
+- p1: the probability that the CpG is semi-methylated
+- p2: the probability that the CpG is full-methylated
+
+The classification will be made using rules: 
+
+- if p0 = max(p): un-methylated
+- if p2 = max(p): full-methylated
+- if p1 = max(p):
+	- if p1 <= prob_cutoff: semi-methylated
+	- if p1 > prob_cutoff: unknown
  
 #### Input files
 [test_08.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_08.tsv.gz) 
