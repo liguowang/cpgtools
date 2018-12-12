@@ -822,13 +822,12 @@ chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
 
 <a name="p3.12"></a>trichotmize.py
 ----
-This program uses Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into
-three status:
+This program uses Gaussian Mixture model (GMM) to trichotmize each CpG into three status:
  * Un-methylated (labeled as "0" in result file)
  * Semi-methylated (labeled as "1" in result file)
  * Full-methylated (labeled as "2" in result file)
 
-Basically, BGMM will first calculate probability p (p = p0 + p1 + p2 = 1) for each CpG based on its beta value
+Basically, GMM will first calculate probability p (p = p0 + p1 + p2 = 1) for each CpG based on its beta value
 - p0: the probability that the CpG is un-methylated
 - p1: the probability that the CpG is semi-methylated
 - p2: the probability that the CpG is full-methylated
