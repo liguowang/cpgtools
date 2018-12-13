@@ -24,23 +24,22 @@
     |[region_stat.py](#p3.13)             |*Calculate basic statistics of CpGs located in each genomic region*
     |[trichotmize.py](#p3.14)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
----
 
 ## <a name="p1"></a>Part 1: Installation
 
 
 ### <a name="p1.1"></a>Part 1.1: Prerequisites
 CpGtools are written in [Python](https://www.python.org/). In particular,  **Python3 (v3.5.x)**
-is required to run all scripts in CpGtools. Some scripts also need **R** to generate graphs and 
-run generalized linear model (GLM).  
+is required to run all programs in CpGtools. Some programs also need **[R](https://www.r-project.org/)**
+to generate graphs and run generalized linear model (GLM).  
 
 - [Python 3](https://www.python.org/downloads/) and [pip3](https://pip.pypa.io/en/stable/installing/)
 - [R](https://www.r-project.org/)
 
 
 ### <a name="p1.2"></a>Part 1.2: Python Dependencies
-Note: these packages will be automatically installed when you use [pip3](https://pip.pypa.io/en/stable/installing/)
-to install CpGtools.
+Note: You do NOT need to install these packages manually, as they will be automatically
+installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to install CpGtools.
 
 - [numpy](http://www.numpy.org/)
 - [scipy](https://www.scipy.org/)
