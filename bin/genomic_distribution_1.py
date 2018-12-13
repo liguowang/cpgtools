@@ -6,7 +6,7 @@ including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions'
 'Downsteam intergenic regions'.
 
 Please note, a particular genomic region can be assigned to different groups listed above,
-because most genes have multiple transcripts, and different genes could be overlapped on the
+because most genes have multiple transcripts, and different genes could overlap on the
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
 this issue, we define the priority order below:
 
@@ -43,7 +43,7 @@ __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
 
 def main():
-	print (__doc__)
+	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'.")
@@ -56,18 +56,21 @@ def main():
 	print ()
 
 	if not (options.input_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(101)
 
 	if not (options.gene_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(102)
 				
 	if not (options.out_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(103)	
 	
-	FOUT = open(options.out_file + '.txt','w')
+	FOUT = open(options.out_file + '.tsv','w')
 	ROUT = open(options.out_file + '.r','w')
 	
 	#step1: read CpG file

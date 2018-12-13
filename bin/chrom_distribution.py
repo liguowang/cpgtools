@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program calculates the CpG distribution (frequency) over chromosomes.
+This program calculates the distribution of CpG over chromosomes.
 #=========================================================================================
 """
 
@@ -24,10 +24,10 @@ __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
 
 def main():
-	print (__doc__)
+	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-files",action="store",type="string",dest="input_files",help="Input CpG file(s) in BED format. Multiple BED files should be separated by \",\" (eg: \"-i file_1.bed,file_2.bed,file_3.bed\"). BED file must have at least 3 columns: Chrom - the name of the chromosome or scaffold, chromStart - the starting position of CpG in the chromosome or scaffold, chromEnd - the ending position of CpG in the chromosome or scaffold. Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'. The barplot figures will NOT be generated if you provide more than 12 samples (bed files). [required]")
+	parser.add_option("-i","--input-files",action="store",type="string",dest="input_files",help="Input CpG file(s) in BED3+ format. Multiple BED files should be separated by \",\" (eg: \"-i file_1.bed,file_2.bed,file_3.bed\"). BED file can be regular or compressed by 'gzip' or 'bz'. The barplot figures will NOT be generated if you provide more than 12 samples (bed files). [required]")
 	parser.add_option("-n","--names",action="store",type="string",dest="file_names",help="Shorter and meaningful names to label samples. Should be separated by \",\" and match CpG BED files in number. If not provided, basenames of CpG BED files will be used to label samples. [optional]")
 	parser.add_option("-s","--chrom-size",action="store",type="string",dest="chrom_size",help="Chromosome size file. Tab or space separated text file with 2 columns: first column is chromosome name/ID, second column is chromosome size. This file will determine: (1) which chromosomes are included in the final barplots, so do NOT inlude 'unplaced', 'alternative' contigs in this file. (2) The order of chrosomes in the final barplots.  [required]")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file. [required]")
@@ -36,14 +36,17 @@ def main():
 	print ()
 
 	if not (options.input_files):
+		print (__doc__)
 		#print ('You must specify input file(s)',file=sys.stderr)
 		parser.print_help()
 		sys.exit(101)
 	if not (options.chrom_size):
+		print (__doc__)
 		#print ('You must specify the chrom size file',file=sys.stderr)
 		parser.print_help()
 		sys.exit(102)
 	if not (options.out_file):
+		print (__doc__)
 		#print ('You must specify the output file',file=sys.stderr)
 		parser.print_help()
 		sys.exit(103)	

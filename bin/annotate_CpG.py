@@ -41,8 +41,8 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the C position. Must have at least 3 columns (chrom start end). Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'. The barplot figures will NOT be generated if you provide more than 12 samples (bed files). [required]")
-	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in standard BED-6 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. Must have at least 3 columns (chrom start end). BED file can be regular or compressed by 'gzip' or 'bz'. [required]")
+	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
 	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
 	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")
 	parser.add_option("-e","--extension",action="store",type="int",dest="extension_size",default=1000000,help="Size of extension to both up- and down-stream of TSS (used to define gene's \"extended regulatory domain\"). default=%default (bp)")

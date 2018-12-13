@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program performs differential CpG analysis using logistic regression model with count
-data (in the form of "c/n", where "c" indicates "Number of reads with methylated C", and
-"n" indicates "Number of total reads". Both c and n are  non-negative integers and c <= n).
-Below example showing input data on 2 CpGs of 3 groups (A,B, and C) with each group has 
-3 replicates:
+This program performs differential CpG analysis using logistic regression model based on
+methylation proportions (in the form of "c,n", where "c" indicates "Number of reads with
+methylated C", and "n" indicates "Number of total reads". Both c and n are  non-negative
+integers and c <= n). Below example showing input data on 2 CpGs of 3 groups (A,B, and C)
+with each group has 3 replicates:
  
 cgID  A_1   A_2   A_3   B_1   B_2   B_3   C_1   C_2   C_3
-CpG_1 129/170 166/178 7/9 1 6/16  10/10 10/15 11/15 16/22 20/36     
-CpG_2 0/77  0/99  0/85  0/77  1/37  3/37  0/42  0/153 0/6
+CpG_1 129,170 166,178 7,9 1 6,16  10,10 10,15 11,15 16,22 20,36     
+CpG_2 0,77  0,99  0,85  0,77  1,37  3,37  0,42  0,153 0,6
+
+allow for covariables. 
 ...
 
 #=========================================================================================
@@ -41,7 +43,7 @@ __status__ = "Development"
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values (represented by methyl_count/total_count, eg. 20/30) with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be regular or compressed by 'gzip' or 'bz'.")
 	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples as well as other covariables such as gender, age.  Sample IDs shoud match to the \"Data file\".")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
 	(options,args)=parser.parse_args()
@@ -146,9 +148,9 @@ def main():
 		tmp = f[1:]
 		chunk_size = int(len(tmp)/3)
 		sub_lists = [tmp[i:i+chunk_size] for i in range(0,len(tmp),chunk_size)]
-		v_names = sub_lists[0]
-		v_pvals = sub_lists[1]
-		v_coefs = sub_lists[2]
+		v_names = sub_lists[0][1:]
+		v_pvals = sub_lists[1][1:]
+		v_coefs = sub_lists[2][1:]
 		glm_results[cgID] = [v_pvals, v_coefs]
 	
 	printlog("Results saved to \"%s\" ..." % (options.out_file + '.pval.txt'))

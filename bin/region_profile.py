@@ -26,10 +26,10 @@ __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
 
 def main():
-	print (__doc__)
+	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6 file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'.")
 	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED file specificy genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd). If the 6-th column does not exist, all regions will be considered as on \"+\" strand. ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of extension to downstream. default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of extension to upstream. default=%default (bp)")
@@ -39,14 +39,17 @@ def main():
 	print ()
 
 	if not (options.input_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(101)
 
 	if not (options.region_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(102)
 				
 	if not (options.out_file):
+		print (__doc__)
 		parser.print_help()
 		sys.exit(103)	
 	
