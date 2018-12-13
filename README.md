@@ -54,22 +54,23 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 
 1. First, download **[get-pip.py](https://bootstrap.pypa.io/get-pip.py)**
 		
-		curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+	$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
 2. Then run the following:
 		
-		python get-pip.py
+	$ python get-pip.py
 
 3. Run the following code to check:
 		
-		pip3 --version
-		pip 18.1 from /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pip (python 3.6)
+	$ pip3 --version
+	pip 18.1 from /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pip (python 3.6)
 		
-		which pip3
-		/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
+	$ which pip3
+	/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
 		
-		which pip	
-		/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
+	$ which pip	
+	/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
+
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
 
@@ -77,7 +78,7 @@ Note that **pip** is actualy a soft link to the same executable file path with *
 
 You can run the following command to install CpGtools and all its dependencies. 
 	
-	pip install cpgtools (not ready)		
+	$ pip install cpgtools (not ready)		
 
 You can run the following command to **upgrade** CpGtools and all its dependencies. 	
 	
