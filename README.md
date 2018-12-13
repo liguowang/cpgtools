@@ -50,7 +50,7 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 - [weblogo](https://pypi.org/project/weblogo/)
 
 
-### <a name="p1.3"></a>Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have [pip3](https://pip.pypa.io/en/stable/installing/))
+### <a name="p1.3"></a>Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have it)
 
 1. First, download **[get-pip.py](https://bootstrap.pypa.io/get-pip.py)**
 		
@@ -61,6 +61,7 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 		python get-pip.py
 
 3. Run the following code to check:
+		
 		pip3 --version
 		pip 18.1 from /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pip (python 3.6)
 		
