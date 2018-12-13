@@ -16,6 +16,7 @@
     |[dmc_glm.py](#p3.4)                  |Differential CpG analysis using **logistic regression model** based on methylation proportions (RRBS/WGBS)
     |[dmc_nonparametric.py](#p3.5)        |Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) based on beta values (450K/850K, RRBS/WGBS)
     |[dmc_ttest.py](#p3.6)                |Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) based on beta values (450K/850K, RRBS/WGBS)
+    |[dmc_fisher.py](#p3.13)              |Differential CpG analysis using **Fisher's exact test** (RRBS/WGBS)
     |[genomic_distribution_1.py](#p3.7)   |Calculates the distribution of CpG frequencies over genomic regions defined by gene model. 
     |[genomic_distribution_2.py](#p3.8)   |Calculates the distribution of CpG frequencies over genomic regions defined by user
     |[methyl_logo.py](#p3.9)              |Generate motif logo and motif matrices around cytosine
@@ -317,19 +318,18 @@ Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
-                        Data file containing beta values (represented by
-                        "methyl_count,total_count", eg. "20,30") with the 1st
-                        row containing sample IDs (must be unique) and the 1st
-                        column containing CpG positions or probe IDs (must be
-                        unique). This file can be regular or compressed by
-                        'gzip' or 'bz'.
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be
+                        regular or compressed by 'gzip' or 'bz'.
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file define the biological groups of each
                         samples as well as other covariables such as gender,
                         age.  Sample IDs shoud match to the "Data file".
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
-                        
+                        Prefix of output file.                        
 ```
 
 #### Input files
@@ -524,6 +524,83 @@ $ python3 ../bin/dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup
 ```
 #### Output file
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
+
+
+<a name="p3.13"></a>dmc_fisher.py
+---
+This program performs differential CpG analysis using Fisher exact test.
+
+ * apply to two sample comparison with no biological/technical replicates
+ * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be collapsed (i.e. ignoring any biological/technical variation)
+
+Input file format:
+
+cgID        sample_1    sample_2
+CpG_1       129,170     166,178
+CpG_2       24,77       67,99
+
+number before "," indicates *number of methyl reads*
+number after "," indicates *number of total reads*
+
+3 columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to this table.
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be
+                        regular or compressed by 'gzip' or 'bz'.
+  -g GROUP_FILE, --group=GROUP_FILE
+                        Group file define the biological groups of each
+                        samples. It is a comma-separated 2 columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs.  It must have a header
+                        row. Sample IDs shoud match to the "Data file". Note:
+                        automatically switch to use ANOVA if more than 2
+                        groups were defined in this file.
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```
+
+#### Input files
+[test_09.tsv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.tsv)
+[test_09.grp.csv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.grp.csv)
+
+
+#### Example
+
+```text
+$ python3 ../bin/dmc_fisher.py  -i test_09.tsv -g test_09.grp.csv -o test_09
+
+@ 2018-12-13 14:40:28: Read group file "test_09.grp.csv" ...
+	Group 1 has 2 samples:
+		LTS_MCR-1008,LTS_MCR-1035
+	Group 2 has 2 samples:
+		STS_MCR-1021,STS_MCR-1251
+@ 2018-12-13 14:40:48: Perfrom Benjamini-Hochberg (aka FDR) correction ...
+@ 2018-12-13 14:40:48: Writing to test_09.pval.txt
+
+
+$ head test_09.pval.txt
+
+ID	LTS_MCR-1008	LTS_MCR-1035	STS_MCR-1021	STS_MCR-1251	OddsRatio	pval	adj.pval
+chr10:100011340	12,14	26,37	0,18	10,24	9.353846153846154	1.2116597355208375e-06	6.343768248800197e-05
+chr10:100011341	0,21	0,54	0,26	0,19	nan	1.0	1.0
+chr10:100011387	0,14	0,40	0,20	0,24	nan	1.0	1.0
+chr10:100011388	18,18	47,54	19,23	18,19	1.2548262548262548	0.7574366471769988	1.0
+chr10:100026933	16,30	28,55	7,40	13,19	2.0926829268292684	0.04119183894184185	0.2617016451197068
+chr10:100026991	0,30	0,48	0,40	0,19	nan	1.0	1.0
+chr10:100027909	2,77	1,66	2,64	0,46	1.1571428571428573	1.0	1.0
+chr10:100027910	0,34	0,49	0,49	0,40	nan	1.0	1.0
+chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
+		
+```                     
 
 <a name="p3.7"></a>genomic_distribution_1.py
 ----
