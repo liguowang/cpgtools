@@ -10,3 +10,5 @@ recursive-include lib *.py
 recursive-include scripts *
 recursive-include bin *
 recursive-include doc *
+recursive-include img *
+recursive-include test *
