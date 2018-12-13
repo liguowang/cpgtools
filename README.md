@@ -13,7 +13,7 @@
     |[annotate_CpG.py](#p3.1)             |*Assign CpG into gene's **basal** and **extended** regulatory domain*
     |[beta_profile.py](#p3.2)             |*Calculate average beta profile genomic regions defined by genes (eg. exons, introns, intergenic regions)*
     |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
-    |[dmc_glm.py](#p3.4)                  |*Differential CpG analysis using **logistic regression model** based on methylation proportions (RRBS/WGBS)*
+    |[dmc_logit.py](#p3.4)                |*Differential CpG analysis using **logistic regression model** based on methylation proportions (RRBS/WGBS)*
     |[dmc_nonparametric.py](#p3.5)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) based on beta values (450K/850K, RRBS/WGBS)*
     |[dmc_ttest.py](#p3.6)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) based on beta values (450K/850K, RRBS/WGBS)*
     |[dmc_fisher.py](#p3.7)               |*Differential CpG analysis using **Fisher's exact test** (RRBS/WGBS)*
@@ -60,7 +60,7 @@ Then run the following:
 	
 	$ python get-pip.py
 
-Run the following code to check:
+Run the following code to check (below output is based on MacOS Sierra):
 	
 	$ pip3 --version
 	pip 18.1 from /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pip (python 3.6)
@@ -305,7 +305,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 3. CpG per Mb 
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
-<a name="p3.4"></a>dmc_glm.py
+<a name="p3.4"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using logistic regression model based on
 methylation proportions. It allows for covariable analysis.
@@ -362,7 +362,7 @@ Download test group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguo
 
 #### Example
 ```text
-$ python3 ../bin/dmc_glm.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+$ python3 ../bin/dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
 ```
 
 #### Output file
