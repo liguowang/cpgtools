@@ -617,7 +617,7 @@ because most genes have multiple transcripts, and different genes could overlap 
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
 this issue, we define the following priority order:
 
-Coding exons > UTR exons > Introns > Upstream intergenic regions > Downsteam intergenic regions
+*Coding exons* > *UTR exons* > *Introns* > *Upstream intergenic regions* > *Downsteam intergenic regions*
 
 Higher-priority group override the low-priority group. For example, if a certain part
 of a **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
