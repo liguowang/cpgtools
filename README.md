@@ -24,7 +24,7 @@
     |[region_stat.py](#p3.13)             |*Calculate basic statistics of CpGs located in each genomic region*
     |[trichotmize.py](#p3.14)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
-
+---
 
 ## <a name="p1"></a>Part 1: Installation
 
