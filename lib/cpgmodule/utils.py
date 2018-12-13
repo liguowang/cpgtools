@@ -405,6 +405,10 @@ def stats_over_range(cpg_ranges, chrom, st, end):
 	
 	return [i_count, i_min, i_max, i_mean, i_median, i_std]
 
+def load_pickle_obj():
+    with open('./id2chr.pkl', 'rb') as f:
+        return pickle.load(f)
+
 
 """			
 def read_CpG_bed(cpgfile,genefile, bin_count = 100):
