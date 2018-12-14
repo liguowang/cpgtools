@@ -107,15 +107,15 @@ Note:
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
-**Basal regulatory domain**:is a user-defined genomic region around the TSS (transcription start site). By default,
+**Basal regulatory domain** is a user-defined genomic region around the TSS (transcription start site). By default,
 from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
 domain*. When defining a gene's *basal regulatory domain*, the other nearby genes will be
 ignored (which means different genes' *basal regulatory domains* can be overlapped.)
-**Extended regulatory domain**:
-The gene's basal regulatory domain is further extended in both directions to the nearest gene's
-basal regulatory domain but no more than the maximum extension (specified by '-e', default =
-1000 kb) in one direction.	
-**Basal regulatory domain** and **Extended regulatory domain** are illustrated below
+
+**Extended regulatory domain** is a genomic region that is further extended (from *basal regulatory domains* ) in both directions to the nearest gene's
+basal regulatory domain but no more than the maximum extension (specified by '-e', default = 1000 kb) in one direction.	
+
+*Basal regulatory domain* and *Extended regulatory domain* are illustrated below
 
 ![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
 
