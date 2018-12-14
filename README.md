@@ -130,7 +130,7 @@ One can convert *proportion value* into *beta value*, but not *vice versa*.
 <a name="p3.1"></a>annotate_CpG.py
 ---
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
-"[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
+"[Basal plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
 **Basal regulatory domain** is a user-defined genomic region around the TSS (transcription start site). By default,
 from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
@@ -1047,3 +1047,5 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ![trichotmize.png](https://github.com/liguowang/cpgtools/blob/master/img/trichotmize.png)
 ```
+
+## <a name="p4"></a>Part 3: Contact Information
