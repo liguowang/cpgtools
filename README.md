@@ -11,7 +11,7 @@
     |Program                              |Description                              
     |-------------------------------------|---------------------------------------------------------------------------------------------
     |[annotate_CpG.py](#p3.1)             |*Assign CpG into gene's **basal** and **extended** regulatory domain*
-    |[beta_profile.py](#p3.2)             |*Calculate average beta profile genomic regions defined by genes (eg. exons, introns, intergenic regions)*
+    |[beta_profile.py](#p3.2)             |*Calculate the average beta profile over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
     |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
     |[dmc_fisher.py](#p3.4)               |*Differential CpG analysis using **Fisher's exact test** (RRBS/WGBS)* 
     |[dmc_glm.py](#p3.5)                  |*Differential CpG analysis using **linear model** (450K/850K)* 
@@ -86,7 +86,9 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 	$ pip install cpgtools --upgrade (not ready)
 
 
-## <a name="p2"></a>Part 2: BED (Browser Extensible Data) format conventions
+## <a name="p2"></a>Part 2: File and data format 
+
+### BED (Browser Extensible Data) format
 
 BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
 
@@ -95,6 +97,17 @@ BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For examp
 - **BED3+** file has at least 3 columns (chrom, chromStart, chromEnd). It could have additional columns, but these additional columns will be ignored.
 - **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). It can be used to represent genomic regions and their associated scores, or in cases where "stand" information is important.  
 - **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
+
+### proportion data
+In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
+We define proportion value as **two non-negative integers separated by comma (",") withe the first integer representing 
+"number of methylated reads" and the second integer representing "number of total reads"**. for example:
+
+```text
+0/10,1/27,2/159		#All these three proportions values indicated a hypo-methylated CpG or locus, 
+7/7,17/19,30/34		#All these three proportions values indicated a hyper-methylated CpG or locus.
+```
+
 
 Note:
 1. The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
