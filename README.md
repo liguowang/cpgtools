@@ -107,8 +107,8 @@ Note:
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
-We define proportion value as **two non-negative integers separated by comma (",") withe the first integer representing 
-"number of methylated reads" and the second integer representing "number of total reads"**. for example:
+We define proportion value as **two non-negative integers separated by comma (",")** with the first integer representing 
+"number of methylated reads" and the second integer representing "number of total reads". for example:
 
 ```text
 0/10,1/27,2/159		#All these three proportions values indicated a hypo-methylated CpG or locus, 
@@ -117,7 +117,7 @@ We define proportion value as **two non-negative integers separated by comma (",
 
 ### <a name="p2.3"></a>Part 2.3: beta value
 beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
-One can convert *proportion value* into *beta value* but not vice versa. 
+One can convert *proportion value* into *beta value*, but not *vice versa*. 
 
 ![beta.png](https://github.com/liguowang/cpgtools/blob/master/img/beta.png)
 
