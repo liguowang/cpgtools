@@ -6,6 +6,9 @@
 	- [Install pip3](#p1.3)
 	- [Install CpGtools](#p1.4)
 - [File and data format](#p2)
+	- [BED format](#2.1)
+	- [Proportion value](#2.2)
+	- [Beta value](#2.3)
 - [Usage information](#p3)
 
     |Program                              |Description                              
@@ -88,7 +91,7 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 
 ## <a name="p2"></a>Part 2: File and data format 
 
-### BED format
+### <a name="p2.1"></a>Part 2.1: BED format
 
 BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
 
@@ -102,7 +105,7 @@ Note:
 - The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
 - A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
 
-### proportion value
+### <a name="p2.2"></a>Part 2.2: proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
 We define proportion value as **two non-negative integers separated by comma (",") withe the first integer representing 
 "number of methylated reads" and the second integer representing "number of total reads"**. for example:
@@ -112,7 +115,7 @@ We define proportion value as **two non-negative integers separated by comma (",
 7/7,17/19,30/34		#All these three proportions values indicated a hyper-methylated CpG or locus.
 ```
 
-### beta value
+### <a name="p2.3"></a>Part 2.3: beta value
 beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
 One can convert *proportion value* into *beta value* but not vice versa. 
 
