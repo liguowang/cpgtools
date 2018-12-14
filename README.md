@@ -6,9 +6,9 @@
 	- [Install pip3](#p1.3)
 	- [Install CpGtools](#p1.4)
 - [File and data format](#p2)
-	- [BED format](#2.1)
-	- [Proportion value](#2.2)
-	- [Beta value](#2.3)
+	- [BED format](#p2.1)
+	- [Proportion value](#p2.2)
+	- [Beta value](#p2.3)
 - [Usage information](#p3)
 
     |Program                              |Description                              
