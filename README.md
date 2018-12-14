@@ -88,7 +88,7 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 
 ## <a name="p2"></a>Part 2: File and data format 
 
-### BED (Browser Extensible Data) format
+### BED format
 
 BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
 
@@ -98,7 +98,7 @@ BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For examp
 - **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). It can be used to represent genomic regions and their associated scores, or in cases where "stand" information is important.  
 - **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
 
-### proportion data
+### proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
 We define proportion value as **two non-negative integers separated by comma (",") withe the first integer representing 
 "number of methylated reads" and the second integer representing "number of total reads"**. for example:
