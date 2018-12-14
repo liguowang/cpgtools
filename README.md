@@ -5,7 +5,7 @@
 	- [Python Dependencies](#p1.2)
 	- [Install pip3](#p1.3)
 	- [Install CpGtools](#p1.4)
-- [BED file format](#p2)
+- [File and data format](#p2)
 - [Usage information](#p3)
 
     |Program                              |Description                              
@@ -98,6 +98,10 @@ BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For examp
 - **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). It can be used to represent genomic regions and their associated scores, or in cases where "stand" information is important.  
 - **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
 
+Note:
+- The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
+- A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
+
 ### proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
 We define proportion value as **two non-negative integers separated by comma (",") withe the first integer representing 
@@ -108,10 +112,11 @@ We define proportion value as **two non-negative integers separated by comma (",
 7/7,17/19,30/34		#All these three proportions values indicated a hyper-methylated CpG or locus.
 ```
 
+### beta value
+beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
+One can convert *proportion value* into *beta value* but not vice versa. 
 
-Note:
-1. The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
-2. A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
+![beta.png](https://github.com/liguowang/cpgtools/blob/master/img/beta.png)
 
 ## <a name="p3"></a>Part 3: Usage Information
 
