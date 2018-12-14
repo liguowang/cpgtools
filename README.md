@@ -102,6 +102,10 @@ Note:
 
 ## <a name="p3"></a>Part 3: Usage Information
 
+
+
+
+
 <a name="p3.1"></a>annotate_CpG.py
 ---
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
@@ -110,9 +114,9 @@ This program annotate CpGs by assigning them to gene's regulatory domains. Follo
 **Basal regulatory domain** is a user-defined genomic region around the TSS (transcription start site). By default,
 from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
 domain*. When defining a gene's *basal regulatory domain*, the other nearby genes will be
-ignored (which means different genes' *basal regulatory domains* can be overlapped.)
+ignored (which means different genes' *basal regulatory domain* can be overlapped.)
 
-**Extended regulatory domain** is a genomic region that is further extended (from *basal regulatory domains* ) in both directions to the nearest gene's
+**Extended regulatory domain** is a genomic region that is further extended (from *basal regulatory domain* ) in both directions to the nearest gene's
 basal regulatory domain but no more than the maximum extension (specified by '-e', default = 1000 kb) in one direction.	
 
 *Basal regulatory domain* and *Extended regulatory domain* are illustrated below
