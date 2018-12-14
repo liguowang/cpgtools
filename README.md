@@ -107,16 +107,15 @@ Note:
 This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
 "[Basel plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
-**Basal regulatory domain**:
-A gene's basal regulatory domain is a window around its TSS (transcription start site). In 
-particular, basal regulatory domain is obtained by extending '-u' basepairs (default = 5 kb)
-to the upstream and '-d' basepairs (default = 1 kb) to the downstream of TSS regardless of
-other nearby genes.
-
+**Basal regulatory domain**:is a user-defined genomic region around the TSS (transcription start site). By default,
+from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
+domain*. When defining a gene's *basal regulatory domain*, the other nearby genes will be
+ignored (which means different genes' *basal regulatory domains* can be overlapped.)
 **Extended regulatory domain**:
 The gene's basal regulatory domain is further extended in both directions to the nearest gene's
 basal regulatory domain but no more than the maximum extension (specified by '-e', default =
 1000 kb) in one direction.	
+**Basal regulatory domain** and **Extended regulatory domain** are illustrated below
 
 ![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
 
@@ -128,13 +127,15 @@ Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
-                        BED file specifying the C position. Must have at least
-                        3 columns (chrom start end). Note: the first base in a
-                        chromosome is numbered 0. BED file can be regular or
-                        compressed by 'gzip' or 'bz'. [required]
+                        BED3+ file specifying the C position. BED3+ file could
+                        be a regular text file or compressed file (*.gz,
+                        *.bz2) or accessible url. [required]
   -r GENE_FILE, --refgene=GENE_FILE
-                        Reference gene model in standard BED-12 format
+                        Reference gene model in BED12 format
                         (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+                        It is recommended that multiple transcripts of the
+                        same gene are collapsed into a single super transcript
+                        with one TSS and one name.
   -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
                         Size of extension to upstream of TSS (used to define
                         gene's "basal regulatory domain"). default=5000 (bp)
