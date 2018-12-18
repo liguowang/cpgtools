@@ -111,8 +111,8 @@ We define proportion value as **two non-negative integers separated by comma (",
 "number of methylated reads" and the second integer representing "number of total reads". for example:
 
 ```text
-0/10,1/27,2/159		#All these three proportions values indicated a hypo-methylated CpG or locus, 
-7/7,17/19,30/34		#All these three proportions values indicated a hyper-methylated CpG or locus.
+0,10 1,27 2,159		#All these three proportions values indicated a hypo-methylated CpG or locus, 
+7,7 17,19 30,34		#All these three proportions values indicated a hyper-methylated CpG or locus.
 ```
 
 ### <a name="p2.3"></a>Part 2.3: beta value
