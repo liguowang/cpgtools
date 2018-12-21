@@ -340,9 +340,11 @@ This program performs differential CpG analysis using Fisher exact test.
 
 Input file format:
 
+```text
 cgID        sample_1    sample_2
 CpG_1       129,170     166,178
 CpG_2       24,77       67,99
+```
 
 number before "," indicates *number of methyl reads*
 number after "," indicates *number of total reads*
