@@ -13,8 +13,8 @@
 
     |Program                              |Description                              
     |-------------------------------------|---------------------------------------------------------------------------------------------
-    |[annotate_CpG.py](#p3.1)             |*Assign CpG into gene's **basal** and **extended** regulatory domain*
-    |[beta_profile.py](#p3.2)             |*Calculate the average beta profile over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
+    |[annotate_CpG.py](#p3.1)             |*Annotate the function of CpG by assigning it to gene's **basal** and **extended** regulatory domain*
+    |[beta_profile.py](#p3.2)             |*Calculate the average methylation level over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
     |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
     |[dmc_fisher.py](#p3.4)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
     |[dmc_glm.py](#p3.5)                  |*Differential CpG analysis using **linear model** on beta values* 
@@ -24,7 +24,7 @@
     |[genomic_distribution_1.py](#p3.9)   |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
     |[genomic_distribution_2.py](#p3.10)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
     |[methyl_logo.py](#p3.11)             |*Generate motif logo and motif matrices around cytosine*
-    |[region_profile.py](#p3.12)          |*Calculate average beta profile for user specified genomic regions*
+    |[region_profile.py](#p3.12)          |*Calculate average methylation level for user specified genomic regions*
     |[region_stat.py](#p3.13)             |*Calculate basic statistics of CpGs located in each genomic region*
     |[trichotmize.py](#p3.14)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
@@ -93,7 +93,7 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 
 ### <a name="p2.1"></a>Part 2.1: BED format
 
-BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For example, the first 100 bases of a chromosome are defined as chromStart=0, chromEnd=100, and span the bases numbered 0-99.
+BED format is commonly used to describe *blocks of genome*. It is 0-based (meaning the first base of a chromosome is numbered 0). It is s left-open, right-closed. For example, the bed entry **chr1 10 15** contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1.
 
 - **BED12** file (also called the standarded BED file) which has 12 fields. It is used to describe gene models. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
 - **BED3** file only has the first 3 required fields (chrom, chromStart, chromEnd). It is commonly used to represent genomic regions when "score" and "strand" are not important. 
@@ -101,9 +101,6 @@ BED file is 0-based	 (i.e. the first base of chromosome is index as '0'For examp
 - **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). It can be used to represent genomic regions and their associated scores, or in cases where "stand" information is important.  
 - **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
 
-Note:
-- The coordinates in a BED record are both 0-based, meaning the first base on a chromosome is numbered 0.
-- A BED interval is left-open, right-closed. So, "chr1 10 15" contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1. 
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
