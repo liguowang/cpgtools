@@ -565,7 +565,7 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 This program performs differential CpG analysis based on [proportion value](#p2.2).
 
 * use [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) for two group comparison.
-* use [ANOVA](https://en.wikipedia.org/wiki/Analysis_of_v) for multiple groups comparison.
+* use [ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance) for multiple groups comparison.
 
 Notes: The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
 
