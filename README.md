@@ -333,7 +333,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 <a name="p3.4"></a>dmc_fisher.py
 ---
-This program performs differential CpG analysis using Fisher exact test on [proportion value](#p2.2).
+This program performs differential CpG analysis using **Fisher exact test** on [proportion value](#p2.2).
 
  * apply to two sample comparison with no biological/technical replicates
  * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be collapsed (i.e. ignoring any biological/technical variation)
@@ -350,7 +350,10 @@ CpG_2       24,77       67,99	...
 number before "," indicates *number of methyl reads*
 number after "," indicates *number of total reads*
 
-3 columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to this table.
+3 columns ("Odds ratio", "pvalue" and "FDR adjusted pvalue") will append to this table.
+
+- pvalue is two-tailed (same for other methods)
+- We used [Benjamini-Hochberg Procedure](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/) for multiple test correction (same for other method)
 
 #### Basic usage
 ```text
