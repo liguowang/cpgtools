@@ -216,7 +216,7 @@ chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 ---	
 beta_profile.py calculates the average methylation level (i.e. average beta value) across
 regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
-intron,  up-stream intergenic and down-stream intergenic.
+intron,  up-stream intergenic and down-stream intergenic regions.
 
 #### Basic usage
 
@@ -324,9 +324,9 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 1. Total CpG count per chromsome 
 ![chromDist.CpG_total.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_total.png) 
-2. CpG percent on each chromosome
+2. CpG percent on each chromosome (normalized to total CpGs)
 ![chromDist.CpG_percent.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_percent.png)
-3. CpG per Mb 
+3. CpG per Mb (normalized to chromsome size)
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
 
