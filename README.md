@@ -353,7 +353,7 @@ number after "," indicates *number of total reads*
 3 columns ("Odds ratio", "pvalue" and "FDR adjusted pvalue") will append to this table.
 
 - pvalue is two-tailed (same for other methods)
-- We used [Benjamini-Hochberg Procedure](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/) for multiple test correction (same for other method)
+- We used [Benjamini-Hochberg Procedure](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/) for multiple test correction (same for other methods)
 
 #### Basic usage
 ```text
@@ -415,8 +415,8 @@ chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
 
 <a name="p3.5"></a>dmc_glm.py
 ---
-This program performs differential CpG analysis using generalized liner model based on
-beta values. It allows for covariable analysis.
+This program performs differential CpG analysis using **[generalized liner model](https://en.wikipedia.org/wiki/Generalized_linear_model)** based on
+[beta value](#p2.3). It allows for covariable analysis.
 
 #### Basic usage
 ```text
