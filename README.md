@@ -474,32 +474,9 @@ Options:
 ```
 
 #### Input files
-**Data file**.
-Below example showing input data on 2 CpGs of 2 groups (A,B) with each group has 3 replicates.
-methylation proportions is represented by two non-negative integers separated by "," (in the form of "c,n", 
-where "c" indicates "Number of reads with methylated C", and "n" indicates "Number of total
-reads", c <= n). Any other forms will be considered as "missing values".
 
-|cgID  | A_1    |A_2      |A_3     |B_1     |B_2     |B_3     |
-|:---- |:-------|:-------:|:------:|:------:|:------:|-------:|
-|CpG_1 |129,170 |166,178  |7,9     |8,16    |11,15   |100,230 |
-|CpG_2 |0,7     |2,18     |4,39    |32,37   |14,15   |20,23   |
-
-
-
-**Group file**.
-Below example specified two variables. "survival" (1=long-term survival, 2=short-term survival), and "sex" (1=Male, 2=Female)
-```text
-sampleID,survival,Sex
-A_1,1,1
-A_2,1,2
-A_3,1,2
-B_1,2,1
-B_2,2,1
-B_3,2,2
-```
-Download test data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)
-Download test group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz)
+- Data file: [test_04_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.tsv.gz)
+- Group file: [test_04_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_04_TwoGroup.grp.csv.gz)
 
 #### Example
 ```text
