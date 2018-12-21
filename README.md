@@ -446,7 +446,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 <a name="p3.6"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using logistic regression model based on
-methylation proportions. It allows for covariable analysis.
+[proportion value](#p2.2). It allows for covariable analysis.
 
 #### Basic usage
 
@@ -514,7 +514,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 
 <a name="p3.7"></a>dmc_nonparametric.py
 ---
-This program performs differential CpG analysis based on **beta values**.
+This program performs differential CpG analysis based on [proportion value](#p2.2).
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
 - use [Kruskal-Wallis H-test](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance) for multiple groups comparison.
 
@@ -582,7 +582,7 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
 <a name="p3.8"></a>dmc_ttest.py
 ---
-This program performs differential CpG analysis based on beta values.
+This program performs differential CpG analysis based on [proportion value](#p2.2).
 
 * use Student's t-test for two group comparison.
 * use ANOVA for multiple groups comparison.
