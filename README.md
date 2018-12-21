@@ -93,7 +93,7 @@ You can run the following command to **upgrade** CpGtools and all its dependenci
 
 ### <a name="p2.1"></a>Part 2.1: BED format
 
-BED format is commonly used to describe *blocks of genome*. The BED format consists of one line per feature, each containing 3-12 columns of data. It is 0-based (meaning the first base of a chromosome is numbered 0). It is s left-open, right-closed. For example, the bed entry **chr1 10 15** contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1.
+BED format is commonly used to describe *blocks of genome*. The BED format consists of one line per feature, each containing 3-12 columns of data. It is 0-based (meaning the first base of a chromosome is numbered 0). It is s left-open, right-closed. For example, the bed entry **"chr1 10 15"** contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1.
 
 - **BED12** file (a.k.a. the standarded BED file) which has 12 fields. It is used to describe gene models. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
 - **BED3** file only has the first 3 required fields (chrom, chromStart, chromEnd). It is commonly used to represent genomic regions when "score" and "strand" are not important. 
