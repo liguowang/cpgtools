@@ -440,6 +440,9 @@ Options:
 
 ##### Input files
 
+- Data file: [test_10_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.tsv.gz)
+- Group file: [test_10_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.grp.csv.gz)
+
 #### Output files
 Additional columns (pvalue and coefficient) will be appended to the original data file.
 
