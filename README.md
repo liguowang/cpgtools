@@ -445,7 +445,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 
 <a name="p3.6"></a>dmc_logit.py
 ---
-This program performs differential CpG analysis using logistic regression model based on
+This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
 [proportion value](#p2.2). It allows for covariable analysis.
 
 #### Basic usage
