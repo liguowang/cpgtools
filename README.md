@@ -103,18 +103,18 @@ BED (Browser Extensible Data) format is commonly used to describe *blocks of gen
 
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
-In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by "proportion". 
-We define proportion value as **two non-negative integers separated by comma (",")** with the first integer representing 
+In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by a "proportion" vlaue. 
+We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer representing 
 "number of methylated reads" and the second integer representing "number of total reads". for example:
 
 ```text
-0,10 1,27 2,159		#All these three proportions values indicated a hypo-methylated CpG or locus, 
-7,7 17,19 30,34		#All these three proportions values indicated a hyper-methylated CpG or locus.
+0,10 1,27 2,159		#Three proportions values indicated hypo-methylated loci 
+7,7 17,19 30,34		#Three proportions values indicated hyper-methylated loci
 ```
 
 ### <a name="p2.3"></a>Part 2.3: beta value
 beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
-One can convert *proportion value* into *beta value*, but not *vice versa*. 
+Please note that one can convert *proportion value* into *beta value*, but not *vice versa*. 
 
 ![beta.png](https://github.com/liguowang/cpgtools/blob/master/img/beta.png)
 
@@ -134,10 +134,10 @@ from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal r
 domain*. When defining a gene's *basal regulatory domain*, the other nearby genes will be
 ignored (which means different genes' *basal regulatory domain* can be overlapped.)
 
-**Extended regulatory domain** is a genomic region that is further extended (from *basal regulatory domain* ) in both directions to the nearest gene's
+**Extended regulatory domain** is a genomic region that is further extended from *basal regulatory domain* in both directions to the nearest gene's
 basal regulatory domain but no more than the maximum extension (specified by '-e', default = 1000 kb) in one direction.	
 
-*Basal regulatory domain* and *Extended regulatory domain* are illustrated below
+*Basal regulatory domain* and *Extended regulatory domain* are illustrated in below diagram
 
 ![basal & extended regulatory domain](https://github.com/liguowang/cpgtools/blob/master/img/gene_domain.png)
 
@@ -178,8 +178,8 @@ Options:
 ```	                        
 
 #### Input files
-- BED3+ file specifying the C position. Download test file [test_01.bed6](https://github.com/liguowang/cpgtools/blob/master/test/test_01.bed6)
-- Reference gene model in BED12 format. Download test file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
+- BED3+ file specifying the C position. Download the test BED3 file [test_01.bed6](https://github.com/liguowang/cpgtools/blob/master/test/test_01.bed6)
+- Reference gene model in BED12 format. Download the test BED12 file [hg19.RefSeq.union.bed](https://github.com/liguowang/cpgtools/blob/master/test/hg19.RefSeq.union.bed)
 
 #### Output file
 Two addtional columns will be appended to the orignal BED file (-i):
