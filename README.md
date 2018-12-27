@@ -1,5 +1,7 @@
 ## CpGtools -- Tools to analyze and visualize DNA methylation data
 
+## Table of contents
+
 - [Installation](#p1)
 	- [Prerequisites](#p1.1)
 	- [Python Dependencies](#p1.2)
@@ -380,8 +382,9 @@ Options:
 ```
 
 #### Input files
-[test_09.tsv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.tsv)
-[test_09.grp.csv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.grp.csv)
+
+- Data file:[test_09.tsv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.tsv)
+- Group file:[test_09.grp.csv](https://github.com/liguowang/cpgtools/blob/master/test/test_09.grp.csv)
 
 
 #### Example
@@ -656,10 +659,10 @@ This program counts number of CpGs falling into genomic regions defined by **gen
 4. Upstream intergenic regions (regions upstream of TSS)
 5. Downsteam intergenic regions (regions downstream of TES)
 
-Please note, a particular genomic region can be assigned to different groups listed above,
+Please note, a particular genomic region can be assigned to different groups defined above,
 because most genes have multiple transcripts, and different genes could overlap on the
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
-this issue, we define the following priority order:
+this issue (ambiguity), we define the following priority order:
 
 *Coding exons* > *UTR exons* > *Introns* > *Upstream intergenic regions* > *Downsteam intergenic regions*
 
