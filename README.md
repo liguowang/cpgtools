@@ -110,8 +110,8 @@ right-closed. For example, the bed entry **"chr1   10   15"** contains the 11-th
 
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
-In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by a "proportion" vlaue. 
-We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer (*m*, *m* <= 0 <= *n*) representing 
+In [bisulfite sequencing](https://en.wikipedia.org/wiki/Bisulfite_sequencing) ([RRBS](https://en.wikipedia.org/wiki/Reduced_representation_bisulfite_sequencing) or [WGBS](https://en.wikipedia.org/wiki/Whole_genome_bisulfite_sequencing)), the methylation level of a particular CpG or region can be represented by a "proportion" vlaue. 
+We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer (*m*,  0 <= *m* <= *n*) representing 
 "number of methylated reads" and the second integer (*n*, *n* >= 0) representing "number of total reads". for example:
 
 ```text
