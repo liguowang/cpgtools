@@ -82,6 +82,7 @@ Install "gamlss" package from the R command line:
 	> install.packages("gamlss")
 	
 Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
+	
 	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
 	$ R CMD INSTALL gamlss_5.1-2.tar.gz
 
