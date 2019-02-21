@@ -18,17 +18,18 @@
     |[annotate_CpG.py](#p3.1)             |*Annotate the function of CpG by assigning it to gene's **basal** and **extended** regulatory domain*
     |[beta_profile.py](#p3.2)             |*Calculate the average methylation level over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
     |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
-    |[dmc_fisher.py](#p3.4)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
-    |[dmc_glm.py](#p3.5)                  |*Differential CpG analysis using **linear model** on beta values* 
-    |[dmc_logit.py](#p3.6)                |*Differential CpG analysis using **logistic regression model** on proportion values*
-    |[dmc_nonparametric.py](#p3.7)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta values*
-    |[dmc_ttest.py](#p3.8)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta values*
-    |[genomic_distribution_1.py](#p3.9)   |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
-    |[genomic_distribution_2.py](#p3.10)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
-    |[methyl_logo.py](#p3.11)             |*Generate motif logo and motif matrices around cytosine*
-    |[region_profile.py](#p3.12)          |*Calculate average methylation level for user specified genomic regions*
-    |[region_stat.py](#p3.13)             |*Calculate basic statistics of CpGs located in each genomic region*
-    |[trichotmize.py](#p3.14)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
+    |[dmc_bb.py](#p3.4)               	  |*Differential CpG analysis using **beta binomial regression** on proportion values* 
+    |[dmc_fisher.py](#p3.5)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
+    |[dmc_glm.py](#p3.6)                  |*Differential CpG analysis using **linear model** on beta values* 
+    |[dmc_logit.py](#p3.7)                |*Differential CpG analysis using **logistic regression model** on proportion values*
+    |[dmc_nonparametric.py](#p3.8)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta values*
+    |[dmc_ttest.py](#p3.9)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta values*
+    |[genomic_distribution_1.py](#p3.10)  |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
+    |[genomic_distribution_2.py](#p3.11)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
+    |[methyl_logo.py](#p3.12)             |*Generate motif logo and motif matrices around cytosine*
+    |[region_profile.py](#p3.13)          |*Calculate average methylation level for user specified genomic regions*
+    |[region_stat.py](#p3.14)             |*Calculate basic statistics of CpGs located in each genomic region*
+    |[trichotmize.py](#p3.15)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
 
 ## <a name="p1"></a>Part 1: Installation
@@ -333,7 +334,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 
 
-<a name="p3.4"></a>dmc_fisher.py
+<a name="p3.5"></a>dmc_fisher.py
 ---
 This program performs differential CpG analysis using **Fisher exact test** on [proportion value](#p2.2).
 
@@ -416,7 +417,7 @@ chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
 		
 ```       
 
-<a name="p3.5"></a>dmc_glm.py
+<a name="p3.6"></a>dmc_glm.py
 ---
 This program performs differential CpG analysis using **[generalized liner model](https://en.wikipedia.org/wiki/Generalized_linear_model)** based on
 [beta value](#p2.3). It allows for covariable analysis.
@@ -449,7 +450,7 @@ Options:
 #### Output files
 Additional columns (pvalue and coefficient) will be appended to the original data file.
 
-<a name="p3.6"></a>dmc_logit.py
+<a name="p3.7"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
 [proportion value](#p2.2). It allows for covariable analysis.
@@ -495,7 +496,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - survival.coef
 - Sex.coef
 
-<a name="p3.7"></a>dmc_nonparametric.py
+<a name="p3.8"></a>dmc_nonparametric.py
 ---
 This program performs differential CpG analysis based on [proportion value](#p2.2).
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
@@ -563,7 +564,7 @@ $ python3 ../bin/dmc_nonparametric.py -i test_06_ThreeGroup.tsv.gz -g test_06_Th
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
 
 
-<a name="p3.8"></a>dmc_ttest.py
+<a name="p3.9"></a>dmc_ttest.py
 ---
 This program performs differential CpG analysis based on [proportion value](#p2.2).
 
@@ -649,7 +650,7 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
               
 
-<a name="p3.9"></a>genomic_distribution_1.py
+<a name="p3.10"></a>genomic_distribution_1.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **genes** (5 groups):
 
@@ -717,7 +718,7 @@ The barplot "OUT_7.pdf" was also generated.
 ```         
 ![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)  
 
-<a name="p3.10"></a>genomic_distribution_2.py
+<a name="p3.11"></a>genomic_distribution_2.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **users**.
 A maximum of 10 BED files (define 10 different genomic regions) can be analyzed.
@@ -776,7 +777,7 @@ $ python3 ../bin/genomic_distribution_2.py -i test_03b.bed3.gz  -b  hg19_H3K4me3
 #### Output files
 Similar to "genomic_distribution_1.py"      
 
-<a name="p3.11"></a>methyl_logo.py
+<a name="p3.12"></a>methyl_logo.py
 ----
 This program generates DNA sequence logo around methylated Cs in 3 steps:
 
@@ -789,7 +790,7 @@ This program generates DNA sequence logo around methylated Cs in 3 steps:
 	- [Jaspar](http://jaspar.genereg.net/) format matrix
 3. Generate motif logo using [weblogo](https://github.com/WebLogo/weblogo)
 
-Note: **input file** must provide correct stand information. 
+Note: **input BED file** must has strand information. 
 
 #### Basic usage
 ```text
@@ -853,7 +854,7 @@ letter-probability matrix: alength= 4 w= 11 nsites= 2932
  0.36933987997817785 0.29330332787779595 0.15759683578832515 0.17975995635570105
 ```
 
-<a name="p3.12"></a>region_profile.py
+<a name="p3.13"></a>region_profile.py
 ----
 This program calculates the overall methylation level (i.e. average beta value) over
 particular genomic regions (eg. promoters, TF bindings). 
@@ -893,7 +894,7 @@ actual genomic sizes.
 
 ![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
 
-<a name="p3.13"></a>region_stat.py
+<a name="p3.14"></a>region_stat.py
 ----
 This program gives basic statistics for each genomic region. Add 6 columns to the input BED file:
 
@@ -944,7 +945,7 @@ chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
 
 ```     
 
-<a name="p3.14"></a>trichotmize.py
+<a name="p3.15"></a>trichotmize.py
 ----
 This program uses Gaussian Mixture model (GMM) to trichotmize each CpG into 4 status:
  * Un-methylated (labeled as "0" in result file)
@@ -1032,6 +1033,6 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 "Semi-methylated" and "Full-methylated".
 
 ![trichotmize.png](https://github.com/liguowang/cpgtools/blob/master/img/trichotmize.png)
-```
+
 
 ## <a name="p4"></a>Part 3: Contact Information
