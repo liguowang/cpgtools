@@ -86,7 +86,7 @@ Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
 	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
 	$ R CMD INSTALL gamlss_5.1-2.tar.gz
 
-### <a name="p1.5"></a>Part 1.5: Install CpGtools
+### <a name="p1.5"></a>Part 1.5: Install or Upgrade CpGtools
 	
 	$ pip3 install cpgtools		#install CpGtools and all its dependencies	
 	$ pip3 install cpgtools --upgrade		#**upgrade** CpGtools and all its dependencies
@@ -96,9 +96,13 @@ Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
 
 ### <a name="p2.1"></a>Part 2.1: BED format
 
-BED (Browser Extensible Data) format is commonly used to describe *blocks of genome*. The BED format consists of one line per feature, each containing 3-12 columns of data. It is 0-based (meaning the first base of a chromosome is numbered 0). It is s left-open, right-closed. For example, the bed entry **"chr1 10 15"** contains the 11-th, 12-th, 13-th, 14-th and 15-th bases of chromosome-1 (NOTE: **"chr1 10 15"** is equivalent **"chr1:11-15"**).
+BED (Browser Extensible Data) format is commonly used to describe *blocks of genome*.
+The BED format consists of one line per feature, each containing 3-12 columns of data.
+It is 0-based (meaning the first base of a chromosome is numbered 0). It is s left-open,
+right-closed. For example, the bed entry **"chr1   10   15"** contains the 11-th, 12-th,
+13-th, 14-th and 15-th bases of chromosome-1.
 
-- **BED12** file (a.k.a. the standarded BED file) which has 12 fields. Each row is used to describe a gene or an array of disconnected genomic regions. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
+- **BED12** file (i.e. the standarded BED file) which has 12 fields. Each row in this file describes a gene or an array of disconnected genomic regions. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
 - **BED3** file only has the first 3 required fields (chrom, chromStart, chromEnd). Each row is used to represent a single genomic region where "score" and "strand" are not important. 
 - **BED3+** file has at least 3 columns (chrom, chromStart, chromEnd). It could have additional columns, but these additional columns will be ignored.
 - **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). Each row is used to represent a single genomic region and their associated scores, or in cases where "stand" information is important.  
@@ -107,8 +111,8 @@ BED (Browser Extensible Data) format is commonly used to describe *blocks of gen
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
 In bisulfite sequencing (RRBS or WGBS), the methylation level of a particular CpG or region can be represented by a "proportion" vlaue. 
-We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer representing 
-"number of methylated reads" and the second integer representing "number of total reads". for example:
+We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer (*m*, *m* <= 0 <= *n*) representing 
+"number of methylated reads" and the second integer (*n*, *n* >= 0) representing "number of total reads". for example:
 
 ```text
 0,10 1,27 2,159		#Three proportions values indicated hypo-methylated loci 
