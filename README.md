@@ -64,7 +64,7 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 	$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 	$ python get-pip.py
 	
-Run the following code to check (below output is based on MacOS Sierra):
+Run the following code to check:
 
 	$ pip3 --version
 	pip 18.1 from /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pip (python 3.6)
@@ -77,7 +77,7 @@ Run the following code to check (below output is based on MacOS Sierra):
 
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
-### <a name="p1.4"></a>Part 1.5: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
+### <a name="p1.4"></a>Part 1.4: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
 
 We assume your already have **[R](https://www.r-project.org/)** installed. If not, please follow this [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install **[R](https://www.r-project.org/)**.
 
