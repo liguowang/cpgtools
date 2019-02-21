@@ -1,0 +1,215 @@
+Loading required package: splines
+Loading required package: gamlss.data
+Loading required package: gamlss.dist
+Loading required package: MASS
+Loading required package: nlme
+Loading required package: parallel
+ **********   GAMLSS Version 5.1-2  ********** 
+For more on GAMLSS look at http://www.gamlss.org/
+Type gamlssNews() to see new features/changes/bug fixes.
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Error in while (abs(olddv - dv) > cc && itn < cyc) { : 
+  missing value where TRUE/FALSE needed
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In RS() : Algorithm RS has not yet converged
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+
+Warning message:
+In summary.gamlss(fit, save = TRUE) :
+  summary: vcov has failed, option qr is used instead
+

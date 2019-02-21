@@ -30,7 +30,7 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand). BED file can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand). BED6+ file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in standard BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of down-stream genomic region added to gene. default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of up-stream genomic region added to gene. default=%default (bp)")

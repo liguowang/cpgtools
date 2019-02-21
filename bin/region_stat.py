@@ -33,7 +33,7 @@ __status__ = "Development"
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6 file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6 file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED file specificy genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
 	(options,args)=parser.parse_args()

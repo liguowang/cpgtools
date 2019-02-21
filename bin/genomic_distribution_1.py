@@ -46,7 +46,7 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. BED file can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in standard BED-12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of down-stream intergenic region w.r.t. TES (transcription end site). default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of up-stream intergenic region w.r.t. TSS (transcription start site). default=%default (bp)")

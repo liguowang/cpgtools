@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program annotate CpGs by assigning them to gene's regulatory domains. Follows the 
+This program annotates CpGs by assigning them to target genes. Follows the 
 "Basel plus extension" rules used by GREAT:
 
 Basal regulatory domain:
-Each gene is assigned a basal regulatory domain of a minimum distance upstream
-(default = 5 kb) and downstream (default = 1 kb) of the TSS (transcription start site)
-regardless of other nearby genes.
+is a user-defined genomic region around the TSS (transcription start site). By default,
+from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
+domain*. When defining a gene's "basal regulatory domain", the other nearby genes will be
+ignored (which means different genes' basal regulatory domains can be overlapped.)
 
 Extended regulatory domain:
-The gene regulatory domain is extended in both directions to the nearest gene's basal 
-regulatory domain but no more than the maximum extension (default = 1000 kb) in one
+The gene regulatory domain is extended in both directions to the nearest gene's "basal 
+regulatory domain" but no more than the maximum extension (default = 1000 kb) in one
 direction.
 
 (http://great.stanford.edu/public/html/index.php)
@@ -41,8 +42,8 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. Must have at least 3 columns (chrom start end). BED file can be regular or compressed by 'gzip' or 'bz'. [required]")
-	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. BED3+ file could be a regular text file or compressed file (*.gz, *.bz2) or accessible url. [required]")
+	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). \"One gene one transcipt\" is recommended. Since most genes have multple transcripts, one can collapse multiple transcripts of the same gene into a single super transcript or select the canonical transcript.")
 	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
 	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")
 	parser.add_option("-e","--extension",action="store",type="int",dest="extension_size",default=1000000,help="Size of extension to both up- and down-stream of TSS (used to define gene's \"extended regulatory domain\"). default=%default (bp)")
@@ -75,7 +76,7 @@ def main():
 	printlog("Calculate extended regulatory domain from: \"%s\" ..." % (options.gene_file))
 	extended_domains = geteExtendedDomains(basal_ranges = basal_domains, bedfile = options.gene_file, up = options.basal_up_size, down = options.basal_down_size, ext=options.extension_size, printit = False)
 	
-	overlap = extended_domains['chr1'].find(2161048,2161049)
+	#overlap = extended_domains['chr1'].find(2161048,2161049)
 	
 	printlog("Assigning CpG to gene ...")
 	for l in ireader.reader(options.input_file):

@@ -1,6 +1,7 @@
-cython>=0.17
 numpy
+scipy
 pysam
 bx-python
 pyBigWig
 sklearn
+weblogo

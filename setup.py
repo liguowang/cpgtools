@@ -22,7 +22,7 @@ def main():
             author_email ="wangliguo78@gmail.com",
             platforms = ['Linux','MacOS'],
             requires = [],
-            install_requires = ['numpy','scipy','pysam','bx-python','pyBigWig','sklearn','weblogo'], 
+            install_requires = ['numpy','scipy','sklearn','weblogo'], 
             description = "Tools to analyze and visualize DNA methylation data",
             url = "http://cpgtools.sourceforge.net/",
             zip_safe = False,

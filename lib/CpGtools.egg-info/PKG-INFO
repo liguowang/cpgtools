@@ -1,6 +1,6 @@
-Metadata-Version: 1.1
-Name: CpGtools
-Version: 0.1.0
+Metadata-Version: 1.2
+Name: cpgtools
+Version: 0.1.1
 Summary: Tools to analyze and visualize DNA methylation data
 Home-page: http://cpgtools.sourceforge.net/
 Author: Liguo Wang
@@ -18,4 +18,4 @@ Classifier: Operating System :: MacOS :: MacOS X
 Classifier: Operating System :: POSIX
 Classifier: Programming Language :: Python
 Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
-Requires: cython (>=0.17)
+Requires-Python: >=3.5

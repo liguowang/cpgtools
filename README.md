@@ -121,19 +121,16 @@ We define the proportion value as **two non-negative integers separated by comma
 
 ### <a name="p2.3"></a>Part 2.3: beta value
 beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
-Please note that one can convert *proportion value* into *beta value*, but not *vice versa*. 
+One can convert *proportion value* into *beta value*, but not *vice versa*. 
 
 ![beta.png](https://github.com/liguowang/cpgtools/blob/master/img/beta.png)
 
 ## <a name="p3"></a>Part 3: Usage Information
 
 
-
-
-
 <a name="p3.1"></a>annotate_CpG.py
 ---
-This program annotate CpGs by assigning them to gene's regulatory domains. Follows the
+This program annotates CpGs by assigning them to their target genes. Follows the
 "[Basal plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
 **Basal regulatory domain** is a user-defined genomic region around the TSS (transcription start site). By default,
@@ -162,9 +159,10 @@ Options:
   -r GENE_FILE, --refgene=GENE_FILE
                         Reference gene model in BED12 format
                         (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
-                        It is recommended that multiple transcripts of the
-                        same gene are collapsed into a single super transcript
-                        with one TSS and one name.
+                        "One gene one transcipt" is recommended. Since most
+                        genes have multple transcripts, one can collapse
+                        multiple transcripts of the same gene into a single
+                        super transcript or select the canonical transcript.
   -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
                         Size of extension to upstream of TSS (used to define
                         gene's "basal regulatory domain"). default=5000 (bp)
