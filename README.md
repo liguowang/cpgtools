@@ -333,6 +333,49 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
 
+<a name="p3.4"></a>dmc_bb.py
+---
+This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial model (ZIBB)"** on [proportion value](#p2.2).
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (*.gz, *.bz2) or
+                        accessible url..
+  -g GROUP_FILE, --group=GROUP_FILE
+                        Group file define the biological groups of each
+                        samples as well as other covariables such as gender,
+                        age.  Sample IDs shoud match to the "Data file".
+  -f FAMILY_FUNC, --family=FAMILY_FUNC
+                        A gamlss (https://cran.r-project.org/web/packages/gaml
+                        ss/index.html) family object. Can be integer 1 or 2
+                        with 1 = "BB (beta binomial)" and 2 = "ZIBB (zero
+                        inflated beta binomial)". Default=2.
+  -o OUT_FILE, --output=OUT_FILE
+                        Prefix of output file.
+```                        
+#### Example
+```text
+$ python3 ../bin/dmc_bb.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+$ python3 ../bin/dmc_bb.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+```
+
+#### Output file
+Additional columns (pvalue and coefficient) will be appended to the original data file. In the example above, 
+4 additional columns were added to "test_04_TwoGroup.tsv":
+
+- survival.pval
+- Sex.pval
+- survival.coef
+- Sex.coef
 
 <a name="p3.5"></a>dmc_fisher.py
 ---
@@ -467,14 +510,19 @@ Options:
                         (represented by "methyl_count,total_count", eg.
                         "20,30") with the 1st row containing sample IDs (must
                         be unique) and the 1st column containing CpG positions
-                        or probe IDs (must be unique). This file can be
-                        regular or compressed by 'gzip' or 'bz'.
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (*.gz, *.bz2) or
+                        accessible url..
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file define the biological groups of each
                         samples as well as other covariables such as gender,
                         age.  Sample IDs shoud match to the "Data file".
+  -f FAMILY_FUNC, --family=FAMILY_FUNC
+                        Error distribution and link function to be used in the
+                        GLM model. Can be integer 1 or 2 with 1 = "binomial"
+                        and 2 = "quasibinomial". Default=1.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.                        
+                        Prefix of output file.
 ```
 
 #### Input files
