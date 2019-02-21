@@ -6,7 +6,8 @@
 	- [Prerequisites](#p1.1)
 	- [Python Dependencies](#p1.2)
 	- [Install pip3](#p1.3)
-	- [Install CpGtools](#p1.4)
+	- [Install gamlss](#p1.4)
+	- [Install CpGtools](#p1.5)
 - [File and data format](#p2)
 	- [BED format](#p2.1)
 	- [Proportion value](#p2.2)
@@ -38,11 +39,12 @@
 ### <a name="p1.1"></a>Part 1.1: Prerequisites
 CpGtools are written in [Python](https://www.python.org/). In particular,  **Python3 (v3.5.x)**
 is required to run all programs in CpGtools. Some programs also need **[R](https://www.r-project.org/)**
-to generate graphs and run generalized linear model (GLM).  
+to generate graphs and fit linear and beta binomial models.  
 
-- [Python 3](https://www.python.org/downloads/) and [pip3](https://pip.pypa.io/en/stable/installing/)
+- [Python 3](https://www.python.org/downloads/)
+- [pip3](https://pip.pypa.io/en/stable/installing/)
 - [R](https://www.r-project.org/)
-
+- [gamlss](https://CRAN.R-project.org/package=gamlss) (Generalised Additive Models for Location Scale and Shape) R package
 
 ### <a name="p1.2"></a>Part 1.2: Python Dependencies
 Note: You do NOT need to install these packages manually, as they will be automatically
@@ -80,8 +82,12 @@ Run the following code to check (below output is based on MacOS Sierra):
 
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
+### <a name="p1.4"></a>Part 1.5: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
 
-### <a name="p1.4"></a>Part 1.4: Install CpGtools
+We assume your computer already have **[R](https://www.r-project.org/)** installed. If not, please follow this [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install **[R](https://www.r-project.org/)**.
+
+
+### <a name="p1.5"></a>Part 1.5: Install CpGtools
 
 You can run the following command to install CpGtools and all its dependencies. 
 	
