@@ -82,8 +82,17 @@ Run the following code to check (below output is based on MacOS Sierra):
 Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
 
 ### <a name="p1.4"></a>Part 1.5: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
+
 We assume your already have **[R](https://www.r-project.org/)** installed. If not, please follow this [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install **[R](https://www.r-project.org/)**.
 
+Install "gamlss" package from the R command line:
+	
+	> install.packages("gamlss")
+
+Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
+	
+	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
+	$ R CMD INSTALL gamlss_5.1-2.tar.gz
 
 ### <a name="p1.5"></a>Part 1.5: Install CpGtools
 
