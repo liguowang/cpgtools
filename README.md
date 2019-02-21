@@ -60,12 +60,8 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 
 
 ### <a name="p1.3"></a>Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have it)
-First, download **[get-pip.py](https://bootstrap.pypa.io/get-pip.py)**
 
 	$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-	
-Then run the following:
-
 	$ python get-pip.py
 	
 Run the following code to check (below output is based on MacOS Sierra):
