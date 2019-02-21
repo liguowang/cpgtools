@@ -78,18 +78,15 @@ Note that **pip** is actualy a soft link to the same executable file path with *
 We assume your already have **[R](https://www.r-project.org/)** installed. If not, please follow these [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install **[R](https://www.r-project.org/)**.
 
 Install "gamlss" package from the R command line:
-	
 	> install.packages("gamlss")
-
 Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
-	
 	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
 	$ R CMD INSTALL gamlss_5.1-2.tar.gz
 
 ### <a name="p1.5"></a>Part 1.5: Install CpGtools
 	
-	$ pip install cpgtools		#install CpGtools and all its dependencies	
-	$ pip install cpgtools --upgrade		#**upgrade** CpGtools and all its dependencies
+	$ pip3 install cpgtools		#install CpGtools and all its dependencies	
+	$ pip3 install cpgtools --upgrade		#**upgrade** CpGtools and all its dependencies
 
 
 ## <a name="p2"></a>Part 2: File and data format 
