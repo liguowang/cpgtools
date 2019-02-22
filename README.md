@@ -1095,7 +1095,7 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ## <a name="p4"></a>Part 4: Comparison of differential CpG analysis tools
 
-![./img/Diff_analysis_table.png](https://github.com/liguowang/cpgtools/blob/master/img/./img/Diff_analysis_table.png)
+![./img/Diff_analysis_table.png](https://github.com/liguowang/cpgtools/blob/master/img/Diff_analysis_table.png)
   
 
 ## <a name="p5"></a>Part 5: Contact Information
