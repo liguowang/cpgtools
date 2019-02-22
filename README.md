@@ -341,7 +341,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 <a name="p3.4"></a>dmc_bb.py
 ---
-This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial model (ZIBB)"** on [proportion value](#p2.2).
+This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial model (ZIBB)"** on [proportion values](#p2.2). It allows for covariable analysis.
 
 #### Basic usage
 ```text
@@ -387,8 +387,8 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 ---
 This program performs differential CpG analysis using **Fisher exact test** on [proportion value](#p2.2).
 
- * apply to two sample comparison with no biological/technical replicates
- * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be collapsed (i.e. ignoring any biological/technical variation)
+ * applies to two sample comparison with no biological/technical replicates
+ * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be merged (i.e. ignores biological/technical variations)
 
 Input file format:
 
@@ -417,16 +417,15 @@ Options:
                         (represented by "methyl_count,total_count", eg.
                         "20,30") with the 1st row containing sample IDs (must
                         be unique) and the 1st column containing CpG positions
-                        or probe IDs (must be unique). This file can be
-                        regular or compressed by 'gzip' or 'bz'.
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (*.gz, *.bz2) or
+                        accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file define the biological groups of each
                         samples. It is a comma-separated 2 columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs.  It must have a header
-                        row. Sample IDs shoud match to the "Data file". Note:
-                        automatically switch to use ANOVA if more than 2
-                        groups were defined in this file.
+                        row. Sample IDs shoud match to the "Data file".
   -o OUT_FILE, --output=OUT_FILE
                         Prefix of output file.
 ```
@@ -469,7 +468,7 @@ chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
 <a name="p3.6"></a>dmc_glm.py
 ---
 This program performs differential CpG analysis using **[generalized liner model](https://en.wikipedia.org/wiki/Generalized_linear_model)** based on
-[beta value](#p2.3). It allows for covariable analysis.
+[beta values](#p2.3). It allows for covariable analysis.
 
 #### Basic usage
 ```text
@@ -502,7 +501,8 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 <a name="p3.7"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
-[proportion value](#p2.2). It allows for covariable analysis.
+[proportion values](#p2.2). It allows for covariable analysis.
+User can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
 
 #### Basic usage
 
