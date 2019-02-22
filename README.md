@@ -945,9 +945,8 @@ python3 ../bin/region_profile.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromo
 ```
 
 #### Output
-Average methylation profile over "upstream"(left), "user-specified" (center), and "down-stream"(right) genomic regions. 
-Note: All groups ("upstream", "user-specified", and "down-stream") were scaled into 100 nt long, regardless of their 
-actual genomic sizes.   
+- Average methylation profile over "upstream"(left), "user-specified" (middle), and "down-stream"(right) genomic regions. 
+- Note: All groups ("upstream", "user-specified", and "down-stream") were scaled into 100 nt long, regardless of their actual genomic sizes.   
 
 ![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
 
