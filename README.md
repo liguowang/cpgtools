@@ -502,7 +502,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
 [proportion values](#p2.2). It allows for covariable analysis.
-User can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
+User can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation, "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
 
 #### Basic usage
 
@@ -552,7 +552,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 
 <a name="p3.8"></a>dmc_nonparametric.py
 ---
-This program performs differential CpG analysis based on [proportion value](#p2.2).
+This program performs differential CpG analysis based on [beta values](#p2.3).
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
 - use [Kruskal-Wallis H-test](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance) for multiple groups comparison.
 
@@ -620,19 +620,11 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
 <a name="p3.9"></a>dmc_ttest.py
 ---
-This program performs differential CpG analysis based on [proportion value](#p2.2).
+This program performs differential CpG analysis based on [beta values](#p2.3).
 
-* use [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) for two group comparison.
-* use [ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance) for multiple groups comparison.
+* uses [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) for two group comparison.
+* uses [ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance) for multiple groups comparison.
 
-Notes: The ANOVA test has important assumptions that must be satisfied in order for the associated p-value to be valid.
-
-* The samples are independent.
-* Each sample is from a normally distributed population.
-* The population standard deviations of the groups are all equal.  This property is known as homoscedasticity.
-
-If these assumptions are not true for a given set of data, it may still be
-    possible to use the Kruskal-Wallis H-test although with some loss of power.
 
 #### Basic usage
 ```text
@@ -717,11 +709,11 @@ This program counts number of CpGs falling into genomic regions defined by **gen
 Please note, a particular genomic region can be assigned to different groups defined above,
 because most genes have multiple transcripts, and different genes could overlap on the
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
-this issue (ambiguity), we define the following priority order:
+this ambiguity issue, we define the following priority order:
 
 *Coding exons* > *UTR exons* > *Introns* > *Upstream intergenic regions* > *Downsteam intergenic regions*
 
-Higher-priority group override the low-priority group. For example, if a certain part
+Higher-priority group overrides the low-priority group. For example, if a certain part
 of a **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
 be considered as exon (i.e. removed from intron) since "exon" has higher priority.
 
