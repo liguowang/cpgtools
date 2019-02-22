@@ -1095,15 +1095,17 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ## <a name="p4"></a>Part 4: Comparison of differential CpG analysis tools
 
-|Program         |Method/Model        |Input data type   |Experiment   |Covariable analysis |Multiple group comparison               
-|----------------|--------------------|--------------------------------------------------------------------------------
-|dmc_fisher.py   |Fisher Exact Test   |Proportion values |RRBS/WGBS    |No                  |No
-|dmc_logit.py    |Logistic regression (binomial, quasibinomial) |Proportion values |RRBS/WGBS    |Yes                 |Yes
-|dmc_bb.py       |Beta bionomial regression (BB, ZIBB) |Proportion values |RRBS/WGBS    |Yes                 |Yes
-|dmc_ttest.py    |T test/ANOVA |Beta values |450K/850K    |No                 |Yes (use ANOVA)
-|dmc_glm.py      |Linear model |Beta values |450K/850K    |Yes                 |Yes
-|dmc_nonparametric.py     |Mann-Whitney rank test/Kruskal-Wallis H-test |Beta values |450K/850K    |No                 |Yes (use Kruskal-Wallis H-test)
-
+|Program              |Method/Model              |Input data type   |Experiment   |Covariable analysis |Multiple group comparison               
+|---------------------|--------------------------|--------------------------------------------------------------------------------
+|dmc_fisher.py        |Fisher Exact Test         |Proportion values |RRBS/WGBS    |No                  |No
+|dmc_logit.py         |Logistic regression       |Proportion values |RRBS/WGBS    |Yes                 |Yes
+|                     |(binomial, quasibinomial) |                  |             |                    |
+|dmc_bb.py            |Beta bionomial regression |Proportion values |RRBS/WGBS    |Yes                 |Yes
+|                     |(BB, ZIBB)                |                  |             |                    |
+|dmc_ttest.py         |T test and ANOVA          |Beta values       |450K/850K    |No                  |Yes (use ANOVA)
+|dmc_glm.py           |Linear model              |Beta values       |450K/850K    |Yes                 |Yes
+|dmc_nonparametric.py |Mann-Whitney rank test and|Beta values       |450K/850K    |No                  |Yes (use Kruskal-Wallis H-test)
+|                     |Kruskal-Wallis H-test     |                  |             |                    |
 
 
 
