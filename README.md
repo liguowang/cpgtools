@@ -1095,26 +1095,7 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ## <a name="p4"></a>Part 4: Comparison of differential CpG analysis tools
 
-    |Program              |Method/Model              |Input      |Experiment|Covariable|Multiple group |
-    |                     |                          |data type  |          |analysis  |comparison     |
-    |---------------------|--------------------------|---------------------------------|---------------|
-    |dmc_fisher.py        |Fisher Exact Test         |Proportion |RRBS/WGBS |No        |No             |
-    |                     |                          |values     |          |          |               |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
-    |dmc_logit.py         |Logistic regression       |Proportion |RRBS/WGBS |Yes       |Yes            |
-    |                     |(binomial, quasibinomial) |values     |          |          |               |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
-    |dmc_bb.py            |Beta bionomial regression |Proportion |RRBS/WGBS |Yes       |Yes            |
-    |                     |(BB, ZIBB)                |values     |          |          |               |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
-    |dmc_ttest.py         |T test and ANOVA          |Beta values|450K/850K |No        |Yes(ANOVA)     |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
-    |dmc_glm.py           |Linear model              |Beta values|450K/850K |Yes       |Yes            |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
-    |dmc_nonparametric.py |Mann-Whitney rank test and|Beta values|450K/850K |No        |Yes            |
-    |                     |Kruskal-Wallis H-test     |           |          |          |(Kruskal-Wallis|
-    |                     |                          |           |          |          |H test)        |
-    |---------------------|--------------------------|-----------|----------|----------|---------------|
- 
+![./img/Diff_analysis_table.png](https://github.com/liguowang/cpgtools/blob/master/img/./img/Diff_analysis_table.png)
+  
 
 ## <a name="p5"></a>Part 5: Contact Information
