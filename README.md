@@ -32,6 +32,9 @@
     |[region_stat.py](#p3.14)             |*Calculate basic statistics of CpGs located in each genomic region*
     |[trichotmize.py](#p3.15)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
+- [Comparison of differential CpG analysis tools](#p4)
+
+- [Contact Information](#p5)
 
 ## <a name="p1"></a>Part 1: Installation
 
@@ -1090,5 +1093,18 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ![trichotmize.png](https://github.com/liguowang/cpgtools/blob/master/img/trichotmize.png)
 
+## <a name="p4"></a>Part 4: Comparison of differential CpG analysis tools
 
-## <a name="p4"></a>Part 3: Contact Information
+|Program         |Method/Model        |Input data type   |Experiment   |Covariable analysis |Multiple group comparison               
+|----------------|--------------------|--------------------------------------------------------------------------------
+|dmc_fisher.py   |Fisher Exact Test   |Proportion values |RRBS/WGBS    |No                  |No
+|dmc_logit.py    |Logistic regression (binomial, quasibinomial) |Proportion values |RRBS/WGBS    |Yes                 |Yes
+|dmc_bb.py       |Beta bionomial regression (BB, ZIBB) |Proportion values |RRBS/WGBS    |Yes                 |Yes
+|dmc_ttest.py    |T test/ANOVA |Beta values |450K/850K    |No                 |Yes (use ANOVA)
+|dmc_glm.py      |Linear model |Beta values |450K/850K    |Yes                 |Yes
+|dmc_nonparametric.py     |Mann-Whitney rank test/Kruskal-Wallis H-test |Beta values |450K/850K    |No                 |Yes (use Kruskal-Wallis H-test)
+
+
+
+
+## <a name="p5"></a>Part 5: Contact Information
