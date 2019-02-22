@@ -952,7 +952,7 @@ python3 ../bin/region_profile.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromo
 
 <a name="p3.14"></a>region_stat.py
 ----
-This program gives basic statistics for each genomic region. Add 6 columns to the input BED file:
+This program gives basic statistics for each genomic region. Append 6 columns to the input BED file:
 
 1. Number of CpGs detected in the genomic region
 2. Min methylation level
