@@ -771,7 +771,7 @@ A maximum of 10 BED files (defining 10 sets of genomic regions) can be analyzed.
 
 Please note:
 The order of BED files is important (i.e. considered as "priority order"). Overlapped
-genomic regions will be kept only in the **set** with the highest priority and removed from
+genomic regions will be retained only in the **set** with the highest priority and removed from
 **all the other sets** that have lower priorities.  For example, users provided 3 BED files via
 "-i promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
 with promoters, **the overlapped part** will be removed from "enhancers.bed".
@@ -821,7 +821,18 @@ $ python3 ../bin/genomic_distribution_2.py -i test_03b.bed3.gz  -b  hg19_H3K4me3
 ```
 
 #### Output files
-Similar to "genomic_distribution_1.py"      
+
+OUT_8.txt
+
+|Priority_order  |Name                             |Number_of_regions       |Size_of_regions(bp)     |CpG_raw_count   |CpG_count_per_KB
+|-----------------------------------------------------------------------------------------------------------------------------------------
+|0               |hg19_H3K4me3.bed4                |88439                   |215137961               |253264          |1.177216697707756
+|1               |hg19_CGI.bed4                    |13637                   |6739408                 |42559           |6.314946357306161
+|2               |hg19_H3K27ac_with_H3K4me1.bed4   |49579                   |83443517                |51436           |0.6164169710152557
+|3               |hg19_H3K27me3.bed4               |137573                  |276362203               |60922           |0.22044259069681826      
+
+OUT_8.pdf
+![Genomic distribution2.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist2.png)  
 
 <a name="p3.12"></a>methyl_logo.py
 ----
