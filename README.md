@@ -1098,7 +1098,7 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
     |Program              |Method/Model              |Input      |Experiment|Covariable|Multiple group |
     |                     |                          |data type  |          |analysis  |comparison     |
     |---------------------|--------------------------|---------------------------------|---------------|
-    |dmc_fisher.py        |Fisher Exact Test         |Proportio  |RRBS/WGBS |No        |No             |
+    |dmc_fisher.py        |Fisher Exact Test         |Proportion |RRBS/WGBS |No        |No             |
     |                     |                          |values     |          |          |               |
     |---------------------|--------------------------|-----------|----------|----------|---------------|
     |dmc_logit.py         |Logistic regression       |Proportion |RRBS/WGBS |Yes       |Yes            |
