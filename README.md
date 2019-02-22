@@ -1098,6 +1098,7 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 |Program              |Method/Model              |Input data type   |Experiment   |Covariable analysis |Multiple group comparison      |           
 |---------------------|--------------------------|-------------------------------------------------------------------------------------|
 |dmc_fisher.py        |Fisher Exact Test         |Proportion values |RRBS/WGBS    |No                  |No                             |
+|---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
 |dmc_logit.py         |Logistic regression       |Proportion values |RRBS/WGBS    |Yes                 |Yes                            |
 |                     |(binomial, quasibinomial) |                  |             |                    |                               |
 |---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
@@ -1105,7 +1106,9 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 |                     |(BB, ZIBB)                |                  |             |                    |                               |
 |---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
 |dmc_ttest.py         |T test and ANOVA          |Beta values       |450K/850K    |No                  |Yes (use ANOVA)                |
+|---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
 |dmc_glm.py           |Linear model              |Beta values       |450K/850K    |Yes                 |Yes                            |
+|---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
 |dmc_nonparametric.py |Mann-Whitney rank test and|Beta values       |450K/850K    |No                  |Yes (use Kruskal-Wallis H-test)|
 |                     |Kruskal-Wallis H-test     |                  |             |                    |                               |
 |---------------------|--------------------------|------------------|-------------|--------------------|-------------------------------|
