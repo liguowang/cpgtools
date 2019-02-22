@@ -698,7 +698,7 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
 <a name="p3.10"></a>genomic_distribution_1.py
 ----
-This program counts number of CpGs falling into genomic regions defined by **genes** (5 groups):
+This program counts number of CpGs falling into genomic regions around **genes**. The genomic region around a particular gene can be divided into 5 groups:
 
 1. Coding exons
 2. UTR exons
@@ -708,7 +708,7 @@ This program counts number of CpGs falling into genomic regions defined by **gen
 
 Please note, a particular genomic region can be assigned to different groups defined above,
 because most genes have multiple transcripts, and different genes could overlap on the
-genome. For example, a exon of gene A could be located in a intron of gene B. To address
+genome. For example, a exon of one gene could be located in (or partially overlapped with) a intron of another gene. To address
 this ambiguity issue, we define the following priority order:
 
 *Coding exons* > *UTR exons* > *Introns* > *Upstream intergenic regions* > *Downsteam intergenic regions*
@@ -767,12 +767,12 @@ The barplot "OUT_7.pdf" was also generated.
 <a name="p3.11"></a>genomic_distribution_2.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **users**.
-A maximum of 10 BED files (define 10 different genomic regions) can be analyzed.
+A maximum of 10 BED files (defining 10 sets of genomic regions) can be analyzed.
 
 Please note:
-The **order** of BED files is important (i.e. considered as "priority order"). Overlapped
-genomic regions will be kept only in the BED file with the highest priority and removed from
-BED files of lower priority.  For example, users provided 3 BED files via
+The order of BED files is important (i.e. considered as "priority order"). Overlapped
+genomic regions will be kept only in the **set** with the highest priority and removed from
+**all the other sets** that have lower priorities.  For example, users provided 3 BED files via
 "-i promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
 with promoters, **the overlapped part** will be removed from "enhancers.bed".
 
