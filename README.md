@@ -74,7 +74,7 @@ Run the following code to check:
 	$ which pip	
 	/Library/Frameworks/Python.framework/Versions/3.6/bin/pip
 
-Note that **pip** is actualy a soft link to the same executable file path with **pip3**. so you can use pip directly. 
+Note that, in this case, **pip** is actually a soft link to **pip3**.
 
 ### <a name="p1.4"></a>Part 1.4: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
 
@@ -105,11 +105,11 @@ It is 0-based (meaning the first base of a chromosome is numbered 0). It is s le
 right-closed. For example, the bed entry **"chr1   10   15"** contains the 11-th, 12-th,
 13-th, 14-th and 15-th bases of chromosome-1.
 
-- **BED12** file (i.e. the standarded BED file) which has 12 fields. Each row in this file describes a gene or an array of disconnected genomic regions. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
-- **BED3** file only has the first 3 required fields (chrom, chromStart, chromEnd). Each row is used to represent a single genomic region where "score" and "strand" are not important. 
-- **BED3+** file has at least 3 columns (chrom, chromStart, chromEnd). It could have additional columns, but these additional columns will be ignored.
-- **BED6** file has the first 6 fields (chrom, chromStart, chromEnd, name, score, stand). Each row is used to represent a single genomic region and their associated scores, or in cases where "stand" information is important.  
-- **BED6+** file has at least 6 columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
+- **BED12** file (i.e. the standard BED file) which has 12 fields. Each row in this file describes a gene or an array of disconnected genomic regions. Details are described [here](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). 
+- **BED3** file only has the first three required fields (chrom, chromStart, chromEnd). Each row is used to represent a single genomic region where "score" and "strand" are not important. 
+- **BED3+** file has at least three columns (chrom, chromStart, chromEnd). It could have additional columns, but these additional columns will be ignored.
+- **BED6** file has the first six fields (chrom, chromStart, chromEnd, name, score, strand). Each row is used to represent a single genomic region and their associated scores, or in cases where "strand" information is important.  
+- **BED6+** file has at least six columns (chrom, chromStart, chromEnd, name, score, stand). It could have additional columns, but these additional columns will be ignored.
 
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
@@ -162,8 +162,8 @@ Options:
   -r GENE_FILE, --refgene=GENE_FILE
                         Reference gene model in BED12 format
                         (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
-                        "One gene one transcipt" is recommended. Since most
-                        genes have multple transcripts, one can collapse
+                        "One gene one transcript" is recommended. Since most
+                        genes have multiple transcripts, one can collapse
                         multiple transcripts of the same gene into a single
                         super transcript or select the canonical transcript.
   -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
@@ -177,8 +177,8 @@ Options:
                         (used to define gene's "extended regulatory domain").
                         default=1000000 (bp)
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file. Two addtional columns will be
-                        appended to the orignal BED file with the last column
+                        Prefix of the output file. Two additional columns will be
+                        appended to the original BED file with the last column
                         indicating "genes whose extended regulatory domain are
                         overlapped with the CpG", the 2nd last column
                         indicating "genes whose basal regulatory domain are
@@ -191,7 +191,7 @@ Options:
 - Human and mouse RefSeq gene bed files (with multiple transcripts of the same genes collapsed into a single super transcript) are available from [here](https://github.com/liguowang/cpgtools/blob/master/refgene/).
 
 #### Output file
-Two addtional columns will be appended to the orignal BED file (-i):
+Two additional columns will be appended to the original BED file (-i):
 - the last column contains genes whose **extended regulatory domain** are overlapped with the CpG
 - the 2nd last column contains genes whose **basal regulatory domain** are overlapped with the CpG
 - "//" indicates no genes are found
@@ -253,7 +253,7 @@ Options:
                         Size of up-stream genomic region added to gene.
                         default=2000 (bp)
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.                        
+                        Prefix of the output file.                        
 ```
 
 #### Input files
@@ -310,14 +310,14 @@ Options:
                         used to label samples. [optional]
   -s CHROM_SIZE, --chrom-size=CHROM_SIZE
                         Chromosome size file. Tab or space separated text file
-                        with 2 columns: first column is chromosome name/ID,
-                        second column is chromosome size. This file will
+                        with two columns: the first column is chromosome name/ID,
+                        the second column is chromosome size. This file will
                         determine: (1) which chromosomes are included in the
-                        final barplots, so do NOT inlude 'unplaced',
+                        final barplots, so do NOT include 'unplaced',
                         'alternative' contigs in this file. (2) The order of
-                        chrosomes in the final barplots.  [required]
+                        chromosomes in the final barplots.  [required]
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file. [required]
+                        Prefix of the output file. [required]
 
 ```
 #### Input files
@@ -358,11 +358,11 @@ Options:
                         be unique) and the 1st column containing CpG positions
                         or probe IDs (must be unique). This file can be a
                         regular text file or compressed file (*.gz, *.bz2) or
-                        accessible url..
+                        accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples as well as other covariables such as gender,
-                        age.  Sample IDs shoud match to the "Data file".
+                        Group file defining the biological group of each
+                        sample as well as other covariables such as gender,
+                        age.  Sample IDs should match to the "Data file".
   -f FAMILY_FUNC, --family=FAMILY_FUNC
                         A gamlss (https://cran.r-project.org/web/packages/gaml
                         ss/index.html) family object. Can be integer 1 or 2
@@ -424,13 +424,13 @@ Options:
                         regular text file or compressed file (*.gz, *.bz2) or
                         accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples. It is a comma-separated 2 columns file with
+                        Group file defining the biological group of each
+                        sample. It is a comma-separated two columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs.  It must have a header
-                        row. Sample IDs shoud match to the "Data file".
+                        row. Sample IDs should match to the "Data file".
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```
 
 #### Input files
@@ -485,11 +485,11 @@ Options:
                         unique). This file can be regular or compressed by
                         'gzip' or 'bz'.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples as well as other covariables such as gender,
-                        age.  Sample IDs shoud match to the "Data file".
+                        Group file defining the biological group of each
+                        sample as well as other covariables such as gender,
+                        age.  Sample IDs should match to the "Data file".
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 
 ```
 
@@ -505,7 +505,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
 [proportion values](#p2.2). It allows for covariable analysis.
-User can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation, "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
+Users can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation, "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
 
 #### Basic usage
 
@@ -523,15 +523,15 @@ Options:
                         regular text file or compressed file (*.gz, *.bz2) or
                         accessible url..
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples as well as other covariables such as gender,
-                        age.  Sample IDs shoud match to the "Data file".
+                        Group file defining the biological group of each
+                        sample as well as other covariables such as gender,
+                        age.  Sample IDs should match to the "Data file".
   -f FAMILY_FUNC, --family=FAMILY_FUNC
                         Error distribution and link function to be used in the
                         GLM model. Can be integer 1 or 2 with 1 = "binomial"
                         and 2 = "quasibinomial". Default=1.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```
 
 #### Input files
@@ -573,15 +573,15 @@ Options:
                         values" and ignored. This file can be regular or
                         compressed by 'gzip' or 'bz'.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples. It is a comma-separated 2 columns file with
+                        Group file defining the biological group of each
+                        samples. It is a comma-separated two columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs. It must have a header
-                        row. Sample IDs shoud match to the "Data file". Note:
+                        row. Sample IDs should match to the "Data file". Note:
                         automatically switch to use  Kruskal-Wallis H-test if
                         more than 2 groups were defined in this file.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```
 
 #### Input files
@@ -643,8 +643,8 @@ Options:
                         values" and ignored. This file can be regular or
                         compressed by 'gzip' or 'bz'.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file define the biological groups of each
-                        samples. It is a comma-separated 2 columns file with
+                        Group file defining the biological groups of each
+                        sample. It is a comma-separated 2 columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs.  It must have a header
                         row. Sample IDs shoud match to the "Data file". Note:
@@ -652,16 +652,16 @@ Options:
                         groups were defined in this file.
   -p, --paired          If '-p/--paired' flag was specified, use paired t-test
                         which requires the equal number of samples in both
-                        group. Paired sampels are matched by the order. This
+                        groups. Paired sampels are matched by the order. This
                         option will be ignored for multiple group analysis.
   -w, --welch           If '-w/--welch' flag was specified, using Welch's
                         t-test which does not assume the two samples have
-                        equal variance.  If omited , use standard two sample
+                        equal variance.  If omitted, use standard two-sample
                         t-test (i.e. assuming the two samples have equal
                         variance). This option will be ignored for paired
                         t-test and multiple group analysis.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.    
+                        Prefix of the output file.    
 ```
 
 #### Example
@@ -711,13 +711,13 @@ This program counts number of CpGs falling into genomic regions around **genes**
 
 Please note, a particular genomic region can be assigned to different groups defined above,
 because most genes have multiple transcripts, and different genes could overlap on the
-genome. For example, a exon of one gene could be located in (or partially overlapped with) a intron of another gene. To address
+genome. For example, an exon of one gene could be located in (or partially overlapped with) an intron of another gene. To address
 this ambiguity issue, we define the following priority order:
 
 *Coding exons* > *UTR exons* > *Introns* > *Upstream intergenic regions* > *Downsteam intergenic regions*
 
 Higher-priority group overrides the low-priority group. For example, if a certain part
-of a **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
+of an **intron** is overlapped with **exon** of other transcripts/genes, the overlapped part will
 be considered as exon (i.e. removed from intron) since "exon" has higher priority.
 
 #### Basic usage
@@ -741,7 +741,7 @@ Options:
                         Size of up-stream intergenic region w.r.t. TSS
                         (transcription start site). default=2000 (bp)
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 
 ```
 
@@ -808,7 +808,7 @@ Options:
                         numbered 0. (5) BED files can be regular or compressed
                         by 'gzip' or 'bz'.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```
 
 #### Input files
@@ -858,7 +858,7 @@ Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
-                        BED file specifying the methylated C position. This
+                        BED file of the methylated C position. This
                         BED file should have at least 6 columns (Chrom,
                         ChromStart, ChromeEnd, name, score, strand).  Note:
                         Must provide correct *strand* information. BED file
@@ -871,7 +871,7 @@ Options:
   -n MOTIF_NAME, --name=MOTIF_NAME
                         Motif name. default=motif
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```                        
 #### Input file
 [test_07_450K_CH.bed](https://github.com/liguowang/cpgtools/blob/master/test/test_07_450K_CH.bed)
@@ -925,14 +925,14 @@ Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
-                        BED6 file specifying the C position. This BED file
+                        BED6 file of the C position. This BED file
                         should have at least 6 columns (Chrom, ChromStart,
                         ChromeEnd, Name, Beta_value, Strand).  Note: the first
                         base in a chromosome is numbered 0. BED file can be
                         regular or compressed by 'gzip' or 'bz'.
   -r REGION_FILE, --region=REGION_FILE
-                        BED file specificy genomic regions. This BED file
-                        should have at least 3 columns (Chrom, ChromStart,
+                        BED file of genomic regions. This BED file
+                        should have at least three columns (Chrom, ChromStart,
                         ChromeEnd). If the 6-th column does not exist, all
                         regions will be considered as on "+" strand.
   -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
@@ -981,7 +981,7 @@ Options:
                         should have at least 3 columns (Chrom, ChromStart,
                         ChromeEnd).
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```
 
 #### Example
