@@ -57,6 +57,7 @@ installed when you use [pip3](https://pip.pypa.io/en/stable/installing/) to inst
 - [scipy](https://www.scipy.org/)
 - [sklearn](https://www.scilearn.com/)
 - [weblogo](https://pypi.org/project/weblogo/)
+- [bx-python](https://github.com/bxlab/bx-python)
 
 ### <a name="p1.3"></a>Part 1.3: Install [pip3](https://pip.pypa.io/en/stable/installing/) (Skip this step if you already have it)
 
