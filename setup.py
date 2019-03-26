@@ -8,7 +8,7 @@ Setup script for CpGtools  -- Tools to analyze and visualize DNA methylation dat
 
 def main():
     setup(  name = "cpgtools",
-            version = "0.1.1",
+            version = "0.1.2",
             python_requires='>=3.5',
             py_modules = [ 'psyco_full' ],
             packages = find_packages( 'lib' ),
@@ -22,7 +22,7 @@ def main():
             author_email ="wangliguo78@gmail.com",
             platforms = ['Linux','MacOS'],
             requires = [],
-            install_requires = ['numpy','scipy','sklearn','weblogo'], 
+            install_requires = ['numpy','scipy','sklearn','weblogo','bx-python'], 
             description = "Tools to analyze and visualize DNA methylation data",
             url = "http://cpgtools.sourceforge.net/",
             zip_safe = False,
