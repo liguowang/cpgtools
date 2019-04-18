@@ -11,7 +11,9 @@
 - [File and data format](#p2)
 	- [BED format](#p2.1)
 	- [Proportion value](#p2.2)
-	- [Beta value](#p2.3)
+	- [The Beta-value](#p2.3)
+	- [The M-value](#p2.4)
+	- [Conversion between Beta- and M-value](#p2.4)
 - [Usage information](#p3)
 
     |Program                              |Description                              
@@ -21,10 +23,10 @@
     |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
     |[dmc_bb.py](#p3.4)               	  |*Differential CpG analysis using **beta binomial regression** on proportion values* 
     |[dmc_fisher.py](#p3.5)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
-    |[dmc_glm.py](#p3.6)                  |*Differential CpG analysis using **linear model** on beta values* 
+    |[dmc_glm.py](#p3.6)                  |*Differential CpG analysis using **linear model** on beta- or M-values* 
     |[dmc_logit.py](#p3.7)                |*Differential CpG analysis using **logistic regression model** on proportion values*
-    |[dmc_nonparametric.py](#p3.8)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta values*
-    |[dmc_ttest.py](#p3.9)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta values*
+    |[dmc_nonparametric.py](#p3.8)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta- or M-values*
+    |[dmc_ttest.py](#p3.9)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta- or M-values*
     |[genomic_distribution_1.py](#p3.10)  |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
     |[genomic_distribution_2.py](#p3.11)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
     |[methyl_logo.py](#p3.12)             |*Generate motif logo and motif matrices around cytosine*
@@ -123,11 +125,27 @@ We define the proportion value as **two non-negative integers separated by comma
 7,7 17,19 30,34		#Three proportions values indicated hyper-methylated loci
 ```
 
-### <a name="p2.3"></a>Part 2.3: beta value
-beta value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
-One can convert *proportion value* into *beta value*, but not *vice versa*. 
+### <a name="p2.3"></a>Part 2.3: Beta-value
+The Beta-value is a value between 0 and 1, which can be interpreted as the approximation of the **percentage of methylation** for a given CpG or locus. 
+One can convert *proportion value* into *beta value*, but not *vice versa*. In equation below, C is the "probe intensity" or "read count" of *methylated* allele, while U 
+is the "probe intensity" or "read count" of *unmethylated* allele. 
 
 ![beta.png](https://github.com/liguowang/cpgtools/blob/master/img/beta.png)
+
+### <a name="p2.4"></a>Part 2.4: M-value
+The M-value is calculated as the log2 ratio of the probe intensities (or read counts) of *methylated* allele versus *unmethylated* allele.
+In equation below, C is the "probe intensity" or "read count" of *methylated* allele, while U 
+is the "probe intensity" or "read count" of *unmethylated* allele. w is the offset or pseudo count added to both denominator and numerator to avoid unexpected big changes and 
+performing log transformation on zeros.
+
+![M.png](https://github.com/liguowang/cpgtools/blob/master/img/M.png)
+
+### <a name="p2.5"></a>Part 2.5: Conversion between Beta-value and M-value
+The relationship between Beta-value and M-value is shown as equation and figure:
+
+![beta_vs_M.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_vs_M.png)
+![beta_vs_M_curve.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_vs_M_curve.png)
+
 
 ## <a name="p3"></a>Part 3: Usage Information
 
@@ -1096,7 +1114,7 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
 
 ## <a name="p4"></a>Part 4: Comparison of differential CpG analysis tools
 
-![./img/Diff_analysis_table.png](https://github.com/liguowang/cpgtools/blob/master/img/Diff_analysis_table.png)
+![Diff_analysis_table.png](https://github.com/liguowang/cpgtools/blob/master/img/Diff_analysis_table.png)
   
 
 ## <a name="p5"></a>Part 5: Contact Information
