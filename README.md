@@ -1118,3 +1118,5 @@ Below histogram and piechart showed the proportion of CpGs assigned to "Un-methy
   
 
 ## <a name="p5"></a>Part 5: Contact Information
+For questions, bugs, feature requests, and more. Created a ticket here:
+https://github.com/liguowang/cpgtools/issues
