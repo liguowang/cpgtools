@@ -19,20 +19,21 @@
     |Program                              |Description                              
     |-------------------------------------|---------------------------------------------------------------------------------------------
     |[annotate_CpG.py](#p3.1)             |*Annotate the function of CpG by assigning it to gene's **basal** and **extended** regulatory domain*
-    |[beta_profile.py](#p3.2)             |*Calculate the average methylation level over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
-    |[chrom_distribution.py](#p3.3)       |*Calculates the distribution of CpG frequencies over chromosomes*
-    |[dmc_bb.py](#p3.4)               	  |*Differential CpG analysis using **beta binomial regression** on proportion values* 
-    |[dmc_fisher.py](#p3.5)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
-    |[dmc_glm.py](#p3.6)                  |*Differential CpG analysis using **linear model** on beta- or M-values* 
-    |[dmc_logit.py](#p3.7)                |*Differential CpG analysis using **logistic regression model** on proportion values*
-    |[dmc_nonparametric.py](#p3.8)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta- or M-values*
-    |[dmc_ttest.py](#p3.9)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta- or M-values*
-    |[genomic_distribution_1.py](#p3.10)  |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
-    |[genomic_distribution_2.py](#p3.11)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
-    |[methyl_logo.py](#p3.12)             |*Generate motif logo and motif matrices around cytosine*
-    |[region_profile.py](#p3.13)          |*Calculate average methylation level for user specified genomic regions*
-    |[region_stat.py](#p3.14)             |*Calculate basic statistics of CpGs located in each genomic region*
-    |[trichotmize.py](#p3.15)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
+    |[beta_m_conversion.py](#p3.2)        |*Convert Beta-value into M-value or vice versa*    
+    |[beta_profile.py](#p3.3)             |*Calculate the average methylation level over genomic regions defined by genes (eg. exons, introns, intergenic regions)*
+    |[chrom_distribution.py](#p3.4)       |*Calculates the distribution of CpG frequencies over chromosomes*
+    |[dmc_bb.py](#p3.5)               	  |*Differential CpG analysis using **beta binomial regression** on proportion values* 
+    |[dmc_fisher.py](#p3.6)               |*Differential CpG analysis using **Fisher's exact test** on proportion values* 
+    |[dmc_glm.py](#p3.7)                  |*Differential CpG analysis using **linear model** on beta- or M-values* 
+    |[dmc_logit.py](#p3.8)                |*Differential CpG analysis using **logistic regression model** on proportion values*
+    |[dmc_nonparametric.py](#p3.9)        |*Differential CpG analysis using **MannWhitney U test** (2 groups comparison) or **KruskalWallis H-test** (3+ groups comparison) on beta- or M-values*
+    |[dmc_ttest.py](#p3.10)                |*Differential CpG analysis using **T test** (2 groups comparison) or **ANOVA** (3+ groups comparison) on beta- or M-values*
+    |[genomic_distribution_1.py](#p3.11)  |*Calculates the distribution of CpG frequencies over genomic regions defined by gene model* 
+    |[genomic_distribution_2.py](#p3.12)  |*Calculates the distribution of CpG frequencies over genomic regions defined by user*
+    |[methyl_logo.py](#p3.13)             |*Generate motif logo and motif matrices around cytosine*
+    |[region_profile.py](#p3.14)          |*Calculate average methylation level for user specified genomic regions*
+    |[region_stat.py](#p3.15)             |*Calculate basic statistics of CpGs located in each genomic region*
+    |[trichotmize.py](#p3.16)             |*Trichotmize beta values into "methyl", "semimethyl" and "unmethyl" status using Gaussian Mixture Model* 
 
 - [Comparison of differential CpG analysis tools](#p4)
 
@@ -274,7 +275,7 @@ $ python3 ../bin/beta_m_conversion.py -i test_05_TwoGroup.tsv -d Beta -o test_05
 
 
 
-<a name="p3.2"></a>beta_profile.py
+<a name="p3.3"></a>beta_profile.py
 ---	
 beta_profile.py calculates the average methylation level (i.e. average beta value) across
 gene body (including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
@@ -337,7 +338,7 @@ $ python3 ../bin/beta_profile.py -r ../refgene/hg19.RefSeq.union.bed.gz -i test_
 ![beta_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_profile.png)
 
 
-<a name="p3.3"></a>chrom_distribution.py
+<a name="p3.4"></a>chrom_distribution.py
 ---	
 This program calculates the distribution of CpG over chromosomes.
 
@@ -394,7 +395,7 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 ![chromDist.CpG_perMb.png](https://github.com/liguowang/cpgtools/blob/master/img/chromDist.CpG_perMb.png)
 
 
-<a name="p3.4"></a>dmc_bb.py
+<a name="p3.5"></a>dmc_bb.py
 ---
 This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial model (ZIBB)"** on [proportion values](#p2.2). It allows for covariable analysis.
 
@@ -440,7 +441,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - survival.coef
 - Sex.coef
 
-<a name="p3.5"></a>dmc_fisher.py
+<a name="p3.6"></a>dmc_fisher.py
 ---
 This program performs differential CpG analysis using **Fisher exact test** on [proportion value](#p2.2).
 
@@ -522,7 +523,7 @@ chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
 		
 ```       
 
-<a name="p3.6"></a>dmc_glm.py
+<a name="p3.7"></a>dmc_glm.py
 ---
 This program performs differential CpG analysis using **[generalized liner model](https://en.wikipedia.org/wiki/Generalized_linear_model)** based on
 [beta values](#p2.3). It allows for covariable analysis.
@@ -555,7 +556,7 @@ Options:
 #### Output files
 Additional columns (pvalue and coefficient) will be appended to the original data file.
 
-<a name="p3.7"></a>dmc_logit.py
+<a name="p3.8"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
 [proportion values](#p2.2). It allows for covariable analysis.
@@ -607,7 +608,7 @@ Additional columns (pvalue and coefficient) will be appended to the original dat
 - survival.coef
 - Sex.coef
 
-<a name="p3.8"></a>dmc_nonparametric.py
+<a name="p3.9"></a>dmc_nonparametric.py
 ---
 This program performs differential CpG analysis based on [beta values](#p2.3).
 - use [Mann-Whitney U test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html) for two group comparison.
@@ -675,7 +676,7 @@ $ python3 ../bin/dmc_nonparametric.py -i test_06_ThreeGroup.tsv.gz -g test_06_Th
 Additional two columns ("pval", and "adj.pval") will be appended to the orignal data file.
 
 
-<a name="p3.9"></a>dmc_ttest.py
+<a name="p3.10"></a>dmc_ttest.py
 ---
 This program performs differential CpG analysis based on [beta values](#p2.3).
 
@@ -753,7 +754,7 @@ Additional two columns ("pval", and "adj.pval") will be appended to the orignal 
 
               
 
-<a name="p3.10"></a>genomic_distribution_1.py
+<a name="p3.11"></a>genomic_distribution_1.py
 ----
 This program counts number of CpGs falling into genomic regions around **genes**. The genomic region around a particular gene can be divided into 5 groups:
 
@@ -821,7 +822,7 @@ The barplot "OUT_7.pdf" was also generated.
 ```         
 ![Genomic distribution.png](https://github.com/liguowang/cpgtools/blob/master/img/genomic_dist1.png)  
 
-<a name="p3.11"></a>genomic_distribution_2.py
+<a name="p3.12"></a>genomic_distribution_2.py
 ----
 This program counts number of CpGs falling into genomic regions defined by **users**.
 A maximum of 10 BED files (defining 10 sets of genomic regions) can be analyzed.
@@ -891,7 +892,7 @@ OUT_8.txt
 OUT_8.pdf
 ![Genomic distribution2.png](https://github.com/liguowang/cpgtools/blob/master/img/genome_dist2.png)  
 
-<a name="p3.12"></a>methyl_logo.py
+<a name="p3.13"></a>methyl_logo.py
 ----
 This program generates DNA sequence logo around methylated Cs in 3 steps:
 
@@ -968,7 +969,7 @@ letter-probability matrix: alength= 4 w= 11 nsites= 2932
  0.36933987997817785 0.29330332787779595 0.15759683578832515 0.17975995635570105
 ```
 
-<a name="p3.13"></a>region_profile.py
+<a name="p3.14"></a>region_profile.py
 ----
 This program calculates the overall methylation level (i.e. average beta value) over
 particular genomic regions (eg. promoters, TF bindings). 
@@ -1007,7 +1008,7 @@ python3 ../bin/region_profile.py -i test_02.bed6.gz -r hg19.RefSeq.union.1Kpromo
 
 ![region_profile.png](https://github.com/liguowang/cpgtools/blob/master/img/region_profile.png)
 
-<a name="p3.14"></a>region_stat.py
+<a name="p3.15"></a>region_stat.py
 ----
 This program gives basic statistics for each genomic region. Append 6 columns to the input BED file:
 
@@ -1058,7 +1059,7 @@ chr1	935051	936052	HES4	0	-	3	0.0863	0.1507	0.1145	0.1066	0.0329
 
 ```     
 
-<a name="p3.15"></a>trichotmize.py
+<a name="p3.16"></a>trichotmize.py
 ----
 This program uses Gaussian Mixture model (GMM) to trichotmize each CpG into 4 status:
  * Un-methylated (labeled as "0" in result file)
