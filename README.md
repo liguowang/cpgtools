@@ -379,17 +379,19 @@ Options:
                         regular text file or compressed file (*.gz, *.bz2) or
                         accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file defining the biological group of each
+                        Group file defining the biological groups of each
                         sample as well as other covariables such as gender,
                         age.  Sample IDs should match to the "Data file".
   -f FAMILY_FUNC, --family=FAMILY_FUNC
                         A gamlss (https://cran.r-project.org/web/packages/gaml
                         ss/index.html) family object. Can be integer 1 or 2
-                        with 1 = "BB (beta binomial)" and 2 = "ZIBB (zero
-                        inflated beta binomial)". Default=2.
+                        with 1 = "BB (beta binomial)", 2 = "ZIBB (zero
+                        inflated beta binomial)" or 3 = "ZABB (zero adjusted
+                        beta binomial)". Default=1.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of output file.
+                        Prefix of the output file.
 ```                        
+
 #### Example
 ```text
 $ python3 ../bin/dmc_bb.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
