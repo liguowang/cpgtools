@@ -13,7 +13,7 @@
 	- [Proportion value](#p2.2)
 	- [The Beta-value](#p2.3)
 	- [The M-value](#p2.4)
-	- [Conversion between Beta- and M-value](#p2.4)
+	- [Conversion between Beta- and M-value](#p2.5)
 - [Usage information](#p3)
 
     |Program                              |Description                              
@@ -42,7 +42,7 @@
 
 
 ### <a name="p1.1"></a>Part 1.1: Prerequisites
-CpGtools are written in [Python](https://www.python.org/). In particular,  **Python3 (v3.5.x)**
+CpGtools are written in [Python](https://www.python.org/). **Python3 (v3.5.x)**
 is required to run all programs in CpGtools. Some programs also need **[R](https://www.r-project.org/)**
 to generate graphs and fit linear and beta binomial models.  
 
@@ -81,13 +81,13 @@ Note that, in this case, **pip** is actually a soft link to **pip3**.
 
 ### <a name="p1.4"></a>Part 1.4: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
 
-We assume your already have **[R](https://www.r-project.org/)** installed. If not, please follow these [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install **[R](https://www.r-project.org/)**.
+If you don't have **[R](https://www.r-project.org/)**, please follow these [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install.
 
-Install "gamlss" package from the R command line:
+Option-1: Install "gamlss" package from the R command line:
 
 	> install.packages("gamlss")
 	
-Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
+Option-2: Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
 	
 	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
 	$ R CMD INSTALL gamlss_5.1-2.tar.gz
@@ -155,12 +155,13 @@ This program annotates CpGs by assigning them to their target genes. Follows the
 "[Basal plus extension rules](http://great.stanford.edu/public/html/index.php)" used by [GREAT](http://great.stanford.edu/public/html/):
 
 **Basal regulatory domain** is a user-defined genomic region around the TSS (transcription start site). By default,
-from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
-domain*. When defining a gene's *basal regulatory domain*, the other nearby genes will be
+from TSS upstream 5 Kb to TSS downstream 1 Kb is considered as the gene's *basal regulatory
+domain*. When defining a gene's *basal regulatory domain*, the other nearby genes are
 ignored (which means different genes' *basal regulatory domain* can be overlapped.)
 
 **Extended regulatory domain** is a genomic region that is further extended from *basal regulatory domain* in both directions to the nearest gene's
-basal regulatory domain but no more than the maximum extension (specified by '-e', default = 1000 kb) in one direction.	
+basal regulatory domain but no more than the maximum extension (specified by '-e', default = 1000 kb) in one direction.	In other words, the "extension"
+stops when it reaches other genes' "basal regulatory domain" or the extension limit, whichever comes first. 
 
 *Basal regulatory domain* and *Extended regulatory domain* are illustrated in below diagram
 
