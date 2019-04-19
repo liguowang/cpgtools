@@ -241,6 +241,39 @@ chr1	714620	714621	cg24063007	0.0368	+	LOC100288069	//
 ```
 
 
+<a name="p3.2"></a>beta_m_conversion.py
+---	
+Convert Beta-value into M-value or vice versa.
+
+#### Basic usage
+```text
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Data file with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (*.gz, *.bz2) or
+                        accessible url.
+  -d DATA_TYPE, --dtype=DATA_TYPE
+                        Data type either "Beta" or "M".
+  -o OUT_FILE, --output=OUT_FILE
+                        Output file.
+```
+#### Example
+
+```
+$ python3 ../bin/beta_m_conversion.py -i test_05_TwoGroup.tsv -d Beta -o test_05_Mvalue.txt
+
+@ 2019-04-19 10:47:02: Convert Beta-value file "test_05_TwoGroup.tsv" into M-value file "test_05_Mvalue.txt" ...
+
+```
+
+
+
+
+
 <a name="p3.2"></a>beta_profile.py
 ---	
 beta_profile.py calculates the average methylation level (i.e. average beta value) across
