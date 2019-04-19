@@ -143,7 +143,6 @@ performing log transformation on zeros.
 ### <a name="p2.5"></a>Part 2.5: Conversion between Beta-value and M-value
 The relationship between Beta-value and M-value is shown as equation and figure:
 
-![beta_vs_M.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_vs_M.png)
 ![beta_vs_M_curve.png](https://github.com/liguowang/cpgtools/blob/master/img/beta_vs_M_curve.png)
 
 
