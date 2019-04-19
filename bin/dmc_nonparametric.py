@@ -24,7 +24,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.4"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -61,8 +61,8 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). Except for the 1st row and 1st column, any non-numerical values will be considered as \"missing values\" and ignored. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs. It must have a header row. Sample IDs shoud match to the \"Data file\". Note: automatically switch to use  Kruskal-Wallis H-test if more than 2 groups were defined in this file.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological group of each sample. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs. It must have a header row. Sample IDs should match to the \"Data file\". Note: automatically switch to use  Kruskal-Wallis H-test if more than 2 groups were defined in this file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

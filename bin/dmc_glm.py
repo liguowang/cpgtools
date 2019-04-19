@@ -26,7 +26,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.4"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -36,8 +36,8 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples as well as other covariables such as gender, age.  Sample IDs shoud match to the \"Data file\".")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age.  Sample IDs shoud match to the \"Data file\".")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()
