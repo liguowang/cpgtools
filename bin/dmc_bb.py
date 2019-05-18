@@ -51,7 +51,7 @@ def main():
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age.  Sample IDs should match to the \"Data file\".")
-	parser.add_option("-f","--family",action="store",type="int",dest="family_func",default=1, help="A gamlss (https://cran.r-project.org/web/packages/gamlss/index.html) family object. Can be integer 1 or 2 with 1 = \"BB (beta binomial)\", 2 = \"ZIBB (zero inflated beta binomial)\" or 3 = \"ZABB (zero adjusted beta binomial)\". Default=%default.")
+	parser.add_option("-f","--family",action="store",type="int",dest="family_func",default=1, help="A gamlss (https://cran.r-project.org/web/packages/gamlss/index.html) family object. Can be integer 1, 2 or 3: 1 = \"BB (beta binomial)\", 2 = \"ZIBB (zero inflated beta binomial)\" or 3 = \"ZABB (zero adjusted beta binomial)\". Default=%default.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
@@ -78,7 +78,6 @@ def main():
 		print ("Input group file \"%s\" does not exist\n" % options.input_file) 
 		sys.exit(105)
 	
-	FOUT = open(options.out_file + '.pval.txt','w')
 	ROUT = open(options.out_file + '.r','w')
 	family = {1:'BB',2:'ZIBB', 3:'ZABB'}
 	if not options.family_func in family.keys():
@@ -89,11 +88,29 @@ def main():
 	print ('library("gamlss")', file=ROUT)
 	
 	printlog("Read group file \"%s\" ..." % (options.group_file))
-	(samples,cv_names, cvs) = read_grp_file2(options.group_file)
+	####
+	(samples,cv_names, cvs, v_types) = read_grp_file2(options.group_file)
 	for cv_name in cv_names:
-		print (cv_name)
+		print ("%s: %s" % (cv_name, v_types[cv_name]))
 		for sample in samples:
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])
+	####
+	print ('bbr <- function (cgid, m,t,%s, app){' % ','.join(cv_names), file=ROUT)
+	print ('  tryCatch(', file=ROUT)
+	print ('\t{', file=ROUT) 
+	print ('\tcapture.output(fit <- gamlss(cbind(m,t - m) ~ %s, family=%s), file ="NUL")' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
+	print ('\tcapture.output(s <- summary(fit, save=TRUE), file="NUL")', file=ROUT)
+	print ('\tpvals <- s$coef.table[,4]', file=ROUT)
+	print ('\tcoefs <- s$coef.table[,1]', file=ROUT)
+	print ('\tif (app){write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)}' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ('\telse {write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", append = FALSE, col.names=c("ID",paste(names(coefs), "coef",sep="."), paste(names(pvals), "pval",sep=".")))}' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ('\t},', file=ROUT) 
+	print ('\terror=function(error_message) {write.table(file=\"%s\",x=matrix(c(cgid, "Failed"), nrow=1), quote=FALSE, row.names=FALSE, sep="\\t", append=TRUE, col.names=FALSE)}' % (options.out_file + '.results.txt'), file=ROUT)
+	print ('  )', file=ROUT) 
+	print ('}', file=ROUT)	
+	print ('\n', file=ROUT)
+
+
 	
 	printlog("Processing file \"%s\" ..." % (options.input_file))
 	line_num = 0
@@ -109,9 +126,21 @@ def main():
 				if s not in sample_IDs:
 					printlog("Cannot find sample ID \"%s\" from file \"%s\"" % (s, options.input_file))
 					sys.exit(3)
+			####
+			for cv_name in cv_names:
+				if v_types[cv_name] == 'continuous':
+					print (cv_name + ' <- c(%s)' % (','.join([str(cvs[cv_name][s]) for s in  sample_IDs  ])), file = ROUT)
+				elif  v_types[cv_name] == 'categorical':
+					print (cv_name + ' <- as.factor(c(%s))' % (','.join([str(cvs[cv_name][s]) for s in  sample_IDs  ])), file = ROUT)
+				else:
+					printlog("unknown vaiable type!")
+					sys.exit(1)
+			####	
+			print ('\n', file=ROUT)
+			
 			continue
 		else:
-			methyl_reads = []			# c
+			methyl_reads = []	# c
 			total_reads = []	# n
 			cg_id = f[0]
 			for i in f[1:]:
@@ -130,21 +159,14 @@ def main():
 					else:
 						printlog("Incorrect data format!")
 						print (f)
-						sys.exit(1)						
-			print ('',file=ROUT)
-			print ('cgid <- \"!%s\"' % cg_id, file=ROUT)
-			print ("y <- c(%s)" % (','.join([str(read) for read in methyl_reads])), file=ROUT)	#response variable
-			print ("total_reads <- c(%s)" % (','.join([str(read) for read in total_reads])), file=ROUT)	#For a binomial GLM prior weights are used to give the number of trials when the response is the proportion of successes
-			for cv_name in cv_names:
-				print (cv_name + ' <- c(%s)' % (','.join([str(cvs[cv_name][s]) for s in  sample_IDs  ])), file = ROUT)
-			
-			print ('capture.output(try(fit <- gamlss(cbind(y, total_reads-y) ~ %s, family=%s)),file="NUL")' % ('+'.join(cv_names), family[options.family_func]), file = ROUT)
-			print ('capture.output(s <- summary(fit, save=TRUE), file="NUL")', file=ROUT)
-			print ('pval <- s$coef.table[,4]',file=ROUT)
-			print ('coef <- s$coef.table[,1]',file=ROUT)
-			#print ('cat(cgid, names(pval),as.vector(pval),as.vector(coef), sep="\\t")', file=ROUT)
-			print ( 'write.table(file=\"%s\",x=matrix(c(cgid, names(pval),as.vector(pval),as.vector(coef)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=FALSE, append = TRUE)' % (options.out_file + '.tmp_results.txt'),  file = ROUT) 
+						sys.exit(1)		
+			if line_num == 2:
+				print ('bbr(\"%s\", c(%s), c(%s), %s, FALSE)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+			else:
+				print ('bbr(\"%s\", c(%s), c(%s), %s, TRUE)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+		
 	ROUT.close()
+	
 	
 	#sys.exit(0)
 	try:
@@ -154,47 +176,5 @@ def main():
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
 	
-	
-	printlog("Reading file \"%s\" ..." % (options.out_file + '.tmp_results.txt'))
-	bbr_results = {}
-	for l in open(options.out_file + '.tmp_results.txt'):
-		bbr_names = []
-		bbr_pvalues = []
-		bbr_coeffs = []
-		l = l.strip()
-		if not l.startswith('!'):continue
-		l = l.replace(')','')
-		l = l.replace('(','')
-		f = l.split()
-		cgID = f[0].replace('!','')
-		tmp = f[1:]
-		bbr_results[cgID] = [cv_names, ["NaN"]* len(cv_names), ["NaN"]* len(cv_names)]
-		
-		if len(tmp)%3 == 0:
-			chunk_size = int(len(tmp)/3)
-			sub_lists = [tmp[i:i+chunk_size] for i in range(0,len(tmp),chunk_size)]
-			r_names = sub_lists[0]
-			r_pvalues = sub_lists[1]
-			r_coefs = sub_lists[2]	
-			for i in range(len(r_names)):
-				if r_names[i] not in cv_names:
-					continue
-				bbr_names.append(r_names[i])
-				bbr_pvalues.append(r_pvalues[i])
-				bbr_coeffs.append(r_coefs[i])
-		bbr_results[cgID] = [bbr_names, bbr_pvalues, bbr_coeffs]	
-	printlog("Results saved to \"%s\" ..." % (options.out_file + '.pval.txt'))
-	line_num = 0
-	for l in ireader.reader(options.input_file):
-		line_num += 1
-		f = l.split()
-		if line_num == 1:
-			print (l + '\t' + '\t'.join([i + '.coef' for i in bbr_names]) + '\t' + '\t'.join([i + '.pval' for i in bbr_names]), file=FOUT)
-		else:
-			cgID = f[0]
-			print (l + '\t' + '\t'.join(bbr_results[cgID][2]) + '\t' + '\t'.join(bbr_results[cgID][1]), file=FOUT)
-	
-	FOUT.close()
-
 if __name__=='__main__':
 	main()
