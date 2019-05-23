@@ -26,7 +26,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.4"
+__version__="0.1.5"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -36,7 +36,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age.  Sample IDs shoud match to the \"Data file\".")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age. The first varialbe is usually categorical and used to make the contrast (calculate pvalues), all the other variables are considered as covariates.   Sample IDs shoud match to the \"Data file\".")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
@@ -62,6 +62,9 @@ def main():
 	if not os.path.isfile(options.group_file):
 		print ("Input group file \"%s\" does not exist\n" % options.input_file) 
 		sys.exit(105)
+	if os.path.exists(options.out_file + '.results.txt'):
+		os.remove(options.out_file + '.results.txt')
+	
 	
 	ROUT = open(options.out_file + '.r','w')
 	
@@ -72,26 +75,25 @@ def main():
 		for sample in samples:
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])	
 	
-	print ('lrf1 <- function (cgid, y, %s){' % ','.join(cv_names), file=ROUT)
-	print ('try(fit <- glm(y ~ %s, family=gaussian))' % ('+'.join(cv_names)), file=ROUT)
-	print ('pvals <- coef(summary(fit))[,4]', file=ROUT)
-	print ('coefs <- coef(summary(fit))[,1]', file=ROUT)
-	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=c("ID",paste(names(coefs), "coef",sep="."), paste(names(pvals), "pval",sep=".")))' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ('lrf <- function (cgid, y, %s){' % ','.join(cv_names), file=ROUT)
+	print ('\ttry(fit1 <- glm(y ~ %s, family=gaussian))' % ('+'.join(cv_names)), file=ROUT)
+	if len(cv_names) == 1:
+		print ('\ttry(fit0 <- glm(y ~ 1, family=gaussian))', file=ROUT)
+	elif len(cv_names) >1:
+		print ('\ttry(fit0 <- glm(y ~ %s, family=gaussian))' % ('+'.join(cv_names[1:])), file=ROUT)
+	
+	print ('\ttest <- anova(fit1, fit0,test="Chisq")', file=ROUT)
+	print ('\tpval <- test$"Pr(>Chi)"[2]', file=ROUT)
+	print ('\tresults <- list(cgID = cgid, pvalue = pval)', file=ROUT)
+	print ('\twrite.table(file=\"%s\",x=results, quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
 	print ('}', file=ROUT)	
 	print ('\n', file=ROUT)
 
-	print ('lrf2 <- function (cgid, y,%s){' % ','.join(cv_names), file=ROUT)
-	print ('try(fit <- glm(y ~ %s, family=gaussian))' % ('+'.join(cv_names)), file=ROUT)
-	print ('pvals <- coef(summary(fit))[,4]', file=ROUT)
-	print ('coefs <- coef(summary(fit))[,1]', file=ROUT)
-	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=FALSE, append = TRUE)' % (options.out_file + '.results.txt'),  file = ROUT) 
-	print ('}', file=ROUT)	
-	print ('\n', file=ROUT)
+	
 
 	printlog("Processing file \"%s\" ..." % (options.input_file))
+
 	line_num = 0
-	probe_list = []
-	p_list = []
 	for l in ireader.reader(options.input_file):
 		line_num += 1
 		f = l.split()
@@ -112,8 +114,6 @@ def main():
 					sys.exit(1)
 			print ('\n', file=ROUT)
 			continue
-
-			continue
 		else:
 			beta_values = []
 			cg_id = f[0]
@@ -122,14 +122,12 @@ def main():
 					beta_values.append(float(i))
 				except:
 					beta_values.append("NaN")
-			if line_num == 2:
-				print ('lrf1(\"%s\", c(%s), %s)' % (cg_id,  ','.join([str(i) for i in beta_values]), ','.join(cv_names)), file=ROUT)
-			else:
-				print ('lrf2(\"%s\", c(%s), %s)' % (cg_id,  ','.join([str(i) for i in beta_values]), ','.join(cv_names)), file=ROUT)
+			#print ('%s = c(%s),' % (cg_id, ','.join([str(i) for i in beta_values])), file=ROUT)
+			print ('lrf(\"%s\", c(%s), %s)' % (cg_id,  ','.join([str(i) for i in beta_values]), ','.join(cv_names)), file=ROUT)	
 
+	
 	ROUT.close()
-	
-	
+
 	try:
 		printlog("Runing Rscript file \"%s\" ..." % (options.out_file + '.r'))
 		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.r.warnings.txt' ), shell=True)
@@ -137,7 +135,22 @@ def main():
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
 	
-
+	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
+	probe_list = []
+	p_list = []
+	if os.path.exists(options.out_file + '.results.txt') and os.path.getsize(options.out_file + '.results.txt') > 0:
+		for l in ireader.reader(options.out_file + '.results.txt'):
+			f = l.split()
+			probe_list.append(f[0])
+			p_list.append(float(f[1]))
+	q_list =  padjust.multiple_testing_correction(p_list)
 	
+	OUT = open(options.out_file + '.results.txt','w')
+	print ("probe\t\tP-value\tadj.Pvalue", file = OUT)
+	
+	for id,p,q in zip(probe_list, p_list, q_list):
+		print (id + '\t' + str(p) + '\t' + str(q), file=OUT)
+	OUT.close()
+		
 if __name__=='__main__':
 	main()
