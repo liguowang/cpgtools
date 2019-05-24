@@ -560,7 +560,7 @@ Options:
 $ python3 ../bin/dmc_glm.py -i test_10_TwoGroup.tsv.gz -g test_10_TwoGroup.grp.csv.gz -o OUT_10
 ```
 
-#### Output file (OUT_10.results.txt) contains three columns: "probe ID", "Pvalue", "adjusted pvalue" using Benjamini-Hochberg Procedure
+#### Output file (OUT_10.results.txt) contains three columns: "probe ID", "pvalue", "adjusted pvalue" using Benjamini-Hochberg Procedure
 
 ```text
 probe	P-value	adj.Pvalue
@@ -575,10 +575,6 @@ cg00000321	0.000587450695456258	0.009536537263900292
 
 #### L-shaped P-value distribution
 ![GLM Pvalue distribution](https://github.com/liguowang/cpgtools/blob/master/img/Glm_pval.dist.png) 
-
-#### Heatmap of differentially methylated CpGs (adjusted pvalue < 0.01)
-![GLM heatmap](https://github.com/liguowang/cpgtools/blob/master/img/Glm_heatmap_FDR_0.01.png) 
-
 
 <a name="p3.8"></a>dmc_logit.py
 ---
@@ -623,10 +619,33 @@ Options:
 
 #### Example
 ```text
+# use Quasi-binomial model (default -f 1)
 $ python3 ../bin/dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
+
+# use binomial modal (-f 2)
+$ python3 ../bin/dmc_logit.py -f 2 -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv.gz -o OUT_4
 ```
 
 #### Output file (OUT_4.results.txt)
+```text
+probe   P-value adj.Pvalue
+chr10:100011340 0.0546323518620442      0.3248064044298097
+chr10:100011341 0.768672174535567       0.9847126895355661
+chr10:100011387 0.0334718446686874      0.24170580971337552
+chr10:100011388 0.181370509914284       0.609283062981305
+chr10:100026933 0.948461826880375       0.9915600605862358
+chr10:100026991 0.627819689928786       0.9478550817230952
+chr10:100027909 0.620643596716385       0.9452046607692122
+chr10:100027910 0.973256346793073       0.9940906689517144
+```
+
+#### Binomial vs Quasi-binomial
+
+Compared to the binomial distribution, the quasi-binomial distribution has an extra parameter that
+attempts to describe additional variance in the data that cannot be explained by a Binomial distribution alone.
+Therefore, quasi-binomial fits the data better than binomial.
+![logit Pvalue distribution](https://github.com/liguowang/cpgtools/blob/master/img/logit_bin_pvalue_dist.png) 
+
 
 
 <a name="p3.9"></a>dmc_nonparametric.py
