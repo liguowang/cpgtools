@@ -136,20 +136,35 @@ def main():
 		sys.exit(1)
 	
 	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
-	probe_list = []
-	p_list = []
+	probe_list0 = []	#probes without valid pvalue
+	probe_list1 = []
+	p_list1 = []
 	if os.path.exists(options.out_file + '.results.txt') and os.path.getsize(options.out_file + '.results.txt') > 0:
 		for l in ireader.reader(options.out_file + '.results.txt'):
 			f = l.split()
-			probe_list.append(f[0])
-			p_list.append(float(f[1]))
-	q_list =  padjust.multiple_testing_correction(p_list)
+			id = f[0]
+			try:
+				pv = float(f[1])
+				probe_list1.append(id)
+				p_list1.append(pv)
+			except:
+				probe_list0.append(id)
+				continue
+	q_list1 =  padjust.multiple_testing_correction(p_list1)
 	
 	OUT = open(options.out_file + '.results.txt','w')
-	print ("probe\t\tP-value\tadj.Pvalue", file = OUT)
+	print ("probe\tP-value\tadj.Pvalue", file = OUT)
 	
-	for id,p,q in zip(probe_list, p_list, q_list):
+	#probes with valid p and q
+	for id,p,q in zip(probe_list1, p_list1, q_list1):
 		print (id + '\t' + str(p) + '\t' + str(q), file=OUT)
+	
+	#probes without valid p and q
+	if len(probe_list0) > 0:
+		for id in probe_list0:
+			print (id + '\tNA\tNA', file=OUT)
+	
+	
 	OUT.close()
 		
 if __name__=='__main__':
