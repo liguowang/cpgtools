@@ -548,7 +548,7 @@ Options:
 
 ```
 
-##### Input files
+#### Input files
 
 - Data file: [test_10_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.tsv.gz)
 - Group file: [test_10_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.grp.csv.gz)
