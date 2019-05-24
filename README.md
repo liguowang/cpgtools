@@ -553,17 +553,27 @@ Options:
 - Data file: [test_10_TwoGroup.tsv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.tsv.gz)
 - Group file: [test_10_TwoGroup.grp.csv.gz](https://github.com/liguowang/cpgtools/blob/master/test/test_10_TwoGroup.grp.csv.gz)
 
-#### Output files
+#### Example
 ```text
-probe           P-value adj.Pvalue
-cg00000109      0.853305759084755       0.9265543482195918
-cg00000165      0.0745299982364383      0.22639732149586358
-cg00000236      0.00257982631000069     0.023965748145765
-cg00000292      0.116828991966835       0.2999689382232735
-cg00000321      0.000629032684254901    0.00918295889423213
-...
+$ python3 ../bin/dmc_glm.py -i test_10_TwoGroup.tsv.gz -g test_10_TwoGroup.grp.csv.gz -o OUT_10
 ```
 
+#### Output file (OUT_10.results.txt)
+Output file contains three columns:
+ - probe ID
+ - pvalue
+ - adjusted pvalue using Benjamini-Hochberg Procedure
+
+```text
+probe	P-value	adj.Pvalue
+cg00000109	0.87401380379295	0.937883682576403
+cg00000165	0.091454828800697	0.25827401525189775
+cg00000236	0.00247195726100249	0.02464563570291615
+cg00000292	0.177656104946106	0.39031424241726714
+cg00000321	0.000587450695456258	0.009536537263900292
+...
+...
+```
 
 #### P-value distribution
 ![GLM Pvalue distribution](https://github.com/liguowang/cpgtools/blob/master/img/Glm_pval.dist.png) 
