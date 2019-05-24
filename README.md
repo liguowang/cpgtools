@@ -537,15 +537,17 @@ Options:
                         Data file containing beta values with the 1st row
                         containing sample IDs (must be unique) and the 1st
                         column containing CpG positions or probe IDs (must be
-                        unique). This file can be regular or compressed by
-                        'gzip' or 'bz'.
+                        unique). This file can be regular text file or
+                        compressed file (*.gz, *.bz2) or accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
-                        Group file defining the biological group of each
+                        Group file defining the biological groups of each
                         sample as well as other covariables such as gender,
-                        age.  Sample IDs should match to the "Data file".
+                        age. The first varialbe is usually categorical and
+                        used to make the contrast (calculate pvalues), all the
+                        other variables are considered as covariates.   Sample
+                        IDs shoud match to the "Data file".
   -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
-
 ```
 
 #### Input files
@@ -558,11 +560,7 @@ Options:
 $ python3 ../bin/dmc_glm.py -i test_10_TwoGroup.tsv.gz -g test_10_TwoGroup.grp.csv.gz -o OUT_10
 ```
 
-#### Output file (OUT_10.results.txt)
-Output file contains three columns:
- - probe ID
- - pvalue
- - adjusted pvalue using Benjamini-Hochberg Procedure
+#### Output file (OUT_10.results.txt) contains three columns: "probe ID", "Pvalue", "adjusted pvalue" using Benjamini-Hochberg Procedure
 
 ```text
 probe	P-value	adj.Pvalue
@@ -575,7 +573,7 @@ cg00000321	0.000587450695456258	0.009536537263900292
 ...
 ```
 
-#### P-value distribution
+#### L-shaped P-value distribution
 ![GLM Pvalue distribution](https://github.com/liguowang/cpgtools/blob/master/img/Glm_pval.dist.png) 
 
 #### Heatmap of differentially methylated CpGs (adjusted pvalue < 0.01)
