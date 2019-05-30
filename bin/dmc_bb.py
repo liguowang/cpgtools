@@ -40,7 +40,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.4"
+__version__="0.1.6"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -85,7 +85,7 @@ def main():
 		sys.exit(106)
 	
 	
-	print ('library("gamlss")', file=ROUT)
+	print ('library("aod")', file=ROUT)
 	
 	printlog("Read group file \"%s\" ..." % (options.group_file))
 	####
@@ -95,21 +95,24 @@ def main():
 		for sample in samples:
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])
 	####
-	print ('bbr <- function (cgid, m,t,%s, app){' % ','.join(cv_names), file=ROUT)
-	print ('  tryCatch(', file=ROUT)
-	print ('\t{', file=ROUT) 
-	print ('\tcapture.output(fit <- gamlss(cbind(m,t - m) ~ %s, family=%s), file ="NUL")' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
-	print ('\tcapture.output(s <- summary(fit, save=TRUE), file="NUL")', file=ROUT)
-	print ('\tpvals <- s$coef.table[,4]', file=ROUT)
-	print ('\tcoefs <- s$coef.table[,1]', file=ROUT)
-	print ('\tif (app){write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)}' % (options.out_file + '.results.txt'),  file = ROUT) 
-	print ('\telse {write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", append = FALSE, col.names=c("ID",paste(names(coefs), "coef",sep="."), paste(names(pvals), "pval",sep=".")))}' % (options.out_file + '.results.txt'),  file = ROUT) 
-	print ('\t},', file=ROUT) 
-	print ('\terror=function(error_message) {write.table(file=\"%s\",x=matrix(c(cgid, "Failed"), nrow=1), quote=FALSE, row.names=FALSE, sep="\\t", append=TRUE, col.names=FALSE)}' % (options.out_file + '.results.txt'), file=ROUT)
-	print ('  )', file=ROUT) 
+	
+	print ('bbr <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
+	print ('\tif (sum(m, na.rm=TRUE) == 0){', file=ROUT)
+	print ('\t\twrite.table(file=\"%s\",x=list(cgID = cgid, pvalue = NA), quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
+	print ('\t\treturn()',file=ROUT)
+	print ('\t}', file=ROUT)
+	print ('\tdat <- data.frame(m=m, t=t, %s)' % ','.join(['='.join(i) for i in zip(cv_names, cv_names)]), file=ROUT)
+	print ('\tfit1 <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names), file=ROUT)
+	if len(cv_names) == 1:
+		print ('\tfit0 <- betabin(cbind(m,t - m) ~ 1, ~1, link=c("logit"), data=na.omit(dat))', file=ROUT)
+	elif len(cv_names) >1:
+		print ('\tfit0 <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names[1:]), file=ROUT)
+	print ('\ttest <- anova(fit1, fit0, test="Chisq")', file=ROUT)
+	print ('\tpval <- test@anova.table$"P(> Chi2)"[2]', file=ROUT)
+	print ('\tresults <- list(cgID = cgid, pvalue = pval)', file=ROUT)
+	print ('\twrite.table(file=\"%s\",x=results, quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
 	print ('}', file=ROUT)	
 	print ('\n', file=ROUT)
-
 
 	
 	printlog("Processing file \"%s\" ..." % (options.input_file))
@@ -160,21 +163,52 @@ def main():
 						printlog("Incorrect data format!")
 						print (f)
 						sys.exit(1)		
-			if line_num == 2:
-				print ('bbr(\"%s\", c(%s), c(%s), %s, FALSE)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
-			else:
-				print ('bbr(\"%s\", c(%s), c(%s), %s, TRUE)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+			print ('bbr(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
 		
 	ROUT.close()
 	
 	
-	#sys.exit(0)
 	try:
 		printlog("Runing Rscript file \"%s\" ..." % (options.out_file + '.r'))
 		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.tmp_warnings.txt' ), shell=True)
 	except:
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
+
+
+	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
+	probe_list0 = []	#probes without valid pvalue
+	probe_list1 = []
+	p_list1 = []	
+	if os.path.exists(options.out_file + '.results.txt') and os.path.getsize(options.out_file + '.results.txt') > 0:
+		for l in ireader.reader(options.out_file + '.results.txt'):
+			f = l.split()
+			id = f[0]
+			try:
+				pv = float(f[1])
+				probe_list1.append(id)
+				p_list1.append(pv)
+			except:
+				probe_list0.append(id)
+				continue
+	q_list1 =  padjust.multiple_testing_correction(p_list1)
+	
+	OUT = open(options.out_file + '.results.txt','w')
+	print ("probe\tP-value\tadj.Pvalue", file = OUT)
+	
+	#probes with valid p and q
+	for id,p,q in zip(probe_list1, p_list1, q_list1):
+		print (id + '\t' + str(p) + '\t' + str(q), file=OUT)
+	
+	#probes without valid p and q
+	if len(probe_list0) > 0:
+		for id in probe_list0:
+			print (id + '\tNA\tNA', file=OUT)
+	
+	
+	OUT.close()
+
 	
 if __name__=='__main__':
 	main()
+
