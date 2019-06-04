@@ -50,7 +50,7 @@ to generate graphs and fit linear and beta binomial models.
 - [Python 3](https://www.python.org/downloads/)
 - [pip3](https://pip.pypa.io/en/stable/installing/)
 - [R](https://www.r-project.org/)
-- [gamlss](https://CRAN.R-project.org/package=gamlss) (Generalised Additive Models for Location Scale and Shape) R package
+- [aod](https://CRAN.R-project.org/package=aod) (Analysis of Overdispersed Data) R package
 
 ### <a name="p1.2"></a>Part 1.2: Python Dependencies
 Note: You do NOT need to install these packages manually, as they will be automatically
