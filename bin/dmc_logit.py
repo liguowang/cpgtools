@@ -44,7 +44,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url..")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age. The first varialbe is usually categorical and used to make the contrast (calculate pvalues), all the other variables are considered as covariates.   Sample IDs shoud match to the \"Data file\".")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age. The first varialbe is grouping variable (must be categorical), all the other variables are considered as covariates (can be categorial or continuous). Sample IDs shoud match to the \"Data file\".")
 	parser.add_option("-f","--family",action="store",type="int",dest="family_func",default=1, help="Error distribution and link function to be used in the GLM model. Can be integer 1 or 2 with 1 = \"quasibinomial\" and 2 = \"binomial\". Default=%default.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
@@ -70,11 +70,9 @@ def main():
 	if not os.path.isfile(options.group_file):
 		print ("Input group file \"%s\" does not exist\n" % options.input_file) 
 		sys.exit(105)
-	if os.path.exists(options.out_file + '.results.txt'):
-		os.remove(options.out_file + '.results.txt')
-		
+	
 	ROUT = open(options.out_file + '.r','w')
-	family = {1:'quasibinomial',2:'binomial'}
+	family = {1:'quasibinomial', 2:'binomial',}
 	if not options.family_func in family.keys():
 		print ("Incorrect value of '-f'!") 
 		sys.exit(106)
@@ -86,22 +84,30 @@ def main():
 		for sample in samples:
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])
 	
-	print ('lrf <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
-	print ('\ttry(fit1 <- glm(cbind(m,t - m) ~ %s, family=%s))' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
-	if len(cv_names) == 1:
-		print ('\ttry(fit0 <- glm(cbind(m,t - m) ~ 1, family=%s))' % (family[options.family_func]), file=ROUT)
-	elif len(cv_names) >1:
-		print ('\ttry(fit0 <- glm(cbind(m,t - m) ~ %s, family=%s))' % ('+'.join(cv_names[1:]),family[options.family_func]), file=ROUT)
-	print ('\ttest <- anova(fit1, fit0,test="Chisq")', file=ROUT)
-	print ('\tpval <- test$"Pr(>Chi)"[2]', file=ROUT)
-	print ('\tresults <- list(cgID = cgid, pvalue = pval)', file=ROUT)
-	print ('\twrite.table(file=\"%s\",x=results, quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
+	print ('lrf1 <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
+	print ('try(fit <- glm(cbind(m,t - m) ~ %s, family=%s))' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
+	print ('pvals <- coef(summary(fit))[,4]', file=ROUT)
+	print ('coefs <- coef(summary(fit))[,1]', file=ROUT)
+	print ('\tif(max(pvals, na.rm=T)>1){pvals = pvals + NA}', file=ROUT)
+	print ('\tif(sum(m, na.rm=T) == 0){pvals = pvals + NA}', file=ROUT)
+	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=c("ID",paste(gsub("2","",names(coefs)), "coef",sep="."), paste(gsub("2","",names(pvals)), "pval",sep=".")))' % (options.out_file + '.results.txt'),  file = ROUT) 
 	print ('}', file=ROUT)	
 	print ('\n', file=ROUT)
 
+	print ('lrf2 <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
+	print ('try(fit <- glm(cbind(m,t - m) ~ %s, family=%s))' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
+	print ('pvals <- coef(summary(fit))[,4]', file=ROUT)
+	print ('coefs <- coef(summary(fit))[,1]', file=ROUT)
+	print ('\tif(max(pvals, na.rm=T)>1){pvals = pvals + NA}', file=ROUT)
+	print ('\tif(sum(m, na.rm=T) == 0){pvals = pvals + NA}', file=ROUT)
+	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=FALSE, append = TRUE)' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ('}', file=ROUT)	
+	print ('\n', file=ROUT)
 		
 	printlog("Processing file \"%s\" ..." % (options.input_file))
 	line_num = 0
+	probe_list = []
+	p_list = []
 	for l in ireader.reader(options.input_file):
 		line_num += 1
 		f = l.split()
@@ -127,7 +133,7 @@ def main():
 			continue
 		else:
 			methyl_reads = []			# c
-			total_reads = []			# n
+			total_reads = []	# n
 			cg_id = f[0]
 			for i in f[1:]:
 				#try:
@@ -146,50 +152,20 @@ def main():
 						printlog("Incorrect data format!")
 						print (f)
 						sys.exit(1)		
-			print ('lrf(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+			if line_num == 2:
+				print ('lrf1(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+			else:
+				print ('lrf2(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
 
 	ROUT.close()
 	
 	
 	try:
 		printlog("Runing Rscript file \"%s\" ..." % (options.out_file + '.r'))
-		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.r.warnings.txt' ), shell=True)
+		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.warnings.txt' ), shell=True)
 	except:
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
-	
-	
-	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
-	probe_list0 = []	#probes without valid pvalue
-	probe_list1 = []
-	p_list1 = []	
-	if os.path.exists(options.out_file + '.results.txt') and os.path.getsize(options.out_file + '.results.txt') > 0:
-		for l in ireader.reader(options.out_file + '.results.txt'):
-			f = l.split()
-			id = f[0]
-			try:
-				pv = float(f[1])
-				probe_list1.append(id)
-				p_list1.append(pv)
-			except:
-				probe_list0.append(id)
-				continue
-	q_list1 =  padjust.multiple_testing_correction(p_list1)
-	
-	OUT = open(options.out_file + '.results.txt','w')
-	print ("probe\tP-value\tadj.Pvalue", file = OUT)
-	
-	#probes with valid p and q
-	for id,p,q in zip(probe_list1, p_list1, q_list1):
-		print (id + '\t' + str(p) + '\t' + str(q), file=OUT)
-	
-	#probes without valid p and q
-	if len(probe_list0) > 0:
-		for id in probe_list0:
-			print (id + '\tNA\tNA', file=OUT)
-	
-	
-	OUT.close()
 	
 if __name__=='__main__':
 	main()

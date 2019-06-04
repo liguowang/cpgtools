@@ -50,7 +50,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age.  Sample IDs should match to the \"Data file\".")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample as well as other covariables such as gender, age. The first varialbe is grouping variable (must be categorical), all the other variables are considered as covariates (can be categorial or continuous). Sample IDs shoud match to the \"Data file\"..")
 	parser.add_option("-f","--family",action="store",type="int",dest="family_func",default=1, help="A gamlss (https://cran.r-project.org/web/packages/gamlss/index.html) family object. Can be integer 1, 2 or 3: 1 = \"BB (beta binomial)\", 2 = \"ZIBB (zero inflated beta binomial)\" or 3 = \"ZABB (zero adjusted beta binomial)\". Default=%default.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
@@ -96,24 +96,33 @@ def main():
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])
 	####
 	
-	print ('bbr <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
-	print ('\tif (sum(m, na.rm=TRUE) == 0){', file=ROUT)
-	print ('\t\twrite.table(file=\"%s\",x=list(cgID = cgid, pvalue = NA), quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
-	print ('\t\treturn()',file=ROUT)
-	print ('\t}', file=ROUT)
+	print ('bbr1 <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
 	print ('\tdat <- data.frame(m=m, t=t, %s)' % ','.join(['='.join(i) for i in zip(cv_names, cv_names)]), file=ROUT)
-	print ('\tfit1 <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names), file=ROUT)
-	if len(cv_names) == 1:
-		print ('\tfit0 <- betabin(cbind(m,t - m) ~ 1, ~1, link=c("logit"), data=na.omit(dat))', file=ROUT)
-	elif len(cv_names) >1:
-		print ('\tfit0 <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names[1:]), file=ROUT)
-	print ('\ttest <- anova(fit1, fit0, test="Chisq")', file=ROUT)
-	print ('\tpval <- test@anova.table$"P(> Chi2)"[2]', file=ROUT)
-	print ('\tresults <- list(cgID = cgid, pvalue = pval)', file=ROUT)
-	print ('\twrite.table(file=\"%s\",x=results, quote=FALSE, row.names=FALSE, sep="\\t",append = TRUE, col.names=FALSE)' % (options.out_file + '.results.txt'),  file = ROUT)
+	print ('\tfit <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names), file=ROUT)
+	print ('\ttest <- summary(fit)',file=ROUT)
+	print ('\tcoefs <- test@Coef$Estimate',file=ROUT)
+	print ('\tpvals = test@Coef$"Pr(> |z|)"',file=ROUT)
+	print ('\tif(max(pvals, na.rm=T)>1){pvals = pvals + NA}', file=ROUT)
+	print ('\tif(sum(m, na.rm=T) == 0){pvals = pvals + NA}', file=ROUT)
+	print ('\tnames = row.names(test@Coef)',file=ROUT)
+	print ('\tnames = gsub("2","",names)',file=ROUT)
+	print ( '\twrite.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=c("ID",paste(names, "coef",sep="."), paste(names, "pval",sep=".")))' % (options.out_file + '.results.txt'),  file = ROUT) 
 	print ('}', file=ROUT)	
 	print ('\n', file=ROUT)
-
+	
+	print ('bbr2 <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
+	print ('\tdat <- data.frame(m=m, t=t, %s)' % ','.join(['='.join(i) for i in zip(cv_names, cv_names)]), file=ROUT)
+	print ('\tfit <- betabin(cbind(m,t - m) ~ %s, ~1, link=c("logit"), data=na.omit(dat))' % '+'.join(cv_names), file=ROUT)
+	print ('\ttest <- summary(fit)',file=ROUT)
+	print ('\tcoefs <- test@Coef$Estimate',file=ROUT)
+	print ('\tpvals = test@Coef$"Pr(> |z|)"',file=ROUT)
+	print ('\tif(max(pvals, na.rm=T)>1){pvals = pvals + NA}', file=ROUT)
+	print ('\tif(sum(m, na.rm=T) == 0){pvals = pvals + NA}', file=ROUT)
+	print ('\tnames = row.names(test@Coef)',file=ROUT)
+	print ('\tnames = gsub("2","",names)',file=ROUT)
+	print ( '\twrite.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1), quote=FALSE, row.names=FALSE, sep="\\t", col.names=FALSE, append=TRUE)' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ('}', file=ROUT)	
+	print ('\n', file=ROUT)
 	
 	printlog("Processing file \"%s\" ..." % (options.input_file))
 	line_num = 0
@@ -163,19 +172,21 @@ def main():
 						printlog("Incorrect data format!")
 						print (f)
 						sys.exit(1)		
-			print ('bbr(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
-		
+			if line_num == 2:
+				print ('bbr1(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
+			else:
+				print ('bbr2(\"%s\", c(%s), c(%s), %s)' % (cg_id, ','.join([str(read) for read in methyl_reads]), ','.join([str(read) for read in total_reads]), ','.join(cv_names)), file=ROUT)
 	ROUT.close()
 	
 	
 	try:
 		printlog("Runing Rscript file \"%s\" ..." % (options.out_file + '.r'))
-		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.tmp_warnings.txt' ), shell=True)
+		subprocess.call("Rscript %s 2>%s" % (options.out_file + '.r', options.out_file + '.warnings.txt' ), shell=True)
 	except:
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
 
-
+	"""
 	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
 	probe_list0 = []	#probes without valid pvalue
 	probe_list1 = []
@@ -207,7 +218,7 @@ def main():
 	
 	
 	OUT.close()
-
+	"""
 	
 if __name__=='__main__':
 	main()
