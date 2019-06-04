@@ -80,18 +80,18 @@ Run the following code to check:
 
 Note that, in this case, **pip** is actually a soft link to **pip3**.
 
-### <a name="p1.4"></a>Part 1.4: Install [gamlss](https://CRAN.R-project.org/package=gamlss)
+### <a name="p1.4"></a>Part 1.4: Install [aod](https://cran.r-project.org/web/packages/aod/index.html)
 
 If you don't have **[R](https://www.r-project.org/)**, please follow these [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install.
 
 Option-1: Install "gamlss" package from the R command line:
 
-	> install.packages("gamlss")
+	> install.packages("aod")
 	
 Option-2: Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
 	
-	$ wget https://cran.r-project.org/src/contrib/gamlss_5.1-2.tar.gz
-	$ R CMD INSTALL gamlss_5.1-2.tar.gz
+	$ wget https://cran.r-project.org/src/contrib/aod_1.3.1.tar.gz
+	$ R CMD INSTALL aod_1.3.1.tar.gz
 
 ### <a name="p1.5"></a>Part 1.5: Install or Upgrade CpGtools
 	
@@ -117,7 +117,7 @@ right-closed. For example, the bed entry **"chr1   10   15"** contains the 11-th
 
 
 ### <a name="p2.2"></a>Part 2.2: proportion value
-In [bisulfite sequencing](https://en.wikipedia.org/wiki/Bisulfite_sequencing) ([RRBS](https://en.wikipedia.org/wiki/Reduced_representation_bisulfite_sequencing) or [WGBS](https://en.wikipedia.org/wiki/Whole_genome_bisulfite_sequencing)), the methylation level of a particular CpG or region can be represented by a "proportion" vlaue. 
+In [bisulfite sequencing](https://en.wikipedia.org/wiki/Bisulfite_sequencing) ([RRBS](https://en.wikipedia.org/wiki/Reduced_representation_bisulfite_sequencing) or [WGBS](https://en.wikipedia.org/wiki/Whole_genome_bisulfite_sequencing)), the methylation level of a particular CpG or region can be represented by a "proportion" value. 
 We define the proportion value as **two non-negative integers separated by comma (",")** with the first integer (*m*,  0 <= *m* <= *n*) representing 
 "number of methylated reads" and the second integer (*n*, *n* >= 0) representing "number of total reads". for example:
 
@@ -397,7 +397,9 @@ $ python3 ../bin/chrom_distribution.py -i test_03a.bed3.gz,test_03b.bed3.gz -n 4
 
 <a name="p3.5"></a>dmc_bb.py
 ---
-This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial model (ZIBB)"** on [proportion values](#p2.2). It allows for covariable analysis.
+This program performs differential CpG analysis using **"beta binomial (BB)"** or **"zero inflated beta binomial (ZIBB)"**
+model on [proportion values](#p2.2). It allows for covariable analysis. P-values are calculated using [F-test](https://en.wikipedia.org/wiki/F-test)
+to compare two nested models (full model vs reduced model). 
 
 #### Basic usage
 ```text
@@ -462,7 +464,7 @@ number after "," indicates *number of total reads*
 
 3 columns ("Odds ratio", "pvalue" and "FDR adjusted pvalue") will append to this table.
 
-- pvalue is two-tailed (same for other methods)
+- pvalue is two-tailed
 - We used [Benjamini-Hochberg Procedure](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/) for multiple test correction (same for other methods)
 
 #### Basic usage
@@ -526,7 +528,7 @@ chr10:100027919	0,76	0,66	2,58	0,44	0.0	0.17375025298519042	0.6757824934416998
 <a name="p3.7"></a>dmc_glm.py
 ---
 This program performs differential CpG analysis using **[generalized liner model](https://en.wikipedia.org/wiki/Generalized_linear_model)** based on
-[beta values](#p2.3). It allows for covariable analysis.
+[beta values](#p2.3). It allows for covariable analysis. Pvalues are calculated using ANOVA to compare two nested models (full model vs reduced model)
 
 #### Basic usage
 ```text
@@ -579,8 +581,10 @@ cg00000321	0.000587450695456258	0.009536537263900292
 <a name="p3.8"></a>dmc_logit.py
 ---
 This program performs differential CpG analysis using [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model based on
-[proportion values](#p2.2). It allows for covariable analysis.
-Users can choose to use "binomial" or "quasibinomial" to model the data. According to "glm" documentation, "The *quasibinomial* family differs from the *binomial* family only in that the dispersion parameter is not fixed at one, so it can model over-dispersion".
+[proportion values](#p2.2). It allows for covariable analysis. Users can choose to use "binomial" or "quasibinomial"
+to model the data. According to "glm" documentation, "The *quasibinomial* family differs from the *binomial* family
+only in that the dispersion parameter is not fixed at one, so it can model over-dispersion". Pvalues are calculated
+using ANOVA to compare two nested models (full model vs reduced model).
 
 #### Basic usage
 
@@ -642,7 +646,7 @@ chr10:100027910 0.973256346793073       0.9940906689517144
 #### Binomial vs Quasi-binomial
 
 Compared to the binomial distribution, the quasi-binomial distribution has an extra parameter that
-attempts to describe additional variance in the data that cannot be explained by a Binomial distribution alone.
+attempts to capture the additional variance that cannot be explained by a Binomial distribution alone.
 Therefore, quasi-binomial fits the data better than binomial.
 ![logit Pvalue distribution](https://github.com/liguowang/cpgtools/blob/master/img/logit_bin_pvalue_dist.png) 
 
