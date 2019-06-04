@@ -6,7 +6,7 @@
 	- [Prerequisites](#p1.1)
 	- [Python Dependencies](#p1.2)
 	- [Install pip3](#p1.3)
-	- [Install gamlss](#p1.4)
+	- [Install aod](#p1.4)
 	- [Install CpGtools](#p1.5)
 - [File and data format](#p2)
 	- [BED format](#p2.1)
@@ -84,11 +84,11 @@ Note that, in this case, **pip** is actually a soft link to **pip3**.
 
 If you don't have **[R](https://www.r-project.org/)**, please follow these [instructions](https://cran.r-project.org/doc/manuals/r-release/R-admin.html) to install.
 
-Option-1: Install "gamlss" package from the R command line:
+Option-1: Install "aod" package from the R command line:
 
 	> install.packages("aod")
 	
-Option-2: Install "gamlss" (use version 5.1-2 for example) from the Shell command line:
+Option-2: Install "aod" (use version 1.3.1 for example) from the Shell command line:
 	
 	$ wget https://cran.r-project.org/src/contrib/aod_1.3.1.tar.gz
 	$ R CMD INSTALL aod_1.3.1.tar.gz
@@ -417,13 +417,10 @@ Options:
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file defining the biological groups of each
                         sample as well as other covariables such as gender,
-                        age.  Sample IDs should match to the "Data file".
-  -f FAMILY_FUNC, --family=FAMILY_FUNC
-                        A gamlss (https://cran.r-project.org/web/packages/gaml
-                        ss/index.html) family object. Can be integer 1 or 2
-                        with 1 = "BB (beta binomial)", 2 = "ZIBB (zero
-                        inflated beta binomial)" or 3 = "ZABB (zero adjusted
-                        beta binomial)". Default=1.
+                        age. The first varialbe is grouping variable (must be
+                        categorical), all the other variables are considered
+                        as covariates (can be categorial or continuous).
+                        Sample IDs shoud match to the "Data file"..
   -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 ```                        
