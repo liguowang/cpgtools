@@ -329,7 +329,7 @@ def read_grp_file2(gfile):
 	line_num = 0
 	
 	covar_values = collections.defaultdict(list)	#continue variable or categorical variable. key is name, valu list of values
-	cutoff = 0.05	#ratio of number of unique values to the total number of unique values
+	cutoff = 0.5	#ratio of number of unique values to the total number of unique values
 	for l in ireader.reader(gfile):
 		l = l.replace(' ','')
 		line_num += 1
@@ -356,7 +356,7 @@ def read_grp_file2(gfile):
 	#tell if a covariable is continuous or categorical
 	covar_types = {}
 	for k,v in covar_values.items():
-		if ( 1.0*len(set(v)) / len(v) ) < cutoff:
+		if ( 1.0*len(set(v)) / len(v) ) > cutoff:
 			covar_types[k] = 'continuous'
 		else:
 			covar_types[k] = 'categorical'

@@ -23,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.7"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -167,7 +167,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).  [required]")
-	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.9999,help="Probability cutoff to assign a probe into \"semi-methylated\" class. default=%default")
+	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.99,help="Probability cutoff to assign a probe into \"semi-methylated\" class. default=%default")
 	parser.add_option("-r","--report",action="store_true",dest="report_summary",help="Presense of this flag renders program to generate \"summary_report.txt\" file.")
 	parser.add_option("-s","--seed",action="store",type='int', dest="random_state",default=1, help="Random_state is the seed used by the random number generator. You get exactly the same results when running multiple times with the same random_state. default=%default")
 	(options,args)=parser.parse_args()

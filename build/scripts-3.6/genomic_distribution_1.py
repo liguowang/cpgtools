@@ -37,7 +37,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.7"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -50,7 +50,7 @@ def main():
 	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in standard BED-12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of down-stream intergenic region w.r.t. TES (transcription end site). default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of up-stream intergenic region w.r.t. TSS (transcription start site). default=%default (bp)")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

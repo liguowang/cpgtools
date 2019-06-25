@@ -1,7 +1,6 @@
 numpy
 scipy
-pysam
-bx-python
-pyBigWig
 sklearn
 weblogo
+bx-python
+pandas

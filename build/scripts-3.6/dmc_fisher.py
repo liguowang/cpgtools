@@ -1,13 +1,13 @@
 #!python
 """
-#=========================================================================================
-This program performs differential CpG analysis using Fisher exact test.
- 
- * Only apply to two sample comparison with no biological/technical replicates
- * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be sumed
+Description
+-----------
+This program performs differential CpG analysis using Fisher's exact test. It only apply
+to two sample comparison with no replicates. if replicates are provided, *methyl reads*
+and *total reads* of all replicates will be sumed
 
-Input file format:
-
+Example of input data file
+--------------------------
 cgID        sample_1    sample_2
 CpG_1       129,170     166,178
 CpG_2       24,77       67,99 
@@ -15,7 +15,9 @@ CpG_2       24,77       67,99
 number before "," indicates *number of methyl reads*
 number after "," indicates *number of total reads*
 
-3 columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to this table. 
+Output
+-------
+Three columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to input data table. 
 #=========================================================================================
 """
 
@@ -36,7 +38,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -46,8 +48,8 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs shoud match to the \"Data file\". Note: automatically switch to use ANOVA if more than 2 groups were defined in this file.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs should match to the \"Data file\".")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

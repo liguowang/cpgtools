@@ -327,6 +327,9 @@ def read_grp_file2(gfile):
 	covar_names = []
 	covars = collections.defaultdict(dict)
 	line_num = 0
+	
+	covar_values = collections.defaultdict(list)	#continue variable or categorical variable. key is name, valu list of values
+	cutoff = 0.5	#ratio of number of unique values to the total number of unique values
 	for l in ireader.reader(gfile):
 		l = l.replace(' ','')
 		line_num += 1
@@ -339,18 +342,26 @@ def read_grp_file2(gfile):
 		else:
 			sample_id = f[0]
 			samples.append(sample_id)
-			covar_values = f[1:]
+			row_values = f[1:]
 			
-			for a,b in zip(covar_names, covar_values):
+			for a,b in zip(covar_names, row_values):
 				covars[a][sample_id] = b
-		
+				covar_values[a].append(b)
 		
 	tmp = collections.Counter(samples)
 	if tmp.most_common(1)[0][1] > 1:
 		print ("Sample names are not unique!", file=sys.stderr)
 		sys.exit(0)
+	
+	#tell if a covariable is continuous or categorical
+	covar_types = {}
+	for k,v in covar_values.items():
+		if ( 1.0*len(set(v)) / len(v) ) > cutoff:
+			covar_types[k] = 'continuous'
+		else:
+			covar_types[k] = 'categorical'
 		
-	return(samples, covar_names, covars)
+	return(samples, covar_names, covars, covar_types)
 			
 def stats_over_range(cpg_ranges, chrom, st, end):
 	'''

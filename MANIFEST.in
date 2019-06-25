@@ -5,10 +5,8 @@ include LICENSE.txt
 
 include distribute_setup.py
 recursive-include lib *.pyx
-recursive-include lib *.pxd
 recursive-include lib *.py
-recursive-include scripts *
 recursive-include bin *
 recursive-include doc *
 recursive-include img *
-recursive-include test *
+recursive-include refgene *

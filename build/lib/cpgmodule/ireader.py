@@ -6,7 +6,7 @@ read compressed (.gz .bz) files
 
 import bz2
 import gzip
-import urllib
+from urllib.request import urlopen
 
 def nopen(f, mode="rb"):
 	if not isinstance(f, str):
@@ -18,7 +18,7 @@ def nopen(f, mode="rb"):
 	return {"r": sys.stdin, "w": sys.stdout}[mode[0]] if f == "-" \
 		else gzip.open(f, mode) if f.endswith((".gz", ".Z", ".z")) \
 		else bz2.BZ2File(f, mode) if f.endswith((".bz", ".bz2", ".bzip2")) \
-		else urllib.urlopen(f) if f.startswith(("http://", "https://","ftp://")) \
+		else urlopen(f) if f.startswith(("http://", "https://","ftp://")) \
 		else open(f, mode)
 
  

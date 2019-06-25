@@ -1,23 +1,9 @@
 #!python
 """
-#=========================================================================================
-This program performs differential CpG analysis based on beta values.
- * use Student's t-test for two group comparison.
- * use ANOVA for multiple groups comparison.
- 
-    Notes
-    -----
-    The ANOVA test has important assumptions that must be satisfied in order
-    for the associated p-value to be valid.
-
-    1. The samples are independent.
-    2. Each sample is from a normally distributed population.
-    3. The population standard deviations of the groups are all equal.  This
-       property is known as homoscedasticity.
-
-    If these assumptions are not true for a given set of data, it may still be
-    possible to use the Kruskal-Wallis H-test although with some loss of power. 
-#=========================================================================================
+Description
+-----------
+This program performs differential CpG analysis based on beta values. It uses Student's
+t-test for two group comparison, and ANOVA for multiple groups comparison.
 """
 
 
@@ -36,7 +22,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -88,10 +74,10 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). Except for the 1st row and 1st column, any non-numerical values will be considered as \"missing values\" and ignored. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file define the biological groups of each samples. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs shoud match to the \"Data file\". Note: automatically switch to use ANOVA if more than 2 groups were defined in this file.")
-	parser.add_option("-p","--paired",action="store_true",default=False,dest="paired",help="If '-p/--paired' flag was specified, use paired t-test which requires the equal number of samples in both group. Paired sampels are matched by the order. This option will be ignored for multiple group analysis.")
-	parser.add_option("-w","--welch",action="store_true",default=False,dest="welch_ttest",help="If '-w/--welch' flag was specified, using Welch's t-test which does not assume the two samples have equal variance.  If omited , use standard two sample t-test (i.e. assuming the two samples have equal variance). This option will be ignored for paired t-test and multiple group analysis.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological group of each sample. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs should match to the \"Data file\". Note: automatically switch to use ANOVA if more than 2 groups were defined in this file.")
+	parser.add_option("-p","--paired",action="store_true",default=False,dest="paired",help="If '-p/--paired' flag was specified, use paired t-test which requires the equal number of samples in both groups. Paired sampels are matched by the order. This option will be ignored for multiple group analysis.")
+	parser.add_option("-w","--welch",action="store_true",default=False,dest="welch_ttest",help="If '-w/--welch' flag was specified, using Welch's t-test which does not assume the two samples have equal variance.  If omitted, use standard two-sample t-test (i.e. assuming the two samples have equal variance). This option will be ignored for paired t-test and multiple group analysis.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()
@@ -116,12 +102,15 @@ def main():
 	#ROUT = open(options.out_file + '.r','w')
 	
 	printlog("Read group file \"%s\" ..." % (options.group_file))
-	(s,g) = read_grp_file1(options.group_file)
-	s2g = dict(zip(s,g))
-	g2s = collections.defaultdict(list)
+	(ss,gs) = read_grp_file1(options.group_file)
 	
-	for k,v in s2g.items():
-		g2s[v].append(k)
+	s2g = {}
+	for s,g in zip(ss,gs):
+		s2g[s] = g	
+	
+	g2s = collections.defaultdict(list)
+	for s,g in zip(ss, gs)
+		g2s[g].append(s)
 	
 	group_IDs = sorted(g2s.keys())
 	for g in group_IDs:

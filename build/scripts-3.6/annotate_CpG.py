@@ -1,7 +1,7 @@
 #!python
 """
 #=========================================================================================
-This program annotate CpGs by assigning them to gene's regulatory domains. Follows the 
+This program annotates CpGs by assigning them to target genes. Follows the 
 "Basel plus extension" rules used by GREAT:
 
 Basal regulatory domain:
@@ -33,7 +33,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.7"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -43,11 +43,11 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. BED3+ file could be a regular text file or compressed file (*.gz, *.bz2) or accessible url. [required]")
-	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). It is recommended that multiple transcripts of the same gene are collapsed into a single super transcript with one TSS and one name.")
+	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). \"One gene one transcript\" is recommended. Since most genes have multiple transcripts; one can collapse multiple transcripts of the same gene into a single super transcript or select the canonical transcript.")
 	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
 	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")
 	parser.add_option("-e","--extension",action="store",type="int",dest="extension_size",default=1000000,help="Size of extension to both up- and down-stream of TSS (used to define gene's \"extended regulatory domain\"). default=%default (bp)")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file. Two addtional columns will be appended to the orignal BED file with the last column indicating \"genes whose extended regulatory domain are overlapped with the CpG\", the 2nd last column indicating \"genes whose basal regulatory domain are overlapped with the CpG\". [required]")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file. Two additional columns will be appended to the original BED file with the last column indicating \"genes whose extended regulatory domain are overlapped with the CpG\", the 2nd last column indicating \"genes whose basal regulatory domain are overlapped with the CpG\". [required]")
 	(options,args)=parser.parse_args()
 	
 	print ()
@@ -68,7 +68,10 @@ def main():
 		parser.print_help()
 		sys.exit(103)	
 	
-	FOUT = open(options.out_file + '.annotatio.txt','w')
+	FOUT = open(options.out_file + '.associated_genes.txt','w')
+	print ("#The last column contains genes whose extended regulatory domain are overlapped with the CpG", file=FOUT)
+	print ("#The 2nd last column contains genes whose basal regulatory domain are overlapped with the CpG", file=FOUT)
+	print ("#\"//\" indicates no genes are found", file=FOUT)
 	
 	printlog("Calculate basal regulatory domain from: \"%s\" ..." % (options.gene_file))
 	basal_domains = getBasalDomains(bedfile = options.gene_file, up = options.basal_up_size, down = options.basal_down_size, printit = False)
@@ -76,7 +79,7 @@ def main():
 	printlog("Calculate extended regulatory domain from: \"%s\" ..." % (options.gene_file))
 	extended_domains = geteExtendedDomains(basal_ranges = basal_domains, bedfile = options.gene_file, up = options.basal_up_size, down = options.basal_down_size, ext=options.extension_size, printit = False)
 	
-	overlap = extended_domains['chr1'].find(2161048,2161049)
+	#overlap = extended_domains['chr1'].find(2161048,2161049)
 	
 	printlog("Assigning CpG to gene ...")
 	for l in ireader.reader(options.input_file):

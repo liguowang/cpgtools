@@ -30,7 +30,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.7"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -46,7 +46,7 @@ def main():
 (3) The *order* of BED files is used to determine the *priority* of BED files, and overlapped genomic regions will be kept only in the BED file of the highest priority and removed from BED files of lower priority. For example, if an enhancer region is overlapped with promoters, the *overlapped part* will be removed from \"enhancers.bed\". \
 (4) Each BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd), and the first base in a chromosome is numbered 0. \
 (5) BED files can be regular or compressed by 'gzip' or 'bz'.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

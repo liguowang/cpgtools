@@ -18,7 +18,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.0"
+__version__="0.1.7"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -29,8 +29,8 @@ def main():
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input-files",action="store",type="string",dest="input_files",help="Input CpG file(s) in BED3+ format. Multiple BED files should be separated by \",\" (eg: \"-i file_1.bed,file_2.bed,file_3.bed\"). BED file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url. The barplot figures will NOT be generated if you provide more than 12 samples (bed files). [required]")
 	parser.add_option("-n","--names",action="store",type="string",dest="file_names",help="Shorter and meaningful names to label samples. Should be separated by \",\" and match CpG BED files in number. If not provided, basenames of CpG BED files will be used to label samples. [optional]")
-	parser.add_option("-s","--chrom-size",action="store",type="string",dest="chrom_size",help="Chromosome size file. Tab or space separated text file with 2 columns: first column is chromosome name/ID, second column is chromosome size. This file will determine: (1) which chromosomes are included in the final barplots, so do NOT inlude 'unplaced', 'alternative' contigs in this file. (2) The order of chrosomes in the final barplots.  [required]")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file. [required]")
+	parser.add_option("-s","--chrom-size",action="store",type="string",dest="chrom_size",help="Chromosome size file. Tab or space separated text file with 2 columns: the first column is chromosome name/ID, the second column is chromosome size. This file will determine: (1) which chromosomes are included in the final barplots, so do NOT include 'unplaced', 'alternative' contigs in this file. (2) The order of chromosomes in the final barplots.  [required]")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file. [required]")
 	(options,args)=parser.parse_args()
 	
 	print ()
