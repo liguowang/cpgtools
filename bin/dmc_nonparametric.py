@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program performs differential CpG analysis based on beta values.
- * use Mann-Whitney rank test for two group comparison.
- * use Kruskal-Wallis H-test for multiple groups comparison.
- 
-#=========================================================================================
+Description
+-----------
+This program performs differential CpG analysis based on beta values. It uses Mann-Whitney
+rank test for two group comparison, and the Kruskal-Wallis H-test for multiple groups
+comparison. 
 """
 
 
@@ -24,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"

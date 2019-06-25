@@ -1,21 +1,26 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program annotates CpGs by assigning them to target genes. Follows the 
-"Basel plus extension" rules used by GREAT:
+Description
+-----------
+This program annotates CpGs by assigning them to their putative target genes. Follows the 
+"Basel plus extension" rules used by GREAT(http://great.stanford.edu/public/html/index.php)
+ 
+ * Basal regulatory domain:
+   is a user-defined genomic region around the TSS (transcription start site). By default,
+   from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
+   domain*. When defining a gene's "basal regulatory domain", the other nearby genes will be
+   ignored (which means different genes' basal regulatory domains can be overlapped.)
 
-Basal regulatory domain:
-is a user-defined genomic region around the TSS (transcription start site). By default,
-from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
-domain*. When defining a gene's "basal regulatory domain", the other nearby genes will be
-ignored (which means different genes' basal regulatory domains can be overlapped.)
+ * Extended regulatory domain:
+   The gene regulatory domain is extended in both directions to the nearest gene's "basal 
+   regulatory domain" but no more than the maximum extension (default = 1000 kb) in one
+   direction.
 
-Extended regulatory domain:
-The gene regulatory domain is extended in both directions to the nearest gene's "basal 
-regulatory domain" but no more than the maximum extension (default = 1000 kb) in one
-direction.
-
-(http://great.stanford.edu/public/html/index.php)
+Notes
+-----
+ 1. Which genes are assigned to a particular CpG largely depends on gene annotation. A
+    "conservative" gene model (such as Refseq curated protein coding genes) is recommended. 
+ 2. In the gene model, multiple isoforms should be merged into a single gene.
 #=========================================================================================
 """
 
@@ -33,7 +38,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"

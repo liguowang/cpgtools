@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program calculates the average methylation level (i.e. average beta value) across 
-regions including: 5'UTR exon, CDS exon, 3'UTR exon, first intron, internal intron, last
-intron,  up-stream intergenic and down-stream intergenic.
-#=========================================================================================
+Description
+-----------
+This program calculates the gene-centered methylation profile (i.e. average beta value around
+genes). The genomic regions include:
+"5'UTR exon", "CDS exon", "3'UTR exon", "first intron", "internal intron", "last intron",
+"up-stream intergenic", and "down-stream intergenic".
+
+Example of input BED6+ file
+---------------------------
+chr22   44021512        44021513        cg24055475      0.9231  -
+chr13   111568382       111568383       cg06540715      0.1071  +
+chr20   44033594        44033595        cg21482942      0.6122  -
 """
 
 
@@ -21,7 +28,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"

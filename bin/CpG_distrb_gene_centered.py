@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
+Description
+-----------
 This program counts number of CpGs falling into genomic regions defined by genes (5 groups)
 including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions', and 
 'Downsteam intergenic regions'.
 
+Notes
+-----
 Please note, a particular genomic region can be assigned to different groups listed above,
 because most genes have multiple transcripts, and different genes could overlap on the
 genome. For example, a exon of gene A could be located in a intron of gene B. To address
-this issue, we define the priority order below:
-
-0) Coding exons
-1) UTR exons
-2) Introns
-3) Upstream intergenic regions
-4) Downsteam intergenic regions  
-
+this issue, we define the priority order as  below:
+ 0) Coding exons
+ 1) UTR exons
+ 2) Introns
+ 3) Upstream intergenic regions
+ 4) Downsteam intergenic regions  
 Higher-priority group override the low-priority group. For example, if a certain part 
 of a intron is overlapped with exon of other transcripts/genes, the overlapped part will 
 be considered as exon (i.e. removed from intron) since "exon" has higher priority. 
@@ -37,7 +38,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -46,7 +47,7 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in standard BED-12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of down-stream intergenic region w.r.t. TES (transcription end site). default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of up-stream intergenic region w.r.t. TSS (transcription start site). default=%default (bp)")

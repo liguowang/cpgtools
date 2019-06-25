@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program performs differential CpG analysis using Fisher exact test.
- 
- * Only apply to two sample comparison with no biological/technical replicates
- * if biological/technical replicates are provided, *methyl reads* and *total reads* of all replicates will be sumed
+Description
+-----------
+This program performs differential CpG analysis using Fisher's exact test. It only apply
+to two sample comparison with no replicates. if replicates are provided, *methyl reads*
+and *total reads* of all replicates will be sumed
 
-Input file format:
-
+Example of input data file
+--------------------------
 cgID        sample_1    sample_2
 CpG_1       129,170     166,178
 CpG_2       24,77       67,99 
@@ -15,7 +15,9 @@ CpG_2       24,77       67,99
 number before "," indicates *number of methyl reads*
 number after "," indicates *number of total reads*
 
-3 columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to this table. 
+Output
+-------
+Three columns ("Odds ratio", "pvalue" and "adjusted pvalue") will append to input data table. 
 #=========================================================================================
 """
 
@@ -36,7 +38,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"

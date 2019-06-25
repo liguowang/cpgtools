@@ -1,9 +1,21 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program calculates the overall methylation level (i.e. average beta value) across 
-particular genomic regions (eg. promoters, TF bindings). 
-#=========================================================================================
+Description
+-----------
+This program calculates the "genomic region" centered methylation profile (i.e. average
+beta value around user specified genomic regions).
+
+Example of input BED6+ file
+---------------------------
+chr22   44021512        44021513        cg24055475      0.9231  -
+chr13   111568382       111568383       cg06540715      0.1071  +
+chr20   44033594        44033595        cg21482942      0.6122  -
+
+Example of input BED3+ file
+---------------------------
+chr1    15864   15865
+chr1    18826   18827
+chr1    29406   29407
 """
 
 
@@ -20,7 +32,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -29,8 +41,8 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6 file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED file of genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd). If the 6-th column does not exist, all regions will be considered as on \"+\" strand. ")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand). BED6+ file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED3+ file of genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd). If the 6-th column does not exist, all regions will be considered as on \"+\" strand. ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of extension to downstream. default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of extension to upstream. default=%default (bp)")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")

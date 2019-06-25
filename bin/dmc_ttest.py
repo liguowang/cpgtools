@@ -1,23 +1,9 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program performs differential CpG analysis based on beta values.
- * use Student's t-test for two group comparison.
- * use ANOVA for multiple groups comparison.
- 
-    Notes
-    -----
-    The ANOVA test has important assumptions that must be satisfied in order
-    for the associated p-value to be valid.
-
-    1. The samples are independent.
-    2. Each sample is from a normally distributed population.
-    3. The population standard deviations of the groups are all equal.  This
-       property is known as homoscedasticity.
-
-    If these assumptions are not true for a given set of data, it may still be
-    possible to use the Kruskal-Wallis H-test although with some loss of power. 
-#=========================================================================================
+Description
+-----------
+This program performs differential CpG analysis based on beta values. It uses Student's
+t-test for two group comparison, and ANOVA for multiple groups comparison.
 """
 
 
@@ -36,7 +22,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -116,12 +102,15 @@ def main():
 	#ROUT = open(options.out_file + '.r','w')
 	
 	printlog("Read group file \"%s\" ..." % (options.group_file))
-	(s,g) = read_grp_file1(options.group_file)
-	s2g = dict(zip(s,g))
-	g2s = collections.defaultdict(list)
+	(ss,gs) = read_grp_file1(options.group_file)
 	
-	for k,v in s2g.items():
-		g2s[v].append(k)
+	s2g = {}
+	for s,g in zip(ss,gs):
+		s2g[s] = g	
+	
+	g2s = collections.defaultdict(list)
+	for s,g in zip(ss, gs)
+		g2s[g].append(s)
 	
 	group_IDs = sorted(g2s.keys())
 	for g in group_IDs:

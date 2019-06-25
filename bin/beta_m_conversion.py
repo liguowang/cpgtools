@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
+Description
+-----------
 Convert Beta-value into M-value or vice versa
-#=========================================================================================
+
+Example of input
+-----------------
+CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
+cg_001	0.831035	0.878022	0.794427	0.880911
+cg_002	0.249544	0.209949	0.234294	0.236680
+cg_003	0.845065	0.843957	0.840184	0.824286
 """
 
 
@@ -18,17 +25,17 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
 
 	
 def main():
-	usage="%prog [options]" + "\n"
+	usage="%prog [options]"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",help="Data type either \"Beta\" or \"M\".")
+	parser.add_option("-i","--input",action="store",type="string",dest="input_file",help="Tab separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",help="Input data type either \"Beta\" or \"M\".")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Output file.")
 	(options,args)=parser.parse_args()
 	

@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program counts number of CpGs falling into genomic regions defined by *users*. 
-A maximum of 10 BED files (define 10 different genomic regions) can be analyzed. 
+Description
+-----------
+This program counts number of CpGs falling into genomic regions defined by user. 
 
-Please note:
-The *order* of BED files is important (i.e. considered as "priority order"). Overlapped
-genomic regions will be kept only in the BED file with the highest priority and removed from
-BED files of lower priority.  For example, users provided 3 BED files via 
-"-i promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
-with promoters, *the overlapped part* will be removed from "enhancers.bed".
-
+Notes
+------
+ 1. A maximum of 10 BED files (define 10 different genomic regions) can be analyzed
+    together. 
+ 2. The *order* of BED files is important (i.e. considered as "priority order"). Overlapped
+    genomic regions will be kept in the BED file with the highest priority and removed
+    from BED files of lower priorities.  For example, users provided 3 BED files via  "-i
+    promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
+    with promoters, *the overlapped part* will be removed from "enhancers.bed".
+ 3. BED files can be regular or compressed by 'gzip' or 'bz'.
 #=========================================================================================
 """
 
@@ -30,7 +33,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -39,13 +42,8 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the methylated C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of BED files specifying the genomic regions. Note: \
-(1) This program can only analyze a maximum of 10 BED files. \
-(2) BED files should be separated by comma (eg. \" -i promoters.bed,enhancers.bed,intergenic.bed\"). \
-(3) The *order* of BED files is used to determine the *priority* of BED files, and overlapped genomic regions will be kept only in the BED file of the highest priority and removed from BED files of lower priority. For example, if an enhancer region is overlapped with promoters, the *overlapped part* will be removed from \"enhancers.bed\". \
-(4) Each BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd), and the first base in a chromosome is numbered 0. \
-(5) BED files can be regular or compressed by 'gzip' or 'bz'.")
+	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of BED files specifying the genomic regions.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
 	(options,args)=parser.parse_args()
 	

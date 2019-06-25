@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
+Description
+-----------
 This program uses Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into 
 three status: 
  * Un-methylated (labeled as "0" in result file)
  * Semi-methylated (labeled as "1" in result file)
  * Full-methylated (labeled as "2" in result file)
-#=========================================================================================
+ * unassigned (labeled as "-1" in result file)
 """
 
 
@@ -18,12 +19,13 @@ from sklearn import mixture
 from time import strftime
 from cpgmodule import ireader
 from cpgmodule.utils import *
+import pandas as pd
 
 __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -42,51 +44,35 @@ def load_data(infile):
 	cg09835024		0.0547		0.1187		0.0625	...
 	cg25813447		0.428		0.3746		0.0666	...
 	cg07779434		0.3713		0.4194		0.0493	...
-	...
-	...
-	...
 	"""
-	printlog("Reading " + infile + " ...")
-	line_num = 0
-	beta_values = collections.defaultdict(list)
-	for l in ireader.reader(infile):
-		line_num += 1		
-		if line_num == 1:
-			sample_IDs = l.split()[1:]
-			column_num = len(sample_IDs)
-			continue
-		else:
-			f = l.split()
-			beta_values['probeID'].append(f[0])
-			tmp = list(map(float,f[1:]))
-			
-			if len(tmp) != column_num:
-				print >>sys.stderr, "The number of columns of this row does NOT match with header row's"
-				print >>sys.stderr, l
-				continue
-			for sid, beta in zip(sample_IDs, tmp):
-				beta_values[sid].append(beta)
-	print ("\tTotal samples: %d" % (len(beta_values.keys())-1), file=sys.stderr)
-	print ("\tTotal probes: %d" % (line_num-1), file=sys.stderr)
-	return beta_values
+
+	printlog("Reading input file: \"%s\"" % infile)
+	df1 = pd.read_table(infile, index_col = 0)
+
+	#remove any rows with NAs
+	df2 = df1.dropna(axis=0, how='any')
+	printlog("%d rows with missing values were removed." % (len(df1) - len(df2)))
+        
+	print ("\tTotal samples: %d" % (len(df2.columns)), file=sys.stderr)
+	print ("\tTotal probes: %d" % len(df2), file=sys.stderr)
+	return df2
 
 def build_GMM(d,rnd):
 	"""
 	Return means of components of Gaussian Mixture Model.
-	d is beta value object returned by "load_data" function.
+	d is data frame returned by "load_data" function.
 	rnd is a random number. You get exactly the same results when running multiple times using the same random number. Must be integer. 
 	"""
 	
 	bgmm_models = collections.defaultdict(list)
-	for s_id in sorted(d.keys()):
-		if s_id == 'probeID':continue
-		#if s_id != 'male_100':continue	# test only one sample
+	for s_id in sorted(d.columns):
 		printlog ("Building Bayesian Gaussian Mixture model for subject: %s ...\r" % s_id)
 		bgmm = mixture.BayesianGaussianMixture(n_components=3, covariance_type='full',max_iter=50000,tol=0.001,random_state=rnd)
-		bgmm_models[s_id] = bgmm.fit(np.array(d[s_id]).reshape(-1,1))
-		
+		bgmm_models[s_id] = bgmm.fit(d[s_id].values.reshape(-1,1))
+	#print (bgmm_models)
 	return bgmm_models
-		
+	
+
 def summary_GMM(m):
 	"""
 	Summarize BGMM models returned by "build_GMM"
@@ -126,7 +112,7 @@ def trichotmize(d,m, prob_cutoff = 0.9999):
 	m is BGMM models returned by 'build_GMM' function
 	
 	"""
-	probe_IDs = d['probeID']
+	probe_IDs = list(d.index)
 	
 	for s_id in sorted(m.keys()):
 		printlog ("Writing to \"%s\" ..." % (s_id + ".results.txt"))
@@ -142,12 +128,12 @@ def trichotmize(d,m, prob_cutoff = 0.9999):
 			else:
 				methyl_lables[idx] = '1'	# semi-methyl
 				
-		probs = m[s_id].predict_proba(np.array(d[s_id]).reshape(-1,1))	# list of probabilities of components: [[  4.33638063e-035   9.54842259e-001   4.51577411e-002],...]
+		probs = m[s_id].predict_proba(d[s_id].values.reshape(-1,1))	# list of probabilities of components: [[  4.33638063e-035   9.54842259e-001   4.51577411e-002],...]
 		
 		print ("#Prob_of_0: Probability of CpG belonging to un-methylation group", file=FOUT)
 		print ("#Prob_of_1: Probability of CpG belonging to semi-methylation group", file=FOUT)
 		print ("#Prob_of_2: Probability of CpG belonging to full-methylation group", file=FOUT)
-		print ("#Assigned_lable: -1 = 'unsigned', 0 = 'un-methylation', 1 = 'semi-methylation', 2 = 'full-methylation'", file=FOUT)
+		print ("#Assigned_lable: -1 = 'unassigned', 0 = 'un-methylation', 1 = 'semi-methylation', 2 = 'full-methylation'", file=FOUT)
 		print ("Probe_ID" + '\tBeta_value\t' + '\t'.join(['Prob_of_' + methyl_lables[0], 'Prob_of_' + methyl_lables[1], 'Prob_of_' + methyl_lables[2]]) + '\t' + 'Assigned_lable', file=FOUT)
 		for probe_ID, beta, p in zip(probe_IDs, betas, probs):
 			p_list = list(p)
@@ -166,10 +152,10 @@ def main():
 	print (__doc__)
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).  [required]")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).")
 	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.99,help="Probability cutoff to assign a probe into \"semi-methylated\" class. default=%default")
 	parser.add_option("-r","--report",action="store_true",dest="report_summary",help="Presense of this flag renders program to generate \"summary_report.txt\" file.")
-	parser.add_option("-s","--seed",action="store",type='int', dest="random_state",default=1, help="Random_state is the seed used by the random number generator. You get exactly the same results when running multiple times with the same random_state. default=%default")
+	parser.add_option("-s","--seed",action="store",type='int', dest="random_state",default=99, help="The seed used by the random number generator. default=%default")
 	(options,args)=parser.parse_args()
 	
 	print ()

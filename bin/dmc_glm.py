@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
+Description
+-----------
 This program performs differential CpG analysis using linear regression model based on
 beta values. 
-
-allow for covariables. 
-...
-
-#=========================================================================================
 """
 
 
@@ -26,7 +22,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
-This program generates DNA sequence logo around methylated Cs.
-#=========================================================================================
+Description
+-----------
+This program generates DNA motif logo for a given set of CpGs.
 """
 
 
@@ -21,7 +21,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -30,7 +30,7 @@ def main():
 	print (__doc__)
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the methylated C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, name, score, strand).  Note: Must provide correct *strand* information. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, name, score, strand).  Note: Must provide correct *strand* information. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-r","--refgenome",action="store",type="string",dest="genome_file",help="Reference genome seqeunces in FASTA format.")
 	parser.add_option("-e","--extend",action="store",type="int",dest="extend_size",default=5,help="Number of bases extended to up- and down-stream. default=%default (bp)")
 	parser.add_option("-n","--name",action="store",type='string', dest="motif_name",default='motif', help="Motif name. default=%default")

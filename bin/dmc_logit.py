@@ -1,20 +1,21 @@
 #!/usr/bin/env python
 """
-#=========================================================================================
+Description
+-----------
 This program performs differential CpG analysis using logistic regression model based on
 methylation proportions (in the form of "c,n", where "c" indicates "Number of reads with
 methylated C", and "n" indicates "Number of total reads". Both c and n are  non-negative
-integers and c <= n). Below example showing input data on 2 CpGs of 3 groups (A,B, and C)
+integers and c <= n). 
+
+Example of input data
+---------------------
+Below example showing input data on 2 CpGs of 3 groups (A,B, and C)
 with each group has 3 replicates:
  
 cgID  A_1   A_2   A_3   B_1   B_2   B_3   C_1   C_2   C_3
 CpG_1 129,170 166,178 7,9 1 6,16  10,10 10,15 11,15 16,22 20,36     
 CpG_2 0,77  0,99  0,85  0,77  1,37  3,37  0,42  0,153 0,6
 
-allow for covariables. 
-...
-
-#=========================================================================================
 """
 
 
@@ -34,7 +35,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.6"
+__version__="0.1.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
