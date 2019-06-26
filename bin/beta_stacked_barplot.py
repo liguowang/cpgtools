@@ -3,7 +3,7 @@
 Description
 -----------
 This program creates stacked barplot for each sample. The stacked barplot showing
-proportions of CpGs that have beta values within the range of:
+the proportions of CpGs whose beta values are falling into these 4 ranges:
  * [0.00,  0.25] 	#first quantile
  * [0.25,  0.50]	#second quantile
  * [0.50,  0.75]	#third quantile

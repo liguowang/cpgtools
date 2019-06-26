@@ -2,8 +2,8 @@
 """
 Description
 -----------
-This program calculates the "genomic region" centered methylation profile (i.e. average
-beta value around user specified genomic regions).
+This program calculates methylation profile (i.e. average
+beta value) around user specified genomic regions.
 
 Example of input BED6+ file
 ---------------------------
@@ -14,6 +14,7 @@ chr20   44033594        44033595        cg21482942      0.6122  -
 Example of input BED3+ file
 ---------------------------
 chr1    15864   15865
+
 chr1    18826   18827
 chr1    29406   29407
 """

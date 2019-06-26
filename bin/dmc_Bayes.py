@@ -3,9 +3,13 @@
 #=========================================================================================
 Description
 -----------
-This program estimates the difference in means between two groups and yields a probability
-distribution over the difference. It is similar to John Kruschke's BEST algorithm
-(Bayesian Estimation Supersedes T test) (http://www.indiana.edu/~kruschke/BEST/).
+Different from statistical testing, this program tries to estimates "how different the
+means between the two groups are" using Bayesian approach. An MCMC is used to estimate the
+"means", "difference of means", "95% HDI (highest posterior density interval)", and the
+osterior probability that the HDI does NOT include "0". 
+
+It is similar to John Kruschke's BEST algorithm (Bayesian Estimation Supersedes T test)
+(http://www.indiana.edu/~kruschke/BEST/).
 
 Notes
 -----

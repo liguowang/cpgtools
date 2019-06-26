@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program counts number of CpGs falling into genomic regions defined by user. 
+This program calculates the distribution of CpG over user-specified genomic regions. 
 
 Notes
 ------

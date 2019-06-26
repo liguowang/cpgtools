@@ -2,8 +2,8 @@
 """
 Description
 -----------
-This program gives basic statistics for each genomic region. It adds 6 columns to the input
-BED file:
+This program gives basic information of CpGs located in each genomic region. 
+It adds 6 columns to the input BED file:
  1. Number of CpGs detected in the genomic region
  2. Min methylation level
  3. Max methylation level

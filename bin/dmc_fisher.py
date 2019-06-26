@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program performs differential CpG analysis using Fisher's exact test. It only apply
+This program performs differential CpG analysis using Fisher's exact test. It only applies
 to two sample comparison with no replicates. if replicates are provided, *methyl reads*
 and *total reads* of all replicates will be sumed
 

@@ -2,10 +2,10 @@
 """
 Description
 -----------
-This program calculates the gene-centered methylation profile (i.e. average beta value around
-genes). The genomic regions include:
-"5'UTR exon", "CDS exon", "3'UTR exon", "first intron", "internal intron", "last intron",
-"up-stream intergenic", and "down-stream intergenic".
+This program calculates the methylation profile (i.e. average beta value) for genomic regions 
+around genes. These genomic regions include: "5'UTR exon", "CDS exon", "3'UTR exon",
+"first intron", "internal intron", "last intron", "up-stream intergenic", and
+"down-stream intergenic".
 
 Example of input BED6+ file
 ---------------------------

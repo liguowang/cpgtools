@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program counts number of CpGs falling into genomic regions defined by genes (5 groups)
+This program calculates the distribution of CpG over gene-centered genomic regions
 including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions', and 
 'Downsteam intergenic regions'.
 

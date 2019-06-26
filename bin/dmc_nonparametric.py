@@ -2,8 +2,8 @@
 """
 Description
 -----------
-This program performs differential CpG analysis based on beta values. It uses Mann-Whitney
-rank test for two group comparison, and the Kruskal-Wallis H-test for multiple groups
+This program performs differential CpG analysis uisng the  Mann-Whitney U test
+for two group comparison, and the Kruskal-Wallis H-test for multiple groups
 comparison. 
 """
 

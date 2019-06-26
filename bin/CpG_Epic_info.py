@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program extracts annotation information for Illumina Epic array IDs. 
+This program extracts EpicArray annotation information for 450K/850K array IDs. 
 The first column of input file must contain CpG IDs (such as "cg18478105")
 """
 
