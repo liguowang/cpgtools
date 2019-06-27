@@ -2,8 +2,8 @@
 """
 Description
 -----------
-This program extracts EpicArray annotation information for 450K/850K array IDs. 
-The first column of input file must contain CpG IDs (such as "cg18478105")
+This program add annotation information for each 450K/850K probe ID
+(such as "cg18478105")
 """
 
 import sys,os
@@ -38,10 +38,11 @@ def read_annotation(infile):
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file with the first column containing CpG IDs. This file can be regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Input data file (Tab or space separated) with some column containing 450K/850K array CpG IDs. This file can be regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-a","--annotation",action="store",type="string",dest="anno_file",help="Annotation file downloaded from \"https://github.com/liguowang/cpgtools/blob/master/epic/MethylationEPIC.tsv.gz\".")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
-	parser.add_option("-l", "--header", action="store_true", dest="header", default=False, help="Data file has a header row.")
+	parser.add_option("-p","--probe_column",action="store",type='int', dest="probe_col",default=0, help="The number specifying which column contains probe IDs. Note: the column index starts with 0. default=%default.")
+	parser.add_option("-l", "--header", action="store_true", dest="header", default=False, help="Input data file has a header row.")
 	(options,args)=parser.parse_args()
 	
 	if not (options.input_file):
@@ -65,7 +66,7 @@ def main():
 	if not os.path.isfile(options.anno_file):
 		print ("Input annotation file \"%s\" does not exist\n" % options.input_file) 
 		sys.exit(105)
-			
+	
 	printlog("Read annotation file \"%s\" ..." % (options.anno_file))	
 	(header, data)= read_annotation(options.anno_file)
 	
@@ -76,16 +77,16 @@ def main():
 		line_num += 1
 		f = l.split()
 		if (line_num == 1 and options.header):
-			first_col = f[0]
-			other_cols = f[1:]
-			print (first_col + '\t' + '\t'.join(header) + '\t' + '\t'.join(other_cols), file=OUT)
+			print (l + '\t' +  '\t'.join(header), file=OUT)
 		else:
-			cgid = f[0]
-			other_cols = f[1:]
+			if options.probe_col >= len(f):
+				print ("Error: column ID must be smaller than %d!" % len(f), file=sys.stderr)
+				sys.exit(0)
+			cgid = f[options.probe_col]
 			try:
-				print (cgid + '\t' + data[cgid] + '\t' + '\t'.join(other_cols),file=OUT)
+				print (l + '\t'  + data[cgid],file=OUT)
 			except:
-				print (cgid + '\t' + '\t'.join(['NA']*len(header)) + '\t' + '\t'.join(other_cols),file=OUT)	
+				print (l + '\t' + '\t'.join(['NA']*len(header)), file=OUT)
 	OUT.close()		
 
 if __name__=='__main__':
