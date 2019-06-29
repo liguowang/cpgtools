@@ -47,7 +47,7 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. BED3+ file could be a regular text file or compressed file (*.gz, *.bz2) or accessible url. [required]")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. BED3+ file could be a regular text file or compressed file (.gz, .bz2). [required]")
 	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). \"One gene one transcript\" is recommended. Since most genes have multiple transcripts; one can collapse multiple transcripts of the same gene into a single super transcript or select the canonical transcript.")
 	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
 	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")

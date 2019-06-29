@@ -14,7 +14,6 @@ chr20   44033594        44033595        cg21482942      0.6122  -
 Example of input BED3+ file
 ---------------------------
 chr1    15864   15865
-
 chr1    18826   18827
 chr1    29406   29407
 """
@@ -42,7 +41,7 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand). BED6+ file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand). BED6+ file can be a regular text file or compressed file (.gz, .bz2).")
 	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED3+ file of genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd). If the 6-th column does not exist, all regions will be considered as on \"+\" strand. ")
 	parser.add_option("-d","--downstream",action="store",type="int",dest="downstream_size",default=2000,help="Size of extension to downstream. default=%default (bp)")
 	parser.add_option("-u","--upstream",action="store",type="int",dest="upstream_size",default=2000,help="Size of extension to upstream. default=%default (bp)")

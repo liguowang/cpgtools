@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
 #=========================================================================================
-This program picks the top (according to standard deviation) N rows from the input file.
-Does the following operations. The resulting file can be used for clustering/PCA analysis
+This program picks the top N rows (according to standard deviation) from the input file.
+The resulting file can be used for clustering/PCA analysis
 
 Example of input data file
 ---------------------------
