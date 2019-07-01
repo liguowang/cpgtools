@@ -74,15 +74,16 @@ def main():
 		
 	printlog("Reading input file: \"%s\" ..." % (options.input_file))
 	df1 = pd.read_table(options.input_file, index_col = 0)
-		
+	
+	
 	#remove NA and transpose
 	df2 = df1.dropna(axis=0, how='any')
 	printlog("%d rows with missing values were removed." % (len(df1) - len(df2)))
-	print (df2.head())
+	#print (df2.head())
 	
 	printlog("Transposing data frame ...")
 	df2 = df2.T
-	print (df2.head()) 
+	#print (df2.head()) 
 	
 	printlog("Standarizing values ...")
 	x = df2.values
@@ -90,12 +91,18 @@ def main():
 	
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
-
+	
+	#print(group)
+	
 	pca = PCA(n_components = options.n_components)
 	principalComponents = pca.fit_transform(x)	
 	pca_names = [str(i)+str(j) for i,j in zip(['PC']*options.n_components,range(1,options.n_components+1))]
 	principalDf = pd.DataFrame(data = principalComponents, columns = pca_names, index = df2.index)	
+	
+
+	
 	finalDf = pd.concat([principalDf, group], axis = 1)
+	finalDf.index.name = 'Sample_ID'
 	
 	printlog("Writing PCA results to file: \"%s\" ..." % (options.out_file + '.PCA.tsv'))
 	finalDf.to_csv(options.out_file + '.PCA.tsv', sep="\t")
