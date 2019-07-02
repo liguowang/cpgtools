@@ -74,15 +74,16 @@ def main():
 		
 	printlog("Reading input file: \"%s\" ..." % (options.input_file))
 	df1 = pd.read_table(options.input_file, index_col = 0)
-		
+	
+	
 	#remove NA and transpose
 	df2 = df1.dropna(axis=0, how='any')
 	printlog("%d rows with missing values were removed." % (len(df1) - len(df2)))
-	print (df2.head())
+	#print (df2.head())
 	
 	printlog("Transposing data frame ...")
 	df2 = df2.T
-	print (df2.head()) 
+	#print (df2.head()) 
 	
 	printlog("Standarizing values ...")
 	x = df2.values
@@ -90,12 +91,27 @@ def main():
 	
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
-
+	
+	group_names = group['Group_ID'].unique().tolist()
+	
+	colors = []
+	for i in range(0, len(group['Group_ID'])):
+		colors.append(group_names.index(group['Group_ID'][i]) + 1)
+	group['Colors'] = colors		
+	
+	group_to_col = {}
+	for grp, col in zip(group['Group_ID'], group['Colors']):
+		group_to_col[grp] = col
+	
 	pca = PCA(n_components = options.n_components)
 	principalComponents = pca.fit_transform(x)	
 	pca_names = [str(i)+str(j) for i,j in zip(['PC']*options.n_components,range(1,options.n_components+1))]
 	principalDf = pd.DataFrame(data = principalComponents, columns = pca_names, index = df2.index)	
-	finalDf = pd.concat([principalDf, group], axis = 1)
+	
+
+	
+	finalDf = pd.concat([principalDf, group], axis = 1, sort=True)
+	finalDf.index.name = 'Sample_ID'
 	
 	printlog("Writing PCA results to file: \"%s\" ..." % (options.out_file + '.PCA.tsv'))
 	finalDf.to_csv(options.out_file + '.PCA.tsv', sep="\t")
@@ -107,16 +123,16 @@ def main():
 	
 	
 	ROUT = open(options.out_file + '.PCA.r','w')
-	tmp = group['Group_ID'].values	#array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
-	group_names, counts = np.unique(tmp, return_counts = True)
-	
 	
 	print ('pdf(file=\"%s\", width=8, height=8)' % (options.out_file + '.PCA.pdf'),file=ROUT)
 	print ('')
 	print ('d = read.table(file=\"%s\", sep="\\t", header=TRUE)' % (options.out_file + '.PCA.tsv'), file=ROUT)
 	print ('attach(d)', file=ROUT)
-	print ('plot(PC1, PC2,col=(rep(c(%s), times=c(%s))),pch=20,cex=1.23)' % (','.join([str(i) for i in range(1,len(counts)+1)]) , ','.join([str(i) for i in counts])), file=ROUT)
-	print ('text(PC1,PC2,labels=Sample_ID,col=(rep(c(%s), times=c(%s))), cex=0.7,pos=1)' % (','.join([str(i) for i in range(1,len(counts)+1)]) , ','.join([str(i) for i in counts])),file=ROUT)
+	print ('plot(PC1, PC2, col = Colors, pch=20, cex=1.2)', file=ROUT)
+	print ('text(PC1, PC2, labels=Sample_ID, col = Colors, cex=0.5, pos=1)', file=ROUT)
+	
+	print ('legend("topright", legend=c(%s), col=c(%s), pch=20,cex=1.5)' %  (','.join(['"' + str(i) + '"' for i in group_to_col.keys()]), ','.join(['"' + str(group_to_col[i]) + '"' for i in group_to_col.keys()])), file=ROUT)
+	
 	
 	print ('dev.off()', file=ROUT)
 	ROUT.close()
