@@ -15,6 +15,6 @@ Upgrade CpGtools
  $ pip3 install cpgtools --upgrade	
 
 
-Online manual
+Documentation
 --------------
 https://cpgtools.readthedocs.io/en/latest/
