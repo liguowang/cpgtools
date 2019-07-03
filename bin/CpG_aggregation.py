@@ -113,7 +113,7 @@ def findIntervals(chrom, start, end, obj, a = 0.01):
 	
 	if ori_total_sum == 0:
 		return(['N/A']*6)
-	if ori_methyl_sum == 0:
+	if ori_methyl_sum == 0 or ori_methyl_sum == ori_total_sum:
 		return([ori_CpG_count, ori_methyl_sum, ori_total_sum, ori_CpG_count, ori_methyl_sum, ori_total_sum])
 	
 	
