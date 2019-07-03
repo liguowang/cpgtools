@@ -39,6 +39,9 @@ CpG position analysis modules
 +==============================+===================================================================+
 |CpG_anno_probe.py             |add comprehensive annotation information to each 450K/850K probe   |
 |                              |ID.                                                                |
++==============================+===================================================================+
+|CpG_aggregation.py            |Aggregate proportion values of a list of CpGs that located in give |
+|                              |genomic regions.                                                   |
 +------------------------------+-------------------------------------------------------------------+
 |CpG_distrb_chrom.py           |Calculates the distribution of CpG over chromosomes.               |
 +------------------------------+-------------------------------------------------------------------+
