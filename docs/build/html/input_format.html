@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Input file and data format &mdash; CpGtools documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Pre-compiled datasets" href="dataset.html" />
+    <link rel="prev" title="3. CpGtools Release history" href="change_log.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> CpGtools
+          
+
+          
+            
+            <img src="_static/CpGtools_logo2.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">CpGtools Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release history</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Format</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Input file and data format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bed-file">1.1. BED file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proportion-values">1.2. Proportion values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beta-values">1.3. Beta values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#m-values">1.4. M values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convert-beta-value-to-m-value-or-vice-versa">1.5. Convert Beta value to M value or <em>vice versa</em></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Test and Demo Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">1. Pre-compiled datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Usage Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_aggregation.html">1. CpG_aggregation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">6. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">7. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">8. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">10. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">12. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">14. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">15. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">16. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">17. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">18. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">19. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">20. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">21. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">23. dmc_ttest.py</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CpGtools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Input file and data format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/input_format.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-file-and-data-format">
+<h1>1. Input file and data format<a class="headerlink" href="#input-file-and-data-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bed-file">
+<h2>1.1. BED file<a class="headerlink" href="#bed-file" title="Permalink to this headline">¶</a></h2>
+<p>BED (Browser Extensible Data) format is commonly used to describe blocks of genome. The
+BED format consists of one line per feature, each containing 3-12 columns of data. It is
+0-based (meaning the first base of a chromosome is numbered 0). It is s left-open,
+right-closed. For example, the bed entry “chr1 10 15” contains the 11-th, 12-th, 13-th,
+14-th and 15-th bases of chromosome-1.</p>
+<dl class="simple">
+<dt>BED12 file</dt><dd><p>The standard BED file which has 12 fields. Each row in this file describes a
+gene or an array of disconnected genomic regions. Details are described <a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">here</a></p>
+</dd>
+<dt>BED3 file</dt><dd><p>Only has the first three required fields (chrom, chromStart, chromEnd). Each row is
+used to represent a single genomic region where “score” and “strand” are not important.</p>
+</dd>
+<dt>BED3+ file</dt><dd><p>Has at least three columns (chrom, chromStart, chromEnd). It could have additional
+columns, but these additional columns will be ignored.</p>
+</dd>
+<dt>BED6 file</dt><dd><p>Has the first six fields (chrom, chromStart, chromEnd, name, score, strand). Each row
+is used to represent a single genomic region and their associated scores, or in cases
+where “strand” information is important.</p>
+</dd>
+<dt>BED6+ file</dt><dd><p>Has at least six columns (chrom, chromStart, chromEnd, name, score, stand). It could
+have additional columns, but these additional columns will be ignored.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="proportion-values">
+<h2>1.2. Proportion values<a class="headerlink" href="#proportion-values" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Bisulfite_sequencing">bisulfite sequencing</a>
+(RRBS or WGBS), the methylation level of a particular CpG or
+region can be represented by a “proportion” value. We define the proportion value as a
+pair of integers separated by comma (“,”) with the first integer (m, 0 &lt;- m &lt;- n)
+representing “number of methylated reads” and the second integer (n, n &gt;- 0) representing
+“number of total reads”. for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">27</span>    <span class="mi">2</span><span class="p">,</span><span class="mi">159</span>   <span class="c1">#Three proportions values indicated 3 hypo-methylated loci</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">7</span>    <span class="mi">17</span><span class="p">,</span><span class="mi">19</span>   <span class="mi">30</span><span class="p">,</span><span class="mi">34</span>   <span class="c1">#Three proportions values indicated 3 hyper-methylated loci</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="beta-values">
+<h2>1.3. Beta values<a class="headerlink" href="#beta-values" title="Permalink to this headline">¶</a></h2>
+<p>The Beta-value is a value between 0 and 1, which can be interpreted as the approximation
+of the percentage of methylation for a given CpG or locus. One can convert proportion
+value into beta value, but not vice versa. In equation below, C is the “probe intensity”
+or “read count” of methylated allele, while U is the “probe intensity” or “read count” of
+unmethylated allele.</p>
+<div class="math notranslate nohighlight">
+\[\beta=\frac{C}{U+C}, (0 \leq \beta \leq 1)\]</div>
+</div>
+<div class="section" id="m-values">
+<h2>1.4. M values<a class="headerlink" href="#m-values" title="Permalink to this headline">¶</a></h2>
+<p>The M-value is calculated as the log2 ratio of the probe intensities (or read counts) of
+methylated allele versus unmethylated allele. In equation below, C is the “probe
+intensity” or “read count” of methylated allele, while U is the “probe intensity” or
+“read count” of unmethylated allele. w is the offset or pseudo count added to both
+denominator and numerator to avoid unexpected big changes and performing log
+transformation on zeros.</p>
+<div class="math notranslate nohighlight">
+\[M=\log _{2}\left(\frac{C+w}{U+w}\right)\]</div>
+</div>
+<div class="section" id="convert-beta-value-to-m-value-or-vice-versa">
+<h2>1.5. Convert Beta value to M value or <em>vice versa</em><a class="headerlink" href="#convert-beta-value-to-m-value-or-vice-versa" title="Permalink to this headline">¶</a></h2>
+<p>The relationship between Beta-value and M-value is shown as equation and figure:</p>
+<div class="math notranslate nohighlight">
+\[\beta=\frac{2^{M}}{2^{M}+1} ; M=\log _{2}\left(\frac{\beta}{1-\beta}\right)\]</div>
+<a class="reference internal image-reference" href="_images/beta_vs_M_curve.png"><img alt="_images/beta_vs_M_curve.png" class="align-center" src="_images/beta_vs_M_curve.png" style="width: 320.0px; height: 320.0px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dataset.html" class="btn btn-neutral float-right" title="1. Pre-compiled datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="change_log.html" class="btn btn-neutral float-left" title="3. CpGtools Release history" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Liguo Wang
+      <span class="lastupdated">
+        Last updated on Jun 25, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

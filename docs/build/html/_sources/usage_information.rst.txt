@@ -1,0 +1,1401 @@
+Usage Information
+=================
+
+CpG_anno_probe.py
+-----------------
+
+This program adds comprehensive annotation information to each 450K/850K array probe ID.
+Basically, it will add 17 columns to the orignal input data file. These 17 columns include
+(from left to rigth):
+
++-----------------------+-------------------------------------------------------------------------+
+| Header Name           |Description                                                              |
++-----------------------+-------------------------------------------------------------------------+
+| hg19_pos              |The genomic position of the CpG on human genome assembly `hg19 (or       |
+|                       |GRCh37) <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/>`_      |
++-----------------------+-------------------------------------------------------------------------+
+| hg38_pos              |The genomic position of the CpG on human genome assembly `hg38 (or       |
+|                       |GRCh38) <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/>`_.     |
++-----------------------+-------------------------------------------------------------------------+
+| strand                |Strand of the CpG. Value - "R" (reverse strand) or "F" (forward strand). |
++-----------------------+-------------------------------------------------------------------------+
+| geneSymbol            |Genes the CpG has been assigned to. "N/A" indicates no genes were found. |
+|                       |This is retrieved from the Illumina `MethylationEpic v1.0 B4             |
+|                       |<https://support.illumina.com/downloads/infinium-methylationepic-v1-0-   |
+|                       |product-files.html>`_ manifest file.                                     |
++-----------------------+-------------------------------------------------------------------------+
+| CpGisland             |The CpG island (CGI) that overlaps with this CpG. "N/A" indicates no     |
+|                       |CGIs were found.                                                         |
++-----------------------+-------------------------------------------------------------------------+
+| with_450K             |Boolean indicating whether this CpG probe is also included in 450K.      |
+|                       |"0" - No, "1"- Yes.                                                      |
++-----------------------+-------------------------------------------------------------------------+
+| SNP_ID                |SNPs (rsID) that are close to this CpG. Multiple SNPs are separated      |
+|                       |by ";". "N/A" indicates no SNPs were found.                              |
++-----------------------+-------------------------------------------------------------------------+
+| SNP_distance          |The nucleotide distances between SNPs and the CpG.                       |
++-----------------------+-------------------------------------------------------------------------+
+| SNP_MAF               |The `minor allele frequencies (MAF) <https://en.wikipedia.org/wiki       |
+|                       |/Minor_allele_frequency>`_ of SNPs.                                      |
++-----------------------+-------------------------------------------------------------------------+
+| Cross_Reactive        |Boolean ("0" - No, "1"- Yes) indicating whether this CpG could be        |
+|                       |affected by cross-hybridisation or underlying genetic variation as       |
+|                       |reported by this `paper <https://genomebiology.biomedcentral.com/        |
+|                       |articles/10.1186/s13059-016-1066-1>`_.                                   |
++-----------------------+-------------------------------------------------------------------------+
+| ENCODE_TF_ChIP        |Transcription factor (TF) binding sites identified from ChIP-seq         |
+|                       |experiments performed,by the `ENCODE <https://www.encodeproject.org/>`_  |
+|                       |project. Peaks from 1264 experiments representing 338 transcription      |
+|                       |factors in 130 cell types are combined (N - 10,560,472).                 |
+|                       |BED format file was downloaded from the `UCSC Tabel Browser              |
+|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
+|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
+|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-encRegTfbsClustered>`_.  |
++-----------------------+-------------------------------------------------------------------------+
+| ENCODE_DNaseI         |DNase I hypersensitivity sites identified from ENCODE `DNase-seq         |
+|                       |<https://en.wikipedia.org/wiki/DNase-Seq>`_ experiments. Peaks from      |
+|                       |125 cell types are combined (N - 1,867,665). BED format file was         |
+|                       |downloaded from `UCSC Table Browser                                      |
+|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
+|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
+|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-                         |
+|                       |wgEncodeRegDnaseClustered>`_.                                            |
++-----------------------+-------------------------------------------------------------------------+
+|ENCODE_H3K27ac_ChIP    |H3K27ac peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
+|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 665,650)    | 
++-----------------------+-------------------------------------------------------------------------+
+|ENCODE_H3K4me1_ChIP    |H3K4me1 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
+|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 1,435,550)  | 
++-----------------------+-------------------------------------------------------------------------+
+|ENCODE_H3K4me3_ChIP    |H3K4me3 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
+|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 525,824)    | 
++-----------------------+-------------------------------------------------------------------------+
+|ENCODE_chromHMM        |Chromatin State Segmentation by `chromHMM <https://www.nature.com/       |
+|                       |articles/nmeth.1906>`_ from ENCODE. Chromatin states across 9 cell types |
+|                       |(GM12878,  H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were     |
+|                       |learned by computationally by integrating 9 factors (CTCF, H3K27ac,      |
+|                       |H3K27me3, H3K36me3, H3K4me1, H3K4me2, H3K4me3, H3K9ac, H4K20me1 )        |
+|                       |plus input. A total of 15 states were identified, include: State-1       |
+|                       |(Active Promoter), state-2 (Weak Promoter), state-3 (Inactive/poised     |
+|                       |Promoter), state-4 and 5 (Strong enhancer), state-6 and 7                |
+|                       |(Weak/poised enhancer), state-8 (insulator), state-9 (Transcriptional    |
+|                       |transition), state-10 (Transcriptional elongation), state-11 (Weak       |
+|                       |transcribed), state-12 (Polycomb-repressed), state-13 (Heterochromatin or| 
+|                       |low signal), state-14 and 15 (Repetitive/Copy Number Variation).         |
+|                       |Orignal chromatin state BED file was downloaded from `UCSC Table Browser |
+|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
+|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
+|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-wgEncodeBroadHmm>`_.     |
++-----------------------+-------------------------------------------------------------------------+
+|FANTOM_enhancer        |PHANTOM5 human enhancers downloaded from `here <http://fantom.gsc.riken. |
+|                       |jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_|
+|                       |and_2_expression_tpm_matrix.txt.gz>`_.                                   |
++-----------------------+-------------------------------------------------------------------------+
+
+**Notes**
+
+- For peaks identified from ENCODE ChIP-seq and DNase-seq (ENCODE_TF_ChIP, ENCODE_H3K27ac_ChIP, ENCODE
+  _H3K4me1_ChIP, ENCODE_H3K4me3_ChIP and ENCODE_DNaseI), we require the probe  must be located in the
+  100 bp window centered on the **middle** of the peak.
+
+**Options**
+
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input_file-INPUT_FILE
+                        Input data file (Tab separated) with certain column
+                        containing 450K/850K array CpG IDs. This file can be
+                        regular text file or compressed file (.gz, .bz2).
+  -a ANNO_FILE, --annotation-ANNO_FILE
+                        Annotation file. This file can be regular text file 
+                        or compressed file (.gz, .bz2). 
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+  -p PROBE_COL, --probe_column-PROBE_COL
+                        The number specifying which column contains probe IDs.
+                        Note: the column index starts with 0. default-0.
+  -l, --header          Input data file has a header row.
+ 
+
+
+**Input files**
+
+- `test_01.hg19.bed6 <https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6>`_
+- `MethylationEPIC_CpGtools.tsv.gz <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz>`_
+
+**Command**
+
+::
+ 
+ # probe IDs are located in the 4th column (-p 3)
+ 
+ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv -i test_01.hg19.bed6 -o output
+ 
+ or (take gzipped files as input) 
+ 
+ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.bed6.gz -o output
+
+ @ 2019-06-28 09:12:41: Read annotation file "../epic/MethylationEPIC_CpGtools.tsv" ...
+ @ 2019-06-28 09:12:52: Add annotation information to "test_01.hg19.bed6" ... 
+
+**Output files**
+
+- output.anno.txt
+
+CpG_aggregation.py
+-------------------
+Aggregate proportion values of a list of CpGs that located in give genomic regions
+(eg. CpG islands, promoters, exons, etc).
+
+**Example of input file**
+::
+
+ Chrom	Start	End	score
+ chr1	100017748	100017749	3,10
+ chr1	100017769	100017770	0,10
+ chr1	100017853	100017854	16,21
+
+**Notes**
+
+- Outlier CpG will be removed if the probability of observing its proportion vlaue is less
+  than p-cutoff. For example, if alpha set to 0.05 and there are 10 CpGs (n - 10) located in a
+  particular genomic region, the p-cutoff of this genomic region is 0.005 (0.05/10). Supposing
+  the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e
+  regional methylation level (beta) - 25/100 - 0.25)
+
+  The probability of observing CpG (3,10) is :
+	pbinom(q-3, size-10, prob-0.25) - 0.7759
+  The probability of observing CpG (0,10) is :
+	pbinom(q-0, size-10, prob-0.25) - 0.05631
+  The probability of observing CpG (16,21) is :
+	pbinom(q-16, size-21, prob-0.25, lower.tail-FALSE) - 1.19e-07 (outlier)
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-INPUT_FILE
+                        Input CpG file in BED format. The first 3 columns
+                        contain "Chrom", "Start", and "End". The 4th column
+                        contains proportion values.
+  -a ALPHA_CUT, --alpha-ALPHA_CUT
+                        The chance of mistakingly assign a particular CpG as
+                        an outlier for each genomic region. default-0.05
+  -b BED_FILE, --bed-BED_FILE
+                        BED3+ file specifying the genomic regions.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `test_03_RRBS.bed.gz <https://sourceforge.net/projects/cpgtools/files/test/test_03_RRBS.bed.gz>`_
+- `hg19.RefSeq.union.1Kpromoter.bed.gz <https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz>`_
+
+**Command**
+::
+
+ $CpG_aggregation.py -b hg19.RefSeq.union.1Kpromoter.bed.gz  -i 0_du145_133_glp_sh1.bed -o out
+
+**Output**
+::
+
+ chr1    567292  568293  3       0       93      3       0       93
+ chr1    713567  714568  6       0       100     6       0       100
+ chr1    762401  763402  7       0       110     7       0       110
+ chr1    762470  763471  10      0       158     10      0       158
+ chr1    854571  855572  2       12      16      2       12      16
+ chr1    860620  861621  16      91      232     16      91      232
+ chr1    894178  895179  12      151     229     41      506     735 
+
+Column1-3:
+	Genome coordinates
+Column4-6:
+	numbers of "CpG", "aggregated methyl reads", and "aggregate total reads" **after** 
+	outlier filtering
+Column7-9:
+	numbers of "CpG", "aggregated methyl reads", and "aggregate total reads" **before** 
+	outlier filtering
+
+
+CpG_distrb_chrom.py
+--------------------
+This program calculates the distribution of CpG over chromosomes
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILES, --input-files-INPUT_FILES
+                        Input CpG file(s) in BED3+ format. Multiple BED files
+                        should be separated by "," (eg: "-i
+                        file_1.bed,file_2.bed,file_3.bed"). BED file can be a
+                        regular text file or compressed file (.gz, .bz2). The
+                        barplot figures will NOT be generated if you provide
+                        more than 12 samples (bed files). [required]
+  -n FILE_NAMES, --names-FILE_NAMES
+                        Shorter and meaningful names to label samples. Should
+                        be separated by "," and match CpG BED files in number.
+                        If not provided, basenames of CpG BED files will be
+                        used to label samples. [optional]
+  -s CHROM_SIZE, --chrom-size-CHROM_SIZE
+                        Chromosome size file. Tab or space separated text file
+                        with 2 columns: the first column is chromosome
+                        name/ID, the second column is chromosome size. This
+                        file will determine: (1) which chromosomes are
+                        included in the final barplots, so do NOT include
+                        'unplaced', 'alternative' contigs in this file. (2)
+                        The order of chromosomes in the final barplots.
+                        [required]
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file. [required]                        
+
+**Input files**
+
+- `450K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/450K_probe.hg19.bed3.gz>`_
+- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
+- `hg19.chrom.sizes <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.chrom.sizes>`_
+
+**Command**
+::
+ 
+ $ chrom_distribution.py -i 450K_probe.hg19.bed3.gz,850K_probe.hg19.bed3.gz -n 450K,850K \
+   -s hg19.chrom.sizes -o chromDist
+ 
+**Output files**
+
+- chromDist.txt
+- chromDist.r
+- chromDist.CpG_total.pdf
+- chromDist.CpG_percent.pdf
+- chromDist.CpG_perMb.pdf
+
+Total CpG count per chromsome 
+
+.. image:: _static/chromDist.CpG_total.png
+   :height: 200 px
+   :width: 500 px
+   :scale: 100 %  
+
+CpG percent on each chromosome (normalized to total CpGs)    
+
+.. image:: _static/chromDist.CpG_percent.png
+   :height: 200 px
+   :width: 500 px
+   :scale: 100 %  
+
+CpG per Mb (normalized to chromsome size)   
+ 
+.. image:: _static/chromDist.CpG_perMb.png
+   :height: 200 px
+   :width: 500 px
+   :scale: 100 %  
+
+
+CpG_distrb_gene_centered.py
+----------------------------
+This program calculates the distribution of CpG over gene-centered genomic regions
+including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions', and
+'Downsteam intergenic regions'.
+
+**Notes**
+
+Please note, a particular genomic region can be assigned to different groups listed above,
+because most genes have multiple transcripts, and different genes could overlap on the
+genome. For example, a exon of gene A could be located in a intron of gene B. To address
+this issue, we define the priority order as  below:
+
+1. Coding exons
+2. UTR exons
+3. Introns
+4. Upstream intergenic regions
+5. Downsteam intergenic regions
+
+Higher-priority group override the low-priority group. For example, if a certain part
+of a intron is overlapped with exon of other transcripts/genes, the overlapped part will
+be considered as exon (i.e. removed from intron) since "exon" has higher priority.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED file specifying the C position. This BED file
+                        should have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd).  Note: the first base in a chromosome is
+                        numbered 0. This file can be a regular text file or
+                        compressed file (.gz, .bz2).
+  -r GENE_FILE, --refgene-GENE_FILE
+                        Reference gene model in standard BED-12 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+  -d DOWNSTREAM_SIZE, --downstream-DOWNSTREAM_SIZE
+                        Size of down-stream intergenic region w.r.t. TES
+                        (transcription end site). default-2000 (bp)
+  -u UPSTREAM_SIZE, --upstream-UPSTREAM_SIZE
+                        Size of up-stream intergenic region w.r.t. TSS
+                        (transcription start site). default-2000 (bp)
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
+- `hg19.RefSeq.union.bed.gz <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_                        
+
+**Command**
+
+::
+
+ $ CpG_distrb_gene_centered.py -i 850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o geneDist
+
+**Output files**
+
+- geneDist.tsv
+- geneDist.r
+- geneDist.pdf
+
+.. image:: _static/geneDist.png
+   :height: 400 px
+   :width: 600 px
+   :scale: 100 %  
+
+
+CpG_distrb_region.py
+--------------------
+This program calculates the distribution of CpG over user-specified genomic regions. 
+
+**Notes**
+
+- A maximum of 10 BED files (define 10 different genomic regions) can be analyzed together. 
+- The *order* of BED files is important (i.e. considered as "priority order"). Overlapped
+  genomic regions will be kept in the BED file with the highest priority and removed
+  from BED files of lower priorities.  For example, users provided 3 BED files via  "-i
+  promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
+  with promoters, *the overlapped part* will be removed from "enhancers.bed".
+- BED files can be regular or compressed by 'gzip' or 'bz'.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i CPG_FILE, --cpg-CPG_FILE
+                        BED file specifying the C position. This BED file
+                        should have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd).  Note: the first base in a chromosome is
+                        numbered 0. This file can be a regular text file or
+                        compressed file (.gz, .bz2).
+  -b BED_FILES, --bed-BED_FILES
+                        List of BED files specifying the genomic regions.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_						Input bed file of 850K probe
+- `hg19_CGI.bed4 <https://sourceforge.net/projects/cpgtools/files/test/hg19_CGI.bed4>`_											CpG islands
+- `hg19_H3K4me3.bed4 <https://sourceforge.net/projects/cpgtools/files/test/hg19_H3K4me3.bed>`_									Promoters
+- `hg19_H3K27ac_with_H3K4me1.bed4 <https://sourceforge.net/projects/cpgtools/files/test/hg19_H3K27ac_with_H3K4me1.bed4>`_		Bivalent promoters
+- `hg19_H3K27me3.bed4 <https://sourceforge.net/projects/cpgtools/files/test/hg19_H3K27me3.bed4>`_								Heterochromatin regions
+
+**Command**
+::
+ 
+ # check the distribution of 850K probes in 4 genomic regions (CpG islands, Promoters,
+ # Bivalent promoters, and Heterochromatin regions)
+ 
+ $CpG_distrb_region.py -i 850K_probe.hg19.bed3.gz -b  hg19_H3K4me3.bed4,hg19_CGI.bed4,\
+  hg19_H3K27ac_with_H3K4me1.bed4,hg19_H3K27me3.bed4 -o regionDist
+ 
+
+**Output files**
+
+- regionDist.tsv
+- regionDist.r
+- regionDist.pdf
+
+.. image:: _static/regionDist.png
+   :height: 400 px
+   :width: 600 px
+   :scale: 100 %  
+
+CpG_logo.py
+-----------
+This program generates DNA motif logo for a given set of CpGs. To answer the question of
+"what is the genomic context for a given list of CpGs ?". This program first extract
+genomic sequences around C postion, and then generate `motif matrices <https://en.wikipedia.org/wiki/Position_weight_matrix>`_
+include:
+
+- position frequency matrix (PFM)
+- position probability matrix (PPM)
+- position weight matrix (PWM)
+- `MEME <http://meme-suite.org/doc/meme-format.html>`_ format matrix
+- `Jaspar <http://jaspar.genereg.net/>`_ format matrix
+
+It also generate motif logo using `weblogo <https://github.com/WebLogo/weblogo>`_
+
+**Notes**
+
+- input BED file must has strand information.
+
+**Options**
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, name, score, strand).  Note: Must provide
+                        correct *strand* information. This file can be a
+                        regular text file or compressed file (.gz, .bz2).
+  -r GENOME_FILE, --refgenome-GENOME_FILE
+                        Reference genome seqeunces in FASTA format. Must be
+                        indexed using samtools "faidx" command.
+  -e EXTEND_SIZE, --extend-EXTEND_SIZE
+                        Number of bases extended to up- and down-stream.
+                        default-5 (bp)
+  -n MOTIF_NAME, --name-MOTIF_NAME
+                        Motif name. default-motif
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of output file.
+                        
+**Input files**
+
+- Human reference genome sequences in FASTA format: `hg19.fa.gz 
+  <http://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz>`_ and `hg38.fa.gz
+  <http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz>`_
+- `450_CH.hg19.bed.gz <https://sourceforge.net/projects/cpgtools/files/test/450_CH.hg19.bed.gz>`_                       
+
+**Command**
+::
+
+ $CpG_logo.py -i 450_CH.hg19.bed.gz -r hg19.fa -o 450_CH
+
+**Output files**
+
+- 450_CH.logo.fa
+- 450_CH.logo.jaspar
+- 450_CH.logo.meme
+- 450_CH.logo.pfm
+- 450_CH.logo.ppm
+- 450_CH.logo.pwm
+- 450_CH.logo.logo.pdf
+
+.. image:: _static/450_CH.logo.png
+   :height: 400 px
+   :width: 600 px
+   :scale: 100 %  
+
+CpG_to_gene.py
+---------------
+This program annotates CpGs by assigning them to their putative target genes. Follows the
+"Basal plus extension rules" used by `GREAT <http://great.stanford.edu/public/html/>`_.
+
+Basal regulatory domain is a user-defined genomic region around the TSS (transcription
+start site). By default, from TSS upstream 5 Kb to TSS downstream 1 Kb is considered as
+the gene's basal regulatory domain. When defining a gene's basal regulatory domain, the
+other nearby genes are ignored (which means different genes' basal regulatory domain can
+be overlapped.)
+
+Extended regulatory domain is a genomic region that is further extended from basal
+regulatory domain in both directions to the nearest gene's basal regulatory domain but
+no more than the maximum extension (specified by '-e', default - 1000 kb) in one
+direction.	In other words, the "extension" stops when it reaches other genes' "basal
+regulatory domain" or the extension limit, whichever comes first.
+
+Basal regulatory domain and Extended regulatory domain are illustrated in below diagram
+
+.. image:: _static/gene_domain.png
+   :height: 200 px
+   :width: 600 px
+   :scale: 100 %  
+
+**Noets**
+
+- Which genes are assigned to a particular CpG largely depends on gene annotation. A 
+  "conservative" gene model (such as Refseq curated protein coding genes) is recommended.
+- In the refgene file, multiple isoforms should be merged into a single gene.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED3+ file specifying the C position. BED3+ file could
+                        be a regular text file or compressed file (.gz, .bz2).
+                        [required]
+  -r GENE_FILE, --refgene-GENE_FILE
+                        Reference gene model in BED12 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+                        "One gene one transcript" is recommended. Since most
+                        genes have multiple transcripts; one can collapse
+                        multiple transcripts of the same gene into a single
+                        super transcript or select the canonical transcript.
+  -u BASAL_UP_SIZE, --basal-up-BASAL_UP_SIZE
+                        Size of extension to upstream of TSS (used to define
+                        gene's "basal regulatory domain"). default-5000 (bp)
+  -d BASAL_DOWN_SIZE, --basal-down-BASAL_DOWN_SIZE
+                        Size of extension to downstream of TSS (used to define
+                        gene's basal regulatory domain). default-1000 (bp)
+  -e EXTENSION_SIZE, --extension-EXTENSION_SIZE
+                        Size of extension to both up- and down-stream of TSS
+                        (used to define gene's "extended regulatory domain").
+                        default-1000000 (bp)
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file. Two additional columns will
+                        be appended to the original BED file with the last
+                        column indicating "genes whose extended regulatory
+                        domain are overlapped with the CpG", the 2nd last
+                        column indicating "genes whose basal regulatory domain
+                        are overlapped with the CpG". [required]
+                        
+**Input files**
+
+- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
+- `hg19.RefSeq.union.bed.gz <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_
+                        
+**Command**
+
+::
+
+ $CpG_to_gene.py -i  850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o output
+ 
+**Output files**
+
+- output.associated_genes.txt     
+
+beta_PCA.py
+-----------
+This program performs `PCA (principal component analysis) <https://en.wikipedia.org/wiki/Principal_component_analysis>`_
+for samples.
+
+**Example of input data file**
+::
+
+ ID	Sample_01	Sample_02	Sample_03	Sample_04
+ cg_001	0.831035	0.878022	0.794427	0.880911
+ cg_002	0.249544	0.209949	0.234294	0.236680
+ cg_003	0.845065	0.843957	0.840184	0.824286
+ ...
+ 
+**Example of input group file**
+::
+
+ Sample,Group
+ Sample_01,normal
+ Sample_02,normal
+ Sample_03,tumor
+ Sample_04,tumo
+ ...                         
+
+**Notes**
+
+- Rows with missing values will be removed
+- Beta values will be standardized into z scores
+- Only the first two components will be visualized
+- Variance% explained by each components are printed to screen
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-INPUT_FILE
+                        Tab separated data frame file containing beta values
+                        with the 1st row containing sample IDs and the 1st
+                        column containing CpG IDs.
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Comma separated group file defining the biological
+                        groups of each sample. Different group will be colored
+                        differently in the PCA plot.
+  -n N_COMPONENTS, --ncomponent-N_COMPONENTS
+                        Number of components. default-2
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `cirrHCV_vs_normal.data.tsv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
+- `cirrHCV_vs_normal.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv>`_
+
+**Command**
+::
+
+ $beta_PCA.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o HCV_vs_normal
+
+**Output files**
+
+- HCV_vs_normal.PCA.r
+- HCV_vs_normal.PCA.tsv                          
+- HCV_vs_normal.PCA.pdf
+
+.. image:: _static/HCV_vs_normal.PCA.png
+   :height: 450 px
+   :width: 450 px
+   :scale: 100 %  
+
+beta_jitter_plot.py
+--------------------
+This program generates jitter plot (a.k.a. strip chart) and bean plot for each sample (column)
+
+**Example of input**
+::
+
+ CpG_ID  Sample_01       Sample_02       Sample_03       Sample_04
+ cg_001  0.831035        0.878022        0.794427        0.880911
+ cg_002  0.249544        0.209949        0.234294        0.236680
+ cg_003  0.845065        0.843957        0.840184        0.824286
+
+**Notes**
+
+-  User must install the `beanplot <https://cran.r-project.org/web/packages/beanplot/index.html>`_
+   R library.
+   
+**Options**
+  
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-INPUT_FILE
+                        Tab separated data frame file containing beta values
+                        with the 1st row containing sample IDs and the 1st
+                        column containing CpG IDs.
+  -f FRACTION, --fraction-FRACTION
+                        Fraction of total data points (CpGs) used to generate
+                        jitter plot. Decrease this number if the jitter plot
+                        is over-crowded. default-0.5
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `test_05_TwoGroup.tsv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+
+**Command**
+::
+ 
+ $beta_jitterPlot.py -f 1 -i test_05_TwoGroup.tsv.gz -o Jitter
+
+
+**Output files**
+
+- Jitter.r
+- Jitter.pdf
+
+.. image:: _static/Jitter.png
+   :height: 400 px
+   :width: 650 px
+   :scale: 100 %  
+
+beta_m_conversion.py
+---------------------
+
+Convert Beta-value into M-value or vice vers
+
+**Example of input (beta)**
+
+ CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
+ cg_001	0.831035	0.878022	0.794427	0.880911
+ cg_002	0.249544	0.209949	0.234294	0.236680
+ cg_003	0.845065	0.843957	0.840184	0.824286
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-INPUT_FILE
+                        Tab separated data frame file containing beta values
+                        with the 1st row containing sample IDs and the 1st
+                        column containing CpG IDs. This file can be a regular
+                        text file or compressed file (.gz, .bz2) or
+                        accessible url.
+  -d DATA_TYPE, --dtype-DATA_TYPE
+                        Input data type either "Beta" or "M".
+  -o OUT_FILE, --output-OUT_FILE
+                        Output file.
+                        
+beta_profile_gene_centered.py
+------------------------------
+This program calculates the methylation profile (i.e. average beta value) for genomic regions
+around genes. These genomic regions include: 
+
+- 5'UTR exon
+- CDS exon
+- 3'UTR exon,
+- first intron
+- internal intron
+- last intron
+- up-stream intergenic
+- down-stream intergenic
+
+
+**Example of input (BED6+)**
+
+::
+
+ chr22   44021512        44021513        cg24055475      0.9231  -
+ chr13   111568382       111568383       cg06540715      0.1071  +
+ chr20   44033594        44033595        cg21482942      0.6122  -
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED6+ file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, Name, Beta_value, Strand). BED6+ file can
+                        be a regular text file or compressed file (.gz, .bz2).
+  -r GENE_FILE, --refgene-GENE_FILE
+                        Reference gene model in standard BED12 format
+                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
+                        "Strand" column must exist in order to decide 5' and
+                        3' UTRs, up- and down-stream intergenic regions.
+  -d DOWNSTREAM_SIZE, --downstream-DOWNSTREAM_SIZE
+                        Size of down-stream genomic region added to gene.
+                        default-2000 (bp)
+  -u UPSTREAM_SIZE, --upstream-UPSTREAM_SIZE
+                        Size of up-stream genomic region added to gene.
+                        default-2000 (bp)
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+
+- `test_02.bed6.gz <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
+- `hg19.RefSeq.union.bed.gz <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_  
+
+**Command**
+::
+
+$beta_profile_gene_centered.py -i test_02.bed6.gz  -r hg19.RefSeq.union.bed.gz -o gene_profile
+
+**Output files**
+
+- gene_profile.txt
+- gene_profile.r
+- gene_profile.pdf
+
+.. image:: _static/gene_profile.png
+   :height: 350 px
+   :width: 750 px
+   :scale: 100 %  
+
+beta_profile_region.py
+-----------------------
+This program calculates methylation profile (i.e. average beta value) around user
+specified genomic regions.
+
+**Example of input**
+
+::
+ 
+ # BED6 format (INPUT_FILE)
+ chr22   44021512        44021513        cg24055475      0.9231  -
+ chr13   111568382       111568383       cg06540715      0.1071  +
+ chr20   44033594        44033595        cg21482942      0.6122  -
+ 
+ # BED3 format (REGION_FILE)
+ chr1    15864   15865
+ chr1    18826   18827
+ chr1    29406   29407
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED6+ file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, Name, Beta_value, Strand). BED6+ file can
+                        be a regular text file or compressed file (.gz, .bz2).
+  -r REGION_FILE, --region-REGION_FILE
+                        BED3+ file of genomic regions. This BED file should
+                        have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd). If the 6-th column does not exist, all
+                        regions will be considered as on "+" strand.
+  -d DOWNSTREAM_SIZE, --downstream-DOWNSTREAM_SIZE
+                        Size of extension to downstream. default-2000 (bp)
+  -u UPSTREAM_SIZE, --upstream-UPSTREAM_SIZE
+                        Size of extension to upstream. default-2000 (bp)
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+
+**Input files**
+- `test_02.bed6.gz <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
+- `hg19.RefSeq.union.1Kpromoter.bed <https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download>`_
+
+
+**Command**
+::
+
+ $beta_profile_region.py -r hg19.RefSeq.union.1Kpromoter.bed.gz -i test_02.bed6.gz -o region_profile
+
+**Output files**
+
+- region_profile.txt
+- region_profile.r
+- region_profile.pdf
+
+.. image:: _static/region_profile.png
+   :height: 400 px
+   :width: 500 px
+   :scale: 100 %  
+
+beta_stacked_barplot.py
+------------------------
+This program creates stacked barplot for each sample. The stacked barplot showing
+the proportions of CpGs whose beta values are falling into these 4 ranges:
+1. [0.00,  0.25]        #first quantile
+2. [0.25,  0.50]        #second quantile
+3. [0.50,  0.75]        #third quantile
+4. [0.75,  1.00]        #forth quantile
+
+**Example of input file**
+
+::
+
+ CpG_ID  Sample_01       Sample_02       Sample_03       Sample_04
+ cg_001  0.831035        0.878022        0.794427        0.880911
+ cg_002  0.249544        0.209949        0.234294        0.236680
+
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data frame file containing beta values with the 1st
+                        row containing sample IDs and the 1st column
+                        containing CpG IDs.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `cirrHCV_vs_normal.data.tsv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
+                        
+**Command**
+::
+
+ $beta_stacked_barplot.py -i cirrHCV_vs_normal.data.tsv -o stacked_bar
+ 
+**Output files**
+
+- stacked_bar.r
+- stacked_bar.pdf
+
+ 
+.. image:: _static/stacked_bar.png
+   :height: 600 px
+   :width: 650 px
+   :scale: 100 %  
+
+
+beta_stats.py
+--------------
+This program gives basic information of CpGs located in each genomic region. It adds 6
+columns to the input BED file:
+
+1. Number of CpGs detected in the genomic region
+2. Min methylation level
+3. Max methylation level
+4. Average methylation level across all CpGs
+5. Median methylation level across all CpGs
+6. Standard deviation
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        BED6+ file specifying the C position. This BED file
+                        should have at least 6 columns (Chrom, ChromStart,
+                        ChromeEnd, Name, Beta_value, Strand).  Note: the first
+                        base in a chromosome is numbered 0. This file can be a
+                        regular text file or compressed file (.gz, .bz2)
+  -r REGION_FILE, --region-REGION_FILE
+                        BED3+ file of genomic regions. This BED file should
+                        have at least 3 columns (Chrom, ChromStart,
+                        ChromeEnd).
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+ 
+                        
+
+**Input files**
+
+- `test_02.bed6.gz <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
+- `hg19.RefSeq.union.1Kpromoter.bed <https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download>`_
+
+
+**Command**
+::
+
+ $beta_stats.py -r hg19.RefSeq.union.1Kpromoter.bed.gz -i test_02.bed6.gz -o region_stats
+
+**Output files**
+
+- region_stats.txt
+
+
+beta_topN.py
+-------------
+This program picks the top N rows (according to standard deviation) from the input file.
+The resulting file can be used for clustering/PCA analysis
+
+**Example of input**
+
+ CpG_ID  Sample_01       Sample_02       Sample_03       Sample_04
+ cg_001  0.831035        0.878022        0.794427        0.880911
+ cg_002  0.249544        0.209949        0.234294        0.236680
+ cg_003  0.845065        0.843957        0.840184        0.824286
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Tab separated data frame file containing beta values
+                        with the 1st row containing sample IDs and the 1st
+                        column containing CpG IDs.
+  -c CPG_COUNT, --count-CPG_COUNT
+                        Number of most variable CpGs (ranked by standard
+                        deviation) to keep. default-1000
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+
+**Command**
+::
+
+ $beta_topN.py -i test_05_TwoGroup.tsv.gz -c 500 -o test_05_TwoGroup
+
+**Output file**
+
+- test_05_TwoGroup.sortedStdev.tsv
+- test_05_TwoGroup.sortedStdev.topN.tsv
+
+beta_trichotmize.py
+--------------------
+Rather than using hard threshold to call "methylated" or "unmethylated" CpGs or regions, 
+this program uses probability approach (Bayesian Gaussian Mixture model) to trichotmize
+beta values into three status:
+
+- Un-methylated (labeled as "0" in result file)
+- Semi-methylated (labeled as "1" in result file)
+- Full-methylated (labeled as "2" in result file)
+- unassigned (labeled as "-1" in result file)
+
+Basically, GMM will first calculate probability *p0*, *p1*, and *p2* for each CpG based
+on its beta value:
+
+*p0*
+	the probability that the CpG is un-methylated
+*p1*
+	the probability that the CpG is semi-methylated
+*p2*
+	the probability that the CpG is full-methylated
+
+The classification will be made using rules:
+
+::
+
+ if p0 -- max(p0, p1, p2):
+ 	un-methylated
+ elif p2 -- max(p0, p1, p2):
+ 	full-methylated
+ elif p1 -- max(p0, p1, p2):
+ 	if p1 >- prob_cutoff:
+ 		semi-methylated
+ 	else:
+ 	 	unknown/unassigned
+
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+
+**Command**
+::
+
+ $beta_trichotmize.py -i test_05_TwoGroup.tsv -r
+
+Below histogram and piechart showed the proportion of CpGs assigned to "Un-methylated", "Semi-methylated" and "Full-methylated". 
+
+.. image:: _static/trichotmize.png
+   :height: 650 px
+   :width: 650 px
+   :scale: 100 %  
+
+dmc_ttest.py
+-------------
+Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_
+for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
+for multiple groups comparison.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing beta values with the 1st row
+                        containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). Except for the 1st row and 1st column, any
+                        non-numerical values will be considered as "missing
+                        values" and ignored. This file can be a regular text
+                        file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological group of each
+                        sample. It is a comma-separated 2 columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs.  It must have a header
+                        row. Sample IDs should match to the "Data file". Note:
+                        automatically switch to use ANOVA if more than 2
+                        groups were defined in this file.
+  -p, --paired          If '-p/--paired' flag was specified, use paired t-test
+                        which requires the equal number of samples in both
+                        groups. Paired sampels are matched by the order. This
+                        option will be ignored for multiple group analysis.
+  -w, --welch           If '-w/--welch' flag was specified, using Welch's
+                        t-test which does not assume the two samples have
+                        equal variance.  If omitted, use standard two-sample
+                        t-test (i.e. assuming the two samples have equal
+                        variance). This option will be ignored for paired
+                        t-test and multiple group analysis.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+                        
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+- `test_06_ThreeGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz>`_
+- `test_06_ThreeGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv>`_
+
+**Command**
+::
+ 
+ #Two group comparison. Compare normal livers to HCV-related cirrhosis livers 
+ $dmc_ttest.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o ttest_2G
+ 
+ #Three group comparison. Compare normal livers, HCV-related cirrhosis livers, and liver cancers 
+ $dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv -o ttest_3G
+ 
+**Output files**
+
+- ttest_2G.pval.txt
+- ttest_3G.pval.txt
+
+dmc_glm.py
+-----------
+This program performs differential CpG analysis using `generalized liner model 
+<https://en.wikipedia.org/wiki/Generalized_linear_model>`_. It allows
+for covariants analysis.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing beta values with the 1st row
+                        containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). This file can be regular text file or
+                        compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological groups of each
+                        sample as well as other covariables such as gender,
+                        age. The first varialbe is grouping variable (must be
+                        categorical), all the other variables are considered
+                        as covariates (can be categorial or continuous).
+                        Sample IDs shoud match to the "Data file".
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+- `test_05_TwoGroup.grp2.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp2.csv>`_
+                        
+**Command**
+::
+
+ $dmc_glm.py  -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o GLM_2G
+ 
+ $dmc_glm.py  -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp2.csv -o GLM_2G
+ 
+**Outpu files**
+
+- GLM_2G.results.txt
+- GLM_2G.r
+- GLM_2G.pval.txt (final results)
+
+
+dmc_nonparametric.py
+---------------------
+This program performs differential CpG analysis uisng the  `Mann-Whitney U test <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html>`_
+for two group comparison, and the `Kruskal-Wallis H-test <https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance>`_
+for multiple groups comparison.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing beta values with the 1st row
+                        containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). Except for the 1st row and 1st column, any
+                        non-numerical values will be considered as "missing
+                        values" and ignored. This file can be a regular text
+                        file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological group of each
+                        sample. It is a comma-separated 2 columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs. It must have a header
+                        row. Sample IDs should match to the "Data file". Note:
+                        automatically switch to use  Kruskal-Wallis H-test if
+                        more than 2 groups were defined in this file.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+                        
+
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+- `test_06_ThreeGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz>`_
+- `test_06_ThreeGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv>`_
+
+**Command**
+::
+ 
+ $dmc_nonparametric.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o U_test
+ 
+ $dmc_nonparametric.py -i test_06_TwoGroup.tsv.gz -g test_06_TwoGroup.grp.csv -o H_test
+
+
+dmc_Bayes.py
+-------------
+
+Different from statistical testing, this program tries to estimates "how different the
+means between the two groups are" using Bayesian approach. An `MCMC <https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo>`_
+is used to estimate the "means", "difference of means", "95% HDI (highest posterior density interval)",
+and the posterior probability that the HDI does NOT include "0".
+
+It is similar to John Kruschke's `BEST algorithm <http://www.indiana.edu/~kruschke/BEST/>`_
+(Bayesian Estimation Supersedes T test)
+
+**Notes**
+
+- This program is much slower than T test due to MCMC (Markov chain Monte Carlo) step. 
+  Running it with multiple threads is highly recommended.
+
+
+**Options**
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing beta values with the 1st row
+                        containing sample IDs (must be unique) and the 1st
+                        column containing CpG positions or probe IDs (must be
+                        unique). Except for the 1st row and 1st column, any
+                        non-numerical values will be considered as "missing
+                        values" and ignored. This file can be a regular text
+                        file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological group of each
+                        sample. It is a comma-separated 2 columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs.  It must have a header
+                        row. Sample IDs should match to the "Data file". Note:
+                        Only for two group comparison.
+  -n N_ITER, --niter-N_ITER
+                        Iteration times when using MCMC Metropolis-Hastings's
+                        agorithm to draw samples from the posterior
+                        distribution. default-5000
+  -b N_BURN, --burnin-N_BURN
+                        Number of samples to discard. Thes initial samples are
+                        usually not completely valid because the Markov Chain
+                        has not stabilized to the stationary distributio.
+                        default-500.
+  -p N_PROCESS, --processor-N_PROCESS
+                        Number of processes. default-1
+  -s SEED, --seed-SEED  The seed used by the random number generator.
+                        default-99
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+
+**Command**
+::
+
+ $  dmc_Bayes.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv.gz -p 10 -o dmc_output                        
+
+**Output files**
+
+- **dmc_output.bayes.tsv**: this file consists of 6 columns:
+ 
+ 1. ID : CpG ID
+ 2. *mu1* : Mean methylation level estimated from group1
+ 3. *mu2* : Mean methylation level estimated from gropu2
+ 4. *mu_diff* : Difference between mu1 and mu2
+ 5. *mu_diff* (95% HDI) : 95% of "High Density Interval" of *mu_diff*. The HDI indicates which
+    points of a distribution are most credible. This interval spans 95% of *mu_diff*'s
+    distribution. 
+ 6. The probability that *mu1* and *mu2* are different. 
+    
+::
+
+ $head -10 dmc_output.bayes.tsv
+ 
+ ID	mu1	mu2	mu_diff	mu_diff (95% HDI)	Probability
+ cg00001099	0.775209	0.795404	-0.020196	(-0.065148,0.023974)	0.811024
+ cg00000363	0.610565	0.469523	0.141042	(0.030769,0.232965)	0.994665
+ cg00000884	0.845973	0.873761	-0.027787	(-0.051976,-0.004398)	0.984882
+ cg00000714	0.190868	0.199233	-0.008365	(-0.030071,0.014006)	0.816141
+ cg00000957	0.772905	0.827528	-0.054623	(-0.092116,-0.016465)	0.995327
+ cg00000292	0.748394	0.766326	-0.017932	(-0.051286,0.012583)	0.889729
+ cg00000807	0.729162	0.683732	0.045430	(-0.001523,0.086588)	0.981551
+ cg00000721	0.935903	0.935080	0.000823	(-0.013210,0.018628)	0.508686
+ cg00000948	0.898609	0.897536	0.001073	(-0.020663,0.026813)	0.518238
+
+
+dmc_fisher.py
+---------------
+This program performs differential CpG analysis using Fisher exact test on proportion value.
+It applies to two sample comparison with no biological/technical replicates. If biological/
+technical replicates are provided, methyl reads and total reads of all replicates will be
+merged (i.e. ignores biological/technical variations)
+
+**Input file format**
+::
+
+ # number before "," indicates number of methyl reads, and number after "," indicates
+ # number of total reads
+ cgID        sample_1    sample_2
+ CpG_1       129,170     166,178
+ CpG_2       24,77       67,99
+
+**Options**
+
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological group of each
+                        sample. It is a comma-separated two columns file with
+                        the 1st column containing sample IDs, and the 2nd
+                        column containing group IDs.  It must have a header
+                        row. Sample IDs should match to the "Data file".
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+                        
+
+**Output**
+
+- 3 columns ("Odds ratio", "pvalue" and "FDR adjusted pvalue") will append to the original
+  table.
+
+dmc_logit.py
+-------------
+This program performs differential CpG analysis using `logistic regression model <https://en.wikipedia.org/wiki/Logistic_regression>`_
+based on proportion values. It allows for covariable analysis. Users can choose to use
+"binomial" or "quasibinomial" family to model the data. The quasibinomial family estimates 
+an addition parameter indicating the amount of the oversidpersion.
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological groups of each
+                        sample as well as other covariables such as gender,
+                        age. The first varialbe is grouping variable (must be
+                        categorical), all the other variables are considered
+                        as covariates (can be categorial or continuous).
+                        Sample IDs shoud match to the "Data file".
+  -f FAMILY_FUNC, --family-FAMILY_FUNC
+                        Error distribution and link function to be used in the
+                        GLM model. Can be integer 1 or 2 with 1 -
+                        "quasibinomial" and 2 - "binomial". Default-1.
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+
+**Input files**
+
+- `test_04_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.tsv.gz>`_
+- `test_04_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.grp.csv>`_
+
+**Command**
+::
+
+ $ dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -o output_quasibin
+ $ dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -f 2  -o output_bin
+
+
+
+dmc_bb.py
+------------
+This program performs differential CpG analysis using "beta binomial" model on proportion
+values. It allows for covariant analysis. 
+
+**Notes**
+- You must install R package `aod <https://cran.r-project.org/web/packages/aod/index.html>`_ before running this program.
+
+
+**Options**
+
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file-INPUT_FILE
+                        Data file containing methylation proportions
+                        (represented by "methyl_count,total_count", eg.
+                        "20,30") with the 1st row containing sample IDs (must
+                        be unique) and the 1st column containing CpG positions
+                        or probe IDs (must be unique). This file can be a
+                        regular text file or compressed file (.gz, .bz2).
+  -g GROUP_FILE, --group-GROUP_FILE
+                        Group file defining the biological groups of each
+                        sample as well as other covariables such as gender,
+                        age. The first varialbe is grouping variable (must be
+                        categorical), all the other variables are considered
+                        as covariates (can be categorial or continuous).
+                        Sample IDs shoud match to the "Data file"..
+  -o OUT_FILE, --output-OUT_FILE
+                        Prefix of the output file.
+                         
+**Input files**
+
+- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+
+
+**Command**
+::
+
+ $ python3 ../bin/dmc_bb.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -o OUT_bb                       
+
