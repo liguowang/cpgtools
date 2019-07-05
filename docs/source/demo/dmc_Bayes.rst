@@ -41,14 +41,14 @@ Options
   -n N_ITER, --niter-N_ITER
                         Iteration times when using MCMC Metropolis-Hastings's
                         agorithm to draw samples from the posterior
-                        distribution. default-5000
+                        distribution. default=5000
   -b N_BURN, --burnin-N_BURN
                         Number of samples to discard. Thes initial samples are
                         usually not completely valid because the Markov Chain
                         has not stabilized to the stationary distributio.
                         default-500.
   -p N_PROCESS, --processor-N_PROCESS
-                        Number of processes. default-1
+                        Number of processes. default=1
   -s SEED, --seed-SEED  The seed used by the random number generator.
                         default-99
   -o OUT_FILE, --output-OUT_FILE

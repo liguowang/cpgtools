@@ -7,31 +7,45 @@ Rather than using hard threshold to call "methylated" or "unmethylated" CpGs or 
 this program uses probability approach (Bayesian Gaussian Mixture model) to trichotmize
 beta values into three status:
 
-- Un-methylated (labeled as "0" in result file)
-- Semi-methylated (labeled as "1" in result file)
-- Full-methylated (labeled as "2" in result file)
-- unassigned (labeled as "-1" in result file)
+Un-methylated : labeled as "0" in result file
+	Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are unmethylated. 
+Semi-methylated : labeled as "1" in result file
+	Only one of the homologous chromosomes is methylated. This is also called allele-specific
+	methylation or "imprinting". Note: this is different from **hemimethylation**, which refers
+	to "one of two (complementary) strands is methylated".  
+Full-methylated : labeled as "2" in result file
+	Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are methylated. 
+unassigned : labeled as "-1" in result file
+	CpGs failed to assigned to the three categories above.
+	
+Algorithm
+---------
+As described above, in somatic cells, most CpGs can be grouped into 3 categories including
+"Un-methylated", "Semi-methylated (imprinted)" and "Full-methylated". Therefore, the
+Beta distribution of CpGs can be considered as the mixture of 3 Gaussian distributions
+(i.e. components). **beta_trichotmize.py** first estimates the parameters (mu1, mu2, mu3)
+and (s1, s2, s3) of the 3 components using expectation–maximization (EM) algorithm, then it 
+calculates the posterior probabilities ( *p0*, *p1*, and *p2*) of each component given
+the beta value of a CpG. 
 
-Basically, GMM will first calculate probability *p0*, *p1*, and *p2* for each CpG based
-on its beta value:
 
 *p0*
-	the probability that the CpG is un-methylated
+	the probability that the CpG belongs to **un-methylated** component. 
 *p1*
-	the probability that the CpG is semi-methylated
+	the probability that the CpG belongs to **semi-methylated**  component. 
 *p2*
-	the probability that the CpG is full-methylated
+	the probability that the CpG belongs to **full-methylated** component. 
 
 The classification will be made using rules:
 
 ::
 
- if p0 -- max(p0, p1, p2):
+ if p0 == max(p0, p1, p2):
  	un-methylated
- elif p2 -- max(p0, p1, p2):
+ elif p2 == max(p0, p1, p2):
  	full-methylated
- elif p1 -- max(p0, p1, p2):
- 	if p1 >- prob_cutoff:
+ elif p1 == max(p0, p1, p2):
+ 	if p1 >= prob_cutoff:
  		semi-methylated
  	else:
  	 	unknown/unassigned
