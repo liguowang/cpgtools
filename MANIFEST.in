@@ -8,5 +8,3 @@ recursive-include lib *.pyx
 recursive-include lib *.py
 recursive-include bin *
 recursive-include doc *
-recursive-include img *
-recursive-include refgene *
