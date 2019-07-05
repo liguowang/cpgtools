@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -90,17 +91,17 @@
             
               <p class="caption"><span class="caption-text">CpGtools Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">Input file and data format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input file and data format</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../dataset.html">Pre-compiled datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
@@ -121,8 +122,10 @@
 <li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">16. beta_trichotmize.py</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#description">16.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">16.2. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">16.3. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">16.2. Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">16.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">16.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">16.5. Output files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
@@ -135,7 +138,8 @@
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
@@ -210,29 +214,43 @@
 <p>Rather than using hard threshold to call “methylated” or “unmethylated” CpGs or regions,
 this program uses probability approach (Bayesian Gaussian Mixture model) to trichotmize
 beta values into three status:</p>
-<ul class="simple">
-<li><p>Un-methylated (labeled as “0” in result file)</p></li>
-<li><p>Semi-methylated (labeled as “1” in result file)</p></li>
-<li><p>Full-methylated (labeled as “2” in result file)</p></li>
-<li><p>unassigned (labeled as “-1” in result file)</p></li>
-</ul>
-<p>Basically, GMM will first calculate probability <em>p0</em>, <em>p1</em>, and <em>p2</em> for each CpG based
-on its beta value:</p>
 <dl class="simple">
-<dt><em>p0</em></dt><dd><p>the probability that the CpG is un-methylated</p>
+<dt>Un-methylated<span class="classifier">labeled as “0” in result file</span></dt><dd><p>Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are unmethylated.</p>
 </dd>
-<dt><em>p1</em></dt><dd><p>the probability that the CpG is semi-methylated</p>
+<dt>Semi-methylated<span class="classifier">labeled as “1” in result file</span></dt><dd><p>Only one of the homologous chromosomes is methylated. This is also called allele-specific
+methylation or “imprinting”. Note: this is different from <strong>hemimethylation</strong>, which refers
+to “one of two (complementary) strands is methylated”.</p>
 </dd>
-<dt><em>p2</em></dt><dd><p>the probability that the CpG is full-methylated</p>
+<dt>Full-methylated<span class="classifier">labeled as “2” in result file</span></dt><dd><p>Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are methylated.</p>
+</dd>
+<dt>unassigned<span class="classifier">labeled as “-1” in result file</span></dt><dd><p>CpGs failed to assigned to the three categories above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="algorithm">
+<h2>16.2. Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<p>As described above, in somatic cells, most CpGs can be grouped into 3 categories including
+“Un-methylated”, “Semi-methylated (imprinted)” and “Full-methylated”. Therefore, the
+Beta distribution of CpGs can be considered as the mixture of 3 Gaussian distributions
+(i.e. components). <strong>beta_trichotmize.py</strong> first estimates the parameters (mu1, mu2, mu3)
+and (s1, s2, s3) of the 3 components using expectation–maximization (EM) algorithm, then it
+calculates the posterior probabilities ( <em>p0</em>, <em>p1</em>, and <em>p2</em>) of each component given
+the beta value of a CpG.</p>
+<dl class="simple">
+<dt><em>p0</em></dt><dd><p>the probability that the CpG belongs to <strong>un-methylated</strong> component.</p>
+</dd>
+<dt><em>p1</em></dt><dd><p>the probability that the CpG belongs to <strong>semi-methylated</strong>  component.</p>
+</dd>
+<dt><em>p2</em></dt><dd><p>the probability that the CpG belongs to <strong>full-methylated</strong> component.</p>
 </dd>
 </dl>
 <p>The classification will be made using rules:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">p0</span> <span class="o">--</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">p0</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
        <span class="n">un</span><span class="o">-</span><span class="n">methylated</span>
-<span class="k">elif</span> <span class="n">p2</span> <span class="o">--</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+<span class="k">elif</span> <span class="n">p2</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
        <span class="n">full</span><span class="o">-</span><span class="n">methylated</span>
-<span class="k">elif</span> <span class="n">p1</span> <span class="o">--</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
-       <span class="k">if</span> <span class="n">p1</span> <span class="o">&gt;-</span> <span class="n">prob_cutoff</span><span class="p">:</span>
+<span class="k">elif</span> <span class="n">p1</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+       <span class="k">if</span> <span class="n">p1</span> <span class="o">&gt;=</span> <span class="n">prob_cutoff</span><span class="p">:</span>
                <span class="n">semi</span><span class="o">-</span><span class="n">methylated</span>
        <span class="k">else</span><span class="p">:</span>
                <span class="n">unknown</span><span class="o">/</span><span class="n">unassigned</span>
@@ -240,14 +258,59 @@ on its beta value:</p>
 </div>
 </div>
 <div class="section" id="input-files-examples">
-<h2>16.2. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>16.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>16.3. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>16.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_trichotmize.py -i test_05_TwoGroup.tsv -r
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>16.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>.results.txt for each sample</p></li>
+<li><p>summary_report.txt</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ head CirrHCV_01.results.txt
+
+#Prob_of_0: Probability of CpG belonging to un-methylation group
+#Prob_of_1: Probability of CpG belonging to semi-methylation group
+#Prob_of_2: Probability of CpG belonging to full-methylation group
+#Assigned_lable: -1 = &#39;unassigned&#39;, 0 = &#39;un-methylation&#39;, 1 = &#39;semi-methylation&#39;, 2 = &#39;full-methylation&#39;
+Probe_ID       Beta_value      Prob_of_1       Prob_of_0       Prob_of_2       Assigned_lable
+cg00000109     0.8776539440000001      0.05562534330044164     3.673659573888142e-93   0.9443746566995583      2
+cg00000165     0.239308082     0.999222373166152       0.0007776268338481155   1.3380168478281785e-21  1
+cg00000236     0.8951333909999999      0.052142920095512614    3.5462722261710256e-97  0.9478570799044873      2
+cg00000292     0.783661275     0.22215555206863843     1.46921724055509e-72    0.7778444479313614      2
+cg00000321     0.319783971     0.9999999909047641      9.09523558157906e-09    1.4703488768311725e-16  1
+
+$ cat summary_report.txt
+
+#means of components
+Subject_ID     Unmethyl        SemiMethyl      Methyl
+CirrHCV_01     0.0705891104729628      0.4949428535816466      0.8694861885234295
+CirrHCV_02     0.06775600800214297     0.5018649959502874      0.8731195740516192
+CirrHCV_03     0.07063205540113326     0.49795240946021674     0.8730234341971185
+...
+
+#Weights of components
+
+Subject_ID     Unmethyl        SemiMethyl      Methyl
+CirrHCV_01     0.27231055290074735     0.35186129618859385     0.3758281509106588
+CirrHCV_02     0.2623073658620772      0.36736674559925425     0.37032588853866855
+CirrHCV_03     0.2659211619015646      0.3563058727320757      0.37777296536635974
+...
+
+#Converge status and n_iter
+
+Subject_ID     Converged       n_iter
+CirrHCV_01     True    35
+CirrHCV_02     True    37
+CirrHCV_03     True    34
 </pre></div>
 </div>
 <p>Below histogram and piechart showed the proportion of CpGs assigned to “Un-methylated”, “Semi-methylated” and “Full-methylated”.</p>

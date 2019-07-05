@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -36,7 +37,7 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Compare Differential CpG Analysis Tools" href="../compare_diff_tools.html" />
+    <link rel="next" title="6. CpG_logo.py" href="CpG_logo.html" />
     <link rel="prev" title="4. CpG_distrb_gene_centered.py" href="CpG_distrb_gene_centered.html" /> 
 </head>
 
@@ -90,17 +91,17 @@
             
               <p class="caption"><span class="caption-text">CpGtools Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">Input file and data format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input file and data format</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../dataset.html">Pre-compiled datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
@@ -116,10 +117,29 @@
 <li class="toctree-l2"><a class="reference internal" href="#output-files">5.5. Output files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
@@ -268,7 +288,7 @@ $CpG_distrb_region.py -i 850K_probe.hg19.bed3.gz -b  hg19_H3K4me3.bed4,hg19_CGI.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../compare_diff_tools.html" class="btn btn-neutral float-right" title="Compare Differential CpG Analysis Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CpG_logo.html" class="btn btn-neutral float-right" title="6. CpG_logo.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="CpG_distrb_gene_centered.html" class="btn btn-neutral float-left" title="4. CpG_distrb_gene_centered.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

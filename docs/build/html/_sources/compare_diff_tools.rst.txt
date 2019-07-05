@@ -19,3 +19,20 @@ Compare Differential CpG Analysis Tools
 | dmc_Bayes.py          | Beta- or M-value (450K/850K) | Bayes estimation                             | No          |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 
+P-value distributions
+======================
+Compare p-value distributions of *dmc_ttest.py*,  *dmc_glm.py*, *dmc_nonparametric.py* (U test),
+and *dmc_Bayes.py*
+
+.. image:: _static/beta_pvalue_dist.png
+   :height: 400 px
+   :width: 650 px
+   :scale: 100 %
+
+Correlation of p-values of *dmc_ttest.py*,  *dmc_glm.py*, *dmc_nonparametric.py* (U test),
+and *dmc_Bayes.py* 
+  
+.. image:: _static/beta_pvalue_corr.png
+   :height: 400 px
+   :width: 650 px
+   :scale: 100 %
