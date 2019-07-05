@@ -25,7 +25,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="0.1.8"
+__version__="1.0.0"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -101,7 +101,7 @@ def summary_GMM(m):
 	
 	printlog ("Reports were saved into \"summary_report.txt\".")
 	
-def trichotmize(d,m, prob_cutoff = 0.9999):
+def trichotmize(d,m, prob_cutoff):
 	"""
 	trichotmize beta-value into one of ('0','0.5','1')
 	0 : Un-methylation
@@ -180,7 +180,7 @@ def main():
 		summary_GMM(GMMs)
 	
 	#step4: Classification
-	trichotmize(dat,GMMs)
+	trichotmize(dat, GMMs, options.prob_cutoff)
 	
 
 if __name__=='__main__':
