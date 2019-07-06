@@ -3,7 +3,7 @@ Installation
 
 CpGtools are written in Python. Python3 (v3.5.x) is required to run all programs in
 CpGtools. Some programs also need R and R libraries to generate graphs and fit linear and
-beta binomial models.
+beta-binomial models.
 
 Prerequisites
 --------------
@@ -14,7 +14,7 @@ Note: You need to install these tools if they are not available from your comput
 - `R <https://www.r-project.org/>`_
 - R library `aod <https://cran.r-project.org/package-aod>`_ (only required by **dmc_bb.py**)
 - R library `beanplot <https://cran.r-project.org/web/packages/beanplot/index.html>`_
-  (only required by **beta_jitter_plot.py**)
+  (only needed by **beta_jitter_plot.py**)
 
 Python Dependencies
 --------------------
@@ -36,9 +36,9 @@ Install CpGtools using pip3 from `PyPI <https://pypi.org/project/cpgtools/>`_ or
  or 
  $ pip3 install git+https://github.com/liguowang/cpgtools.git
  
-Instal CpGtools from source code
---------------------------------
-First download the latest `CpGtools <https://sourceforge.net/projects/cpgtools/files/>`_,
+Install CpGtools from source code
+-----------------------------------
+First, download the latest `CpGtools <https://sourceforge.net/projects/cpgtools/files/>`_,
 and then execute the following commands
 
 ::
