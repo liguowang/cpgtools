@@ -107,16 +107,16 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file-INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Input data file (Tab-separated) with a certain column
                         containing 450K/850K array CpG IDs. This file can be
                         a regular text file or compressed file (.gz, .bz2).
-  -a ANNO_FILE, --annotation-ANNO_FILE
+  -a ANNO_FILE, --annotation=ANNO_FILE
                         Annotation file. This file can be a regular text file 
                         or compressed file (.gz, .bz2). 
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
-  -p PROBE_COL, --probe_column-PROBE_COL
+  -p PROBE_COL, --probe_column=PROBE_COL
                         The number specifying which column contains probe IDs.
                         Note: the column index starts with 0. default-0.
   -l, --header          Input data file has a header row.
