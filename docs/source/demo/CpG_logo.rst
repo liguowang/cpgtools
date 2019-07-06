@@ -4,9 +4,9 @@ CpG_logo.py
 Description
 ------------
 
-This program generates DNA motif logo for a given set of CpGs. To answer the question of
-"what is the genomic context for a given list of CpGs ?". This program first extract
-genomic sequences around C postion, and then generate `motif matrices <https://en.wikipedia.org/wiki/Position_weight_matrix>`_
+This program generates a DNA motif logo for a given set of CpGs. To answer the question of
+"what is the genomic context for a given list of CpGs ?". This program first extracts
+genomic sequences around C position, and then generate `motif matrices <https://en.wikipedia.org/wiki/Position_weight_matrix>`_
 include:
 
 - position frequency matrix (PFM)
@@ -15,11 +15,11 @@ include:
 - `MEME <http://meme-suite.org/doc/meme-format.html>`_ format matrix
 - `Jaspar <http://jaspar.genereg.net/>`_ format matrix
 
-It also generate motif logo using `weblogo <https://github.com/WebLogo/weblogo>`_
+It also generates motif logo using `weblogo <https://github.com/WebLogo/weblogo>`_
 
 **Notes**
 
-- input BED file must has strand information.
+- input BED file must have strand information.
 
 Options
 --------
@@ -33,7 +33,7 @@ Options
                         correct *strand* information. This file can be a
                         regular text file or compressed file (.gz, .bz2).
   -r GENOME_FILE, --refgenome-GENOME_FILE
-                        Reference genome seqeunces in FASTA format. Must be
+                        Reference genome seqeunce in FASTA format. Must be
                         indexed using samtools "faidx" command.
   -e EXTEND_SIZE, --extend-EXTEND_SIZE
                         Number of bases extended to up- and down-stream.
