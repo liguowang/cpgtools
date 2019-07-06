@@ -5,7 +5,7 @@ Description
 -----------
 
 Different from statistical testing, this program tries to estimates "how different the
-means between the two groups are" using Bayesian approach. An `MCMC <https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo>`_
+means between the two groups are" using the Bayesian approach. An `MCMC <https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo>`_
 is used to estimate the "means", "difference of means", "95% HDI (highest posterior density interval)",
 and the posterior probability that the HDI does NOT include "0".
 
@@ -14,7 +14,7 @@ It is similar to John Kruschke's `BEST algorithm <http://www.indiana.edu/~krusch
 
 **Notes**
 
-- This program is much slower than T test due to MCMC (Markov chain Monte Carlo) step. 
+- This program is much slower than T-test due to MCMC (Markov chain Monte Carlo) step. 
   Running it with multiple threads is highly recommended.
 
 
@@ -23,7 +23,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         Data file containing beta values with the 1st row
                         containing sample IDs (must be unique) and the 1st
                         column containing CpG positions or probe IDs (must be
@@ -31,27 +31,27 @@ Options
                         non-numerical values will be considered as "missing
                         values" and ignored. This file can be a regular text
                         file or compressed file (.gz, .bz2).
-  -g GROUP_FILE, --group-GROUP_FILE
+  -g GROUP_FILE, --group=GROUP_FILE
                         Group file defining the biological group of each
-                        sample. It is a comma-separated 2 columns file with
+                        sample. It is a comma-separated two columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs.  It must have a header
                         row. Sample IDs should match to the "Data file". Note:
                         Only for two group comparison.
-  -n N_ITER, --niter-N_ITER
+  -n N_ITER, --niter=N_ITER
                         Iteration times when using MCMC Metropolis-Hastings's
                         agorithm to draw samples from the posterior
                         distribution. default=5000
-  -b N_BURN, --burnin-N_BURN
+  -b N_BURN, --burnin=N_BURN
                         Number of samples to discard. Thes initial samples are
                         usually not completely valid because the Markov Chain
-                        has not stabilized to the stationary distributio.
+                        has not stabilized to the stationary distribution.
                         default-500.
-  -p N_PROCESS, --processor-N_PROCESS
+  -p N_PROCESS, --processor=N_PROCESS
                         Number of processes. default=1
-  -s SEED, --seed-SEED  The seed used by the random number generator.
+  -s SEED, --seed=SEED  The seed used by the random number generator.
                         default-99
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 
 
@@ -79,7 +79,7 @@ Output files
  3. *mu2* : Mean methylation level estimated from gropu2
  4. *mu_diff* : Difference between mu1 and mu2
  5. *mu_diff* (95% HDI) : 95% of "High Density Interval" of *mu_diff*. The HDI indicates which
-    points of a distribution are most credible. This interval spans 95% of *mu_diff*'s
+    points of distribution are most credible. This interval spans 95% of *mu_diff*'s
     distribution. 
  6. The probability that *mu1* and *mu2* are different. 
     
