@@ -3,8 +3,7 @@ beta_profile_region.py
 
 Description
 ------------
-This program calculates methylation profile (i.e. average beta value) around user
-specified genomic regions.
+This program calculates methylation profile (i.e. average beta value) around the user-specified genomic regions.
 
 **Example of input**
 
@@ -25,21 +24,21 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         BED6+ file specifying the C position. This BED file
-                        should have at least 6 columns (Chrom, ChromStart,
+                        should have at least six columns (Chrom, ChromStart,
                         ChromeEnd, Name, Beta_value, Strand). BED6+ file can
                         be a regular text file or compressed file (.gz, .bz2).
-  -r REGION_FILE, --region-REGION_FILE
+  -r REGION_FILE, --region=REGION_FILE
                         BED3+ file of genomic regions. This BED file should
-                        have at least 3 columns (Chrom, ChromStart,
+                        have at least three columns (Chrom, ChromStart,
                         ChromeEnd). If the 6-th column does not exist, all
                         regions will be considered as on "+" strand.
-  -d DOWNSTREAM_SIZE, --downstream-DOWNSTREAM_SIZE
+  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
                         Size of extension to downstream. default-2000 (bp)
-  -u UPSTREAM_SIZE, --upstream-UPSTREAM_SIZE
+  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
                         Size of extension to upstream. default-2000 (bp)
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 
 
