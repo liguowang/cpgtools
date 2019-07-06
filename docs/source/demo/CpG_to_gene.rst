@@ -3,7 +3,7 @@ CpG_to_gene.py
 
 Description
 ------------
-This program annotates CpGs by assigning them to their putative target genes. Follows the
+This program annotates CpGs by assigning them to their putative target genes. It follows the
 "Basal plus extension rules" used by `GREAT <http://great.stanford.edu/public/html/>`_.
 
 Basal regulatory domain is a user-defined genomic region around the TSS (transcription
@@ -18,17 +18,17 @@ no more than the maximum extension (specified by '-e', default - 1000 kb) in one
 direction.	In other words, the "extension" stops when it reaches other genes' "basal
 regulatory domain" or the extension limit, whichever comes first.
 
-Basal regulatory domain and Extended regulatory domain are illustrated in below diagram
+Basal regulatory domain and Extended regulatory domain are illustrated in below diagram.
 
 .. image:: ../_static/gene_domain.png
    :height: 200 px
    :width: 600 px
    :scale: 100 %  
 
-**Noets**
+**Notes**
 
 - Which genes are assigned to a particular CpG largely depends on gene annotation. A 
-  "conservative" gene model (such as Refseq curated protein coding genes) is recommended.
+  "conservative" gene model (such as Refseq curated protein-coding genes) is recommended.
 - In the refgene file, multiple isoforms should be merged into a single gene.
 
 Options
