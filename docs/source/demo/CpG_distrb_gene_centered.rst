@@ -29,22 +29,22 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         BED file specifying the C position. This BED file
                         should have at least three columns (Chrom, ChromStart,
                         ChromeEnd).  Note: the first base in a chromosome is
                         numbered 0. This file can be a regular text file or
                         compressed file (.gz, .bz2).
-  -r GENE_FILE, --refgene-GENE_FILE
+  -r GENE_FILE, --refgene=GENE_FILE
                         Reference gene model in standard BED-12 format
                         (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
-  -d DOWNSTREAM_SIZE, --downstream-DOWNSTREAM_SIZE
+  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
                         Size of down-stream intergenic region w.r.t. TES
                         (transcription end site). default-2000 (bp)
-  -u UPSTREAM_SIZE, --upstream-UPSTREAM_SIZE
+  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
                         Size of up-stream intergenic region w.r.t. TSS
                         (transcription start site). default-2000 (bp)
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 
 Input files (examples)
