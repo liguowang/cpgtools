@@ -26,21 +26,21 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         BED file specifying the C position. This BED file
                         should have at least 6 columns (Chrom, ChromStart,
                         ChromeEnd, name, score, strand).  Note: Must provide
                         correct *strand* information. This file can be a
                         regular text file or compressed file (.gz, .bz2).
-  -r GENOME_FILE, --refgenome-GENOME_FILE
+  -r GENOME_FILE, --refgenome=GENOME_FILE
                         Reference genome seqeunce in FASTA format. Must be
                         indexed using samtools "faidx" command.
-  -e EXTEND_SIZE, --extend-EXTEND_SIZE
+  -e EXTEND_SIZE, --extend=EXTEND_SIZE
                         Number of bases extended to up- and down-stream.
                         default-5 (bp)
-  -n MOTIF_NAME, --name-MOTIF_NAME
+  -n MOTIF_NAME, --name=MOTIF_NAME
                         Motif name. default-motif
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of output file.
                         
 Input files (examples)
