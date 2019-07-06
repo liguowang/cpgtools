@@ -31,24 +31,24 @@ for samples.
 - Rows with missing values will be removed
 - Beta values will be standardized into z scores
 - Only the first two components will be visualized
-- Variance% explained by each components are printed to screen
+- Variance% explained by each component will be printed to screen
 
 Options
 --------
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-INPUT_FILE
-                        Tab separated data frame file containing beta values
+  -i INPUT_FILE, --input=INPUT_FILE
+                        Tab-separated data frame file containing beta values
                         with the 1st row containing sample IDs and the 1st
                         column containing CpG IDs.
-  -g GROUP_FILE, --group-GROUP_FILE
-                        Comma separated group file defining the biological
+  -g GROUP_FILE, --group=GROUP_FILE
+                        Comma-separated group file defining the biological
                         groups of each sample. Different group will be colored
                         differently in the PCA plot.
-  -n N_COMPONENTS, --ncomponent-N_COMPONENTS
+  -n N_COMPONENTS, --ncomponent=N_COMPONENTS
                         Number of components. default-2
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 
 Input files (examples)
