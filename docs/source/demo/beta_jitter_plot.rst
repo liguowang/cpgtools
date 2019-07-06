@@ -23,15 +23,15 @@ Options
   
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-INPUT_FILE
+  -i INPUT_FILE, --input=INPUT_FILE
                         Tab separated data frame file containing beta values
                         with the 1st row containing sample IDs and the 1st
                         column containing CpG IDs.
-  -f FRACTION, --fraction-FRACTION
+  -f FRACTION, --fraction=FRACTION
                         Fraction of total data points (CpGs) used to generate
                         jitter plot. Decrease this number if the jitter plot
                         is over-crowded. default-0.5
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --outpu=OUT_FILE
                         Prefix of the output file.
 
 Input files (examples)
