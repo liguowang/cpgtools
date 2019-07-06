@@ -4,7 +4,7 @@ beta_topN.py
 Description
 ------------
 This program picks the top N rows (according to standard deviation) from the input file.
-The resulting file can be used for clustering/PCA analysis
+The resulting file can be used for clustering and PCA analysis.
 
 **Example of input**
 
@@ -18,14 +18,14 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
-                        Tab separated data frame file containing beta values
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Tab-separated data frame file containing beta values
                         with the 1st row containing sample IDs and the 1st
                         column containing CpG IDs.
-  -c CPG_COUNT, --count-CPG_COUNT
+  -c CPG_COUNT, --count=CPG_COUNT
                         Number of most variable CpGs (ranked by standard
                         deviation) to keep. default-1000
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
 
 Input files (examples)
