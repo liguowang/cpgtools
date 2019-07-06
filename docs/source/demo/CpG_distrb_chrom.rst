@@ -25,7 +25,7 @@ Options
                         used to label samples. [optional]
   -s CHROM_SIZE, --chrom-size-CHROM_SIZE
                         Chromosome size file. Tab or space separated text file
-                        with 2 columns: the first column is chromosome
+                        with two columns: the first column is chromosome
                         name/ID, the second column is chromosome size. This
                         file will determine: (1) which chromosomes are
                         included in the final barplots, so do NOT include
@@ -57,7 +57,7 @@ Command
 - chromDist.CpG_percent.pdf
 - chromDist.CpG_perMb.pdf
 
-Total CpG count per chromsome 
+Total CpG count per chromosome
 
 .. image:: ../_static/chromDist.CpG_total.png
    :height: 200 px
