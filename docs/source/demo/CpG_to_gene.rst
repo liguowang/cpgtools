@@ -36,28 +36,28 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         BED3+ file specifying the C position. BED3+ file could
                         be a regular text file or compressed file (.gz, .bz2).
                         [required]
-  -r GENE_FILE, --refgene-GENE_FILE
+  -r GENE_FILE, --refgene=GENE_FILE
                         Reference gene model in BED12 format
                         (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
                         "One gene one transcript" is recommended. Since most
                         genes have multiple transcripts; one can collapse
                         multiple transcripts of the same gene into a single
                         super transcript or select the canonical transcript.
-  -u BASAL_UP_SIZE, --basal-up-BASAL_UP_SIZE
+  -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
                         Size of extension to upstream of TSS (used to define
                         gene's "basal regulatory domain"). default-5000 (bp)
-  -d BASAL_DOWN_SIZE, --basal-down-BASAL_DOWN_SIZE
+  -d BASAL_DOWN_SIZE, --basal-down=BASAL_DOWN_SIZE
                         Size of extension to downstream of TSS (used to define
                         gene's basal regulatory domain). default-1000 (bp)
-  -e EXTENSION_SIZE, --extension-EXTENSION_SIZE
+  -e EXTENSION_SIZE, --extension=EXTENSION_SIZE
                         Size of extension to both up- and down-stream of TSS
                         (used to define gene's "extended regulatory domain").
                         default-1000000 (bp)
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file. Two additional columns will
                         be appended to the original BED file with the last
                         column indicating "genes whose extended regulatory
