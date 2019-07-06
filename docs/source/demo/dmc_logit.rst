@@ -6,7 +6,7 @@ Description
 This program performs differential CpG analysis using `logistic regression model <https://en.wikipedia.org/wiki/Logistic_regression>`_
 based on proportion values. It allows for covariable analysis. Users can choose to use
 "binomial" or "quasibinomial" family to model the data. The quasibinomial family estimates 
-an addition parameter indicating the amount of the oversidpersion.
+an addition parameter indicating the amount of the overdispersion.
 
 Options
 ------------
