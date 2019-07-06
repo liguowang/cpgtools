@@ -11,18 +11,18 @@ including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions'
 
 Please note, a particular genomic region can be assigned to different groups listed above,
 because most genes have multiple transcripts, and different genes could overlap on the
-genome. For example, a exon of gene A could be located in a intron of gene B. To address
+genome. For example, an exon of gene A could be located in an intron of gene B. To address
 this issue, we define the priority order as  below:
 
 - Coding exons
 - UTR exons
 - Introns
 - Upstream intergenic regions
-- Downsteam intergenic regions
+- Downstream intergenic regions
 
 Higher-priority group override the low-priority group. For example, if a certain part
-of a intron is overlapped with exon of other transcripts/genes, the overlapped part will
-be considered as exon (i.e. removed from intron) since "exon" has higher priority.
+of an intron is overlapped with an exon of other transcripts/genes, the overlapped part will
+be considered as exon (i.e., removed from intron) since "exon" has higher priority.
 
 Options
 --------
@@ -31,7 +31,7 @@ Options
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file-INPUT_FILE
                         BED file specifying the C position. This BED file
-                        should have at least 3 columns (Chrom, ChromStart,
+                        should have at least three columns (Chrom, ChromStart,
                         ChromeEnd).  Note: the first base in a chromosome is
                         numbered 0. This file can be a regular text file or
                         compressed file (.gz, .bz2).
