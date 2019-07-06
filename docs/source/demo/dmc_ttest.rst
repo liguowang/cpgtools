@@ -3,8 +3,7 @@ dmc_ttest.py
 
 Description
 ------------
-Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_
-for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
+Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
 for multiple groups comparison.
 
 Options
@@ -12,7 +11,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file-INPUT_FILE
+  -i INPUT_FILE, --input-file=INPUT_FILE
                         Data file containing beta values with the 1st row
                         containing sample IDs (must be unique) and the 1st
                         column containing CpG positions or probe IDs (must be
@@ -20,7 +19,7 @@ Options
                         non-numerical values will be considered as "missing
                         values" and ignored. This file can be a regular text
                         file or compressed file (.gz, .bz2).
-  -g GROUP_FILE, --group-GROUP_FILE
+  -g GROUP_FILE, --group=GROUP_FILE
                         Group file defining the biological group of each
                         sample. It is a comma-separated 2 columns file with
                         the 1st column containing sample IDs, and the 2nd
@@ -38,7 +37,7 @@ Options
                         t-test (i.e. assuming the two samples have equal
                         variance). This option will be ignored for paired
                         t-test and multiple group analysis.
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file.
                         
 Input files (examples)
