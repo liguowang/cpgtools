@@ -3,7 +3,7 @@ dmc_ttest.py
 
 Description
 ------------
-Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
+Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_ for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
 for multiple groups comparison.
 
 Options
