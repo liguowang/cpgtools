@@ -11,19 +11,19 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILES, --input-files-INPUT_FILES
+  -i INPUT_FILES, --input-files=INPUT_FILES
                         Input CpG file(s) in BED3+ format. Multiple BED files
                         should be separated by "," (eg: "-i
                         file_1.bed,file_2.bed,file_3.bed"). BED file can be a
                         regular text file or compressed file (.gz, .bz2). The
                         barplot figures will NOT be generated if you provide
                         more than 12 samples (bed files). [required]
-  -n FILE_NAMES, --names-FILE_NAMES
+  -n FILE_NAMES, --names=FILE_NAMES
                         Shorter and meaningful names to label samples. Should
                         be separated by "," and match CpG BED files in number.
                         If not provided, basenames of CpG BED files will be
                         used to label samples. [optional]
-  -s CHROM_SIZE, --chrom-size-CHROM_SIZE
+  -s CHROM_SIZE, --chrom-size=CHROM_SIZE
                         Chromosome size file. Tab or space separated text file
                         with two columns: the first column is chromosome
                         name/ID, the second column is chromosome size. This
@@ -32,7 +32,7 @@ Options
                         'unplaced', 'alternative' contigs in this file. (2)
                         The order of chromosomes in the final barplots.
                         [required]
-  -o OUT_FILE, --output-OUT_FILE
+  -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file. [required]                        
 
 Input files (examples)
