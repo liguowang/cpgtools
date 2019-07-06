@@ -30,13 +30,13 @@ These modules are primarily used to analyze CpG's genomic locations.
 +------------------------------+-------------------------------------------------------------------+
 |CpG_distrb_gene_centered.py   |Calculates the distribution of CpG over gene-centered genomic      |
 |                              |regions including 'Coding exons', 'UTR exons', 'Introns',          |
-|                              |'Upstream intergenic regions', and 'Downsteam intergenic regions'. |
+|                              |'Upstream intergenic regions', and 'Downstream intergenic regions'.|
 +------------------------------+-------------------------------------------------------------------+
 |CpG_distrb_region.py          |Calculates the distribution of CpG over user-specified genomic     |
 |                              |regions (such as promoters, enhancers).                            |
 +------------------------------+-------------------------------------------------------------------+
 |CpG_logo.py                   |Generates DNA motif logo for a given set of CpGs (to visualize     |
-|                              |the genomic context of    these CpGs).                             |
+|                              |the genomic context of these CpGs).                                |
 +------------------------------+-------------------------------------------------------------------+
 |CpG_to_gene.py                |Assigns CpGs to their putative target genes. Follows the "Basel    |
 |                              |plus extension" rules used by the `GREAT <http://great.stanford.edu|
@@ -57,10 +57,10 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 +------------------------------+-------------------------------------------------------------------+
 |beta_m_conversion.py          |Converts Beta-value into M-value or vice versa.                    |
 +------------------------------+-------------------------------------------------------------------+
-|beta_profile_gene_centered.py |Calculates the methylation profile (i.e. average beta value) for   |
+|beta_profile_gene_centered.py |Calculates the methylation profile (i.e., average beta value) for  |
 |                              |gene-centered genomic regions.                                     |
 +------------------------------+-------------------------------------------------------------------+
-|beta_profile_region.py        |Calculates the methylation profile (i.e. average beta value) for   |
+|beta_profile_region.py        |Calculates the methylation profile (i.e., average beta value) for  |
 |                              |user specified genomic regions.                                    |
 +------------------------------+-------------------------------------------------------------------+
 |beta_stacked_barplot.py       |Creates stacked barplot for each sample. The stacked barplot       |
@@ -74,7 +74,7 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 |                              |"Median methylation level across all CpGs" and "Standard deviation"|
 +------------------------------+-------------------------------------------------------------------+
 |beta_m_conversion.py          |This program picks the N most variable CpGs from the input file.   |
-|                              |The result file can be used for PCA or clustering analysis.        |
+|                              |The resulting file can be used for PCA or clustering analysis.     |
 +------------------------------+-------------------------------------------------------------------+
 |beta_trichotmize.py           |This program uses `Bayesian Gaussian Mixture model <https://scikit-|
 |                              |learn.org/stable/modules/generated/sklearn.mixture.BayesianGaussian|
@@ -85,7 +85,7 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 
 Differential CpG analysis modules
 ----------------------------------
-These modules are primarily used to identify differentially methylated CpGs
+These modules are primarily used to identify CpGs that are differentially methylated between groups
 
 +------------------------------+-------------------------------------------------------------------+
 |Name                          |Description                                                        |
