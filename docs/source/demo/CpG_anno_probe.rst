@@ -5,8 +5,8 @@ Description
 -----------------
 
 This program adds comprehensive annotation information to each 450K/850K array probe ID.
-Basically, it will add 17 columns to the orignal input data file. These 17 columns include
-(from left to rigth):
+It will add 17 columns to the original input data file. These 17 columns include
+(from left to right):
 
 +-----------------------+-------------------------------------------------------------------------+
 | Header Name           |Description                                                              |
@@ -39,24 +39,24 @@ Basically, it will add 17 columns to the orignal input data file. These 17 colum
 |                       |/Minor_allele_frequency>`_ of SNPs.                                      |
 +-----------------------+-------------------------------------------------------------------------+
 | Cross_Reactive        |Boolean ("0" - No, "1"- Yes) indicating whether this CpG could be        |
-|                       |affected by cross-hybridisation or underlying genetic variation as       |
+|                       |affected by cross-hybridization or underlying genetic variation as       |
 |                       |reported by this `paper <https://genomebiology.biomedcentral.com/        |
 |                       |articles/10.1186/s13059-016-1066-1>`_.                                   |
 +-----------------------+-------------------------------------------------------------------------+
 | ENCODE_TF_ChIP        |Transcription factor (TF) binding sites identified from ChIP-seq         |
-|                       |experiments performed,by the `ENCODE <https://www.encodeproject.org/>`_  |
+|                       |experiments performed by the `ENCODE <https://www.encodeproject.org/>`_  |
 |                       |project. Peaks from 1264 experiments representing 338 transcription      |
 |                       |factors in 130 cell types are combined (N - 10,560,472).                 |
 |                       |BED format file was downloaded from the `UCSC Tabel Browser              |
-|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
+|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and a detailed description |
 |                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
 |                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-encRegTfbsClustered>`_.  |
 +-----------------------+-------------------------------------------------------------------------+
 | ENCODE_DNaseI         |DNase I hypersensitivity sites identified from ENCODE `DNase-seq         |
 |                       |<https://en.wikipedia.org/wiki/DNase-Seq>`_ experiments. Peaks from      |
 |                       |125 cell types are combined (N - 1,867,665). BED format file was         |
-|                       |downloaded from `UCSC Table Browser                                      |
-|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
+|                       |downloaded from the `UCSC Table Browser                                  |
+|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and a detailed description |
 |                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
 |                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-                         |
 |                       |wgEncodeRegDnaseClustered>`_.                                            |
@@ -99,7 +99,7 @@ Notes
 -------
 
 - For peaks identified from ENCODE ChIP-seq and DNase-seq (ENCODE_TF_ChIP, ENCODE_H3K27ac_ChIP,
-  ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP and ENCODE_DNaseI), we require the probe  must be
+  ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP, and ENCODE_DNaseI), we require the probe  must be
   located in the 100 bp window centered on the **middle** of the peak.
 
 Options
@@ -108,11 +108,11 @@ Options
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input_file-INPUT_FILE
-                        Input data file (Tab separated) with certain column
+                        Input data file (Tab-separated) with a certain column
                         containing 450K/850K array CpG IDs. This file can be
-                        regular text file or compressed file (.gz, .bz2).
+                        a regular text file or compressed file (.gz, .bz2).
   -a ANNO_FILE, --annotation-ANNO_FILE
-                        Annotation file. This file can be regular text file 
+                        Annotation file. This file can be a regular text file 
                         or compressed file (.gz, .bz2). 
   -o OUT_FILE, --output-OUT_FILE
                         Prefix of the output file.
