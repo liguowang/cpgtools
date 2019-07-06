@@ -5,6 +5,7 @@ Description
 ------------
 This program creates stacked barplot for each sample. The stacked barplot showing
 the proportions of CpGs whose beta values are falling into these four ranges:
+
 1. [0.00,  0.25]        #first quantile
 2. [0.25,  0.50]        #second quantile
 3. [0.50,  0.75]        #third quantile
