@@ -51,7 +51,7 @@ The classification will be made using rules:
 Options
 --------
 
---version             show program's version number and exit
+  --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
                         Input plain text file containing beta values with the
