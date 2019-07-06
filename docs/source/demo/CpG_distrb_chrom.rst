@@ -71,7 +71,7 @@ CpG percent on each chromosome (normalized to total CpGs)
    :width: 500 px
    :scale: 100 %  
 
-CpG per Mb (normalized to chromsome size)   
+CpG per Mb (normalized to chromosome size)   
  
 .. image:: ../_static/chromDist.CpG_perMb.png
    :height: 200 px
