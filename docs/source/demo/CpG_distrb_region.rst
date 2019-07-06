@@ -8,8 +8,8 @@ This program calculates the distribution of CpG over user-specified genomic regi
 
 **Notes**
 
-- A maximum of 10 BED files (define 10 different genomic regions) can be analyzed together. 
-- The *order* of BED files is important (i.e. considered as "priority order"). Overlapped
+- A maximum of ten BED files (define ten different genomic regions) can be analyzed together. 
+- The *order* of BED files is important (i.e., considered as "priority order"). Overlapped
   genomic regions will be kept in the BED file with the highest priority and removed
   from BED files of lower priorities.  For example, users provided 3 BED files via  "-i
   promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
@@ -23,7 +23,7 @@ Options
   -h, --help            show this help message and exit
   -i CPG_FILE, --cpg-CPG_FILE
                         BED file specifying the C position. This BED file
-                        should have at least 3 columns (Chrom, ChromStart,
+                        should have at least three columns (Chrom, ChromStart,
                         ChromeEnd).  Note: the first base in a chromosome is
                         numbered 0. This file can be a regular text file or
                         compressed file (.gz, .bz2).
