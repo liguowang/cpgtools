@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program uses Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into 
+This program uses the Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into 
 three status: 
  * Un-methylated (labeled as "0" in result file)
  * Semi-methylated (labeled as "1" in result file)
@@ -152,14 +152,15 @@ def main():
 	print (__doc__)
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).")
 	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.99,help="Probability cutoff to assign a probe into \"semi-methylated\" class. default=%default")
-	parser.add_option("-r","--report",action="store_true",dest="report_summary",help="Presense of this flag renders program to generate \"summary_report.txt\" file.")
+	parser.add_option("-r","--report",action="store_true",dest="report_summary",default=False, help="If True, generates \"summary_report.txt\" file.  default=%default")
 	parser.add_option("-s","--seed",action="store",type='int', dest="random_state",default=99, help="The seed used by the random number generator. default=%default")
 	(options,args)=parser.parse_args()
 	
 	print ()
-
+	#print (options.report_summary)
+	#sys.exit()
 	if not (options.input_file):
 		parser.print_help()
 		sys.exit(0)

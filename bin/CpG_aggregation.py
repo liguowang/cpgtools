@@ -1,11 +1,11 @@
 """
 Aggregate proportion values of a list of CpGs that located in give genomic regions
-(eg. CpG islands, promoters, exons, etc).
+(eg. CpG islands, promoters, exons, etc.).
 
-Outlier CpG will be removed if the probability of observing its proportion vlaue is less
-than p-cutoff. For example, if alpha set to 0.05 and there are 10 CpGs (n = 10) located in a 
+Outlier CpG will be removed if the probability of observing its proportion value is less
+than p-cutoff. For example, if alpha set to 0.05, and there are 10 CpGs (n = 10) located in a 
 particular genomic region, the p-cutoff of this genomic region is 0.005 (0.05/10). Supposing
-the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e
+the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e.,
 regional methylation level (beta) = 25/100 = 0.25) 
 
 The probability of observing CpG (3,10) is :
@@ -143,10 +143,10 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input",action="store",type="string",dest="input_file",help="Input CpG file in BED format. The first 3 columns contain \"Chrom\", \"Start\", and \"End\". The 4th column contains proportion values.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Input CpG file in BED format. The first 3 columns contain \"Chrom\", \"Start\", and \"End\". The 4th column contains proportion values.")
 	parser.add_option("-a","--alpha",action="store",type='float', dest="alpha_cut", default=0.05, help="The chance of mistakingly assign a particular CpG as an outlier for each genomic region. default=%default" )
 	parser.add_option("-b","--bed",action="store",type="string",dest="bed_file",help="BED3+ file specifying the genomic regions.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 
 	if not (options.input_file):

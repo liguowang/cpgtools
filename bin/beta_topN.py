@@ -2,7 +2,7 @@
 """
 #=========================================================================================
 This program picks the top N rows (according to standard deviation) from the input file.
-The resulting file can be used for clustering/PCA analysis
+The resulting file can be used for clustering/PCA analysis.
 
 Example of input data file
 ---------------------------
@@ -36,9 +36,9 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Tab separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
 	parser.add_option("-c","--count",action="store",type='int', dest="cpg_count", default=1000, help="Number of most variable CpGs (ranked by standard deviation) to keep. default=%default" )
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

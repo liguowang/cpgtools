@@ -72,8 +72,8 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

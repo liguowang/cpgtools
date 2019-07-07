@@ -4,16 +4,16 @@
 Description
 -----------
 Different from statistical testing, this program tries to estimates "how different the
-means between the two groups are" using Bayesian approach. An MCMC is used to estimate the
+means between the two groups are" using the Bayesian approach. An MCMC is used to estimate the
 "means", "difference of means", "95% HDI (highest posterior density interval)", and the
-osterior probability that the HDI does NOT include "0". 
+posterior probability that the HDI does NOT include "0". 
 
 It is similar to John Kruschke's BEST algorithm (Bayesian Estimation Supersedes T test)
 (http://www.indiana.edu/~kruschke/BEST/).
 
 Notes
 -----
-This program is much slower than T test due to MCMC (Markov chain Monte Carlo) step.
+This program is much slower than the T-test due to MCMC (Markov chain Monte Carlo) step.
 Running it with multiple threads is highly recommended.
 
 '''
@@ -320,13 +320,13 @@ if __name__=='__main__':
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). Except for the 1st row and 1st column, any non-numerical values will be considered as \"missing values\" and ignored. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Data file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). Except for the 1st row and 1st column, any non-numerical values will be considered as \"missing values\" and ignored. This file can be a regular text file or compressed file (.gz, .bz2).")
 	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological group of each sample. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs should match to the \"Data file\". Note: Only for two group comparison.")
 	parser.add_option("-n","--niter",action="store",type="int", default=5000,dest="n_iter",help="Iteration times when using MCMC Metropolis-Hastings's agorithm to draw samples from the posterior distribution. default=%default")
-	parser.add_option("-b","--burnin",action="store",type="int", default=500,dest="n_burn",help="Number of samples to discard. Thes initial samples are usually not completely valid because the Markov Chain has not stabilized to the stationary distributio. default=%default.")
-	parser.add_option("-p","--processor",action="store",type="int",dest="n_process",default=1,help="Number of processes. default=%default")
+	parser.add_option("-b","--burnin",action="store",type="int", default=500,dest="n_burn",help="Number of simulated samples to discard. Thes initial samples are usually not completely valid because the Markov Chain has not stabilized to the stationary distribution. default=%default.")
+	parser.add_option("-p","--processor",action="store",type="int",dest="n_process",default=1,help="The number of processes. default=%default")
 	parser.add_option("-s","--seed",action="store",type='int', dest="seed",default=99, help="The seed used by the random number generator. default=%default")
-	parser.add_option("-o","--output",action="store",type="string", dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type="string", dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

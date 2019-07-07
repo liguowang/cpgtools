@@ -34,9 +34,9 @@ __status__ = "Development"
 def main():
 	usage="%prog [options]"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input",action="store",type="string",dest="input_file",help="Tab separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
-	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",help="Input data type either \"Beta\" or \"M\".")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Output file.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta or M values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (.gz, .bz2).")
+	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",default="Beta", help="Input data type either \"Beta\" or \"M\". default=%default")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

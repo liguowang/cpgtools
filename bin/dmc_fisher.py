@@ -4,7 +4,7 @@ Description
 -----------
 This program performs differential CpG analysis using Fisher's exact test. It only applies
 to two sample comparison with no replicates. if replicates are provided, *methyl reads*
-and *total reads* of all replicates will be sumed
+and *total reads* of all replicates will be summed
 
 Example of input data file
 --------------------------
@@ -12,8 +12,8 @@ cgID        sample_1    sample_2
 CpG_1       129,170     166,178
 CpG_2       24,77       67,99 
 
-number before "," indicates *number of methyl reads*
-number after "," indicates *number of total reads*
+the number before "," indicates *number of methyl reads*
+the number after "," indicates *number of total reads*
 
 Output
 -------
@@ -47,9 +47,9 @@ __status__ = "Development"
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Data file containing methylation proportions (represented by \"methyl_count,total_count\", eg. \"20,30\") with the 1st row containing sample IDs (must be unique) and the 1st column containing CpG positions or probe IDs (must be unique). This file can be a regular text file or compressed file (*.gz, *.bz2) or accessible url.")
 	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Group file defining the biological groups of each sample. It is a comma-separated 2 columns file with the 1st column containing sample IDs, and the 2nd column containing group IDs.  It must have a header row. Sample IDs should match to the \"Data file\".")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program generates DNA motif logo for a given set of CpGs.
+This program generates the DNA motif logo for a given set of CpGs.
 """
 
 
@@ -30,11 +30,11 @@ def main():
 	print (__doc__)
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, name, score, strand).  Note: Must provide correct *strand* information. This file can be a regular text file or compressed file (.gz, .bz2).")
-	parser.add_option("-r","--refgenome",action="store",type="string",dest="genome_file",help="Reference genome seqeunces in FASTA format. Must be indexed using samtools \"faidx\" command. ")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="BED file specifying the C position. This BED file should have at least six columns (Chrom, ChromStart, ChromeEnd, name, score, strand).  Note: Must provide correct *strand* information. This file can be a regular text file or compressed file (.gz, .bz2).")
+	parser.add_option("-r","--refgenome",action="store",type="string",dest="genome_file",help="Reference genome seqeunces in FASTA format. Must be indexed using the samtools \"faidx\" command. ")
 	parser.add_option("-e","--extend",action="store",type="int",dest="extend_size",default=5,help="Number of bases extended to up- and down-stream. default=%default (bp)")
 	parser.add_option("-n","--name",action="store",type='string', dest="motif_name",default='motif', help="Motif name. default=%default")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

@@ -8,7 +8,7 @@ Notes
 ------
  1. A maximum of 10 BED files (define 10 different genomic regions) can be analyzed
     together. 
- 2. The *order* of BED files is important (i.e. considered as "priority order"). Overlapped
+ 2. The *order* of BED files determines the *priority order*. Overlapped
     genomic regions will be kept in the BED file with the highest priority and removed
     from BED files of lower priorities.  For example, users provided 3 BED files via  "-i
     promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
@@ -42,9 +42,9 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the C position. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2).")
+	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the C position. This BED file should have at least three columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2).")
 	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of BED files specifying the genomic regions.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

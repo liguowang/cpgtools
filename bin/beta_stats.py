@@ -2,8 +2,8 @@
 """
 Description
 -----------
-This program gives basic information of CpGs located in each genomic region. 
-It adds 6 columns to the input BED file:
+This program gives basic information on CpGs located in each genomic region. 
+It adds six columns to the input BED file:
  1. Number of CpGs detected in the genomic region
  2. Min methylation level
  3. Max methylation level
@@ -40,9 +40,9 @@ __status__ = "Development"
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input-file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least 6 columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2)")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least six columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2)")
 	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED3+ file of genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()

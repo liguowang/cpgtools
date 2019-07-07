@@ -2,7 +2,7 @@
 """
 Description
 -----------
-This program performs PCA (principal component analysis) for samples
+This program performs PCA (principal component analysis) for samples.
 
 Example of input data file
 ---------------------------
@@ -11,7 +11,7 @@ cg_001	0.831035	0.878022	0.794427	0.880911
 cg_002	0.249544	0.209949	0.234294	0.236680
 cg_003	0.845065	0.843957	0.840184	0.824286
 
-Example of input group file
+Example of the input group file
 ---------------------------
 Sample,Group
 Sample_01,normal
@@ -53,10 +53,10 @@ def main():
 	
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input",action="store",type="string",dest="input_file",help="Tab separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
-	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Comma separated group file defining the biological groups of each sample. Different group will be colored differently in the PCA plot.")
+	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
+	parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Comma-separated group file defining the biological groups of each sample. Different groups will be colored differently in the PCA plot.")
 	parser.add_option("-n","--ncomponent",action="store",type='int', dest="n_components", default=2, help="Number of components. default=%default" )
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="Prefix of the output file.")
+	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
 	print ()
