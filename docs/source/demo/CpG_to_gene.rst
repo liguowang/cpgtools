@@ -34,6 +34,33 @@ Basal regulatory domain and Extended regulatory domain are illustrated in below 
 Options
 -----------
 
+Description
+-----------
+This program annotates CpGs by assigning them to their putative target genes. Follows the
+"Basel plus extension" rules used by GREAT(http://great.stanford.edu/public/html/index.php)
+
+ * Basal regulatory domain:
+   is a user-defined genomic region around the TSS (transcription start site). By default,
+   from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
+   domain*. When defining a gene's "basal regulatory domain", the other nearby genes will be
+   ignored (which means different genes' basal regulatory domains can be overlapped.)
+
+ * Extended regulatory domain:
+   The gene regulatory domain is extended in both directions to the nearest gene's "basal
+   regulatory domain" but no more than the maximum extension (default = 1000 kb) in one
+   direction.
+
+Notes
+-----
+ 1. Which genes are assigned to a particular CpG largely depends on gene annotation. A
+    "conservative" gene model (such as Refseq curated protein coding genes) is recommended.
+ 2. In the gene model, multiple isoforms should be merged into a single gene.
+#=========================================================================================
+
+Usage: CpG_to_gene.py [options]
+
+
+Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input-file=INPUT_FILE
@@ -49,14 +76,14 @@ Options
                         super transcript or select the canonical transcript.
   -u BASAL_UP_SIZE, --basal-up=BASAL_UP_SIZE
                         Size of extension to upstream of TSS (used to define
-                        gene's "basal regulatory domain"). default-5000 (bp)
+                        gene's "basal regulatory domain"). default=5000 (bp)
   -d BASAL_DOWN_SIZE, --basal-down=BASAL_DOWN_SIZE
                         Size of extension to downstream of TSS (used to define
-                        gene's basal regulatory domain). default-1000 (bp)
+                        gene's basal regulatory domain). default=1000 (bp)
   -e EXTENSION_SIZE, --extension=EXTENSION_SIZE
                         Size of extension to both up- and down-stream of TSS
                         (used to define gene's "extended regulatory domain").
-                        default-1000000 (bp)
+                        default=1000000 (bp)
   -o OUT_FILE, --output=OUT_FILE
                         Prefix of the output file. Two additional columns will
                         be appended to the original BED file with the last
