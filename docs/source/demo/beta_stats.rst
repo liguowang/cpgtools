@@ -18,7 +18,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         BED6+ file specifying the C position. This BED file
                         should have at least six columns (Chrom, ChromStart,
                         ChromeEnd, Name, Beta_value, Strand).  Note: the first
@@ -29,7 +29,7 @@ Options
                         have at least 3 columns (Chrom, ChromStart,
                         ChromeEnd).
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
  
                         
 
