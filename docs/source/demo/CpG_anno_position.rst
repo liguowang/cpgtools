@@ -45,15 +45,9 @@ Command
 
 ::
  
- # probe IDs are located in the 4th column (-p 3)
  
- $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv -i test_01.hg19.bed6 -o output
+ $CpG_anno_position.py  -l -a hg19_ENCODE_338TF_130Cell_E3.bed.gz -i test_01.hg19.bed6 -o output
  
- or (take gzipped files as input) 
- 
- $ CpG_anno_position.py -l -i test_01.hg19.bed6 -a hg19_ENCODE_338TF_130Cell_E3.bed.gz -o output
-
-
 
 Output files
 -------------
