@@ -23,6 +23,9 @@ These modules are primarily used to analyze CpG's genomic locations.
 |CpG_anno_probe.py             |add comprehensive annotation information to each 450K/850K probe   |
 |                              |ID.                                                                |
 +------------------------------+-------------------------------------------------------------------+
+|CpG_anno_position.py          |add comprehensive annotation information to each CpG based on its  |
+|                              |genomic coordinate.                                                |
++------------------------------+-------------------------------------------------------------------+
 |CpG_aggregation.py            |Aggregate proportion values of a list of CpGs that located in give |
 |                              |genomic regions.                                                   |
 +------------------------------+-------------------------------------------------------------------+
