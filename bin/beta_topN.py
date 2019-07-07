@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 """
 #=========================================================================================
 This program picks the top N rows (according to standard deviation) from the input file.

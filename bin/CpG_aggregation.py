@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Aggregate proportion values of a list of CpGs that located in give genomic regions
 (eg. CpG islands, promoters, exons, etc.).
