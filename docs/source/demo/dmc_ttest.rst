@@ -11,7 +11,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Data file containing beta values with the 1st row
                         containing sample IDs (must be unique) and the 1st
                         column containing CpG positions or probe IDs (must be
@@ -27,18 +27,15 @@ Options
                         row. Sample IDs should match to the "Data file". Note:
                         automatically switch to use ANOVA if more than 2
                         groups were defined in this file.
-  -p, --paired          If '-p/--paired' flag was specified, use paired t-test
-                        which requires the equal number of samples in both
-                        groups. Paired sampels are matched by the order. This
-                        option will be ignored for multiple group analysis.
-  -w, --welch           If '-w/--welch' flag was specified, using Welch's
-                        t-test which does not assume the two samples have
-                        equal variance.  If omitted, use standard two-sample
-                        t-test (i.e. assuming the two samples have equal
-                        variance). This option will be ignored for paired
-                        t-test and multiple group analysis.
+  -p, --paired          If True, performs a paired t-test (the paired sampels
+                        are matched by the order). If False, performs a
+                        standard independent 2 sample t-test. default=False
+  -w, --welch           If True, performs Welch's t-test which does not assume
+                        the two samples have equal variance.  If False,
+                        performs a standard two-sample t-test (i.e. assuming
+                        the two samples have equal variance). default=False
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
                         
 Input files (examples)
 ------------------------
