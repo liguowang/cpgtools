@@ -13,13 +13,14 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Data file containing methylation proportions
                         (represented by "methyl_count,total_count", eg.
                         "20,30") with the 1st row containing sample IDs (must
                         be unique) and the 1st column containing CpG positions
                         or probe IDs (must be unique). This file can be a
-                        regular text file or compressed file (.gz, .bz2).
+                        regular text file or compressed file (*.gz, *.bz2) or
+                        accessible url.
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file defining the biological groups of each
                         sample as well as other covariables such as gender,
@@ -29,10 +30,10 @@ Options
                         Sample IDs should match to the "Data file".
   -f FAMILY_FUNC, --family=FAMILY_FUNC
                         Error distribution and link function to be used in the
-                        GLM model. Can be integer 1 or 2 with 1 -
-                        "quasibinomial" and 2 - "binomial". Default-1.
+                        GLM model. Can be integer 1 or 2 with 1 =
+                        "quasibinomial" and 2 = "binomial". Default=1.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
 
 Input files (examples)
 ------------------------
