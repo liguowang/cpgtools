@@ -59,3 +59,13 @@ Output files
 -------------
 
 - output.anno.txt
+
+::
+
+ $ head -5 output.anno.txt
+ #Chrom	Start	End	Name	Beta	Strand	hg19_ENCODE_338TF_130Cell_E3.bed
+ chr1	10847	10848	cg26928153	0.8965	+	N/A
+ chr1	10849	10850	cg16269199	0.7915	+	N/A
+ chr1	15864	15865	cg13869341	0.9325	+	N/A
+ chr1	534241	534242	cg24669183	0.7941	+	FOXA2,MNT
+ 
