@@ -30,8 +30,8 @@ Options
   -b BED_FILES, --bed=BED_FILES
                         List of BED files specifying the genomic regions.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
-
+                        The prefix of the output file.
+                        
 Input files (examples)
 -----------------------
 
