@@ -126,7 +126,7 @@ def main():
 		sys.exit(103)
 	tree = buildIntervalTree(options.anno_file, window_size = options.window_size)
 	
-	OUT = open(options.out_file + '.anno.tsv','w')
+	OUT = open(options.out_file + '.anno.txt','w')
 	line_num = 0
 	printlog("Reading CpG file: %s ..." % options.input_file)
 	for line in ireader.reader(options.input_file):	 
