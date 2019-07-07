@@ -11,7 +11,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILES, --input-files=INPUT_FILES
+  -i INPUT_FILES, --input_files=INPUT_FILES
                         Input CpG file(s) in BED3+ format. Multiple BED files
                         should be separated by "," (eg: "-i
                         file_1.bed,file_2.bed,file_3.bed"). BED file can be a
@@ -28,13 +28,14 @@ Options
                         with two columns: the first column is chromosome
                         name/ID, the second column is chromosome size. This
                         file will determine: (1) which chromosomes are
-                        included in the final barplots, so do NOT include
+                        included in the final bar plots, so do NOT include
                         'unplaced', 'alternative' contigs in this file. (2)
-                        The order of chromosomes in the final barplots.
+                        The order of chromosomes in the final bar plots.
                         [required]
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file. [required]                        
-
+                        The prefix of the output file. [required]
+ 
+ 
 Input files (examples)
 -----------------------
 
