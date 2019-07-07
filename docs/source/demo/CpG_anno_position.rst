@@ -1,4 +1,4 @@
-CpG_anno_probe.py
+CpG_anno_position.py
 ==================
 
 Description
