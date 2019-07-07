@@ -38,18 +38,19 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Tab-separated data frame file containing beta values
                         with the 1st row containing sample IDs and the 1st
                         column containing CpG IDs.
   -g GROUP_FILE, --group=GROUP_FILE
                         Comma-separated group file defining the biological
-                        groups of each sample. Different group will be colored
-                        differently in the PCA plot.
+                        groups of each sample. Different groups will be
+                        colored differently in the PCA plot.
   -n N_COMPONENTS, --ncomponent=N_COMPONENTS
-                        Number of components. default-2
+                        Number of components. default=2
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
+
 
 Input files (examples)
 -------------------------
