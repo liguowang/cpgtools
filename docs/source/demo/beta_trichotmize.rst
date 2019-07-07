@@ -53,18 +53,19 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Input plain text file containing beta values with the
-                        1st-row containing sample IDs (must be unique) and the
-                        1st-column containing probe IDs (must be unique).
+                        1st row containing sample IDs (must be unique) and the
+                        1st column containing probe IDs (must be unique).
   -c PROB_CUTOFF, --prob-cut=PROB_CUTOFF
                         Probability cutoff to assign a probe into "semi-
                         methylated" class. default=0.99
-  -r, --report          Presence of this flag renders program to generate
-                        "summary_report.txt" file.
+  -r, --report          If True, generates "summary_report.txt" file.
+                        default=False
   -s RANDOM_STATE, --seed=RANDOM_STATE
                         The seed used by the random number generator.
                         default=99
+
 
 Input files (examples)
 ------------------------
