@@ -28,7 +28,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         BED6+ file specifying the C position. This BED file
                         should have at least 6 columns (Chrom, ChromStart,
                         ChromeEnd, Name, Beta_value, Strand). BED6+ file can
@@ -40,12 +40,12 @@ Options
                         3' UTRs, up- and down-stream intergenic regions.
   -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
                         Size of down-stream genomic region added to gene.
-                        default-2000 (bp)
+                        default=2000 (bp)
   -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
                         Size of up-stream genomic region added to gene.
-                        default-2000 (bp)
+                        default=2000 (bp)
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
 
 
 - `test_02.bed6.gz <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
