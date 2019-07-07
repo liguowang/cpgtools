@@ -126,13 +126,10 @@ def main():
 		sys.exit(103)
 	tree = buildIntervalTree(options.anno_file, window_size = options.window_size)
 	
-	OUT = open(options.out_file,'w')
+	OUT = open(options.out_file + '.anno.tsv','w')
 	line_num = 0
 	printlog("Reading CpG file: %s ..." % options.input_file)
-	for line in ireader.reader(options.input_file):	
-		if line.startswith("track"):continue
-		if line.startswith("#"):continue
-		if line.startswith('browser'):continue   
+	for line in ireader.reader(options.input_file):	 
 		fields = line.rstrip('\n ').split()
 		if len(fields) < 3:
 			continue
