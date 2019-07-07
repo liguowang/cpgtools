@@ -1,8 +1,8 @@
 CpG_anno_position.py
-==================
+=====================
 
 Description
------------------
+------------
 
 This program adds annotation information to each CpG based on its **genomic position**.
 
