@@ -136,7 +136,7 @@ def main():
 		line_num += 1
 		f = line.split()
 		if (line_num == 1 and options.header):
-			print (line + '\t' +  basename(options.input_file), file=OUT)
+			print (line + '\t' +  basename(options.anno_file), file=OUT)
 		else:
 			chrom = f[0]
 			start = int(f[1])
