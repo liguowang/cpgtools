@@ -12,7 +12,7 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILE, --input-file=INPUT_FILE
+  -i INPUT_FILE, --input_file=INPUT_FILE
                         Data file containing beta values with the 1st row
                         containing sample IDs (must be unique) and the 1st
                         column containing CpG positions or probe IDs (must be
@@ -22,14 +22,14 @@ Options
                         file or compressed file (.gz, .bz2).
   -g GROUP_FILE, --group=GROUP_FILE
                         Group file defining the biological group of each
-                        sample. It is a comma-separated 2 columns file with
+                        sample. It is a comma-separated two columns file with
                         the 1st column containing sample IDs, and the 2nd
                         column containing group IDs. It must have a header
                         row. Sample IDs should match to the "Data file". Note:
                         automatically switch to use  Kruskal-Wallis H-test if
                         more than two groups were defined in this file.
   -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
+                        The prefix of the output file.
                         
 
 Input files (examples)
