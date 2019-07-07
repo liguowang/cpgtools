@@ -40,9 +40,31 @@ Options
   -o OUT_FILE, --output=OUT_FILE
                         The prefix of the output file.
                         
+Input files (examples)
+-----------------------
+
+- `test_09.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_09.tsv.gz/download>`_
+- `test_09.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_09.grp.csv/download>`_
+
+Commands
+---------
+::
+
+ $ dmc_fisher.py -i test_09.tsv.gz -g test_09.grp.csv -o test_fisher
+
 
 Output
 ---------
 
 - 3 columns ("Odds ratio", "pvalue" and "FDR adjusted pvalue") will append to the original
   table.
+::
+
+ $ head -5 test_fisher.pval.txt
+ ID	LTS_MCR-1008	LTS_MCR-1035	STS_MCR-1021	STS_MCR-1251	OddsRatio	pval	adj.pval
+ chr10:100011340	12,14	26,37	0,18	10,24	9.353846153846154	1.2116597355208375e-06	6.343768248800197e-05
+ chr10:100011341	0,21	0,54	0,26	0,19	nan	1.0	1.0
+ chr10:100011387	0,14	0,40	0,20	0,24	nan	1.0	1.0
+ chr10:100011388	18,18	47,54	19,23	18,19	1.2548262548262548	0.7574366471769988	1.0
+ chr10:100026933	16,30	28,55	7,40	13,19	2.0926829268292684	0.04119183894184185	0.2617016451197068
+  
