@@ -71,12 +71,12 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 |                              |these 4 ranges: [0.00,  0.25], [0.25,  0.50], [0.50,  0.75], and   |
 |                              |[0.75,  1.00].                                                     |
 +------------------------------+-------------------------------------------------------------------+
-|beta_m_conversion.py          |Gives basic information of CpGs located in genomic regions. These  |
+|beta_stats.py                 |Gives basic information of CpGs located in genomic regions. These  |
 |                              |information include "Number of CpGs", "Min methylation level",     |
 |                              |"Max methylation level", "Mean methylation level across all CpGs", |
 |                              |"Median methylation level across all CpGs" and "Standard deviation"|
 +------------------------------+-------------------------------------------------------------------+
-|beta_m_conversion.py          |This program picks the N most variable CpGs from the input file.   |
+|beta_topN.py                  |This program picks the N most variable CpGs from the input file.   |
 |                              |The resulting file can be used for PCA or clustering analysis.     |
 +------------------------------+-------------------------------------------------------------------+
 |beta_trichotmize.py           |This program uses `Bayesian Gaussian Mixture model <https://scikit-|
