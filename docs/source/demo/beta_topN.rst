@@ -7,6 +7,7 @@ This program picks the top N rows (according to standard deviation) from the inp
 The resulting file can be used for clustering and PCA analysis.
 
 **Example of input**
+::
 
  CpG_ID  Sample_01       Sample_02       Sample_03       Sample_04
  cg_001  0.831035        0.878022        0.794427        0.880911
