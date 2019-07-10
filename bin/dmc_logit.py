@@ -36,7 +36,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.0"
+__version__="1.0.1"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -85,6 +85,8 @@ def main():
 		print ("%s: %s" % (cv_name, v_types[cv_name]))
 		for sample in samples:
 			print ('\t' + sample + '\t' + cvs[cv_name][sample])
+	
+	primary_variable = cv_names[0]
 	
 	print ('lrf1 <- function (cgid, m,t,%s){' % ','.join(cv_names), file=ROUT)
 	print ('try(fit <- glm(cbind(m,t - m) ~ %s, family=%s))' % ('+'.join(cv_names),family[options.family_func]), file=ROUT)
@@ -168,7 +170,54 @@ def main():
 	except:
 		print ("Error: cannot run Rscript: \"%s\"" % (options.out_file + '.r'), file=sys.stderr)
 		sys.exit(1)
+
+
+	# read
+	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
 	
+	line_num = 0
+	p_list = []
+	probe_list = []
+	for l in open(options.out_file + '.results.txt', 'r'):
+		l = l.strip()
+		line_num += 1
+		if line_num == 1:
+			headers = l.split()
+			primary_v_index = headers.index(primary_variable + '.pval')
+		else:
+			v = l.split()
+			try:
+				pv = float(v[primary_v_index])
+			except:
+				continue
+			if pv >= 0 and pv <= 1:
+				p_list.append(pv)
+				probe_list.append(v[0])
+
+	
+	# adjust
+	q_list =  padjust.multiple_testing_correction(p_list)
+	
+	# write
+	adjusted_p = {}
+	for id,p,q in zip(probe_list, p_list, q_list):
+		adjusted_p[id] = '\t'.join([str(i) for i in (p,q)])
+	FOUT = open(options.out_file + '.pval.txt','w')
+	printlog("Writing to %s" % (options.out_file + '.pval.txt'))
+	line_num = 1
+	for l in ireader.reader(options.input_file):
+		if line_num == 1:
+			print (l + '\tpval\tadj.pval', file=FOUT)
+		else:
+			f = l.split()
+			probe_ID = f[0]
+			try:
+				print (l + '\t' + adjusted_p[probe_ID], file=FOUT)
+			except:
+				print (l + '\tNaN\tNaN', file=FOUT)
+		line_num += 1
+	FOUT.close()
+		
 if __name__=='__main__':
 	main()
 

@@ -23,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.0"
+__version__="1.0.1"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -150,9 +150,13 @@ def main():
 			primary_v_index = headers.index(primary_variable + '.pval')
 		else:
 			v = l.split()
-			probe_list.append(v[0])
-			p_list.append(float(v[primary_v_index]))
-	
+			try:
+				pv = float(v[primary_v_index])
+			except:
+				continue
+			if pv >= 0 and pv <= 1:
+				p_list.append(pv)
+				probe_list.append(v[0])
 	
 	# adjust
 	q_list =  padjust.multiple_testing_correction(p_list)
