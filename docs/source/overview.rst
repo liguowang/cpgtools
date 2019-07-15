@@ -77,7 +77,8 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 |                              |"Median methylation level across all CpGs" and "Standard deviation"|
 +------------------------------+-------------------------------------------------------------------+
 |beta_topN.py                  |This program picks the N most variable CpGs from the input file.   |
-|                              |The resulting file can be used for PCA or clustering analysis.     |
+|                              |The resulting file can be used for PCA/t-SNE or clustering         |
+|                              |analysis.                                                          |
 +------------------------------+-------------------------------------------------------------------+
 |beta_trichotmize.py           |This program uses `Bayesian Gaussian Mixture model <https://scikit-|
 |                              |learn.org/stable/modules/generated/sklearn.mixture.BayesianGaussian|
