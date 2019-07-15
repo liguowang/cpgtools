@@ -9,7 +9,7 @@ Rather than using a hard threshold to call "methylated" or "unmethylated" CpGs o
 	Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are unmethylated. 
 **Semi-methylated** : labeled as "1" in the result file
 	Only one of the homologous chromosomes is methylated. This is also called allele-specific
-	methylation or imprinting. Note: this is different from **hemimethylation**, which refers
+	methylation or imprinting. Note: **semi-methylation** here is different from **hemimethylation**, which refers
 	to "one of two (complementary) strands is methylated".  
 **Full-methylated** : labeled as "2" in the result file
 	Both the homologous chromosomes (i.e., The maternal and paternal chromosomes) are methylated. 

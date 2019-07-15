@@ -9,9 +9,10 @@ This program adds annotation information to each CpG based on its **genomic posi
 Notes
 ------
 
-- Input CpG and BED files must have at least three columns, and must based on the same genome assembly version
+- Input CpG (-i) and annotation (-a) BED files must have at least three columns, and must based on the same genome assembly   version
 - If multiple regions from the annotation BED file are overlapped with the **same**
   CpG site, their names will be concatenated together.
+- Since the input (-i) is a regular BED foramt file, this module can be uesd to annotate any genomic regions of interest. 
   
 Options
 -------
