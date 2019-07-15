@@ -86,7 +86,7 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 |                              |"unassigned"                                                       |
 +------------------------------+-------------------------------------------------------------------+
 |beta_tSNE.py                  |This program performs `t-SNE (t-Distributed Stochastic Neighbor    |
-|                              |Embedding )` <https://lvdmaaten.github.io/tsne/>`_ analysis.       |
+|                              |Embedding ) <https://lvdmaaten.github.io/tsne/>`_ analysis.        |
 +------------------------------+-------------------------------------------------------------------+
 
 Differential CpG analysis modules
