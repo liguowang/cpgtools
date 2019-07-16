@@ -13,7 +13,12 @@ Notes
 - If multiple regions from the annotation BED file are overlapped with the **same**
   CpG site, their names will be concatenated together.
 - Since the input (-i) is a regular BED foramt file, this module can be uesd to annotate any genomic regions of interest. 
-  
+
+Pre-computed datasets
+----------------------
+
+- `hg38_ENCODE_338TF_130Cell_E3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg38_ENCODE_338TF_130Cell_E3.bed.gz>`_. Transcription factor (TF) binding sites identified from ChIP-seq experiments performed by the ENCODE project. Peaks from 1264 experiments representing 338 transcription factors in 130 cell types are combined (N = 10,560,472). BED format file was downloaded from the UCSC Tabel Browser, and a detailed description is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-encRegTfbsClustered>`_.
+
 Options
 -------
 
