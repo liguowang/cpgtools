@@ -46,7 +46,7 @@ It will add 17 columns to the original input data file. These 17 columns include
 | ENCODE_TF_ChIP        |Transcription factor (TF) binding sites identified from ChIP-seq         |
 |                       |experiments performed by the `ENCODE <https://www.encodeproject.org/>`_  |
 |                       |project. Peaks from 1264 experiments representing 338 transcription      |
-|                       |factors in 130 cell types are combined (N - 10,560,472).                 |
+|                       |factors in 130 cell types are combined (N = 10,560,472).                 |
 |                       |BED format file was downloaded from the `UCSC Tabel Browser              |
 |                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and a detailed description |
 |                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
@@ -63,15 +63,15 @@ It will add 17 columns to the original input data file. These 17 columns include
 +-----------------------+-------------------------------------------------------------------------+
 |ENCODE_H3K27ac_ChIP    |H3K27ac peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
 |                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 665,650)    | 
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 665,650)    | 
 +-----------------------+-------------------------------------------------------------------------+
 |ENCODE_H3K4me1_ChIP    |H3K4me1 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
 |                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 1,435,550)  | 
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 1,435,550)  | 
 +-----------------------+-------------------------------------------------------------------------+
 |ENCODE_H3K4me3_ChIP    |H3K4me3 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
 |                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 525,824)    | 
+|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 525,824)    | 
 +-----------------------+-------------------------------------------------------------------------+
 |ENCODE_chromHMM        |Chromatin State Segmentation by `chromHMM <https://www.nature.com/       |
 |                       |articles/nmeth.1906>`_ from ENCODE. Chromatin states across 9 cell types |
