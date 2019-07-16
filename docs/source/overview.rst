@@ -68,8 +68,8 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 +------------------------------+-------------------------------------------------------------------+
 |beta_stacked_barplot.py       |Creates stacked barplot for each sample. The stacked barplot       |
 |                              |showing the proportions of CpGs whose beta values are falling into |
-|                              |these 4 ranges: [0.00,  0.25], [0.25,  0.50], [0.50,  0.75], and   |
-|                              |[0.75,  1.00].                                                     |
+|                              |these 4 ranges: [0.00,  0.25], (0.25,  0.50], (0.50,  0.75], and   |
+|                              |(0.75,  1.00].                                                     |
 +------------------------------+-------------------------------------------------------------------+
 |beta_stats.py                 |Gives basic information of CpGs located in genomic regions. These  |
 |                              |information include "Number of CpGs", "Min methylation level",     |
