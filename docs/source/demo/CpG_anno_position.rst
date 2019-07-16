@@ -61,6 +61,8 @@ Pre-computed datasets
 	NHEK, NHLF) are combined (N = 665,650)
 
 
+These BED files were lifted over to hg38/GRCh38 using `CrossMap <http://crossmap.sourceforge.net/>`_.
+The hg38-based annotation files are available from `here <https://sourceforge.net/projects/cpgtools/files/data/>`_ 
 
 Options
 -------
