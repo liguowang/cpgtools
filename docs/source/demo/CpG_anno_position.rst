@@ -17,19 +17,19 @@ Notes
 Pre-computed datasets
 ----------------------
 
-`hg19_ENCODE_338TF_130Cell_E3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_338TF_130Cell_E3.bed.gz>`_
+`hg19_ENCODE_338TF_130Cell_E3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_338TF_130Cell_E3.bed.gz>`_ (File size  = 108.2 MB)
 	Transcription factor (TF) binding sites identified from `ChIP-seq <https://en.wikipedia.org/wiki/ChIP-sequencing>`_ experiments performed
 	by the `ENCODE <https://www.encodeproject.org/>`_ project. Peaks from 1264 experiments
 	representing 338 transcription factors in 130 cell types are combined (N = 10,560,472). BED format file was
 	downloaded from the `UCSC Tabel Browser <http://genome.ucsc.edu/cgi-bin/hgTables>`_.
 	
-`hg19_ENCODE_DNaseI_125Cells_V3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_DNaseI_125Cells_V3.bed.gz>`_
+`hg19_ENCODE_DNaseI_125Cells_V3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_DNaseI_125Cells_V3.bed.gz>`_ (File size  = 24.3 MB)
 	`DNase I hypersensitivity sites <https://en.wikipedia.org/wiki/DNase_I_hypersensitive_site>`_ identified from
 	`ENCODE <https://www.encodeproject.org/>`_ `DNase-seq <https://en.wikipedia.org/wiki/DNase-Seq>`_ experiments. Peaks
 	from 125 cell types are combined (N = 1,867,665). BED format file was downloaded from
 	the `UCSC Tabel Browser <http://genome.ucsc.edu/cgi-bin/hgTables>`_.
 	
-`hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz>`_
+`hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz>`_ (File size  = 32.7 MB)
 	Chromatin State Segmentation by `chromHMM <https://www.nature.com/articles/nmeth.1906>`_ 
 	from `ENCODE <https://www.encodeproject.org/>`_. Chromatin states across 9 cell
 	types (GM12878, H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were learned by
@@ -45,17 +45,17 @@ Pre-computed datasets
 `hg19_FANTOM_enhancers_phase_1_and_2.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_FANTOM_enhancers_phase_1_and_2.bed.gz>`_
 	`PHANTOM5 <http://fantom.gsc.riken.jp/5/>`_ human permissive enhancers downloaded from `here <http://fantom.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2_expression_tpm_matrix.txt.gz>`_.
 
-`hg19_ENCODE_H3K4me1_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K4me1_11_cellLines_ChIP.bed.gz>`_
+`hg19_ENCODE_H3K4me1_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K4me1_11_cellLines_ChIP.bed.gz>`_ (File size  = 12.2 MB)
 	H3K4me1 (marker of active and primed enhancer) peaks identified from `ENCODE <https://www.encodeproject.org/>`_ histone ChIP-seq experiments. Peaks from 11 cell
 	types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2, K562, Monocytes-CD14+_RO01746,
 	NHEK, NHLF) are combined (N = 1,435,550)
 
-`hg19_ENCODE_H3K4me3_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K4me3_11_cellLines_ChIP.bed.gz>`_
+`hg19_ENCODE_H3K4me3_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K4me3_11_cellLines_ChIP.bed.gz>`_ (File size  = 4.5 MB)
 	H3K4me3 (marker of promoter) peaks identified from `ENCODE <https://www.encodeproject.org/>`_ histone ChIP-seq experiments. Peaks from 11 cell
 	types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2, K562, Monocytes-CD14+_RO01746,
 	NHEK, NHLF) are combined (N = 525,824)
 
-`hg19_ENCODE_H3K27ac_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K27ac_11_cellLines_ChIP.bed.gz>`_
+`hg19_ENCODE_H3K27ac_11_cellLines_ChIP.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_H3K27ac_11_cellLines_ChIP.bed.gz>`_ (File size  = 5.7 MB)
 	H3K27ac (marker of active enhancer) peaks identified from `ENCODE <https://www.encodeproject.org/>`_ histone ChIP-seq experiments. Peaks from 11 cell
 	types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2, K562, Monocytes-CD14+_RO01746,
 	NHEK, NHLF) are combined (N = 665,650)
