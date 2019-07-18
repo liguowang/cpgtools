@@ -32,6 +32,10 @@ analysis for samples.
 - Beta values will be standardized into z scores
 - Only the first two components will be visualized
 - Different perplexity values can result in significantly different results
+- Even with same data and save parameters, different run might give you (slightly)
+  different result. It is perfectly fine to run t-SNE a number of times (with the same
+  data and parameters), and to select the visualization with the lowest value of the
+  objective function as your final visualization.
 
 Options
 --------
@@ -45,7 +49,8 @@ Options
   -g GROUP_FILE, --group=GROUP_FILE
                         Comma-separated group file defining the biological
                         groups of each sample. Different groups will be
-                        colored differently in the t-SNE plot.
+                        colored differently in the t-SNE plot. Supports a
+                        maximum of 20 groups.
   -p PERPLEXITY_VALUE, --perplexity=PERPLEXITY_VALUE
                         This is a tunable parameter of t-SNE, and has a
                         profound effect on the resulting 2D map. Consider
@@ -67,9 +72,17 @@ Options
                         compressed in a dense cloud with few outliers. If the
                         cost function gets stuck in a bad local minimum
                         increasing the learning rate may help. default=200.0
+  -l, --label           If True, sample ids will be added underneath the data
+                        point. default=False
+  -c PLOT_CHAR, --char=PLOT_CHAR
+                        Ploting character: 1 = 'dot', 2 = 'circle'. default=1
+  -x LEGEND_LOCATION, --loc=LEGEND_LOCATION
+                        Location of legend panel: 1 = 'topright', 2 =
+                        'bottomright', 3 = 'bottomleft', 4 = 'topleft'.
+                        default=1
   -o OUT_FILE, --output=OUT_FILE
                         The prefix of the output file.
-
+                        
 Input files (examples)
 -------------------------
 
