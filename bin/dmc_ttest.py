@@ -23,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.0"
+__version__="1.0.2"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -177,8 +177,11 @@ def main():
 				for g in group_IDs:
 					tmp.append(np.array(g2values[g]))
 				(pval,tscore) = anova(*tmp)
-			probe_list.append(probe_ID)
-			p_list.append(pval)
+			if pval >= 0 and pval <= 1:
+				probe_list.append(probe_ID)
+				p_list.append(pval)
+			else:
+				continue
 		line_num += 1
 	
 	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
@@ -195,7 +198,10 @@ def main():
 		else:
 			f = l.split()
 			probe_ID = f[0]
-			print (l + '\t' + adjusted_p[probe_ID], file=FOUT)
+			try:
+				print (l + '\t' + adjusted_p[probe_ID], file=FOUT)
+			except:
+				print (l + '\t' + 'n/a', file=FOUT)
 		line_num += 1
 	FOUT.close()
 		
