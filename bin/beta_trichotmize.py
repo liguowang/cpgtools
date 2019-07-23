@@ -6,7 +6,7 @@ Description
 This program uses the Bayesian Gaussian Mixture model (BGMM) to trichotmize beta values into 
 three status: 
  * Un-methylated (labeled as "0" in result file)
- * Semi-methylated (labeled as "1" in result file)
+ * Semi- or particial-methylated (labeled as "1" in result file)
  * Full-methylated (labeled as "2" in result file)
  * unassigned (labeled as "-1" in result file)
 """
@@ -26,7 +26,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.0"
+__version__="1.0.2"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -48,7 +48,7 @@ def load_data(infile):
 	"""
 
 	printlog("Reading input file: \"%s\"" % infile)
-	df1 = pd.read_table(infile, index_col = 0)
+	df1 = pd.read_csv(infile, index_col = 0, sep="\t")
 
 	#remove any rows with NAs
 	df2 = df1.dropna(axis=0, how='any')
@@ -106,7 +106,7 @@ def trichotmize(d,m, prob_cutoff):
 	"""
 	trichotmize beta-value into one of ('0','0.5','1')
 	0 : Un-methylation
-	0.5: Semi-methylation
+	0.5: Semi- or particial-methylation
 	1: Methylation
 	
 	d is beta value object returned by "load_data" function
@@ -132,9 +132,9 @@ def trichotmize(d,m, prob_cutoff):
 		probs = m[s_id].predict_proba(d[s_id].values.reshape(-1,1))	# list of probabilities of components: [[  4.33638063e-035   9.54842259e-001   4.51577411e-002],...]
 		
 		print ("#Prob_of_0: Probability of CpG belonging to un-methylation group", file=FOUT)
-		print ("#Prob_of_1: Probability of CpG belonging to semi-methylation group", file=FOUT)
+		print ("#Prob_of_1: Probability of CpG belonging to semi- or particial-methylation group", file=FOUT)
 		print ("#Prob_of_2: Probability of CpG belonging to full-methylation group", file=FOUT)
-		print ("#Assigned_lable: -1 = 'unassigned', 0 = 'un-methylation', 1 = 'semi-methylation', 2 = 'full-methylation'", file=FOUT)
+		print ("#Assigned_lable: -1 = 'unassigned', 0 = 'un-methylation', 1 = 'semi- or particial-methylation', 2 = 'full-methylation'", file=FOUT)
 		print ("Probe_ID" + '\tBeta_value\t' + '\t'.join(['Prob_of_' + methyl_lables[0], 'Prob_of_' + methyl_lables[1], 'Prob_of_' + methyl_lables[2]]) + '\t' + 'Assigned_lable', file=FOUT)
 		for probe_ID, beta, p in zip(probe_IDs, betas, probs):
 			p_list = list(p)
@@ -154,7 +154,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Input plain text file containing beta values with the 1st row containing sample IDs (must be unique) and the 1st column containing probe IDs (must be unique).")
-	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.99,help="Probability cutoff to assign a probe into \"semi-methylated\" class. default=%default")
+	parser.add_option("-c","--prob-cut",action="store",type="float",dest="prob_cutoff",default=0.95,help="Probability cutoff to assign a probe into \"semi- or particial-methylated\" class. default=%default")
 	parser.add_option("-r","--report",action="store_true",dest="report_summary",default=False, help="If True, generates \"summary_report.txt\" file.  default=%default")
 	parser.add_option("-s","--seed",action="store",type='int', dest="random_state",default=99, help="The seed used by the random number generator. default=%default")
 	(options,args)=parser.parse_args()
