@@ -35,8 +35,8 @@ Options
 Input files
 --------------
 
-- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
-- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+- `test_04_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.tsv.gz>`_
+- `test_04_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.grp.csv>`_
 
 Command
 ------------
