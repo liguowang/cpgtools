@@ -99,4 +99,4 @@ Output files
  cg00000721	0.935903	0.935080	0.000823	(-0.013210,0.018628)	0.508686
  cg00000948	0.898609	0.897536	0.001073	(-0.020663,0.026813)	0.518238
 
-mu1 and mu2 can considered as *significantly* different if the 95% HDI does NOT include zero. 
+mu1 and mu2 can be considered as *significantly* different if the 95% HDI does NOT include zero. 
