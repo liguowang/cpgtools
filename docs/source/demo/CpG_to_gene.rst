@@ -103,7 +103,7 @@ Command
 
 ::
 
- $CpG_to_gene.py -i  850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o output
+ $ CpG_to_gene.py -i  850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o output
  
 Output files
 -------------
