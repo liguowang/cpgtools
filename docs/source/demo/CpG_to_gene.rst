@@ -31,8 +31,6 @@ Basal regulatory domain and Extended regulatory domain are illustrated in below 
   "conservative" gene model (such as Refseq curated protein-coding genes) is recommended.
 - In the refgene file, multiple isoforms should be merged into a single gene.
 
-Options
------------
 
 Description
 -----------
