@@ -110,3 +110,19 @@ Output files
 
 - output.associated_genes.txt     
 
+::
+
+ $ head output.associated_genes.txt
+ 
+ #The last column contains genes whose extended regulatory domain are overlapped with the CpG
+ #The 2nd last column contains genes whose basal regulatory domain are overlapped with the CpG
+ #"//" indicates no genes are found
+ chr1	10524	10525	DDX11L1	//
+ chr1	10847	10848	DDX11L1	//
+ chr1	10849	10850	DDX11L1	//
+ chr1	15864	15865	//	MIR6859-1;DDX11L1
+ chr1	18826	18827	MIR6859-1	//
+ chr1	29406	29407	WASH7P;MIR1302-2	//
+ chr1	29424	29425	WASH7P;MIR1302-2	//
+ ...
+
