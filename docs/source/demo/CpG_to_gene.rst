@@ -55,9 +55,11 @@ Notes
  1. Which genes are assigned to a particular CpG largely depends on gene annotation. A
     "conservative" gene model (such as Refseq curated protein coding genes) is recommended.
  2. In the gene model, multiple isoforms should be merged into a single gene.
-#=========================================================================================
 
-Usage: CpG_to_gene.py [options]
+
+
+Options
+-------
 
 
 Options:
