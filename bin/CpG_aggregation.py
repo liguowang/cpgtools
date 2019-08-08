@@ -44,7 +44,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.0"
+__version__="1.0.3"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -110,8 +110,8 @@ def findIntervals(chrom, start, end, obj, a = 0.01):
 		total.append(int(t))
 	ori_CpG_count = len(total)		#number of CpGs of a region
 	p_cut = a / ori_CpG_count
-	ori_methyl_sum = np.sum(methyl)	#total reads of a region
-	ori_total_sum = np.sum(total)	#total methylated reads of a region
+	ori_methyl_sum = int(np.sum(methyl))	#total reads of a region
+	ori_total_sum = int(np.sum(total))	#total methylated reads of a region
 	
 	if ori_total_sum == 0:
 		return(['N/A']*6)
@@ -134,8 +134,8 @@ def findIntervals(chrom, start, end, obj, a = 0.01):
 		new_methyl.append(m)
 		new_total.append(t)
 	new_CpG_count = len(new_total)
-	new_methyl_sum = np.sum(new_methyl)
-	new_total_sum = np.sum(new_total)
+	new_methyl_sum = int(np.sum(new_methyl))
+	new_total_sum = int(np.sum(new_total))
 	
 	return([new_CpG_count, new_methyl_sum, new_total_sum, ori_CpG_count, ori_methyl_sum, ori_total_sum])
 	
