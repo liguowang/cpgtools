@@ -45,7 +45,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.3"
+__version__="1.0.4"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -69,12 +69,14 @@ def main():
 	parser.add_option("--learning_rate",action="store",type='float', dest="learning_rate", default=200.0, help="The learning rate for t-SNE is usually in the range [10.0, 1000.0]. If the learning rate is too high, the data may look like a ‘ball’ with any point approximately equidistant from its nearest neighbors. If the learning rate is too low, most points may look compressed in a dense cloud with few outliers. If the cost function gets stuck in a bad local minimum increasing the learning rate may help. default=%default" )
 	parser.add_option("-l","--label",action="store_true",default=False,dest="text_label",help="If True, sample ids will be added underneath the data point. default=%default")
 	parser.add_option("-c","--char",action="store",type='int', default=1, dest="plot_char",help="Ploting character: 1 = 'dot', 2 = 'circle'. default=%default")
+	parser.add_option("-a","--alpha",action="store",type='float', default=0.5, dest="plot_alpha",help="Opacity of dots. default=%default")
 	parser.add_option("-x","--loc",action="store",type='int', default=1, dest="legend_location",help="Location of legend panel: 1 = 'topright', 2 = 'bottomright', 3 = 'bottomleft', 4 = 'topleft'. default=%default")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	
 	(options,args)=parser.parse_args()
 	
-	
+	#print (options.text_label)
+	#sys.exit(0)
 	print ()
 	if not (options.input_file):
 		print (__doc__)
@@ -142,7 +144,13 @@ def main():
 	print ('')
 	print ('d = read.table(file=\"%s\", sep="\\t", header=TRUE, comment.char = "", stringsAsFactors=FALSE)' % (options.out_file + '.t-SNE.tsv'), file=ROUT)
 	print ('attach(d)', file=ROUT)
-	print ('plot(PC1, PC2, col = Colors, pch=%d, cex=1, main="t-SNE 2D map")' % pch[options.plot_char], file=ROUT)
+	
+	if options.plot_alpha:
+		print ('library(scales)', file=ROUT)
+		print ('plot(PC1, PC2, col = alpha(Colors, %f), pch=%d, cex=1.5, main="t-SNE 2D map")' % (options.plot_alpha, pch[options.plot_char]), file=ROUT)
+	else:
+		print ('plot(PC1, PC2, col = Colors, pch=%d, cex=1.2, main="t-SNE 2D map")' % pch[options.plot_char], file=ROUT)	
+		#print ('plot(PC1, PC2, col = Colors, pch=%d, cex=1, main="t-SNE 2D map")' % pch[options.plot_char], file=ROUT)
 	if options.text_label:
 		print ('text(PC1, PC2, labels=Sample_ID, col = Colors, cex=0.5, pos=1)', file=ROUT)
 	print ('legend("%s", legend=c(%s), col=c(%s), pch=%d,cex=1)' %  (legend_pos[options.legend_location], ','.join(['"' + str(i) + '"' for i in group_names]), ','.join(['"' + str(group_to_col[i]) + '"' for i in group_names]), pch[options.plot_char]), file=ROUT)
