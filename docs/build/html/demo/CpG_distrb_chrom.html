@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. CpG_distrb_chrom.py &mdash; CpGtools documentation</title>
+  <title>4. CpG_distrb_chrom.py &mdash; CpGtools documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. CpG_distrb_gene_centered.py" href="CpG_distrb_gene_centered.html" />
-    <link rel="prev" title="2. CpG_anno_probe.py" href="CpG_anno_probe.html" /> 
+    <link rel="next" title="5. CpG_distrb_gene_centered.py" href="CpG_distrb_gene_centered.html" />
+    <link rel="prev" title="3. CpG_anno_probe.py" href="CpG_anno_probe.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,34 +106,36 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. CpG_distrb_chrom.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">3.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">3.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">3.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">3.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. CpG_distrb_chrom.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">4.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">4.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">4.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">4.4. Command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -187,7 +189,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>3. CpG_distrb_chrom.py</li>
+      <li>4. CpG_distrb_chrom.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -207,13 +209,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="cpg-distrb-chrom-py">
-<h1>3. CpG_distrb_chrom.py<a class="headerlink" href="#cpg-distrb-chrom-py" title="Permalink to this headline">¶</a></h1>
+<h1>4. CpG_distrb_chrom.py<a class="headerlink" href="#cpg-distrb-chrom-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>3.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>4.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This program calculates the distribution of CpG over chromosomes</p>
 </div>
 <div class="section" id="options">
-<h2>3.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>4.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -222,7 +224,7 @@
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>
 </dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILES</var></span>, <span class="option">--input-files-INPUT_FILES</span></kbd></dt>
+<dt><kbd><span class="option">-i <var>INPUT_FILES</var></span>, <span class="option">--input_files=<var>INPUT_FILES</var></span></kbd></dt>
 <dd><p>Input CpG file(s) in BED3+ format. Multiple BED files
 should be separated by “,” (eg: “-i
 file_1.bed,file_2.bed,file_3.bed”). BED file can be a
@@ -230,30 +232,30 @@ regular text file or compressed file (.gz, .bz2). The
 barplot figures will NOT be generated if you provide
 more than 12 samples (bed files). [required]</p>
 </dd>
-<dt><kbd><span class="option">-n <var>FILE_NAMES</var></span>, <span class="option">--names-FILE_NAMES</span></kbd></dt>
+<dt><kbd><span class="option">-n <var>FILE_NAMES</var></span>, <span class="option">--names=<var>FILE_NAMES</var></span></kbd></dt>
 <dd><p>Shorter and meaningful names to label samples. Should
 be separated by “,” and match CpG BED files in number.
 If not provided, basenames of CpG BED files will be
 used to label samples. [optional]</p>
 </dd>
-<dt><kbd><span class="option">-s <var>CHROM_SIZE</var></span>, <span class="option">--chrom-size-CHROM_SIZE</span></kbd></dt>
+<dt><kbd><span class="option">-s <var>CHROM_SIZE</var></span>, <span class="option">--chrom-size=<var>CHROM_SIZE</var></span></kbd></dt>
 <dd><p>Chromosome size file. Tab or space separated text file
-with 2 columns: the first column is chromosome
+with two columns: the first column is chromosome
 name/ID, the second column is chromosome size. This
 file will determine: (1) which chromosomes are
-included in the final barplots, so do NOT include
+included in the final bar plots, so do NOT include
 ‘unplaced’, ‘alternative’ contigs in this file. (2)
-The order of chromosomes in the final barplots.
+The order of chromosomes in the final bar plots.
 [required]</p>
 </dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output-OUT_FILE</span></kbd></dt>
-<dd><p>Prefix of the output file. [required]</p>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
+<dd><p>The prefix of the output file. [required]</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="input-files-examples">
-<h2>3.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>4.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/450K_probe.hg19.bed3.gz">450K_probe.hg19.bed3.gz</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz">850K_probe.hg19.bed3.gz</a></p></li>
@@ -261,7 +263,7 @@ The order of chromosomes in the final barplots.
 </ul>
 </div>
 <div class="section" id="command">
-<h2>3.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>4.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ chrom_distribution.py -i 450K_probe.hg19.bed3.gz,850K_probe.hg19.bed3.gz -n 450K,850K \
   -s hg19.chrom.sizes -o chromDist
 </pre></div>
@@ -274,11 +276,11 @@ The order of chromosomes in the final barplots.
 <li><p>chromDist.CpG_percent.pdf</p></li>
 <li><p>chromDist.CpG_perMb.pdf</p></li>
 </ul>
-<p>Total CpG count per chromsome</p>
+<p>Total CpG count per chromosome</p>
 <a class="reference internal image-reference" href="../_images/chromDist.CpG_total.png"><img alt="../_images/chromDist.CpG_total.png" src="../_images/chromDist.CpG_total.png" style="width: 500.0px; height: 200.0px;" /></a>
 <p>CpG percent on each chromosome (normalized to total CpGs)</p>
 <a class="reference internal image-reference" href="../_images/chromDist.CpG_percent.png"><img alt="../_images/chromDist.CpG_percent.png" src="../_images/chromDist.CpG_percent.png" style="width: 500.0px; height: 200.0px;" /></a>
-<p>CpG per Mb (normalized to chromsome size)</p>
+<p>CpG per Mb (normalized to chromosome size)</p>
 <a class="reference internal image-reference" href="../_images/chromDist.CpG_perMb.png"><img alt="../_images/chromDist.CpG_perMb.png" src="../_images/chromDist.CpG_perMb.png" style="width: 500.0px; height: 200.0px;" /></a>
 </div>
 </div>
@@ -291,10 +293,10 @@ The order of chromosomes in the final barplots.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CpG_distrb_gene_centered.html" class="btn btn-neutral float-right" title="4. CpG_distrb_gene_centered.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CpG_distrb_gene_centered.html" class="btn btn-neutral float-right" title="5. CpG_distrb_gene_centered.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CpG_anno_probe.html" class="btn btn-neutral float-left" title="2. CpG_anno_probe.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CpG_anno_probe.html" class="btn btn-neutral float-left" title="3. CpG_anno_probe.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -305,7 +307,7 @@ The order of chromosomes in the final barplots.
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

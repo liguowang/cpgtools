@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>23. dmc_ttest.py &mdash; CpGtools documentation</title>
+  <title>25. dmc_ttest.py &mdash; CpGtools documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. Compare Differential CpG Analysis Tools" href="../compare_diff_tools.html" />
-    <link rel="prev" title="22. dmc_nonparametric.py" href="dmc_nonparametric.html" /> 
+    <link rel="prev" title="24. dmc_nonparametric.py" href="dmc_nonparametric.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,33 +106,35 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">23. dmc_ttest.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">23.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">23.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">23.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">23.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">23.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">25. dmc_ttest.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">25.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">25.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">25.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">25.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">25.5. Output files</a></li>
 </ul>
 </li>
 </ul>
@@ -188,7 +190,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>23. dmc_ttest.py</li>
+      <li>25. dmc_ttest.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -208,15 +210,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="dmc-ttest-py">
-<h1>23. dmc_ttest.py<a class="headerlink" href="#dmc-ttest-py" title="Permalink to this headline">¶</a></h1>
+<h1>25. dmc_ttest.py<a class="headerlink" href="#dmc-ttest-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>23.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Differential CpG analysis using <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_t-test">T test</a>
-for two groups comparison or <a class="reference external" href="https://en.wikipedia.org/wiki/Analysis_of_variance">ANOVA</a>
+<h2>25.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Differential CpG analysis using <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_t-test">T test</a> for two groups comparison or <a class="reference external" href="https://en.wikipedia.org/wiki/Analysis_of_variance">ANOVA</a>
 for multiple groups comparison.</p>
 </div>
 <div class="section" id="options">
-<h2>23.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>25.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -225,7 +226,7 @@ for multiple groups comparison.</p>
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>
 </dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input-file-INPUT_FILE</span></kbd></dt>
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
 <dd><p>Data file containing beta values with the 1st row
 containing sample IDs (must be unique) and the 1st
 column containing CpG positions or probe IDs (must be
@@ -234,7 +235,7 @@ non-numerical values will be considered as “missing
 values” and ignored. This file can be a regular text
 file or compressed file (.gz, .bz2).</p>
 </dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group-GROUP_FILE</span></kbd></dt>
+<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
 <dd><p>Group file defining the biological group of each
 sample. It is a comma-separated 2 columns file with
 the 1st column containing sample IDs, and the 2nd
@@ -244,27 +245,24 @@ automatically switch to use ANOVA if more than 2
 groups were defined in this file.</p>
 </dd>
 <dt><kbd><span class="option">-p</span>, <span class="option">--paired</span></kbd></dt>
-<dd><p>If ‘-p/–paired’ flag was specified, use paired t-test
-which requires the equal number of samples in both
-groups. Paired sampels are matched by the order. This
-option will be ignored for multiple group analysis.</p>
+<dd><p>If True, performs a paired t-test (the paired sampels
+are matched by the order). If False, performs a
+standard independent 2 sample t-test. default=False</p>
 </dd>
 <dt><kbd><span class="option">-w</span>, <span class="option">--welch</span></kbd></dt>
-<dd><p>If ‘-w/–welch’ flag was specified, using Welch’s
-t-test which does not assume the two samples have
-equal variance.  If omitted, use standard two-sample
-t-test (i.e. assuming the two samples have equal
-variance). This option will be ignored for paired
-t-test and multiple group analysis.</p>
+<dd><p>If True, performs Welch’s t-test which does not assume
+the two samples have equal variance.  If False,
+performs a standard two-sample t-test (i.e. assuming
+the two samples have equal variance). default=False</p>
 </dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output-OUT_FILE</span></kbd></dt>
-<dd><p>Prefix of the output file.</p>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
+<dd><p>The prefix of the output file.</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="input-files-examples">
-<h2>23.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>25.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv">test_05_TwoGroup.grp.csv</a></p></li>
@@ -273,7 +271,7 @@ t-test and multiple group analysis.</p>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>23.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>25.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#Two group comparison. Compare normal livers to HCV-related cirrhosis livers
 $dmc_ttest.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o ttest_2G
 
@@ -283,7 +281,7 @@ $dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv -o ttes
 </div>
 </div>
 <div class="section" id="output-files">
-<h2>23.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<h2>25.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>ttest_2G.pval.txt</p></li>
 <li><p>ttest_3G.pval.txt</p></li>
@@ -302,7 +300,7 @@ $dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv -o ttes
         <a href="../compare_diff_tools.html" class="btn btn-neutral float-right" title="1. Compare Differential CpG Analysis Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dmc_nonparametric.html" class="btn btn-neutral float-left" title="22. dmc_nonparametric.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dmc_nonparametric.html" class="btn btn-neutral float-left" title="24. dmc_nonparametric.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +311,7 @@ $dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv -o ttes
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

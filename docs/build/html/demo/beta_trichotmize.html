@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>16. beta_trichotmize.py &mdash; CpGtools documentation</title>
+  <title>18. beta_trichotmize.py &mdash; CpGtools documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. dmc_Bayes.py" href="dmc_Bayes.html" />
-    <link rel="prev" title="15. beta_topN.py" href="beta_topN.html" /> 
+    <link rel="next" title="19. dmc_Bayes.py" href="dmc_Bayes.html" />
+    <link rel="prev" title="17. beta_topN.py" href="beta_topN.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,35 +106,38 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">16. beta_trichotmize.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">16.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#algorithm">16.2. Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">16.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">16.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">16.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">18. beta_trichotmize.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">18.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">18.2. Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">18.3. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">18.4. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">18.5. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">18.6. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -188,7 +191,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>16. beta_trichotmize.py</li>
+      <li>18. beta_trichotmize.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -208,27 +211,25 @@
            <div itemprop="articleBody">
             
   <div class="section" id="beta-trichotmize-py">
-<h1>16. beta_trichotmize.py<a class="headerlink" href="#beta-trichotmize-py" title="Permalink to this headline">¶</a></h1>
+<h1>18. beta_trichotmize.py<a class="headerlink" href="#beta-trichotmize-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>16.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Rather than using hard threshold to call “methylated” or “unmethylated” CpGs or regions,
-this program uses probability approach (Bayesian Gaussian Mixture model) to trichotmize
-beta values into three status:</p>
+<h2>18.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Rather than using a hard threshold to call “methylated” or “unmethylated” CpGs or regions, this program uses a probability approach (Bayesian Gaussian Mixture model) to trichotmize beta values into three status:</p>
 <dl class="simple">
-<dt>Un-methylated<span class="classifier">labeled as “0” in result file</span></dt><dd><p>Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are unmethylated.</p>
+<dt><strong>Un-methylated</strong><span class="classifier">labeled as “0” in the result file</span></dt><dd><p>Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are unmethylated.</p>
 </dd>
-<dt>Semi-methylated<span class="classifier">labeled as “1” in result file</span></dt><dd><p>Only one of the homologous chromosomes is methylated. This is also called allele-specific
-methylation or “imprinting”. Note: this is different from <strong>hemimethylation</strong>, which refers
+<dt><strong>Semi-methylated</strong><span class="classifier">labeled as “1” in the result file</span></dt><dd><p>Only one of the homologous chromosomes is methylated. This is also called allele-specific
+methylation or imprinting. Note: <strong>semi-methylation</strong> here is different from <strong>hemimethylation</strong>, which refers
 to “one of two (complementary) strands is methylated”.</p>
 </dd>
-<dt>Full-methylated<span class="classifier">labeled as “2” in result file</span></dt><dd><p>Both the homologous chromosomes (i.e. The maternal and paternal chromosomes) are methylated.</p>
+<dt><strong>Full-methylated</strong><span class="classifier">labeled as “2” in the result file</span></dt><dd><p>Both the homologous chromosomes (i.e., The maternal and paternal chromosomes) are methylated.</p>
 </dd>
-<dt>unassigned<span class="classifier">labeled as “-1” in result file</span></dt><dd><p>CpGs failed to assigned to the three categories above.</p>
+<dt><strong>unassigned</strong><span class="classifier">labeled as “-1” in the result file</span></dt><dd><p>CpGs failed to assigned to the three categories above.</p>
 </dd>
 </dl>
 </div>
 <div class="section" id="algorithm">
-<h2>16.2. Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<h2>18.2. Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
 <p>As described above, in somatic cells, most CpGs can be grouped into 3 categories including
 “Un-methylated”, “Semi-methylated (imprinted)” and “Full-methylated”. Therefore, the
 Beta distribution of CpGs can be considered as the mixture of 3 Gaussian distributions
@@ -257,20 +258,50 @@ the beta value of a CpG.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="options">
+<h2>18.3. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">--version</span></kbd></dt>
+<dd><p>show program’s version number and exit</p>
+</dd>
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
+<dd><p>Input plain text file containing beta values with the
+1st row containing sample IDs (must be unique) and the
+1st column containing probe IDs (must be unique).</p>
+</dd>
+<dt><kbd><span class="option">-c <var>PROB_CUTOFF</var></span>, <span class="option">--prob-cut=<var>PROB_CUTOFF</var></span></kbd></dt>
+<dd><p>Probability cutoff to assign a probe into “semi-
+methylated” class. default=0.99</p>
+</dd>
+<dt><kbd><span class="option">-r</span>, <span class="option">--report</span></kbd></dt>
+<dd><p>If True, generates “summary_report.txt” file.
+default=False</p>
+</dd>
+<dt><kbd><span class="option">-s <var>RANDOM_STATE</var></span>, <span class="option">--seed=<var>RANDOM_STATE</var></span></kbd></dt>
+<dd><p>The seed used by the random number generator.
+default=99</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
 <div class="section" id="input-files-examples">
-<h2>16.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>18.4. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>16.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>18.5. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_trichotmize.py -i test_05_TwoGroup.tsv -r
 </pre></div>
 </div>
 </div>
 <div class="section" id="output-files">
-<h2>16.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<h2>18.6. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>.results.txt for each sample</p></li>
 <li><p>summary_report.txt</p></li>
@@ -326,10 +357,10 @@ CirrHCV_03     True    34
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dmc_Bayes.html" class="btn btn-neutral float-right" title="17. dmc_Bayes.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dmc_Bayes.html" class="btn btn-neutral float-right" title="19. dmc_Bayes.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="beta_topN.html" class="btn btn-neutral float-left" title="15. beta_topN.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="beta_topN.html" class="btn btn-neutral float-left" title="17. beta_topN.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -340,7 +371,7 @@ CirrHCV_03     True    34
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

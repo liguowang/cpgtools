@@ -11,30 +11,31 @@ Options
 
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -i INPUT_FILES, --input-files-INPUT_FILES
+  -i INPUT_FILES, --input_files=INPUT_FILES
                         Input CpG file(s) in BED3+ format. Multiple BED files
                         should be separated by "," (eg: "-i
                         file_1.bed,file_2.bed,file_3.bed"). BED file can be a
                         regular text file or compressed file (.gz, .bz2). The
                         barplot figures will NOT be generated if you provide
                         more than 12 samples (bed files). [required]
-  -n FILE_NAMES, --names-FILE_NAMES
+  -n FILE_NAMES, --names=FILE_NAMES
                         Shorter and meaningful names to label samples. Should
                         be separated by "," and match CpG BED files in number.
                         If not provided, basenames of CpG BED files will be
                         used to label samples. [optional]
-  -s CHROM_SIZE, --chrom-size-CHROM_SIZE
+  -s CHROM_SIZE, --chrom-size=CHROM_SIZE
                         Chromosome size file. Tab or space separated text file
-                        with 2 columns: the first column is chromosome
+                        with two columns: the first column is chromosome
                         name/ID, the second column is chromosome size. This
                         file will determine: (1) which chromosomes are
-                        included in the final barplots, so do NOT include
+                        included in the final bar plots, so do NOT include
                         'unplaced', 'alternative' contigs in this file. (2)
-                        The order of chromosomes in the final barplots.
+                        The order of chromosomes in the final bar plots.
                         [required]
-  -o OUT_FILE, --output-OUT_FILE
-                        Prefix of the output file. [required]                        
-
+  -o OUT_FILE, --output=OUT_FILE
+                        The prefix of the output file. [required]
+ 
+ 
 Input files (examples)
 -----------------------
 
@@ -57,7 +58,7 @@ Command
 - chromDist.CpG_percent.pdf
 - chromDist.CpG_perMb.pdf
 
-Total CpG count per chromsome 
+Total CpG count per chromosome
 
 .. image:: ../_static/chromDist.CpG_total.png
    :height: 200 px
@@ -71,7 +72,7 @@ CpG percent on each chromosome (normalized to total CpGs)
    :width: 500 px
    :scale: 100 %  
 
-CpG per Mb (normalized to chromsome size)   
+CpG per Mb (normalized to chromosome size)   
  
 .. image:: ../_static/chromDist.CpG_perMb.png
    :height: 200 px

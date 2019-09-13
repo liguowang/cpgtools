@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -96,7 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites">2.1. Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-dependencies">2.2. Python Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-using-pip3-from-pypi-or-github">2.3. Install CpGtools using pip3 from PyPI or github</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#instal-cpgtools-from-source-code">2.4. Instal CpGtools from source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-from-source-code">2.4. Install CpGtools from source code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrade-cpgtools">2.5. Upgrade CpGtools</a></li>
 </ul>
 </li>
@@ -113,28 +113,30 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -211,7 +213,7 @@
 <h1>2. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>CpGtools are written in Python. Python3 (v3.5.x) is required to run all programs in
 CpGtools. Some programs also need R and R libraries to generate graphs and fit linear and
-beta binomial models.</p>
+beta-binomial models.</p>
 <div class="section" id="prerequisites">
 <h2>2.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>Note: You need to install these tools if they are not available from your computer.</p>
@@ -221,7 +223,7 @@ beta binomial models.</p>
 <li><p><a class="reference external" href="https://www.r-project.org/">R</a></p></li>
 <li><p>R library <a class="reference external" href="https://cran.r-project.org/package-aod">aod</a> (only required by <strong>dmc_bb.py</strong>)</p></li>
 <li><p>R library <a class="reference external" href="https://cran.r-project.org/web/packages/beanplot/index.html">beanplot</a>
-(only required by <strong>beta_jitter_plot.py</strong>)</p></li>
+(only needed by <strong>beta_jitter_plot.py</strong>)</p></li>
 </ul>
 </div>
 <div class="section" id="python-dependencies">
@@ -245,9 +247,9 @@ $ pip3 install git+https://github.com/liguowang/cpgtools.git
 </pre></div>
 </div>
 </div>
-<div class="section" id="instal-cpgtools-from-source-code">
-<h2>2.4. Instal CpGtools from source code<a class="headerlink" href="#instal-cpgtools-from-source-code" title="Permalink to this headline">¶</a></h2>
-<p>First download the latest <a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/">CpGtools</a>,
+<div class="section" id="install-cpgtools-from-source-code">
+<h2>2.4. Install CpGtools from source code<a class="headerlink" href="#install-cpgtools-from-source-code" title="Permalink to this headline">¶</a></h2>
+<p>First, download the latest <a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/">CpGtools</a>,
 and then execute the following commands</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar zxf cpgtools-VERSION.tar.gz
 $ cd cpgtools-VERSION
@@ -292,7 +294,7 @@ $ python setup.py install --root-/home/my_pylib/  #install CpGtools to user spec
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

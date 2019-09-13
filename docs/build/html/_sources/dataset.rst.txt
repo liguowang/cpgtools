@@ -16,7 +16,7 @@ Annotation datasets
   
   * `MethylationEPIC_CpGtools.tsv.gz <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz/download>`_
 
- - BED files uesd to annotate CpG according to its genomic positions (hg19/GRCh37)
+ - BED files used to annotate CpG according to its genomic positions (hg19/GRCh37)
   
   * `hg19_ENCODE_338TF_130Cell_E3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_338TF_130Cell_E3.bed.gz/download>`_
   * `hg19_ENCODE_DNaseI_125Cells_V3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_DNaseI_125Cells_V3.bed.gz/download>`_
@@ -26,7 +26,7 @@ Annotation datasets
   * `hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz/download>`_
   * `hg19_FANTOM_enhancers_phase_1_and_2.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_FANTOM_enhancers_phase_1_and_2.bed.gz/download>`_
 
- - BED files uesd to annotate CpG according to its genomic positions (hg38/GRCh38)
+ - BED files used to annotate CpG according to its genomic locations (hg38/GRCh38)
   
   *	`hg38_ENCODE_338TF_130Cell_E3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg38_ENCODE_338TF_130Cell_E3.bed.gz/download>`_
   * `hg38_ENCODE_DNaseI_125Cells_V3.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg38_ENCODE_DNaseI_125Cells_V3.bed.gz/download>`_

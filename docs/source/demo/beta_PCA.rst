@@ -33,8 +33,7 @@ for samples.
 - Only the first two components will be visualized
 - Variance% explained by each component will be printed to screen
 
-Options
---------
+Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
   -i INPUT_FILE, --input_file=INPUT_FILE
@@ -52,6 +51,8 @@ Options
                         point. default=False
   -c PLOT_CHAR, --char=PLOT_CHAR
                         Ploting character: 1 = 'dot', 2 = 'circle'. default=1
+  -a PLOT_ALPHA, --alpha=PLOT_ALPHA
+                        Opacity of dots. default=0.5
   -x LEGEND_LOCATION, --loc=LEGEND_LOCATION
                         Location of legend panel: 1 = 'topright', 2 =
                         'bottomright', 3 = 'bottomleft', 4 = 'topleft'.

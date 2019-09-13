@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10. beta_m_conversion.py &mdash; CpGtools documentation</title>
+  <title>11. beta_m_conversion.py &mdash; CpGtools documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. beta_profile_gene_centered.py" href="beta_profile_gene_centered.html" />
-    <link rel="prev" title="9. beta_jitter_plot.py" href="beta_jitter_plot.html" /> 
+    <link rel="next" title="12. beta_profile_gene_centered.py" href="beta_profile_gene_centered.html" />
+    <link rel="prev" title="10. beta_jitter_plot.py" href="beta_jitter_plot.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,32 +106,37 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. beta_m_conversion.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">10.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">10.2. Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. beta_m_conversion.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">11.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">11.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-file-example">11.3. Input file (example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">11.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">11.5. Output</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -185,7 +190,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>10. beta_m_conversion.py</li>
+      <li>11. beta_m_conversion.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -205,9 +210,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="beta-m-conversion-py">
-<h1>10. beta_m_conversion.py<a class="headerlink" href="#beta-m-conversion-py" title="Permalink to this headline">¶</a></h1>
+<h1>11. beta_m_conversion.py<a class="headerlink" href="#beta-m-conversion-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>10.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>11.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Convert Beta-value into M-value or vice vers</p>
 <p><strong>Example of input (beta)</strong></p>
 <blockquote>
@@ -218,7 +223,7 @@ cg_003 0.845065        0.843957        0.840184        0.824286</p>
 </div></blockquote>
 </div>
 <div class="section" id="options">
-<h2>10.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>11.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -227,21 +232,43 @@ cg_003 0.845065        0.843957        0.840184        0.824286</p>
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>
 </dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input-INPUT_FILE</span></kbd></dt>
-<dd><p>Tab separated data frame file containing beta values
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
+<dd><p>Tab-separated data frame file containing beta values
 with the 1st row containing sample IDs and the 1st
 column containing CpG IDs. This file can be a regular
-text file or compressed file (.gz, .bz2) or
-accessible url.</p>
+text file or compressed file (.gz, .bz2).</p>
 </dd>
-<dt><kbd><span class="option">-d <var>DATA_TYPE</var></span>, <span class="option">--dtype-DATA_TYPE</span></kbd></dt>
+<dt><kbd><span class="option">-d <var>DATA_TYPE</var></span>, <span class="option">--dtype=<var>DATA_TYPE</var></span></kbd></dt>
 <dd><p>Input data type either “Beta” or “M”.</p>
 </dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output-OUT_FILE</span></kbd></dt>
-<dd><p>Output file.</p>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
+<dd><p>The output file.</p>
 </dd>
 </dl>
 </div></blockquote>
+</div>
+<div class="section" id="input-file-example">
+<h2>11.3. Input file (example)<a class="headerlink" href="#input-file-example" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_08.tsv.gz/download">test_08.tsv.gz</a></p></li>
+</ul>
+</div>
+<div class="section" id="command">
+<h2>11.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ beta_m_conversion.py  -i test_08.tsv -d Beta -o test_08_M.tsv
+</pre></div>
+</div>
+</div>
+<div class="section" id="output">
+<h2>11.5. Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ head -5 test_08_M.tsv
+cg_ID  TCGA-BC-A10Q    TCGA-BC-A10R    TCGA-BC-A10S    TCGA-BC-A10T    TCGA-BC-A10U
+cg00000029     -0.9127840676229807     -0.6635535075463712     -0.9389653708375745     -1.1786876012968779     -0.6217264255944122
+cg00000165     -2.4833534763405667     -2.3330364850204406     -2.858145170950326      -2.914508967160336      -2.3645896606652745
+cg00000236     2.478873972561897       3.0777336083377693      2.6760378499862143      3.04301970048709        2.7096166677505145
+cg00000289     0.9943771370790748      0.13339998728363872     0.5981994318909333      1.2402989291699527      1.432741941887314
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -253,10 +280,10 @@ accessible url.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="beta_profile_gene_centered.html" class="btn btn-neutral float-right" title="11. beta_profile_gene_centered.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="beta_profile_gene_centered.html" class="btn btn-neutral float-right" title="12. beta_profile_gene_centered.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="beta_jitter_plot.html" class="btn btn-neutral float-left" title="9. beta_jitter_plot.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="beta_jitter_plot.html" class="btn btn-neutral float-left" title="10. beta_jitter_plot.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -267,7 +294,7 @@ accessible url.</p>
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

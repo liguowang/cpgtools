@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. CpG_anno_probe.py &mdash; CpGtools documentation</title>
+  <title>3. CpG_anno_probe.py &mdash; CpGtools documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. CpG_distrb_chrom.py" href="CpG_distrb_chrom.html" />
-    <link rel="prev" title="1. CpG_aggregation.py" href="CpG_aggregation.html" /> 
+    <link rel="next" title="4. CpG_distrb_chrom.py" href="CpG_distrb_chrom.html" />
+    <link rel="prev" title="2. CpG_anno_position.py" href="CpG_anno_position.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,36 +106,38 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. CpG_anno_probe.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">2.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#notes">2.2. Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">2.3. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">2.4. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">2.5. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">2.6. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. CpG_anno_probe.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">3.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">3.2. Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">3.3. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">3.4. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">3.5. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">3.6. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">17. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -189,7 +191,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>2. CpG_anno_probe.py</li>
+      <li>3. CpG_anno_probe.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -209,12 +211,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="cpg-anno-probe-py">
-<h1>2. CpG_anno_probe.py<a class="headerlink" href="#cpg-anno-probe-py" title="Permalink to this headline">¶</a></h1>
+<h1>3. CpG_anno_probe.py<a class="headerlink" href="#cpg-anno-probe-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>2.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>3.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This program adds comprehensive annotation information to each 450K/850K array probe ID.
-Basically, it will add 17 columns to the orignal input data file. These 17 columns include
-(from left to rigth):</p>
+It will add 17 columns to the original input data file. These 17 columns include
+(from left to right):</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -259,37 +261,37 @@ by “;”. “N/A” indicates no SNPs were found.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Cross_Reactive</p></td>
 <td><p>Boolean (“0” - No, “1”- Yes) indicating whether this CpG could be
-affected by cross-hybridisation or underlying genetic variation as
+affected by cross-hybridization or underlying genetic variation as
 reported by this <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1066-1">paper</a>.</p></td>
 </tr>
 <tr class="row-even"><td><p>ENCODE_TF_ChIP</p></td>
 <td><p>Transcription factor (TF) binding sites identified from ChIP-seq
-experiments performed,by the <a class="reference external" href="https://www.encodeproject.org/">ENCODE</a>
+experiments performed by the <a class="reference external" href="https://www.encodeproject.org/">ENCODE</a>
 project. Peaks from 1264 experiments representing 338 transcription
-factors in 130 cell types are combined (N - 10,560,472).
-BED format file was downloaded from the <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Tabel Browser</a>, and detailed description
+factors in 130 cell types are combined (N = 10,560,472).
+BED format file was downloaded from the <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Tabel Browser</a>, and a detailed description
 is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&amp;c-chr9&amp;g-encRegTfbsClustered">here</a>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ENCODE_DNaseI</p></td>
 <td><p>DNase I hypersensitivity sites identified from ENCODE <a class="reference external" href="https://en.wikipedia.org/wiki/DNase-Seq">DNase-seq</a> experiments. Peaks from
 125 cell types are combined (N - 1,867,665). BED format file was
-downloaded from <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a>, and detailed description
+downloaded from the <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a>, and a detailed description
 is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&amp;c-chr9&amp;g-wgEncodeRegDnaseClustered">here</a>.</p></td>
 </tr>
 <tr class="row-even"><td><p>ENCODE_H3K27ac_ChIP</p></td>
 <td><p>H3K27ac peaks identified from ENCODE histone ChIP-seq experiments. Peaks
 from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 665,650)</p></td>
+K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 665,650)</p></td>
 </tr>
 <tr class="row-odd"><td><p>ENCODE_H3K4me1_ChIP</p></td>
 <td><p>H3K4me1 peaks identified from ENCODE histone ChIP-seq experiments. Peaks
 from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 1,435,550)</p></td>
+K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 1,435,550)</p></td>
 </tr>
 <tr class="row-even"><td><p>ENCODE_H3K4me3_ChIP</p></td>
 <td><p>H3K4me3 peaks identified from ENCODE histone ChIP-seq experiments. Peaks
 from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N - 525,824)</p></td>
+K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 525,824)</p></td>
 </tr>
 <tr class="row-odd"><td><p>ENCODE_chromHMM</p></td>
 <td><p>Chromatin State Segmentation by <a class="reference external" href="https://www.nature.com/articles/nmeth.1906">chromHMM</a> from ENCODE. Chromatin states across 9 cell types
@@ -313,15 +315,15 @@ is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/
 </table>
 </div>
 <div class="section" id="notes">
-<h2>2.2. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>3.2. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>For peaks identified from ENCODE ChIP-seq and DNase-seq (ENCODE_TF_ChIP, ENCODE_H3K27ac_ChIP,
-ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP and ENCODE_DNaseI), we require the probe  must be
+ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP, and ENCODE_DNaseI), we require the probe  must be
 located in the 100 bp window centered on the <strong>middle</strong> of the peak.</p></li>
 </ul>
 </div>
 <div class="section" id="options">
-<h2>2.3. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>3.3. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -330,19 +332,19 @@ located in the 100 bp window centered on the <strong>middle</strong> of the peak
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>
 </dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file-INPUT_FILE</span></kbd></dt>
-<dd><p>Input data file (Tab separated) with certain column
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
+<dd><p>Input data file (Tab-separated) with a certain column
 containing 450K/850K array CpG IDs. This file can be
-regular text file or compressed file (.gz, .bz2).</p>
+a regular text file or compressed file (.gz, .bz2).</p>
 </dd>
-<dt><kbd><span class="option">-a <var>ANNO_FILE</var></span>, <span class="option">--annotation-ANNO_FILE</span></kbd></dt>
-<dd><p>Annotation file. This file can be regular text file
+<dt><kbd><span class="option">-a <var>ANNO_FILE</var></span>, <span class="option">--annotation=<var>ANNO_FILE</var></span></kbd></dt>
+<dd><p>Annotation file. This file can be a regular text file
 or compressed file (.gz, .bz2).</p>
 </dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output-OUT_FILE</span></kbd></dt>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
 <dd><p>Prefix of the output file.</p>
 </dd>
-<dt><kbd><span class="option">-p <var>PROBE_COL</var></span>, <span class="option">--probe_column-PROBE_COL</span></kbd></dt>
+<dt><kbd><span class="option">-p <var>PROBE_COL</var></span>, <span class="option">--probe_column=<var>PROBE_COL</var></span></kbd></dt>
 <dd><p>The number specifying which column contains probe IDs.
 Note: the column index starts with 0. default-0.</p>
 </dd>
@@ -353,14 +355,14 @@ Note: the column index starts with 0. default-0.</p>
 </div></blockquote>
 </div>
 <div class="section" id="input-files-examples">
-<h2>2.4. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>3.4. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6">test_01.hg19.bed6</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz">MethylationEPIC_CpGtools.tsv.gz</a></p></li>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>2.5. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>3.5. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># probe IDs are located in the 4th column (-p 3)
 
 $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv -i test_01.hg19.bed6 -o output
@@ -375,7 +377,7 @@ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.be
 </div>
 </div>
 <div class="section" id="output-files">
-<h2>2.6. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<h2>3.6. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>output.anno.txt</p></li>
 </ul>
@@ -390,10 +392,10 @@ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.be
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CpG_distrb_chrom.html" class="btn btn-neutral float-right" title="3. CpG_distrb_chrom.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CpG_distrb_chrom.html" class="btn btn-neutral float-right" title="4. CpG_distrb_chrom.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CpG_aggregation.html" class="btn btn-neutral float-left" title="1. CpG_aggregation.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CpG_anno_position.html" class="btn btn-neutral float-left" title="2. CpG_anno_position.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -404,7 +406,7 @@ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.be
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

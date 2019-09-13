@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>17. dmc_Bayes.py &mdash; CpGtools documentation</title>
+  <title>19. dmc_Bayes.py &mdash; CpGtools documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. dmc_bb.py" href="dmc_bb.html" />
-    <link rel="prev" title="16. beta_trichotmize.py" href="beta_trichotmize.html" /> 
+    <link rel="next" title="20. dmc_bb.py" href="dmc_bb.html" />
+    <link rel="prev" title="18. beta_trichotmize.py" href="beta_trichotmize.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.8
+                1.0.1
               </div>
             
           
@@ -106,35 +106,37 @@
 <p class="caption"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">2. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">3. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">4. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">5. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">6. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">7. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">8. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">9. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">10. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">11. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">12. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">13. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">14. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">15. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">16. beta_trichotmize.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">17. dmc_Bayes.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">17.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">17.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">17.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">17.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">17.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">19. dmc_Bayes.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">19.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">19.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">19.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">19.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">19.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">18. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">19. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">20. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">21. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">22. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">23. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -188,7 +190,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>17. dmc_Bayes.py</li>
+      <li>19. dmc_Bayes.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -208,23 +210,23 @@
            <div itemprop="articleBody">
             
   <div class="section" id="dmc-bayes-py">
-<h1>17. dmc_Bayes.py<a class="headerlink" href="#dmc-bayes-py" title="Permalink to this headline">¶</a></h1>
+<h1>19. dmc_Bayes.py<a class="headerlink" href="#dmc-bayes-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>17.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>19.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Different from statistical testing, this program tries to estimates “how different the
-means between the two groups are” using Bayesian approach. An <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a>
+means between the two groups are” using the Bayesian approach. An <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a>
 is used to estimate the “means”, “difference of means”, “95% HDI (highest posterior density interval)”,
 and the posterior probability that the HDI does NOT include “0”.</p>
 <p>It is similar to John Kruschke’s <a class="reference external" href="http://www.indiana.edu/~kruschke/BEST/">BEST algorithm</a>
 (Bayesian Estimation Supersedes T test)</p>
 <p><strong>Notes</strong></p>
 <ul class="simple">
-<li><p>This program is much slower than T test due to MCMC (Markov chain Monte Carlo) step.
+<li><p>This program is much slower than T-test due to MCMC (Markov chain Monte Carlo) step.
 Running it with multiple threads is highly recommended.</p></li>
 </ul>
 </div>
 <div class="section" id="options">
-<h2>17.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>19.2. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -233,7 +235,7 @@ Running it with multiple threads is highly recommended.</p></li>
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>show this help message and exit</p>
 </dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input-file-INPUT_FILE</span></kbd></dt>
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
 <dd><p>Data file containing beta values with the 1st row
 containing sample IDs (must be unique) and the 1st
 column containing CpG positions or probe IDs (must be
@@ -242,7 +244,7 @@ non-numerical values will be considered as “missing
 values” and ignored. This file can be a regular text
 file or compressed file (.gz, .bz2).</p>
 </dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group-GROUP_FILE</span></kbd></dt>
+<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
 <dd><p>Group file defining the biological group of each
 sample. It is a comma-separated 2 columns file with
 the 1st column containing sample IDs, and the 2nd
@@ -250,45 +252,45 @@ column containing group IDs.  It must have a header
 row. Sample IDs should match to the “Data file”. Note:
 Only for two group comparison.</p>
 </dd>
-<dt><kbd><span class="option">-n <var>N_ITER</var></span>, <span class="option">--niter-N_ITER</span></kbd></dt>
+<dt><kbd><span class="option">-n <var>N_ITER</var></span>, <span class="option">--niter=<var>N_ITER</var></span></kbd></dt>
 <dd><p>Iteration times when using MCMC Metropolis-Hastings’s
 agorithm to draw samples from the posterior
 distribution. default=5000</p>
 </dd>
-<dt><kbd><span class="option">-b <var>N_BURN</var></span>, <span class="option">--burnin-N_BURN</span></kbd></dt>
-<dd><p>Number of samples to discard. Thes initial samples are
-usually not completely valid because the Markov Chain
-has not stabilized to the stationary distributio.
-default-500.</p>
+<dt><kbd><span class="option">-b <var>N_BURN</var></span>, <span class="option">--burnin=<var>N_BURN</var></span></kbd></dt>
+<dd><p>Number of simulated samples to discard. Thes initial
+samples are usually not completely valid because the
+Markov Chain has not stabilized to the stationary
+distribution. default=500.</p>
 </dd>
-<dt><kbd><span class="option">-p <var>N_PROCESS</var></span>, <span class="option">--processor-N_PROCESS</span></kbd></dt>
-<dd><p>Number of processes. default=1</p>
+<dt><kbd><span class="option">-p <var>N_PROCESS</var></span>, <span class="option">--processor=<var>N_PROCESS</var></span></kbd></dt>
+<dd><p>The number of processes. default=1</p>
 </dd>
-<dt><kbd><span class="option">-s <var>SEED</var></span>, <span class="option">--seed-SEED</span></kbd></dt>
+<dt><kbd><span class="option">-s <var>SEED</var></span>, <span class="option">--seed=<var>SEED</var></span></kbd></dt>
 <dd><p>The seed used by the random number generator.
-default-99</p>
+default=99</p>
 </dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output-OUT_FILE</span></kbd></dt>
-<dd><p>Prefix of the output file.</p>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
+<dd><p>The prefix of the output file.</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="input-files-examples">
-<h2>17.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2>19.3. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv">test_05_TwoGroup.grp.csv</a></p></li>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>17.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2>19.4. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  dmc_Bayes.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv.gz -p 10 -o dmc_output
 </pre></div>
 </div>
 </div>
 <div class="section" id="output-files">
-<h2>17.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<h2>19.5. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>dmc_output.bayes.tsv</strong>: this file consists of 6 columns:</p></li>
 </ul>
@@ -299,7 +301,7 @@ default-99</p>
 <li><p><em>mu2</em> : Mean methylation level estimated from gropu2</p></li>
 <li><p><em>mu_diff</em> : Difference between mu1 and mu2</p></li>
 <li><p><em>mu_diff</em> (95% HDI) : 95% of “High Density Interval” of <em>mu_diff</em>. The HDI indicates which
-points of a distribution are most credible. This interval spans 95% of <em>mu_diff</em>’s
+points of distribution are most credible. This interval spans 95% of <em>mu_diff</em>’s
 distribution.</p></li>
 <li><p>The probability that <em>mu1</em> and <em>mu2</em> are different.</p></li>
 </ol>
@@ -318,6 +320,7 @@ cg00000721     0.935903        0.935080        0.000823        (-0.013210,0.0186
 cg00000948     0.898609        0.897536        0.001073        (-0.020663,0.026813)    0.518238
 </pre></div>
 </div>
+<p>mu1 and mu2 can be considered as <em>significantly</em> different if the 95% HDI does NOT include zero.</p>
 </div>
 </div>
 
@@ -329,10 +332,10 @@ cg00000948     0.898609        0.897536        0.001073        (-0.020663,0.0268
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dmc_bb.html" class="btn btn-neutral float-right" title="18. dmc_bb.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dmc_bb.html" class="btn btn-neutral float-right" title="20. dmc_bb.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="beta_trichotmize.html" class="btn btn-neutral float-left" title="16. beta_trichotmize.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="beta_trichotmize.html" class="btn btn-neutral float-left" title="18. beta_trichotmize.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -343,7 +346,7 @@ cg00000948     0.898609        0.897536        0.001073        (-0.020663,0.0268
     <p>
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on July 7, 2019.
       </span>
 
     </p>

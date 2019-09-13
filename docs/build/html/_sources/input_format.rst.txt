@@ -17,17 +17,17 @@ BED12 file
 	gene or an array of disconnected genomic regions. Details are described `here <https://genome.ucsc.edu/FAQ/FAQformat.html#format1>`_
 BED3 file 
 	Only has the first three required fields (chrom, chromStart, chromEnd). Each row is
-	used to represent a single genomic region where "score" and "strand" are not important.
+	used to represent a single genomic region where "score" and "strand" are not necessary.
 BED3+ file
-	Has at least three columns (chrom, chromStart, chromEnd). It could have additional
+	Has at least three columns (chrom, chromStart, chromEnd). It could have other
 	columns, but these additional columns will be ignored.
 BED6 file
 	Has the first six fields (chrom, chromStart, chromEnd, name, score, strand). Each row
 	is used to represent a single genomic region and their associated scores, or in cases
-	where "strand" information is important.
+	where "strand" information is essential.
 BED6+ file
 	Has at least six columns (chrom, chromStart, chromEnd, name, score, stand). It could
-	have additional columns, but these additional columns will be ignored.
+	have other columns, but these additional columns will be ignored.
 
 Proportion values
 -----------------
@@ -46,7 +46,7 @@ Beta values
 ------------
 The Beta-value is a value between 0 and 1, which can be interpreted as the approximation
 of the percentage of methylation for a given CpG or locus. One can convert proportion
-value into beta value, but not vice versa. In equation below, C is the "probe intensity"
+value into beta value, but not vice versa. In the equation below, C is the "probe intensity"
 or "read count" of methylated allele, while U is the "probe intensity" or "read count" of
 unmethylated allele.
 
@@ -57,7 +57,7 @@ unmethylated allele.
 M values
 --------
 The M-value is calculated as the log2 ratio of the probe intensities (or read counts) of
-methylated allele versus unmethylated allele. In equation below, C is the "probe
+methylated allele versus unmethylated allele. In the equation below, C is the "probe
 intensity" or "read count" of methylated allele, while U is the "probe intensity" or
 "read count" of unmethylated allele. w is the offset or pseudo count added to both
 denominator and numerator to avoid unexpected big changes and performing log
