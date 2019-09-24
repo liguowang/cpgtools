@@ -27,7 +27,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.3"
+__version__="1.0.6"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -54,7 +54,7 @@ def main():
 		sys.exit(103)	
 	
 	printlog("Reading input file: \"%s\"" % (options.input_file))
-	df1 = pd.read_csv(options.input_file, index_col = 0)
+	df1 = pd.read_csv(options.input_file, index_col = 0, sep="\t")
 	
 	#remove any rows with NAs
 	df2 = df1.dropna(axis=0, how='any')
