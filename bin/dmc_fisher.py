@@ -39,7 +39,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.3"
+__version__="1.0.6"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -97,6 +97,7 @@ def main():
 	or_list = []
 	for l in ireader.reader(options.input_file):
 		f = l.split()
+		if len(f) == 0: continue
 		if line_num == 1:
 			sample_IDs = f[1:]
 			# check if sample ID matches
