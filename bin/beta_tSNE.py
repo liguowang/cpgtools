@@ -29,14 +29,10 @@ Notes
 """
 
 
-import sys,os
-import collections
+import sys
 import subprocess
-import numpy as np
 from optparse import OptionParser
-from cpgmodule import ireader
 from cpgmodule.utils import *
-from cpgmodule import BED
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.manifold import TSNE
@@ -119,6 +115,10 @@ def main():
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
 	
+	#check if sample IDs are unique
+	if len(group.index) != len(group.index.unique()):
+		print ("Sample IDs are not unique", file = sys.stderr)
+		sys.exit()
 	group_names = group['Group_ID'].unique().tolist()	# a list of unique group names
 	color_names = pick_colors(len(group_names))	# a list of unique colors
 	group_to_col = dict(zip(group_names, color_names))
