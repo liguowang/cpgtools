@@ -45,7 +45,7 @@ and then execute the following commands
 
  $ tar zxf cpgtools-VERSION.tar.gz
  $ cd cpgtools-VERSION
- $ python3 setup install  #install CpGtools to the default location
+ $ python3 setup.py install  #install CpGtools to the default location
  or 
  $ python setup.py install --root-/home/my_pylib/  #install CpGtools to user specified location
 
