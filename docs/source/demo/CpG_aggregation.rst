@@ -24,7 +24,7 @@ the total reads mapped to this region is 100, out of which 25 are methylated rea
 regional methylation level (beta) - 25/100 - 0.25)
 
 - The probability of observing CpG (3,10) is : `pbinom(q=3, size=10, prob=0.25) = 0.7759`
-- The probability of observing CpG (0,10) is : `qpbinom(q=0, size=10, prob=0.25) = 0.05631`
+- The probability of observing CpG (0,10) is : `pbinom(q=0, size=10, prob=0.25) = 0.05631`
 - The probability of observing CpG (16,21) is : `pbinom(q=16, size=21, prob=0.25, lower.tail=F) = 1.19e-07` (outlier)
 
 Options
