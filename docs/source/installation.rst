@@ -47,7 +47,7 @@ and then execute the following commands
  $ cd cpgtools-VERSION
  $ python3 setup.py install  #install CpGtools to the default location
  or 
- $ python setup.py install --root-/home/my_pylib/  #install CpGtools to user specified location
+ $ python3 setup.py install --root-/home/my_pylib/  #install CpGtools to user specified location
 
 After the installation is completed, you probably need to setup up the environment variables
 (Below is only an example. Change according to your system configuration)
