@@ -6,7 +6,7 @@ Compare Differential CpG Analysis Tools
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 | dmc_fisher.py         | Proportion value (RRBS/WGBS) | Fisher's exact test                          | No          |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
-| dmc_logit.py          | Proportion value (RRBS/WGBS) | Logistic regression (binom or quasi-bionom)  | Yes         |
+| dmc_logit.py          | Proportion value (RRBS/WGBS) | Logistic regression (binom or quasi-binom)   | Yes         |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 | dmc_bb.py             | Proportion value (RRBS/WGBS) | Beta-binomial regression                     | Yes         |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
