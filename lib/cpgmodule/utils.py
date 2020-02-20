@@ -11,6 +11,14 @@ def revcomp(dna):
 	tab = str.maketrans('ACGTNX*-','TGCANX*-')
 	return dna.upper().translate(tab)[::-1]
 
+def is_number(s):
+	try:
+		float(s)
+		return True
+	except ValueError:
+		return False
+
+
 def colors(n):
 	'''
 	return a list containing n colors
@@ -345,6 +353,10 @@ def read_grp_file2(gfile):
 			row_values = f[1:]
 			
 			for a,b in zip(covar_names, row_values):
+				if is_number(b):
+					pass
+				else:
+					b = "'" + b + "'"
 				covars[a][sample_id] = b
 				covar_values[a].append(b)
 		
