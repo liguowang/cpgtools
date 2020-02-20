@@ -297,9 +297,14 @@ def read_grp_file1(gfile):
 			sys.exit(1)
 		if line_num == 1:
 			continue
-		else:		
+		else:
+			group_id = f[1]
+			if is_number(group_id):
+				pass
+			else:
+				group_id = "'" + group_id + "'"		
 			samples.append(f[0])
-			groups.append(f[1])
+			groups.append(group_id)
 	
 	tmp = collections.Counter(samples)
 	if tmp.most_common(1)[0][1] > 1:
