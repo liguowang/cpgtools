@@ -16,6 +16,10 @@ CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
 cg_001	0.831035	0.878022	0.794427	0.880911
 cg_002	0.249544	0.209949	0.234294	0.236680
 #=========================================================================================
+
+Note: Please name your sample IDs using only "letters" [a-z, A-Z], "numbers" [0-9], and "_"; and
+your sample ID should start with a letter. 
+
 """
 
 
@@ -89,7 +93,7 @@ def main():
 		sys.exit(103)	
 	
 	printlog("Reading beta file: \"%s\"" % (options.input_file))
-	data = pd.read_table(options.input_file)
+	data = pd.read_csv(options.input_file,sep='\t')
 	samples = data.columns[1:]
 
 	ROUT = open(options.out_file + '.r','w')

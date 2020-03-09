@@ -16,6 +16,9 @@ CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
 cg_001	0.831035	0.878022	0.794427	0.880911
 cg_002	0.249544	0.209949	0.234294	0.236680
 cg_003	0.845065	0.843957	0.840184	0.824286
+
+Note: Please name your sample IDs using only "letters" [a-z, A-Z], "numbers" [0-9], and "_"; and
+your sample ID should start with a letter. 
 """
 
 
