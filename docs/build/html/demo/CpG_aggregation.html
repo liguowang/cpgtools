@@ -127,7 +127,7 @@
 <li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_tSNE.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
@@ -143,8 +143,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Liscense</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 </ul>
 
             
@@ -230,7 +235,7 @@ the total reads mapped to this region is 100, out of which 25 are methylated rea
 regional methylation level (beta) - 25/100 - 0.25)</p>
 <ul class="simple">
 <li><p>The probability of observing CpG (3,10) is : <cite>pbinom(q=3, size=10, prob=0.25) = 0.7759</cite></p></li>
-<li><p>The probability of observing CpG (0,10) is : <cite>qpbinom(q=0, size=10, prob=0.25) = 0.05631</cite></p></li>
+<li><p>The probability of observing CpG (0,10) is : <cite>pbinom(q=0, size=10, prob=0.25) = 0.05631</cite></p></li>
 <li><p>The probability of observing CpG (16,21) is : <cite>pbinom(q=16, size=21, prob=0.25, lower.tail=F) = 1.19e-07</cite> (outlier)</p></li>
 </ul>
 </div>
