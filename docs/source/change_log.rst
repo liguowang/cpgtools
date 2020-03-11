@@ -1,6 +1,10 @@
 CpGtools Release history
 =========================
 
+Version 1.0.7
+-------------
+
+Add "CpG_density_gene_centered.py" on 03/11/2010
 
 Version 1.0.2
 -------------
