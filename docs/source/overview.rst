@@ -34,9 +34,9 @@ These modules are primarily used to analyze CpG's genomic locations.
 |CpG_distrb_gene_centered.py   |Calculates the distribution of CpG over gene-centered genomic      |
 |(using bar plot)              |regions including 'Coding exons', 'UTR exons', 'Introns',          |
 |                              |'Upstream intergenic regions', and 'Downstream intergenic regions'.|
-+--------------------------------------------------------------------------------------------------+
++------------------------------+-------------------------------------------------------------------+
 |CpG_density_gene_centered.py  |Calculates the distribution of CpG density over gene-centered      |
-|(using density-like plot)     |genomic regions including "upstream", "genebody" and "downstream"  |
+|(using density-like plot)     |genomic regions including "upstream", "genebody" and "downstream". |
 +------------------------------+-------------------------------------------------------------------+
 |CpG_distrb_region.py          |Calculates the distribution of CpG over user-specified genomic     |
 |                              |regions (such as promoters, enhancers).                            |
