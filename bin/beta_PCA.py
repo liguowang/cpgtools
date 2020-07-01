@@ -100,6 +100,7 @@ def main():
 	
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
+	group.index = group.index.map(str)
 	
 	#check if sample IDs are unique
 	if len(group.index) != len(group.index.unique()):
@@ -117,7 +118,7 @@ def main():
 	pca_names = [str(i)+str(j) for i,j in zip(['PC']*options.n_components,range(1,options.n_components+1))]
 	principalDf = pd.DataFrame(data = principalComponents, columns = pca_names, index = df2.index)	
 	
-	finalDf = pd.concat([principalDf, group], axis = 1, sort=True)
+	finalDf = pd.concat([principalDf, group], axis = 1, sort=False)
 	finalDf.index.name = 'Sample_ID'
 	
 	printlog("Writing PCA results to file: \"%s\" ..." % (options.out_file + '.PCA.tsv'))

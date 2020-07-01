@@ -105,7 +105,7 @@ def main():
 	
 	printlog("Transposing data frame ...")
 	df2 = df2.T
-	#print (df2.head()) 
+	#print (df2.index) 
 		
 	printlog("Standarizing values ...")
 	x = df2.values
@@ -114,6 +114,7 @@ def main():
 	
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
+	group.index = group.index.map(str)
 	
 	#check if sample IDs are unique
 	if len(group.index) != len(group.index.unique()):
@@ -123,15 +124,16 @@ def main():
 	color_names = pick_colors(len(group_names))	# a list of unique colors
 	group_to_col = dict(zip(group_names, color_names))
 	color_list = [group_to_col[g] for g in group['Group_ID']]
-	group['Colors'] = color_list	
+	group['Colors'] = color_list
+	
 	
 	tsne = TSNE(n_components = options.n_components, random_state = 0, perplexity = options.perplexity_value, learning_rate = options.learning_rate, n_iter = options.n_iterations)
 	tsne_components = tsne.fit_transform(x)
 	pc_names = [str(i)+str(j) for i,j in zip(['PC']*options.n_components,range(1,options.n_components+1))]
 	principalDf = pd.DataFrame(data = tsne_components, columns = pc_names, index = df2.index)
-
+	principalDf.index.name = 'Sample_ID'
 	
-	finalDf = pd.concat([principalDf, group], axis = 1, sort=True)
+	finalDf = pd.concat([principalDf, group], axis=1,sort=False)
 	finalDf.index.name = 'Sample_ID'
 	
 	printlog("Writing t-SNE results to file: \"%s\" ..." % (options.out_file + '.t-SNE.tsv'))
