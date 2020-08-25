@@ -36,7 +36,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.7"
+__version__="1.0.8"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -48,8 +48,8 @@ def main():
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
 	parser.add_option("-f","--fraction",action="store",type='float', dest="fraction", default=0.5, help="The fraction of total data points (CpGs) used to generate jitter plot. Decrease this number if the jitter plot is over-crowded. default=%default" )
-	parser.add_option("-w","--width",action="store",type='int', default=800, dest="png_width",help="The width of the output PNG file. default=%default")
-	parser.add_option("-h","--height",action="store",type='int', default=480, dest="png_height",help="The height of the output PNG file. . default=%default")
+	parser.add_option("--width",action="store",type='int', default=800, dest="png_width",help="The width of the output PNG file. default=%default")
+	parser.add_option("--height",action="store",type='int', default=480, dest="png_height",help="The height of the output PNG file. . default=%default")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
