@@ -21,7 +21,7 @@ Outlier CpG will be removed if the probability of observing its proportion value
 than p-cutoff. For example, if alpha set to 0.05, and there are 10 CpGs (n = 10) located in a
 particular genomic region, the p-cutoff of this genomic region is 0.005 (0.05/10). Supposing
 the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e.
-regional methylation level (beta) - 25/100 - 0.25)
+regional methylation level beta = 25/100 = 0.25)
 
 - The probability of observing CpG (3,10) is : `pbinom(q=3, size=10, prob=0.25) = 0.7759`
 - The probability of observing CpG (0,10) is : `pbinom(q=0, size=10, prob=0.25) = 0.05631`
