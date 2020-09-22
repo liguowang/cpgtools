@@ -18,7 +18,7 @@ Aggregate proportion values of a list of CpGs that located in give genomic regio
 **Notes**
 
 Outlier CpG will be removed if the probability of observing its proportion value is less
-than p-cutoff. For example, if alpha set to 0.05, and there are 10 CpGs (n - 10) located in a
+than p-cutoff. For example, if alpha set to 0.05, and there are 10 CpGs (n = 10) located in a
 particular genomic region, the p-cutoff of this genomic region is 0.005 (0.05/10). Supposing
 the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e.
 regional methylation level (beta) - 25/100 - 0.25)
@@ -55,7 +55,7 @@ Command
 
 ::
 
- $CpG_aggregation.py -b hg19.RefSeq.union.1Kpromoter.bed.gz  -i 0_du145_133_glp_sh1.bed -o out
+ $CpG_aggregation.py -b hg19.RefSeq.union.1Kpromoter.bed.gz  -i test_03_RRBS.bed -o out
 
 Output
 -------
