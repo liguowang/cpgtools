@@ -34,7 +34,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.0.7"
+__version__="1.0.9"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -44,7 +44,7 @@ def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the C position. This BED file should have at least three columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2).")
-	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of BED files specifying the genomic regions.")
+	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of comma separated BED files specifying the genomic regions.")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
 	
@@ -126,11 +126,11 @@ def main():
 	print("values = c(%s)" % ','.join([str(i) for i in density[1:]]), file=ROUT)
 	print ('pdf("%s", width=8, height=6)' % (options.out_file + '.pdf'), file=ROUT)
 	print ('layout(matrix(c(1,1,2,1,1,2), nrow=2, byrow=TRUE))', file=ROUT)
-	print ('barplot(values,names.arg=name,col=c(%s),ylab="CpG per Kb")' % ','.join(colors(len(input_bed_files))), file=ROUT)
+	print ('barplot(values,names.arg=name,col="blue",ylab="CpG per Kb")', file=ROUT)
 	print ("plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')", file=ROUT)
 	for name,label in zip(names[1:], labels[1:]):
 		x_pos = 0.0
-		y_pos = 1-(int(name)*20.0 +5)/200 
+		y_pos = 1-(int(name)*9.0 +5)/200 
 		print ("text(x=%f, y=%f, labels=c(\"%s = %s\"),adj=c(0,0))" % (x_pos, y_pos,name,label), file=ROUT)
 	print ('dev.off()', file=ROUT)
 	

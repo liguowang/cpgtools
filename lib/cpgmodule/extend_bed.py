@@ -133,11 +133,11 @@ if __name__=='__main__':
 	
 	
 	for a1,a2,a3,a4 in b:
-		if a4 is '+':
+		if a4 == '+':
 			print ('\t'.join([str(i) for i in a1]) + '(UIR)\t' +str(int(a1[2]) - int(a1[1])) +  '\t+')
 			print ('\t'.join([str(i) for i in a2]) + '(Body)\t' +str(int(a2[2]) - int(a2[1])) +  '\t+')
 			print ('\t'.join([str(i) for i in a3]) + '(DIR)\t' +str(int(a3[2]) - int(a3[1])) +  '\t+')
-		if a4 is '-':
+		if a4 == '-':
 			print ('\t'.join([str(i) for i in a1]) + '(DIR)\t' +str(int(a1[2]) - int(a1[1])) +  '\t-')
 			print ('\t'.join([str(i) for i in a2]) + '(Body)\t' +str(int(a2[2]) - int(a2[1])) +  '\t-')
 			print ('\t'.join([str(i) for i in a3]) + '(UIR)\t' +str(int(a3[2]) - int(a3[1])) +  '\t-')

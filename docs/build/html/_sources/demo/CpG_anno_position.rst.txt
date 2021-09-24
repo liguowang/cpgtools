@@ -33,14 +33,14 @@ Pre-computed datasets
 	Chromatin State Segmentation by `chromHMM <https://www.nature.com/articles/nmeth.1906>`_ 
 	from `ENCODE <https://www.encodeproject.org/>`_. Chromatin states across 9 cell
 	types (GM12878, H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were learned by
-	computationally by integrating 9 factors (CTCF, H3K27ac, H3K27me3, H3K36me3, H3K4me1,
+	integrating 9 factors (CTCF, H3K27ac, H3K27me3, H3K36me3, H3K4me1,
 	H3K4me2, H3K4me3, H3K9ac, H4K20me1 ) plus input. A total of 15 states were identified,
 	include: State-1 (Active Promoter), state-2 (Weak Promoter), state-3 (Inactive/poised
 	Promoter), state-4 and 5 (Strong enhancer), state-6 and 7 (Weak/poised enhancer),
 	state-8 (insulator), state-9 (Transcriptional transition), state-10 (Transcriptional
 	elongation), state-11 (Weak transcribed), state-12 (Polycomb-repressed), state-13
 	(Heterochromatin or low signal), state-14 and 15 (Repetitive/Copy Number Variation).
-	Orignal chromatin state BED file was downloaded the `UCSC Tabel Browser <http://genome.ucsc.edu/cgi-bin/hgTables>`_.
+	The Original chromatin state BED file was downloaded from the `UCSC Tabel Browser <http://genome.ucsc.edu/cgi-bin/hgTables>`_.
 
 `hg19_FANTOM_enhancers_phase_1_and_2.bed.gz <https://sourceforge.net/projects/cpgtools/files/data/hg19_FANTOM_enhancers_phase_1_and_2.bed.gz>`_
 	`PHANTOM5 <http://fantom.gsc.riken.jp/5/>`_ human permissive enhancers downloaded from `here <http://fantom.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2_expression_tpm_matrix.txt.gz>`_.

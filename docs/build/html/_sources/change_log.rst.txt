@@ -1,6 +1,15 @@
 CpGtools Release history
 =========================
 
+Version 1.0.8
+-------------
+
+Fix bug for beta_tSNE.py and beta_PCA.py when sample IDs are number. 
+
+Version 1.0.7
+-------------
+
+Add "CpG_density_gene_centered.py" on 03/11/2020
 
 Version 1.0.2
 -------------

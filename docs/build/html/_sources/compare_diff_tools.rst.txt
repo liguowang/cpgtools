@@ -6,11 +6,11 @@ Compare Differential CpG Analysis Tools
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 | dmc_fisher.py         | Proportion value (RRBS/WGBS) | Fisher's exact test                          | No          |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
-| dmc_logit.py          | Proportion value (RRBS/WGBS) | Logistic regression                          | Yes         |
+| dmc_logit.py          | Proportion value (RRBS/WGBS) | Logistic regression (binom or quasi-binom)   | Yes         |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 | dmc_bb.py             | Proportion value (RRBS/WGBS) | Beta-binomial regression                     | Yes         |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
-| dmc_ttest.py          | Beta- or M-value (450K/850K) | Student's T-test                             | No          |
+| dmc_ttest.py          | Beta- or M-value (450K/850K) | Student's T-test or ANOVA                    | No          |
 +-----------------------+------------------------------+----------------------------------------------+-------------+
 | dmc_glm.py            | Beta- or M-value (450K/850K) | Generalized linear model                     | Yes         |
 +-----------------------+------------------------------+----------------------------------------------+-------------+

@@ -28,7 +28,8 @@ Options
                         numbered 0. This file can be a regular text file or
                         compressed file (.gz, .bz2).
   -b BED_FILES, --bed=BED_FILES
-                        List of BED files specifying the genomic regions.
+                        List of comma separated BED files specifying the genomic
+                        regions.
   -o OUT_FILE, --output=OUT_FILE
                         The prefix of the output file.
                         

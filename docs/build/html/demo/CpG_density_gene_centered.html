@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. CpG_density_gene_centered.py &mdash; CpGtools documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. CpG_distrb_chrom.py" href="CpG_distrb_chrom.html" />
+    <link rel="prev" title="3. CpG_anno_probe.py" href="CpG_anno_probe.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CpGtools
+          
+
+          
+            
+            <img src="../_static/CpGtools_logo2.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">CpGtools Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input file and data format</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Test and Demo Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Usage Information</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. CpG_density_gene_centered.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">4.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">4.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">4.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">4.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">4.5. Output files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">11. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">12. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">13. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">14. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">15. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">16. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">17. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">18. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">19. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">20. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">21. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">22. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">23. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">24. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">25. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">26. dmc_ttest.py</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Liscense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CpGtools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>CpG_density_gene_centered.py</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/demo/CpG_density_gene_centered.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpg-density-gene-centered-py">
+<h1><span class="section-number">4. </span>CpG_density_gene_centered.py<a class="headerlink" href="#cpg-density-gene-centered-py" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2><span class="section-number">4.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This program calculates the CpG density (count) profile over gene body as well as its up-
+down-stream regions. It is useful to visualize how CpGs are distributed around genes.</p>
+<p>Specifically, the up-stream region, gene region (from TSS to TES) and down-stream region
+will be equally divided into 100 bins, then CpG count was aggregated over a total of 300 bins
+from 5’ to 3’ (upstream bins, gene bins, downstrem bins).</p>
+</div>
+<div class="section" id="options">
+<h2><span class="section-number">4.2. </span>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">--version</span></kbd></dt>
+<dd><p>show program’s version number and exit</p>
+</dd>
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
+<dd><p>BED file specifying the C position. This BED file
+should have at least three columns (Chrom, ChromStart,
+ChromeEnd).  Note: the first base in a chromosome is
+numbered 0. This file can be a regular text file or
+compressed file (.gz, .bz2).</p>
+</dd>
+<dt><kbd><span class="option">-r <var>GENE_FILE</var></span>, <span class="option">--refgene=<var>GENE_FILE</var></span></kbd></dt>
+<dd><p>Reference gene model in standard BED6+ format.</p>
+</dd>
+<dt><kbd><span class="option">-d <var>DOWNSTREAM_SIZE</var></span>, <span class="option">--downstream=<var>DOWNSTREAM_SIZE</var></span></kbd></dt>
+<dd><p>Maximum extension size from TES (transcription end
+site) to down-stream to define the “downstream
+intergenic region (DIR)”. Note: (1) The actual used
+DIR size can be smaller because the extending process
+could stop earlier if it reaches the boundary of
+another nearby gene. (2) If the actual used DIR size
+is smaller than cutoff defined by “-c/–SizeCut”, the
+gene will be skipped.  default=2000 (bp)</p>
+</dd>
+<dt><kbd><span class="option">-u <var>UPSTREAM_SIZE</var></span>, <span class="option">--upstream=<var>UPSTREAM_SIZE</var></span></kbd></dt>
+<dd><p>Maximum extension size from TSS (transcription start
+site) to up-stream to define the “upstream intergenic
+region (UIR)”. Note: (1) The actual used UIR size can
+be smaller because the extending process could stop
+earlier if it reaches the boundary of another nearby
+gene. (2) If the actual used UIR size is smaller than
+cutoff defined by “-c/–SizeCut”, the gene will be
+skipped. default=2000 (bp)</p>
+</dd>
+<dt><kbd><span class="option">-c <var>MINIMUM_SIZE</var></span>, <span class="option">--SizeCut=<var>MINIMUM_SIZE</var></span></kbd></dt>
+<dd><p>The minimum gene size. Gene size is defined as the
+genomic size between TSS and TES, including both exons
+and introns. default=200 (bp)</p>
+</dd>
+<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
+<dd><p>The prefix of the output file.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="input-files-examples">
+<h2><span class="section-number">4.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz">850K_probe.hg19.bed3.gz</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz">hg19.RefSeq.union.bed.gz</a></p></li>
+</ul>
+</div>
+<div class="section" id="command">
+<h2><span class="section-number">4.4. </span>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 CpG_density_gene_centered.py -r hg19.RefSeq.union.bed  -i 850K_probe.hg19.bed3 -o CpG_density
+@ 2020-03-11 14:57:10: Reading CpG file: &quot;850K_probe.hg19.bed3&quot;
+@ 2020-03-11 14:57:14: Reading reference gene model: &quot;hg19.RefSeq.union.bed&quot;
+@ 2020-03-11 14:57:14: Calculating CpG density ...
+@ 2020-03-11 14:57:15: Wrting data to : &quot;CpG_density.tsv&quot;
+@ 2020-03-11 14:57:15: Running R script to: &#39;CpG_density.r&#39;
+null device
+         1
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2><span class="section-number">4.5. </span>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>CpG_density.tsv</p></li>
+<li><p>CpG_density.r</p></li>
+<li><p>CpG_density.pdf</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/CpG_density.png"><img alt="../_images/CpG_density.png" src="../_images/CpG_density.png" style="width: 600.0px; height: 400.0px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CpG_distrb_chrom.html" class="btn btn-neutral float-right" title="5. CpG_distrb_chrom.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CpG_anno_probe.html" class="btn btn-neutral float-left" title="3. CpG_anno_probe.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Liguo Wang
+      <span class="lastupdated">
+        Last updated on July 7, 2019.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

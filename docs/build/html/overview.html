@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,29 +11,31 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2. Installation" href="installation.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> CpGtools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> CpGtools
           
 
           
@@ -82,6 +83,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -113,41 +115,48 @@
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_aggregation.html">1. CpG_aggregation.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_position.html">2. CpG_anno_position.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">7. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">8. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">9. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">11. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">13. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">15. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">16. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">17. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">18. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">19. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">20. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">21. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">22. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">23. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">25. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">11. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">12. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">13. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">14. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">15. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">16. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">17. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">18. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">19. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">20. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">21. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">22. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">23. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">24. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">25. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">26. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Liscense</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -186,9 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>1. Overview</li>
+      <li><span class="section-number">1. </span>Overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -208,7 +217,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="overview">
-<h1>1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <p>CpGtools package provides a number of Python programs to annotate, QC, visualize, and
 analyze DNA methylation data generated from Illumina
 <a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">HumanMethylation450 BeadChip (450K)</a> /
@@ -221,157 +230,124 @@ analyze DNA methylation data generated from Illumina
 <li><p>Differential CpG analysis modules</p></li>
 </ul>
 <div class="section" id="cpg-position-analysis-modules">
-<h2>1.1. CpG position analysis modules<a class="headerlink" href="#cpg-position-analysis-modules" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>CpG position analysis modules<a class="headerlink" href="#cpg-position-analysis-modules" title="Permalink to this headline">¶</a></h2>
 <p>These modules are primarily used to analyze CpG’s genomic locations.</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
+<col style="width: 38%" />
+<col style="width: 62%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
 <td><p>Description</p></td>
 </tr>
-<tr class="row-even"><td><p>CpG_anno_probe.py</p></td>
-<td><p>add comprehensive annotation information to each 450K/850K probe
-ID.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_aggregation.html">CpG_aggregation.py</a></p></td>
+<td><p>Aggregate proportion values of CpGs that located in give genomic regions (eg. CpG islands, promoters, exons, etc.).</p></td>
 </tr>
-<tr class="row-odd"><td><p>CpG_anno_position.py</p></td>
-<td><p>add comprehensive annotation information to each CpG based on its
-genomic coordinate.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_anno_position.html">CpG_anno_position.py</a></p></td>
+<td><p>Add annotation information CpGs according to their genomic coordinates.</p></td>
 </tr>
-<tr class="row-even"><td><p>CpG_aggregation.py</p></td>
-<td><p>Aggregate proportion values of a list of CpGs that located in give
-genomic regions.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_anno_probe.html">CpG_anno_probe.py</a></p></td>
+<td><p>Add annotation information to 450K/850K probes.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CpG_distrb_chrom.py</p></td>
-<td><p>Calculates the distribution of CpG over chromosomes.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_density_gene_centered.html">CpG_density_gene_centered.py</a></p></td>
+<td><p>Generate the <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/CpG_density.png">CpG density (count) profile</a> over gene body and the up/down-stream intergenic regions.</p></td>
 </tr>
-<tr class="row-even"><td><p>CpG_distrb_gene_centered.py</p></td>
-<td><p>Calculates the distribution of CpG over gene-centered genomic
-regions including ‘Coding exons’, ‘UTR exons’, ‘Introns’,
-‘Upstream intergenic regions’, and ‘Downstream intergenic regions’.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_chrom.html">CpG_distrb_chrom.py</a></p></td>
+<td><p>Calculate the distribution of CpG over chromosomes.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CpG_distrb_region.py</p></td>
-<td><p>Calculates the distribution of CpG over user-specified genomic
-regions (such as promoters, enhancers).</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_gene_centered.html">CpG_distrb_gene_centered.py</a></p></td>
+<td><p>Calculate the distribution of CpG over <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/geneDist.png">gene-centered genomic regions</a>.</p></td>
 </tr>
-<tr class="row-even"><td><p>CpG_logo.py</p></td>
-<td><p>Generates DNA motif logo for a given set of CpGs (to visualize
-the genomic context of these CpGs).</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_region.html">CpG_distrb_region.py</a></p></td>
+<td><p>Calculate the distribution of CpG over <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/regionDist.png">user-specified genomic regions</a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CpG_to_gene.py</p></td>
-<td><p>Assigns CpGs to their putative target genes. Follows the “Basel
-plus extension” rules used by the <a class="reference external" href="http://great.stanford.edu/public/html/index.php">GREAT</a> algorithm.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_logo.html">CpG_logo.py</a></p></td>
+<td><p>Generate a <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/450_CH.logo.png">DNA motif logo</a> and matrices for a given set of CpGs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_to_gene.html">CpG_to_gene.py</a></p></td>
+<td><p>Assign CpGs to their putative target genes. It uses the algorithm similar to <a class="reference external" href="http://great.stanford.edu/public/html/">GREAT</a>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="cpg-signal-analysis-modules">
-<h2>1.2. CpG signal analysis modules<a class="headerlink" href="#cpg-signal-analysis-modules" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>CpG signal analysis modules<a class="headerlink" href="#cpg-signal-analysis-modules" title="Permalink to this headline">¶</a></h2>
 <p>These modules are primarily used to analyze CpG’s DNA methylation beta values</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
+<col style="width: 38%" />
+<col style="width: 62%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
 <td><p>Description</p></td>
 </tr>
-<tr class="row-even"><td><p>beta_PCA.py</p></td>
-<td><p>Performs <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a> for samples.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_PCA.html">beta_PCA.py</a></p></td>
+<td><p>Perform <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a> (principal component analysis) for samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p>beta_jitter_plot.py</p></td>
-<td><p>Generates jitter plot and bean plot for each sample (column).</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_jitter_plot.html">beta_jitter_plot.py</a>’</p></td>
+<td><p>Generate <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/Jitter.png">jitter plot</a> (a.k.a. strip chart) and bean plot for each sample.”</p></td>
 </tr>
-<tr class="row-even"><td><p>beta_m_conversion.py</p></td>
-<td><p>Converts Beta-value into M-value or vice versa.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_m_conversion.html">beta_m_conversion.py</a></p></td>
+<td><p>Convert Beta-value into M-value or <em>vice versa</em>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>beta_profile_gene_centered.py</p></td>
-<td><p>Calculates the methylation profile (i.e., average beta value) for
-gene-centered genomic regions.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_profile_gene_centered.html">beta_profile_gene_centered.py</a></p></td>
+<td><p>Calculate the <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/gene_profile.png">methylation profile</a> (i.e., average beta value) for genomic regions around genes.</p></td>
 </tr>
-<tr class="row-even"><td><p>beta_profile_region.py</p></td>
-<td><p>Calculates the methylation profile (i.e., average beta value) for
-user specified genomic regions.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_profile_region.html">beta_profile_region.py</a></p></td>
+<td><p>Calculate <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/region_profile.png">methylation profile</a> (i.e. average beta value) around the user-specified genomic regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p>beta_stacked_barplot.py</p></td>
-<td><p>Creates stacked barplot for each sample. The stacked barplot
-showing the proportions of CpGs whose beta values are falling into
-these 4 ranges: [0.00,  0.25], (0.25,  0.50], (0.50,  0.75], and
-(0.75,  1.00].</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_stacked_barplot.html">beta_stacked_barplot.py</a></p></td>
+<td><p>Create <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/stacked_bar.png">stacked barplot</a> for each sample. The stacked barplot showing the proportions of CpGs whose beta values are falling into [0,0.25], [0.25,0.5], [0.5,0.75],[0.75,1]</p></td>
 </tr>
-<tr class="row-even"><td><p>beta_stats.py</p></td>
-<td><p>Gives basic information of CpGs located in genomic regions. These
-information include “Number of CpGs”, “Min methylation level”,
-“Max methylation level”, “Mean methylation level across all CpGs”,
-“Median methylation level across all CpGs” and “Standard deviation”</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_stats.html">beta_stats.py</a></p></td>
+<td><p>Summarize basic information on CpGs located in each genomic region.</p></td>
 </tr>
-<tr class="row-odd"><td><p>beta_topN.py</p></td>
-<td><p>This program picks the N most variable CpGs from the input file.
-The resulting file can be used for PCA/t-SNE or clustering
-analysis.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_tSNE.html">beta_tSNE.py</a></p></td>
+<td><p>Perform <a class="reference external" href="https://lvdmaaten.github.io/tsne/">t-SNE</a> (t-Distributed Stochastic Neighbor Embedding) analysis for samples.</p></td>
 </tr>
-<tr class="row-even"><td><p>beta_trichotmize.py</p></td>
-<td><p>This program uses <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.mixture.BayesianGaussianMixture.html">Bayesian Gaussian Mixture model</a> to trichotmize beta values into three status:
-“Un-methylated”,”Semi-methylated”, “Full-methylated”, and
-“unassigned”</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_topN.html">beta_topN.py</a></p></td>
+<td><p>Select the top N most variable CpGs (according to standard deviation) from the input file.</p></td>
 </tr>
-<tr class="row-odd"><td><p>beta_tSNE.py</p></td>
-<td><p>This program performs <a class="reference external" href="https://lvdmaaten.github.io/tsne/">t-SNE (t-Distributed Stochastic Neighbor
-Embedding )</a> analysis.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_trichotmize.html">beta_trichotmize.py</a></p></td>
+<td><p>Use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.mixture.BayesianGaussianMixture.html">Bayesian Gaussian Mixture model</a> to trichotmize beta values into three status: ‘Un-methylated’,’Semi-methylated’, ‘Full-methylated’, and ‘unassigned’.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="differential-cpg-analysis-modules">
-<h2>1.3. Differential CpG analysis modules<a class="headerlink" href="#differential-cpg-analysis-modules" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Differential CpG analysis modules<a class="headerlink" href="#differential-cpg-analysis-modules" title="Permalink to this headline">¶</a></h2>
 <p>These modules are primarily used to identify CpGs that are differentially methylated between groups</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
+<col style="width: 38%" />
+<col style="width: 62%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
 <td><p>Description</p></td>
 </tr>
-<tr class="row-even"><td><p>dmc_Bayes.py</p></td>
-<td><p>Different from statistical testing, this program tries to estimates
-“how different the means between the two groups are” using Bayesian
-approach. An <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> is used to estimate the “means”, “difference of
-means”, “95% HDI (highest posterior density interval)”, and the
-posterior probability that the HDI does NOT include “0”. It is
-similar to John Kruschke’s <a class="reference external" href="(http://www.indiana.edu/~kruschke/BEST/)">BEST</a> algorithm.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_Bayes.html">dmc_Bayes.py</a></p></td>
+<td><p>Differential CpG analysis using the Bayesian approach. (for 450K/850K data)</p></td>
 </tr>
-<tr class="row-odd"><td><p>dmc_bb.py</p></td>
-<td><p>This program performs differential CpG analysis using the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta-binomial_distribution">beta
-binomial model</a> based on methylation proportions (in the form of
-“c,n”, where “c” indicates “number of reads with methylated C” and
-“n” indicates “Number of total reads”.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_bb.html">dmc_bb.py</a></p></td>
+<td><p>Differential CpG analysis using the beta-binomial model. (for RRBS/WGBS count data)</p></td>
 </tr>
-<tr class="row-even"><td><p>dmc_fisher.py</p></td>
-<td><p>This program performs differential CpG analysis using Fisher’s
-Exact Test. It only applies to two sample comparison with no
-replicates.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_fisher.html">dmc_fisher.py</a></p></td>
+<td><p>Differential CpG analysis using Fisher’s Exact Test. (for RRBS/WGBS count data)</p></td>
 </tr>
-<tr class="row-odd"><td><p>dmc_glm.py</p></td>
-<td><p>This program performs differential CpG analysis using the linear
-regression model.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_glm.html">dmc_glm.py</a></p></td>
+<td><p>Differential CpG analysis using the <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_linear_model">GLM</a> generalized liner model. (for 450K/850K data)</p></td>
 </tr>
-<tr class="row-even"><td><p>dmc_logit.py</p></td>
-<td><p>This program performs differential CpG analysis using the logistic
-regression model.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_logit.html">dmc_logit.py</a></p></td>
+<td><p>Differential CpG analysis using logistic regression model. (for RRBS/WGBS count data)</p></td>
 </tr>
-<tr class="row-odd"><td><p>dmc_nonparametric.py</p></td>
-<td><p>This program performs differential CpG analysis using <a class="reference external" href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test">Mann-Whitney
-test</a>
-for two group comparison, and the <a class="reference external" href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis H-test</a> for multiple groups comparison.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_nonparametric.html">dmc_nonparametric.py</a></p></td>
+<td><p>Differential CpG analysis using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html">Mann-Whitney U test</a> for two group comparison, and the <a class="reference external" href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis H-test</a> for multiple groups comparison.</p></td>
 </tr>
-<tr class="row-even"><td><p>dmc_ttest.py</p></td>
-<td><p>This program performs differential CpG analysis using the T test
-for two group comparison, and <a class="reference external" href="https://en.wikipedia.org/wiki/Analysis_of_variance">ANOVA</a> for multiple groups comparison.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_ttest.html">dmc_ttest.py</a></p></td>
+<td><p>Differential CpG analysis using T test. (for 450K/850K data)</p></td>
 </tr>
 </tbody>
 </table>
@@ -398,6 +374,7 @@ for two group comparison, and <a class="reference external" href="https://en.wik
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
         Last updated on July 7, 2019.
@@ -405,7 +382,14 @@ for two group comparison, and <a class="reference external" href="https://en.wik
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -416,7 +400,6 @@ for two group comparison, and <a class="reference external" href="https://en.wik
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

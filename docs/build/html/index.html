@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,29 +11,31 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Overview" href="overview.html" /> 
@@ -51,7 +52,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> CpGtools
+            <a href="#" class="icon icon-home" alt="Documentation Home"> CpGtools
           
 
           
@@ -81,6 +82,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -107,28 +109,29 @@
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_aggregation.html">1. CpG_aggregation.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_position.html">2. CpG_anno_position.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo/CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">7. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">8. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">9. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">11. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">13. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">15. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">16. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">17. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">18. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">19. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">20. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">21. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">22. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">23. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">25. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">11. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">12. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">13. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">14. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">15. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">16. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">17. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">18. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">19. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">20. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">21. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">22. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">23. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">24. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">25. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">26. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -147,6 +150,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -185,7 +189,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
       <li>&lt;no title&gt;</li>
     
@@ -224,9 +228,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release history</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-2">3.1. Version 1.0.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-1">3.2. Version 1.0.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-0">3.3. Version 1.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-8">3.1. Version 1.0.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-7">3.2. Version 1.0.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-2">3.3. Version 1.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-1">3.4. Version 1.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#version-1-0-0">3.5. Version 1.0.0</a></li>
 </ul>
 </li>
 </ul>
@@ -285,177 +291,185 @@
 <li class="toctree-l2"><a class="reference internal" href="demo/CpG_anno_probe.html#output-files">3.6. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#description">4.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#options">4.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#input-files-examples">4.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#command">4.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_density_gene_centered.html#description">4.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_density_gene_centered.html#options">4.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_density_gene_centered.html#input-files-examples">4.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_density_gene_centered.html#command">4.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_density_gene_centered.html#output-files">4.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#description">5.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#options">5.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#input-files-examples">5.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#command">5.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#output-files">5.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#description">5.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#options">5.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#input-files-examples">5.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_chrom.html#command">5.4. Command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">6. CpG_distrb_region.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#description">6.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#options">6.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#input-files-examples">6.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#command">6.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#output-files">6.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#description">6.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#options">6.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#input-files-examples">6.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#command">6.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_gene_centered.html#output-files">6.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">7. CpG_logo.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#description">7.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#options">7.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#input-files-examples">7.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#command">7.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#output-files">7.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_distrb_region.html">7. CpG_distrb_region.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#description">7.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#options">7.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#input-files-examples">7.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#command">7.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_distrb_region.html#output-files">7.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">8. CpG_to_gene.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#description">8.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#id1">8.2. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#notes">8.3. Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#options">8.4. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#input-files-examples">8.5. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#command">8.6. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#output-files">8.7. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_logo.html">8. CpG_logo.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#description">8.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#options">8.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#input-files-examples">8.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#command">8.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_logo.html#output-files">8.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">9. beta_PCA.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#description">9.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#input-files-examples">9.2. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#command">9.3. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#output-files">9.4. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/CpG_to_gene.html">9. CpG_to_gene.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#description">9.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#id1">9.2. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#notes">9.3. Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#options">9.4. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#input-files-examples">9.5. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#command">9.6. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/CpG_to_gene.html#output-files">9.7. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">10. beta_jitter_plot.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#description">10.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#options">10.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#input-files-examples">10.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#command">10.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#output-files">10.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_PCA.html">10. beta_PCA.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#description">10.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#input-files-examples">10.2. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#command">10.3. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_PCA.html#output-files">10.4. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">11. beta_m_conversion.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#description">11.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#options">11.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#input-file-example">11.3. Input file (example)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#command">11.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#output">11.5. Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_jitter_plot.html">11. beta_jitter_plot.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#description">11.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#options">11.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#input-files-examples">11.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#command">11.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_jitter_plot.html#output-files">11.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#description">12.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#options">12.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#command">12.3. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#output-files">12.4. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_m_conversion.html">12. beta_m_conversion.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#description">12.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#options">12.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#input-file-example">12.3. Input file (example)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#command">12.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_m_conversion.html#output">12.5. Output</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">13. beta_profile_region.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#description">13.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#options">13.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#input-files-examples">13.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#command">13.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#output-files">13.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_gene_centered.html">13. beta_profile_gene_centered.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#description">13.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#options">13.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#command">13.3. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_gene_centered.html#output-files">13.4. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">14. beta_stacked_barplot.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#description">14.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#options">14.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#input-files-examples">14.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#command">14.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#output-files">14.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_profile_region.html">14. beta_profile_region.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#description">14.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#options">14.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#input-files-examples">14.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#command">14.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_profile_region.html#output-files">14.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">15. beta_stats.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#description">15.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#options">15.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#input-files-examples">15.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#command">15.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#output-files">15.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stacked_barplot.html">15. beta_stacked_barplot.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#description">15.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#options">15.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#input-files-examples">15.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#command">15.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stacked_barplot.html#output-files">15.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">16. beta_tSNE.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#description">16.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#input-files-examples">16.2. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#command">16.3. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#output-files">16.4. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_stats.html">16. beta_stats.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#description">16.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#options">16.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#input-files-examples">16.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#command">16.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_stats.html#output-files">16.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">17. beta_topN.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#description">17.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#options">17.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#input-files-examples">17.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#command">17.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#output-file">17.5. Output file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_tSNE.html">17. beta_tSNE.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#description">17.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#input-files-examples">17.2. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#command">17.3. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_tSNE.html#output-files">17.4. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">18. beta_trichotmize.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#description">18.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#algorithm">18.2. Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#options">18.3. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#input-files-examples">18.4. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#command">18.5. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#output-files">18.6. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_topN.html">18. beta_topN.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#description">18.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#options">18.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#input-files-examples">18.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#command">18.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_topN.html#output-file">18.5. Output file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">19. dmc_Bayes.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#description">19.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#options">19.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#input-files-examples">19.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#command">19.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#output-files">19.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/beta_trichotmize.html">19. beta_trichotmize.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#description">19.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#algorithm">19.2. Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#options">19.3. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#input-files-examples">19.4. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#command">19.5. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/beta_trichotmize.html#output-files">19.6. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">20. dmc_bb.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#description">20.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#options">20.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#input-files">20.3. Input files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#command">20.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_Bayes.html">20. dmc_Bayes.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#description">20.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#options">20.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#input-files-examples">20.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#command">20.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_Bayes.html#output-files">20.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">21. dmc_fisher.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#description">21.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#input-file-format">21.2. Input file format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#options">21.3. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#input-files-examples">21.4. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#commands">21.5. Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#output">21.6. Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_bb.html">21. dmc_bb.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#description">21.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#options">21.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#input-files">21.3. Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_bb.html#command">21.4. Command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">22. dmc_glm.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#description">22.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#options">22.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#input-files-examples">22.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#command">22.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#output-files">22.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_fisher.html">22. dmc_fisher.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#description">22.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#input-file-format">22.2. Input file format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#options">22.3. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#input-files-examples">22.4. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#commands">22.5. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_fisher.html#output">22.6. Output</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">23. dmc_logit.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#description">23.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#options">23.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#input-files-examples">23.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#command">23.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_glm.html">23. dmc_glm.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#description">23.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#options">23.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#input-files-examples">23.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#command">23.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_glm.html#output-files">23.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">24. dmc_nonparametric.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#description">24.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#options">24.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#input-files-examples">24.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#command">24.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_logit.html">24. dmc_logit.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#description">24.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#options">24.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#input-files-examples">24.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_logit.html#command">24.4. Command</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">25. dmc_ttest.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#description">25.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#options">25.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#input-files-examples">25.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#command">25.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#output-files">25.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_nonparametric.html">25. dmc_nonparametric.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#description">25.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#options">25.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#input-files-examples">25.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_nonparametric.html#command">25.4. Command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demo/dmc_ttest.html">26. dmc_ttest.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#description">26.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#options">26.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#input-files-examples">26.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#command">26.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo/dmc_ttest.html#output-files">26.5. Output files</a></li>
 </ul>
 </li>
 </ul>
@@ -498,6 +512,7 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
         Last updated on July 7, 2019.
@@ -505,7 +520,14 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -516,7 +538,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -17,6 +17,8 @@ This program generates jitter plot (a.k.a. strip chart) and bean plot for each s
 
 -  User must install the `beanplot <https://cran.r-project.org/web/packages/beanplot/index.html>`_
    R library.
+-  Please name your sample IDs (such as "Sample_01", "Sample_02" in the above example) using only "letters" [a-z, A-Z], "numbers" [0-9], and "_"; and 
+   your sample ID must start with a letter. 
    
 Options
 --------

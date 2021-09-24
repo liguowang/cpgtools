@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,29 +11,31 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. CpG_anno_probe.py" href="CpG_anno_probe.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> CpGtools
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CpGtools
           
 
           
@@ -82,6 +83,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -117,41 +119,48 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">4. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">5. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">6. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">7. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">8. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">9. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">10. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">11. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">12. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">13. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">14. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">15. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">16. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">17. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">18. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">19. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">20. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">21. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">22. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">23. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">24. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">25. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">11. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">12. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">13. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">14. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">15. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">16. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">17. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">18. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">19. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">20. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">21. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">22. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">23. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">24. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">25. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">26. dmc_ttest.py</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Liscense</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -190,9 +199,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>2. CpG_anno_position.py</li>
+      <li><span class="section-number">2. </span>CpG_anno_position.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -212,13 +221,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="cpg-anno-position-py">
-<h1>2. CpG_anno_position.py<a class="headerlink" href="#cpg-anno-position-py" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>CpG_anno_position.py<a class="headerlink" href="#cpg-anno-position-py" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>2.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This program adds annotation information to each CpG based on its <strong>genomic position</strong>.</p>
 </div>
 <div class="section" id="notes">
-<h2>2.2. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Input CpG (-i) and annotation (-a) BED files must have at least three columns, and must based on the same genome assembly   version</p></li>
 <li><p>If multiple regions from the annotation BED file are overlapped with the <strong>same</strong>
@@ -227,7 +236,7 @@ CpG site, their names will be concatenated together.</p></li>
 </ul>
 </div>
 <div class="section" id="pre-computed-datasets">
-<h2>2.3. Pre-computed datasets<a class="headerlink" href="#pre-computed-datasets" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Pre-computed datasets<a class="headerlink" href="#pre-computed-datasets" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_338TF_130Cell_E3.bed.gz">hg19_ENCODE_338TF_130Cell_E3.bed.gz</a> (File size  = 108.2 MB)</dt><dd><p>Transcription factor (TF) binding sites identified from <a class="reference external" href="https://en.wikipedia.org/wiki/ChIP-sequencing">ChIP-seq</a> experiments performed
 by the <a class="reference external" href="https://www.encodeproject.org/">ENCODE</a> project. Peaks from 1264 experiments
@@ -242,14 +251,14 @@ the <a class="reference external" href="http://genome.ucsc.edu/cgi-bin/hgTables"
 <dt><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz">hg19_ENCODE_chromHMM_states_9Cells.merge.bed.gz</a> (File size  = 32.7 MB)</dt><dd><p>Chromatin State Segmentation by <a class="reference external" href="https://www.nature.com/articles/nmeth.1906">chromHMM</a>
 from <a class="reference external" href="https://www.encodeproject.org/">ENCODE</a>. Chromatin states across 9 cell
 types (GM12878, H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were learned by
-computationally by integrating 9 factors (CTCF, H3K27ac, H3K27me3, H3K36me3, H3K4me1,
+integrating 9 factors (CTCF, H3K27ac, H3K27me3, H3K36me3, H3K4me1,
 H3K4me2, H3K4me3, H3K9ac, H4K20me1 ) plus input. A total of 15 states were identified,
 include: State-1 (Active Promoter), state-2 (Weak Promoter), state-3 (Inactive/poised
 Promoter), state-4 and 5 (Strong enhancer), state-6 and 7 (Weak/poised enhancer),
 state-8 (insulator), state-9 (Transcriptional transition), state-10 (Transcriptional
 elongation), state-11 (Weak transcribed), state-12 (Polycomb-repressed), state-13
 (Heterochromatin or low signal), state-14 and 15 (Repetitive/Copy Number Variation).
-Orignal chromatin state BED file was downloaded the <a class="reference external" href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Tabel Browser</a>.</p>
+The Original chromatin state BED file was downloaded from the <a class="reference external" href="http://genome.ucsc.edu/cgi-bin/hgTables">UCSC Tabel Browser</a>.</p>
 </dd>
 <dt><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/hg19_FANTOM_enhancers_phase_1_and_2.bed.gz">hg19_FANTOM_enhancers_phase_1_and_2.bed.gz</a></dt><dd><p><a class="reference external" href="http://fantom.gsc.riken.jp/5/">PHANTOM5</a> human permissive enhancers downloaded from <a class="reference external" href="http://fantom.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2_expression_tpm_matrix.txt.gz">here</a>.</p>
 </dd>
@@ -270,7 +279,7 @@ NHEK, NHLF) are combined (N = 665,650)</p>
 The hg38-based annotation files are available from <a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/">here</a></p>
 </div>
 <div class="section" id="options">
-<h2>2.4. Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -303,20 +312,20 @@ default=False</p>
 </div></blockquote>
 </div>
 <div class="section" id="input-files-examples">
-<h2>2.5. Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.5. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6">test_01.hg19.bed6</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/hg19_ENCODE_338TF_130Cell_E3.bed.gz/download">hg19_ENCODE_338TF_130Cell_E3.bed.gz</a></p></li>
 </ul>
 </div>
 <div class="section" id="command">
-<h2>2.6. Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.6. </span>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$CpG_anno_position.py  -l -a hg19_ENCODE_338TF_130Cell_E3.bed.gz -i test_01.hg19.bed6 -o output
 </pre></div>
 </div>
 </div>
 <div class="section" id="output-files">
-<h2>2.7. Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7. </span>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>output.anno.txt</p></li>
 </ul>
@@ -351,6 +360,7 @@ chr1   534241  534242  cg24669183      0.7941  +       FOXA2,MNT
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Liguo Wang
       <span class="lastupdated">
         Last updated on July 7, 2019.
@@ -358,7 +368,14 @@ chr1   534241  534242  cg24669183      0.7941  +       FOXA2,MNT
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -369,7 +386,6 @@ chr1   534241  534242  cg24669183      0.7941  +       FOXA2,MNT
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

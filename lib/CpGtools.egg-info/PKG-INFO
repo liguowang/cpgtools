@@ -1,8 +1,8 @@
 Metadata-Version: 1.2
 Name: cpgtools
-Version: 0.1.8
+Version: 1.0.7
 Summary: Tools to analyze and visualize DNA methylation data
-Home-page: http://cpgtools.sourceforge.net/
+Home-page: https://cpgtools.readthedocs.io/en/latest/index.html
 Author: Liguo Wang
 Author-email: wangliguo78@gmail.com
 License: UNKNOWN
