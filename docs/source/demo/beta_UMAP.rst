@@ -80,7 +80,7 @@ Command
 ----------
 ::
 
- $beta_PCA.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o cirrHCV_vs_normal -l
+ $beta_UMAP.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o cirrHCV_vs_normal -l
 
 Output files
 ---------------
