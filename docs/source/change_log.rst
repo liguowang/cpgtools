@@ -1,7 +1,7 @@
 CpGtools Release history
 =========================
 
-Version 1.0.9
+Version 1.10.0
 -------------
 
 Add :code:`beta_UMAP.py` on 09/24/2021
