@@ -78,7 +78,8 @@ Options
                         genomic region defined in the annotation BED file
                         (i.e., window_size*0.5 will be extended to up- and
                         down-stream from the middle point of each genomic
-                        region). default=100
+                        region). if --window = 0, do NOT place window.
+			default=100
   -o OUT_FILE, --output=OUT_FILE
                         The prefix of the output file.
   -l, --header          If True, the first row of input CpG file is header.
