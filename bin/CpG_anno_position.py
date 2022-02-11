@@ -52,25 +52,27 @@ def buildIntervalTree(bed_file, window_size = 0):
 		chrom = fields[0]
 		start = int(fields[1])
 		end = int(fields[2])
-		#middle position
-		mid = int(start + (end - start)/2.0 )
-		if start < 0:
-			continue
-		if end < 0:
-			continue
-		if start > end:
-			continue
 		
-		# window start position
-		extension = int(window_size * 0.5)
-		w_start = mid - extension
-		if w_start < start:
-			w_start = start
-		
-		# window end position
-		w_end = mid + extension
-		if w_end > end:
-			w_end = end
+		if window_size > 0:
+			# window middle position
+			mid = int(start + (end - start)/2.0 )
+			if start < 0:
+				continue
+			if end < 0:
+				continue
+			if start > end:
+				continue
+			
+			# window start position
+			extension = int(window_size * 0.5)
+			w_start = mid - extension
+			if w_start < start:
+				w_start = start
+			
+			# window end position
+			w_end = mid + extension
+			if w_end > end:
+				w_end = end
 			
 		if len(fields) >= 4:
 			name = fields[3]
@@ -103,7 +105,7 @@ def main():
 	parser = OptionParser(usage,version="%prog " + __version__)
 	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Input CpG file in BED3+ format.")
 	parser.add_option("-a","--annotation",action="store",type="string",dest="anno_file",help="Input annotation file in BED3+ format.")
-	parser.add_option("-w","--window",action="store",type='int', dest="window_size", default=100, help="Size of window centering on the middle-point of each genomic region defined in the annotation BED file (i.e., window_size*0.5 will be extended to up- and down-stream from the middle point of each genomic region). default=%default" )
+	parser.add_option("-w","--window",action="store",type='int', dest="window_size", default=0, help="Size of window centering on the middle-point of each genomic region defined in the annotation BED file (i.e., window_size*0.5 will be extended to up- and down-stream from the middle point of each genomic region). if WINDOW_SIZE = 0, use the original region. default=%default" )
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	parser.add_option("-l", "--header", action="store_true", dest="header", default=False, help="If True, the first row of input CpG file is header. default=%default")
 	(options,args)=parser.parse_args()
