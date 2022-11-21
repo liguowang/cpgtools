@@ -36,7 +36,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.10.0"
+__version__="1.12.0"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -184,7 +184,9 @@ def main():
 		line_num += 1
 		if line_num == 1:
 			headers = l.split()
-			primary_v_index = headers.index(primary_variable + '.pval')
+			for i,v in enumerate(headers):
+				if v.startswith(primary_variable) and v.endswith('.pval'):
+					primary_v_index = i
 		else:
 			v = l.split()
 			try:

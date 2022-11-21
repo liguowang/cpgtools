@@ -23,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.10.0"
+__version__="1.12.0"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -75,7 +75,7 @@ def main():
 	print ('try(fit <- glm(y ~ %s, family=gaussian))' % ('+'.join(cv_names)), file=ROUT)
 	print ('pvals <- coef(summary(fit))[,4]', file=ROUT)
 	print ('coefs <- coef(summary(fit))[,1]', file=ROUT)
-	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=c("ID",paste(gsub("2","",names(coefs)), "coef",sep="."), paste(gsub("2","",names(pvals)), "pval",sep=".")))' % (options.out_file + '.results.txt'),  file = ROUT) 
+	print ( 'write.table(file=\"%s\",x=matrix(c(cgid, as.vector(coefs), as.vector(pvals)), nrow=1),quote=FALSE, row.names=FALSE, sep="\\t", col.names=c("ID",paste(names(coefs), "coef", sep="."), paste(names(pvals), "pval",sep=".")))' % (options.out_file + '.results.txt'),  file = ROUT) 
 	print ('}', file=ROUT)	
 	print ('\n', file=ROUT)
 
@@ -148,7 +148,9 @@ def main():
 		line_num += 1
 		if line_num == 1:
 			headers = l.split()
-			primary_v_index = headers.index(primary_variable + '.pval')
+			for i,v in enumerate(headers):
+				if v.startswith(primary_variable) and v.endswith('.pval'):
+					primary_v_index = i
 		else:
 			v = l.split()
 			try:

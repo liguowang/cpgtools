@@ -23,7 +23,7 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.10.0"
+__version__="1.12.0"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
@@ -54,7 +54,7 @@ def paired_ttest(a, b, nanPolicy='omit'):
 		t = tmp.statistic
 	except:
 		pass
-			
+
 	return (p,t)
 
 def anova(*args):
@@ -70,7 +70,7 @@ def anova(*args):
 	except:
 		pass
 	return (p,t)
-	
+
 def main():
 	usage="%prog [options]" + "\n"
 	parser = OptionParser(usage,version="%prog " + __version__)
@@ -80,7 +80,7 @@ def main():
 	parser.add_option("-w","--welch",action="store_true",default=False,dest="welch_ttest",help="If True, performs Welch's t-test which does not assume the two samples have equal variance.  If False, performs a standard two-sample t-test (i.e. assuming the two samples have equal variance). default=%default")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
 	(options,args)=parser.parse_args()
-	
+
 	print ()
 	#print (options.paired)
 	#print (options.welch_ttest)
@@ -94,31 +94,31 @@ def main():
 		print (__doc__)
 		parser.print_help()
 		sys.exit(102)
-				
+
 	if not (options.out_file):
 		print (__doc__)
 		parser.print_help()
-		sys.exit(103)	
-	
+		sys.exit(103)
+
 	FOUT = open(options.out_file + '.pval.txt','w')
 	#ROUT = open(options.out_file + '.r','w')
-	
+
 	printlog("Read group file \"%s\" ..." % (options.group_file))
 	(ss,gs) = read_grp_file1(options.group_file)
-	
+
 	s2g = {}
 	for s,g in zip(ss,gs):
-		s2g[s] = g	
-	
+		s2g[s] = g
+
 	g2s = collections.defaultdict(list)
 	for s,g in zip(ss, gs):
 		g2s[g].append(s)
-	
+
 	group_IDs = sorted(g2s.keys())
 	for g in group_IDs:
 		print ("\tGroup %s has %d samples:" % (g, len(g2s[g])))
 		print ('\t\t' + ','.join(g2s[g]))
-	
+
 	if len(group_IDs) < 2:
 		printlog("You must have at least two groups!", file=sys.stderr)
 		sys.exit(1)
@@ -131,15 +131,16 @@ def main():
 		printlog("Perfrom standard t-test of two independent samples ...")
 	elif len(group_IDs) >= 3:
 		printlog("Perfrom ANOVA ...")
-	
+
 	line_num = 1
 	probe_list = []
 	p_list = []
+	delta_beta = {}
 	for l in ireader.reader(options.input_file):
 		f = l.split()
 		if len(f) == 0: continue
 		if line_num == 1:
-			
+
 			sample_IDs = f[1:]
 
 			# check if sample ID matches
@@ -152,27 +153,31 @@ def main():
 			probe_ID = f[0]
 			beta_values = f[1:]
 			for s,b in zip(sample_IDs, beta_values):
-			
+
 				#deal with non-numerical values
 				try:
 					b = float(b)
 				except:
 					b = np.nan
-				
+
 				#skip if s not in group file
 				if s not in s2g:
 					continue
-				
+
 				gid = s2g[s]
 				g2values[gid].append(b)
-			
+
 			if len(g2values) == 2:
 				a = np.array(g2values[group_IDs[0]])
 				b = np.array(g2values[group_IDs[1]])
+				try:
+					delta_beta[probe_ID] = np.mean(a) - np.mean(b)
+				except:
+					delta_beta[probe_ID] = np.nan
 				if options.paired:
 					(pval,tscore) = paired_ttest(a,b)
 				else:
-					(pval,tscore) = standard_ttest(a,b, equalVar = options.welch_ttest)				
+					(pval,tscore) = standard_ttest(a,b, equalVar = options.welch_ttest)
 			elif len(g2values) >= 3:
 				tmp = []
 				for g in group_IDs:
@@ -184,30 +189,30 @@ def main():
 			else:
 				continue
 		line_num += 1
-	
+
 	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
 	adjusted_p = {}
 	q_list =  padjust.multiple_testing_correction(p_list)
 	for id,p,q in zip(probe_list, p_list, q_list):
 		adjusted_p[id] = '\t'.join([str(i) for i in (p,q)])
-	
+
 	printlog("Writing to %s" % (options.out_file + '.pval.txt'))
 	line_num = 1
 	for l in ireader.reader(options.input_file):
 		if line_num == 1:
-			print (l + '\tpval\tadj.pval', file=FOUT)
+			print (l + '\tdelta_beta\tpval\tadj.pval', file=FOUT)
 		else:
 			f = l.split()
 			probe_ID = f[0]
 			try:
-				print (l + '\t' + adjusted_p[probe_ID], file=FOUT)
+				print (l + '\t' + str(delta_beta[probe_ID]) + '\t' + adjusted_p[probe_ID], file=FOUT)
 			except:
-				print (l + '\t' + 'n/a', file=FOUT)
+				print (l + '\t' + 'n/a' + '\t' + 'n/a' + '\t' + 'n/a', file=FOUT)
 		line_num += 1
 	FOUT.close()
-		
-	
-	
+
+
+
 
 if __name__=='__main__':
 	main()
