@@ -76,8 +76,11 @@ def main():
 	for l in ireader.reader(options.input_file):
 		line_num += 1
 		f = l.split()
-		if (line_num == 1 and options.header):
-			print (l + '\t' +  '\t'.join(header), file=OUT)
+		if line_num == 1:
+			if options.header:
+				print (l + '\t' +  '\t'.join(header), file=OUT)
+			else:
+				print ('\t'.join(['NA']*len(f)) + '\t' +  '\t'.join(header), file=OUT)
 		else:
 			if options.probe_col >= len(f):
 				print ("Error: column ID must be smaller than %d!" % len(f), file=sys.stderr)
