@@ -15,6 +15,7 @@ Annotation datasets
  - pre-built TSV file used to annotate CpG according to its 450K/850K probe ID. 
   
   * `MethylationEPIC_CpGtools.tsv.gz <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz/download>`_
+  * `MethylationEPIC_CpGtools.Dec6_2022.tsv.gz <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.Dec6_2022.tsv.gz/download>`_ (Fixed gene symbols that were incorreclty converted into dates by Excel. )
 
  - BED files used to annotate CpG according to its genomic positions (hg19/GRCh37)
   
