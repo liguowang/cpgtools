@@ -1,64 +1,69 @@
-dmc_ttest.py
-============
+predict_sex.py
+==============
 
 Description
 ------------
-Differential CpG analysis using `T test <https://en.wikipedia.org/wiki/Student%27s_t-test>`_ for two groups comparison or `ANOVA <https://en.wikipedia.org/wiki/Analysis_of_variance>`_ 
-for multiple groups comparison.
+Predict sex based on the semi-methylation (also known as genomic imprinting)
+ratio. This method leverages the fact that, due to X chromosome inactivation,
+females have a higher proportion of semi-methylated CpGs on their X chromosomes.
+A log2(ratio) greater than 0 indicates a female, while a log2(ratio) less than
+0 indicates a male.
 
 Options
 -----------
 
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Data file containing beta values with the 1st row
-                        containing sample IDs (must be unique) and the 1st
-                        column containing CpG positions or probe IDs (must be
-                        unique). Except for the 1st row and 1st column, any
-                        non-numerical values will be considered as "missing
-                        values" and ignored. This file can be a regular text
-                        file or compressed file (.gz, .bz2).
-  -g GROUP_FILE, --group=GROUP_FILE
-                        Group file defining the biological group of each
-                        sample. It is a comma-separated 2 columns file with
-                        the 1st column containing sample IDs, and the 2nd
-                        column containing group IDs.  It must have a header
-                        row. Sample IDs should match to the "Data file". Note:
-                        automatically switch to use ANOVA if more than 2
-                        groups were defined in this file.
-  -p, --paired          If True, performs a paired t-test (the paired sampels
-                        are matched by the order). If False, performs a
-                        standard independent 2 sample t-test. default=False
-  -w, --welch           If True, performs Welch's t-test which does not assume
-                        the two samples have equal variance.  If False,
-                        performs a standard two-sample t-test (i.e. assuming
-                        the two samples have equal variance). default=False
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-                        
+  Options:
+    --version             show program's version number and exit
+    -h, --help            show this help message and exit
+    -i INPUT_FILE, --input_file=INPUT_FILE
+                          Tab-separated data frame file containing beta values
+                          with the 1st row containing sample IDs and the 1st
+                          column containing CpG IDs.
+    -x XPROBE_FILE, --xprobe=XPROBE_FILE
+                          File with CpG IDs mapped to the X chromosome, with one
+                          probe listed per row.
+    -c CUTOFF, --cut=CUTOFF
+                          The cutoff of log2(SM ratio) to determine the sex
+                          prediction. Log2(SM ratio) greater than this cutoff
+                          indicates a female, while a log2(ratio) less than this
+                          cutoff indicates a male. default=0.0
+    -o OUT_FILE, --output=OUT_FILE
+                          The prefix of the output file.
+
 Input files (examples)
 ------------------------
 
 
-- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
-- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
-- `test_06_ThreeGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz>`_
-- `test_06_ThreeGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv>`_
+- `test_10.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz>`_
+- `chrX_CpGs.txt.gz <https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz>`_
+
 
 Command
 -----------
 ::
  
- #Two group comparison. Compare normal livers to HCV-related cirrhosis livers 
- $dmc_ttest.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o ttest_2G
- 
- #Three group comparison. Compare normal livers, HCV-related cirrhosis livers, and liver cancers 
- $dmc_ttest.py -i test_06_ThreeGroup.tsv.gz -g test_06_ThreeGroup.grp.csv -o ttest_3G
+ predict_sex.py -x chrX_CpGs.txt.gz -i test_10.tsv.gz -o output
  
 Output files
 ---------------
 
-- ttest_2G.pval.txt
-- ttest_3G.pval.txt
+- output.predicted_sex.tsv
 
+
+::
+
+ $ cat output.predicted_sex.tsv
+ Sample_ID log2_SM_ratio Predicted_sex
+ 2621  -2.249628052954919  Male
+ 2622  -2.2671726671830674 Male
+ 2691  1.4530581933290616  Female
+
+Evaluation
+-----------
+
+When evaluating this classifier using 450K data (`GSE105018 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018>`_) generated from 832 males and 826 females. The prediction accuracy is 100%.
+
+.. image:: ../_static/predict_sex.png
+   :height: 650 px
+   :width: 650 px
+   :scale: 100 %
