@@ -61,4 +61,3 @@ Output files
 
 - ttest_2G.pval.txt
 - ttest_3G.pval.txt
-
