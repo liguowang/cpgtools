@@ -1,6 +1,11 @@
 CpGtools Release history
 =========================
 
+Version 2.0.1
+-------------
+
+Add :code:`predict_sex.py` and :code:`beta_selectNBest.py` on 09/05/2024
+
 Version 1.10.0
 -------------
 
