@@ -33,6 +33,7 @@ import sys
 import subprocess
 from optparse import OptionParser
 from cpgmodule.utils import *
+from cpgmodule._version import __version__
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.manifold import TSNE
@@ -41,15 +42,15 @@ __author__ = "Liguo Wang"
 __copyright__ = "Copyleft"
 __credits__ = []
 __license__ = "GPL"
-__version__="1.12.0"
 __maintainer__ = "Liguo Wang"
 __email__ = "wang.liguo@mayo.edu"
 __status__ = "Development"
 
 def pick_colors(n):
-	my_colors = ['#e6194B', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabebe', '#469990', '#e6beff', '#9A6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#a9a9a9','#ffe119']
+	my_colors = [
+	"#F0A3FF", "#0075DC", "#993F00", "#4C005C", "#191919", "#005C31", "#2BCE48", "#FFCC99", "#808080", "#94FFB5", "#8F7C00", "#9DCC00", "#C20088", "#003380", "#FFA405", "#FFA8BB", "#426600", "#FF0010", "#5EF1F2", "#00998F", "#E0FF66", "#740AFF", "#990000", "#FFFF80", "#FFE100", "#FF5005"]
 	if n > len(my_colors):
-		print ("Only support 21 different colors", file = sys.stderr)
+		print ("Only support 26 different colors", file = sys.stderr)
 		sys.exit()
 	return my_colors[0:n]
 
