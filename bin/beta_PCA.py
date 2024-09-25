@@ -87,27 +87,30 @@ def main():
 	df1 = pd.read_csv(options.input_file, index_col = 0, sep="\t")
 	
 	#remove NA and transpose
-	df2 = df1.dropna(axis=0, how='any')
-	printlog("%d rows with missing values were removed." % (len(df1) - len(df2)))
-	#print (df2.head())
-	
-	printlog("Transposing data frame ...")
-	df2 = df2.T
-	#print (df2.head()) 
-	
-	printlog("Standarizing values ...")
-	x = df2.values
-	x = StandardScaler().fit_transform(x)
-	
+	df2 = df1.dropna(axis=0, how='any').T
+	printlog("%d rows with missing values were removed." % (len(df1.index) - len(df2.columns)))
+
 	printlog("Reading group file: \"%s\" ..." % (options.group_file))
 	group = pd.read_csv(options.group_file, index_col=0, header=0,names=['Sample_ID', 'Group_ID'])
-	group.index = group.index.map(str)
-	
 	#check if sample IDs are unique
 	if len(group.index) != len(group.index.unique()):
 		print ("Sample IDs are not unique", file = sys.stderr)
 		sys.exit()	
+	group.index = group.index.map(str)
+	printlog("Group file \"%s\" contains %d samples" % (options.group_file, len(group.index)))
 	
+	printlog("Find common sample IDs between group file and data file ...") 
+	common_samples = list(set(group.index) & set(df2.index))
+	used_df = df2.loc[common_samples]
+	(usable_sample, usable_cpg) = used_df.shape
+	printlog("Used CpGs: %d, Used samples: %d" % (usable_cpg, usable_sample))
+
+	
+	printlog("Standarizing values ...")
+	x = used_df.to_numpy()
+	x = StandardScaler().fit_transform(x)
+	
+
 	group_names = group['Group_ID'].unique().tolist()	# a list of unique group names
 	color_names = pick_colors(len(group_names))	# a list of unique colors
 	group_to_col = dict(zip(group_names, color_names))
@@ -117,9 +120,9 @@ def main():
 	pca = PCA(n_components = options.n_components, random_state = 0)
 	principalComponents = pca.fit_transform(x)	
 	pca_names = [str(i)+str(j) for i,j in zip(['PC']*options.n_components,range(1,options.n_components+1))]
-	principalDf = pd.DataFrame(data = principalComponents, columns = pca_names, index = df2.index)	
+	principalDf = pd.DataFrame(data = principalComponents, columns = pca_names, index = used_df.index)	
 	
-	finalDf = pd.concat([principalDf, group], axis = 1, sort=False)
+	finalDf = pd.concat([principalDf, group], axis = 1, sort=False, join='inner')
 	finalDf.index.name = 'Sample_ID'
 	
 	printlog("Writing PCA results to file: \"%s\" ..." % (options.out_file + '.PCA.tsv'))
@@ -134,18 +137,22 @@ def main():
 	
 	print ('pdf(file=\"%s\", width=8, height=8)' % (options.out_file + '.PCA.pdf'),file=ROUT)
 	print ('')
-	print ('d = read.table(file=\"%s\", sep="\\t", header=TRUE,  comment.char = "", stringsAsFactors=FALSE)' % (options.out_file + '.PCA.tsv'), file=ROUT)
+	print ('d = read.table(file=\"%s\", sep="\\t", header=TRUE,  comment.char = "", stringsAsFactors=FALSE)' 
+		% (options.out_file + '.PCA.tsv'), file=ROUT)
 	print ('attach(d)', file=ROUT)
 	if options.plot_alpha:
 		print ('library(scales)', file=ROUT)
-		print ('plot(PC1, PC2, col = alpha(Colors, %f), pch=%d, cex=1.5, main="PCA 2D map")' % (options.plot_alpha, pch[options.plot_char]), file=ROUT)
+		print ('plot(PC1, PC2, col = alpha(Colors, %f), pch=%d, cex=1.5, main="PCA 2D map", xlab="PC1 (var. explained: %.2f%%)", ylab="PC2 (var. explained: %.2f%%)")' 
+			% (options.plot_alpha, pch[options.plot_char], pca_vars[0]*100, pca_vars[1]*100), file=ROUT)
 	else:
-		print ('plot(PC1, PC2, col = Colors, pch=%d, cex=1.2, main="PCA 2D map")' % pch[options.plot_char], file=ROUT)	
+		print ('plot(PC1, PC2, col = Colors, pch=%d, cex=1.2, main="PCA 2D map", xlab="PC1 (var. explained: %.2f%%)", ylab="PC2 (var. explained: %.2f%%)")' 
+			% (pca_vars[0]*100, pca_vars[1]*100, pch[options.plot_char], pca_vars[0]*100, pca_vars[1]*100), file=ROUT)	
 	
 	if options.text_label:
 		print ('text(PC1, PC2, labels=Sample_ID, col = Colors, cex=0.5, pos=1)', file=ROUT)
 	
-	print ('legend("%s", legend=c(%s), col=c(%s), pch=%d,cex=1)' %  (legend_pos[options.legend_location], ','.join(['"' + str(i) + '"' for i in group_names]), ','.join(['"' + str(group_to_col[i]) + '"' for i in group_names]), pch[options.plot_char]), file=ROUT)
+	print ('legend("%s", legend=c(%s), col=c(%s), pch=%d,cex=1)' 
+			% (legend_pos[options.legend_location], ','.join(['"' + str(i) + '"' for i in group_names]), ','.join(['"' + str(group_to_col[i]) + '"' for i in group_names]), pch[options.plot_char]), file=ROUT)
 	
 	
 	print ('dev.off()', file=ROUT)
