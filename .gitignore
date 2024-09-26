@@ -1,5 +1,6 @@
-epic/*
 dist/*
-data/*
+build/*
+data_anno/*
+test/*
 update.pl
 ToDo

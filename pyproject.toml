@@ -1,0 +1,48 @@
+#Declaring the build backend
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+#Project's meta data
+[project]
+version = "2.0.2"
+name = "cpgtools"
+authors = [
+  {name="Liguo Wang", email="wangliguo78@gmail.com"},
+]
+maintainers = [
+  {name = "Liguo Wang", email = "wangliguo78@gmail.com"}
+]
+description = "Tools to analyze and visualize DNA methylation data"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.5"
+
+dependencies = [
+	"numpy",
+	"scipy",
+	"scikit-learn",
+	"weblogo",
+	"bx-python",
+	"pandas",
+	"umap-learn",
+	"fancyimpute",
+]
+
+classifiers=[
+	"Programming Language :: Python :: 3",
+	'Development Status :: 4 - Beta',
+	"License :: OSI Approved :: MIT License",
+	'Environment :: Console',
+	'Intended Audience :: Science/Research',
+	'Operating System :: MacOS :: MacOS X',
+	'Operating System :: POSIX',
+	'Topic :: Scientific/Engineering :: Bio-Informatics',
+]
+
+keywords = ["DNA methylation", "EPIC", "450K", "850K", "935K", "RRBS", "WGBS"]
+
+[project.urls]
+Documentation = "https://cpgtools.readthedocs.io/en/latest/index.html"
+Repository = "https://github.com/liguowang/cpgtools.git"
+

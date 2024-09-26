@@ -1,0 +1,76 @@
+Metadata-Version: 2.1
+Name: cpgtools
+Version: 2.0.2
+Summary: Tools to analyze and visualize DNA methylation data
+Author-email: Liguo Wang <wangliguo78@gmail.com>
+Maintainer-email: Liguo Wang <wangliguo78@gmail.com>
+License: Copyright (c) 2024 The Python Packaging Authority
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Documentation, https://cpgtools.readthedocs.io/en/latest/index.html
+Project-URL: Repository, https://github.com/liguowang/cpgtools.git
+Keywords: DNA methylation,EPIC,450K,850K,935K,RRBS,WGBS
+Classifier: Programming Language :: Python :: 3
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: scikit-learn
+Requires-Dist: weblogo
+Requires-Dist: bx-python
+Requires-Dist: pandas
+Requires-Dist: umap-learn
+Requires-Dist: fancyimpute
+
+## Install CpGtools using [pip](https://pip.pypa.io/en/stable/)
+
+1. (Optional) Create Virtual Environments (Note: `venv` is available in Python 3.3 and later. You can also use [virtualenv](https://packaging.python.org/en/latest/key_projects/#virtualenv))
+
+ `$ python3 -m venv my_env` (will create a directory called my_env)
+ 
+ `$ source my_env/bin/activate`
+
+2. Install CpGtools
+
+ `$ pip install cpgtools`
+ 
+ or
+ 
+ `$ pip install git+https://github.com/liguowang/cpgtools.git`
+
+3. Upgrade
+
+ `$ pip install cpgtools --upgrade`
+
+4. Uninstall
+
+ `pip -y uninstall cpgtools`
+
+## Documentation
+
+https://cpgtools.readthedocs.io/en/latest/

@@ -1,2 +1,0 @@
-cpgmodule
-psyco_full

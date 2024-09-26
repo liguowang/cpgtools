@@ -1,6 +1,0 @@
-numpy
-scipy
-sklearn
-weblogo
-bx-python
-pandas
