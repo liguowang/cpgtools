@@ -1,6 +1,11 @@
 CpGtools Release history
 =========================
 
+Version 2.0.3
+-------------
+
+Fix a bug (pvalue and adjusted pvalue are n/a for all the CpGs) during ANOVA analysis
+
 Version 2.0.1
 -------------
 
