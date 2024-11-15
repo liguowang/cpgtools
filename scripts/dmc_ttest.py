@@ -189,7 +189,7 @@ def main():
 			else:
 				continue
 		line_num += 1
-
+	
 	printlog("Perfrom Benjamini-Hochberg (aka FDR) correction ...")
 	adjusted_p = {}
 	q_list =  padjust.multiple_testing_correction(p_list)
@@ -204,6 +204,10 @@ def main():
 		else:
 			f = l.split()
 			probe_ID = f[0]
+			if probe_ID in delta_beta:
+				pass
+			else:
+				delta_beta[probe_ID] = 'n/a'
 			try:
 				print (l + '\t' + str(delta_beta[probe_ID]) + '\t' + adjusted_p[probe_ID], file=FOUT)
 			except:
