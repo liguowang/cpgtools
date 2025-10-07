@@ -15,7 +15,7 @@ maintainers = [
 ]
 description = "Tools to analyze and visualize DNA methylation data"
 readme = "README.md"
-license = {file = "LICENSE"}
+license = "MIT"
 requires-python = ">=3.5"
 
 dependencies = [
@@ -28,12 +28,12 @@ dependencies = [
 	"umap-learn",
 	"fancyimpute",
 	"pycombat",
+	"matplotlib",
 ]
 
 classifiers=[
 	"Programming Language :: Python :: 3",
 	'Development Status :: 4 - Beta',
-	"License :: OSI Approved :: MIT License",
 	'Environment :: Console',
 	'Intended Audience :: Science/Research',
 	'Operating System :: MacOS :: MacOS X',

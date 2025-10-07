@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>16. beta_remove_batch_effects.py &mdash; CpGtools documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="17. beta_selectNBest.py" href="beta_selectNBest.html" />
+    <link rel="prev" title="15. beta_profile_region.py" href="beta_profile_region.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CpGtools
+              <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CpGtools Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input file and data format</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">12. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">13. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">14. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">15. beta_profile_region.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">16. beta_remove_batch_effects.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">16.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">16.2. Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">16.3. Input files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-matrix-tsv-tsv-gz">16.3.1. Beta matrix (TSV/TSV.GZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-map-csv">16.3.2. Batch map (CSV)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-input-files">16.3.3. Example input files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-example">16.4. Command example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-log-abridged">16.4.1. Example log (abridged)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#options">16.5. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outputs">16.6. Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#figures">16.7. Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-tips">16.8. Notes &amp; tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">16.9. Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">17. beta_selectNBest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">18. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">19. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">20. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">21. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">22. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">23. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">24. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">25. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">26. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">27. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">28. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">29. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">30. predict_sex.py</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CpGtools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">16. </span>beta_remove_batch_effects.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/demo/beta_remove_batch_effects.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="beta-remove-batch-effects-py">
+<h1><span class="section-number">16. </span>beta_remove_batch_effects.py<a class="headerlink" href="#beta-remove-batch-effects-py" title="Link to this heading"></a></h1>
+<p>Correct beta-value matrices for technical (batch) effects using the
+<a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">ComBat</a> algorithm.</p>
+<section id="overview">
+<h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_remove_batch_effects.py</span></code> takes a CpG × sample beta matrix and a
+sample-to-batch mapping, applies ComBat, and writes an adjusted matrix
+plus before/after QC boxplots.</p>
+</section>
+<section id="synopsis">
+<h2><span class="section-number">16.2. </span>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_remove_batch_effects</span><span class="o">.</span><span class="n">py</span> \
+  <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">beta_matrix</span><span class="o">.</span><span class="n">tsv</span><span class="p">[</span><span class="o">.</span><span class="n">gz</span><span class="p">]</span><span class="o">&gt;</span> \
+  <span class="o">-</span><span class="n">g</span> <span class="o">&lt;</span><span class="n">batch_map</span><span class="o">.</span><span class="n">csv</span><span class="o">&gt;</span> \
+  <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">output_prefix</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="input-files">
+<h2><span class="section-number">16.3. </span>Input files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-matrix-tsv-tsv-gz">
+<h3><span class="section-number">16.3.1. </span>Beta matrix (TSV/TSV.GZ)<a class="headerlink" href="#beta-matrix-tsv-tsv-gz" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Delimiter:</strong> tab</p></li>
+<li><p><strong>Header:</strong> first row contains sample IDs</p></li>
+<li><p><strong>Index:</strong> first column contains CpG IDs</p></li>
+<li><p><strong>Values:</strong> beta values in [0, 1]</p></li>
+<li><p><strong>Missing values:</strong> rows containing any NA/empty cells are removed prior to ComBat</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>  <span class="n">Sample_02</span>  <span class="n">Sample_03</span>  <span class="n">Sample_04</span>
+<span class="n">cg_001</span>   <span class="mf">0.831035</span>   <span class="mf">0.878022</span>   <span class="mf">0.794427</span>   <span class="mf">0.880911</span>
+<span class="n">cg_002</span>   <span class="mf">0.249544</span>   <span class="mf">0.209949</span>   <span class="mf">0.234294</span>   <span class="mf">0.236680</span>
+<span class="n">cg_003</span>   <span class="mf">0.845065</span>   <span class="mf">0.843957</span>   <span class="mf">0.840184</span>   <span class="mf">0.824286</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-map-csv">
+<h3><span class="section-number">16.3.2. </span>Batch map (CSV)<a class="headerlink" href="#batch-map-csv" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Delimiter:</strong> comma</p></li>
+<li><p><strong>Columns:</strong> <code class="docutils literal notranslate"><span class="pre">Sample,Group</span></code></p></li>
+<li><p><strong>Sample IDs:</strong> must match the sample IDs in the beta matrix header (case-sensitive)</p></li>
+<li><p><strong>Grouping:</strong> each sample belongs to exactly one batch group (e.g., plates, chips)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">plate_1</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">plate_1</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">plate_2</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">plate_2</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="example-input-files">
+<h3><span class="section-number">16.3.3. </span>Example input files<a class="headerlink" href="#example-input-files" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.beta.tsv.gz">test_12_threebatch.beta.tsv.gz</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.batch.csv">test_12_threebatch.batch.csv</a></p></li>
+</ul>
+</section>
+</section>
+<section id="command-example">
+<h2><span class="section-number">16.4. </span>Command example<a class="headerlink" href="#command-example" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ beta_remove_batch_effects.py \
+    -i test_12_threebatch.beta.tsv.gz \
+    -g test_12_threebatch.batch.csv \
+    -o output
+</pre></div>
+</div>
+<section id="example-log-abridged">
+<h3><span class="section-number">16.4.1. </span>Example log (abridged)<a class="headerlink" href="#example-log-abridged" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span> <span class="n">Reading</span> <span class="nb">input</span> <span class="n">file</span><span class="p">:</span> <span class="s2">&quot;test_12_threebatch.beta.tsv.gz&quot;</span> <span class="o">...</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="mi">0</span> <span class="n">rows</span> <span class="k">with</span> <span class="n">missing</span> <span class="n">values</span> <span class="n">were</span> <span class="n">removed</span><span class="o">.</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="n">Reading</span> <span class="n">group</span> <span class="n">file</span><span class="p">:</span> <span class="s2">&quot;test_12_threebatch.batch.csv&quot;</span> <span class="o">...</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="n">Group</span><span class="o">/</span><span class="n">batch</span> <span class="s2">&quot;test_12_threebatch.batch.csv&quot;</span> <span class="n">contains</span> <span class="mi">11</span> <span class="n">samples</span>
+<span class="p">[</span><span class="s1">&#39;plate_1&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_1&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_1&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_1&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_2&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_2&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_2&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_2&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_3&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_3&#39;</span><span class="p">,</span> <span class="s1">&#39;plate_3&#39;</span><span class="p">]</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="n">Generate</span> <span class="n">boxplot</span> <span class="n">before</span> <span class="n">correction</span><span class="o">.</span> <span class="n">Save</span> <span class="n">to</span> <span class="s1">&#39;output.boxplot.png&#39;</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="n">Removing</span> <span class="n">batch</span> <span class="n">effect</span> <span class="o">...</span>
+<span class="n">Found</span> <span class="mi">3</span> <span class="n">batches</span><span class="o">.</span>
+<span class="n">Adjusting</span> <span class="k">for</span> <span class="mi">0</span> <span class="n">covariate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">or</span> <span class="n">covariate</span> <span class="n">level</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Standardizing</span> <span class="n">Data</span> <span class="n">across</span> <span class="n">genes</span><span class="o">.</span>
+<span class="n">Fitting</span> <span class="n">L</span><span class="o">/</span><span class="n">S</span> <span class="n">model</span> <span class="ow">and</span> <span class="n">finding</span> <span class="n">priors</span><span class="o">.</span>
+<span class="n">Finding</span> <span class="n">parametric</span> <span class="n">adjustments</span><span class="o">.</span>
+<span class="n">Adjusting</span> <span class="n">the</span> <span class="n">Data</span>
+<span class="o">@</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">10</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span> <span class="n">Generate</span> <span class="n">boxplot</span> <span class="n">after</span> <span class="n">correction</span><span class="o">.</span> <span class="n">Save</span> <span class="n">to</span> <span class="s1">&#39;output.boxplot_combat.png&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="options">
+<h2><span class="section-number">16.5. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">version</span>                   <span class="n">show</span> <span class="n">program</span><span class="s1">&#39;s version number and exit</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                  <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+<span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">input_file</span> <span class="n">PATH</span>       <span class="n">Tab</span><span class="o">-</span><span class="n">separated</span> <span class="n">beta</span> <span class="n">matrix</span><span class="p">;</span> <span class="n">first</span> <span class="n">row</span> <span class="o">=</span> <span class="n">sample</span> <span class="n">IDs</span><span class="p">,</span>
+                            <span class="n">first</span> <span class="n">column</span> <span class="o">=</span> <span class="n">CpG</span> <span class="n">IDs</span><span class="o">.</span> <span class="n">Can</span> <span class="n">be</span> <span class="o">.</span><span class="n">gz</span> <span class="n">compressed</span><span class="o">.</span>
+<span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span> <span class="n">PATH</span>            <span class="n">Comma</span><span class="o">-</span><span class="n">separated</span> <span class="n">batch</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Sample</span><span class="p">,</span><span class="n">Group</span><span class="o">.</span>
+<span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">PREFIX</span>         <span class="n">Output</span> <span class="n">file</span> <span class="n">prefix</span> <span class="p">(</span><span class="n">no</span> <span class="n">extension</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="outputs">
+<h2><span class="section-number">16.6. </span>Outputs<a class="headerlink" href="#outputs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.combat.tsv</span></code> — beta matrix after ComBat batch correction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot.png</span></code> — distribution of beta values <strong>before</strong> correction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot_combat.png</span></code> — distribution of beta values <strong>after</strong> correction</p></li>
+</ul>
+</section>
+<section id="figures">
+<h2><span class="section-number">16.7. </span>Figures<a class="headerlink" href="#figures" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/output.boxplot.png"><img alt="Boxplot of beta values before ComBat" src="../_images/output.boxplot.png" style="width: 600px; height: 400px;" />
+</a>
+<a class="reference internal image-reference" href="../_images/output.boxplot_combat.png"><img alt="Boxplot of beta values after ComBat" src="../_images/output.boxplot_combat.png" style="width: 600px; height: 400px;" />
+</a>
+</section>
+<section id="notes-tips">
+<h2><span class="section-number">16.8. </span>Notes &amp; tips<a class="headerlink" href="#notes-tips" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Rows with any missing values are removed prior to correction.</p></li>
+<li><p>Ensure all sample IDs in the beta matrix appear exactly once in the batch map.</p></li>
+<li><p>Batch labels (<code class="docutils literal notranslate"><span class="pre">Group</span></code>) can be any strings (e.g., <code class="docutils literal notranslate"><span class="pre">plate_1</span></code>, <code class="docutils literal notranslate"><span class="pre">chip_B</span></code>), as long as they consistently identify batches.</p></li>
+<li><p>If biological covariates should be adjusted for, handle them upstream before running this script (this wrapper applies basic ComBat only).</p></li>
+</ul>
+</section>
+<section id="reference">
+<h2><span class="section-number">16.9. </span>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
+<p>Johnson, W.E., Li, C., &amp; Rabinovic, A. (2007).
+<em>Adjusting batch effects in microarray expression data using empirical Bayes methods.</em>
+Biostatistics, 8(1), 118–127. DOI: see <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">PubMed 16632515</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="beta_profile_region.html" class="btn btn-neutral float-left" title="15. beta_profile_region.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_selectNBest.html" class="btn btn-neutral float-right" title="17. beta_selectNBest.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Liguo Wang.
+      <span class="lastupdated">Last updated on Oct 07, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

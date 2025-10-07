@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>predict_sex.py &mdash; CpGtools documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+  <title>30. predict_sex.py &mdash; CpGtools documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. Compare Differential CpG Analysis Tools" href="../compare_diff_tools.html" />
-    <link rel="prev" title="27. dmc_ttest.py" href="dmc_ttest.html" /> 
+    <link rel="prev" title="29. dmc_ttest.py" href="dmc_ttest.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,9 +36,6 @@
             CpGtools
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                2.0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -64,7 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
@@ -80,18 +75,29 @@
 <li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">13. beta_m_conversion.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">14. beta_profile_gene_centered.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">15. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">16. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">17. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">18. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">19. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">20. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">21. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">22. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">23. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">24. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">25. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">26. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">27. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_remove_batch_effects.html">16. beta_remove_batch_effects.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">17. beta_selectNBest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">18. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">19. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">20. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">21. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">22. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">23. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">24. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">25. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">26. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">27. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">28. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">29. dmc_ttest.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">30. predict_sex.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">30.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">30.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">30.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">30.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">30.5. Output files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation">30.6. Evaluation</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -121,7 +127,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">predict_sex.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">30. </span>predict_sex.py</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/predict_sex.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -132,9 +138,9 @@
            <div itemprop="articleBody">
              
   <section id="predict-sex-py">
-<h1>predict_sex.py<a class="headerlink" href="#predict-sex-py" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">30. </span>predict_sex.py<a class="headerlink" href="#predict-sex-py" title="Link to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <p>Predict sex based on the semi-methylation (also known as genomic imprinting)
 ratio. This method leverages the fact that, due to X chromosome inactivation,
 females have a higher proportion of semi-methylated CpGs on their X chromosomes.
@@ -142,7 +148,7 @@ A log2(ratio) greater than 0 indicates a female, while a log2(ratio) less than
 0 indicates a male.</p>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <blockquote>
 <div><dl>
 <dt>Options:</dt><dd><dl class="option-list">
@@ -176,20 +182,20 @@ cutoff indicates a male. default=0.0</p>
 </div></blockquote>
 </section>
 <section id="input-files-examples">
-<h2>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz">test_10.tsv.gz</a></p></li>
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz">chrX_CpGs.txt.gz</a></p></li>
 </ul>
 </section>
 <section id="command">
-<h2>Command<a class="headerlink" href="#command" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict_sex</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">x</span> <span class="n">chrX_CpGs</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">i</span> <span class="n">test_10</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span>
 </pre></div>
 </div>
 </section>
 <section id="output-files">
-<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>output.predicted_sex.tsv</p></li>
 </ul>
@@ -202,9 +208,10 @@ Sample_ID log2_SM_ratio Predicted_sex
 </div>
 </section>
 <section id="evaluation">
-<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">30.6. </span>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading"></a></h2>
 <p>When evaluating this classifier with Illumina HumanMethylation450 BeadChip data (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018">GSE105018</a>) from 832 males and 826 females, the prediction accuracy achieved is 100%.</p>
-<a class="reference internal image-reference" href="../_images/predict_sex.png"><img alt="../_images/predict_sex.png" src="../_images/predict_sex.png" style="width: 650.0px; height: 650.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/predict_sex.png"><img alt="../_images/predict_sex.png" src="../_images/predict_sex.png" style="width: 650.0px; height: 650.0px;" />
+</a>
 </section>
 </section>
 
@@ -212,7 +219,7 @@ Sample_ID log2_SM_ratio Predicted_sex
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dmc_ttest.html" class="btn btn-neutral float-left" title="27. dmc_ttest.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmc_ttest.html" class="btn btn-neutral float-left" title="29. dmc_ttest.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../compare_diff_tools.html" class="btn btn-neutral float-right" title="1. Compare Differential CpG Analysis Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -220,7 +227,7 @@ Sample_ID log2_SM_ratio Predicted_sex
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Liguo Wang.
-      <span class="lastupdated">Last updated on Sep 05, 2024.
+      <span class="lastupdated">Last updated on Oct 07, 2025.
       </span></p>
   </div>
 

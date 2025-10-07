@@ -3,8 +3,8 @@ Overview
 
 CpGtools package provides a number of Python programs to annotate, QC, visualize, and
 analyze DNA methylation data generated from Illumina
-`HumanMethylation450 BeadChip (450K) <https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html>`_ /
-`MethylationEPIC BeadChip (850K) <https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf>`_ array or
+`HumanMethylation450 BeadChip (450K) <https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html>`_, 
+`MethylationEPIC BeadChip (850K) <https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf>`, `930K <https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html>` or
 `RRBS / WGBS <https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html>`_.
 
 These programs can be divided into four classes:
@@ -71,7 +71,8 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `beta_selectNbest.py <https://cpgtools.readthedocs.io/en/latest/demo/beta_selectNBest.html>`_                                                                                                  | Select the K best features using ANOVA, Mutual information or Chi-squared stat.                                                                                                                                                                                                                                            |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
+| `beta_remove_batch_effects.py <https://cpgtools.readthedocs.io/en/latest/demo/beta_remove_batch_effects.html>`_                                                                                | Corrects batch effect using the `combat <https://pubmed.ncbi.nlm.nih.gov/16632515/>`_ algorithm.                                                                                                                                                                                                                           |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Differential CpG analysis modules
 ----------------------------------

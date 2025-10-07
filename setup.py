@@ -11,7 +11,6 @@ script_files = [
 "scripts/CpG_to_gene.py",
 "scripts/beta_PCA.py",
 "scripts/beta_UMAP.py",
-"scripts/beta_imputation.py",
 "scripts/beta_jitter_plot.py",
 "scripts/beta_m_conversion.py",
 "scripts/beta_profile_gene_centered.py",
@@ -22,6 +21,7 @@ script_files = [
 "scripts/beta_tSNE.py",
 "scripts/beta_topN.py",
 "scripts/beta_trichotmize.py",
+"scripts/beta_remove_batch_effects.py",
 "scripts/dmc_Bayes.py",
 "scripts/dmc_bb.py",
 "scripts/dmc_fisher.py",
@@ -30,6 +30,7 @@ script_files = [
 "scripts/dmc_nonparametric.py",
 "scripts/dmc_ttest.py",
 "scripts/predict_sex.py",
+"scripts/predict_missing.py",
 ]
 
 if __name__ == "__main__":

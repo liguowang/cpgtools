@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>19. beta_topN.py &mdash; CpGtools documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+  <title>21. beta_topN.py &mdash; CpGtools documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="20. beta_trichotmize.py" href="beta_trichotmize.html" />
-    <link rel="prev" title="18. beta_tSNE.py" href="beta_tSNE.html" /> 
+    <link rel="next" title="22. beta_trichotmize.py" href="beta_trichotmize.html" />
+    <link rel="prev" title="20. beta_tSNE.py" href="beta_tSNE.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,9 +36,6 @@
             CpGtools
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                2.0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -80,25 +75,28 @@
 <li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">13. beta_m_conversion.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">14. beta_profile_gene_centered.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">15. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">16. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">17. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">18. beta_tSNE.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">19. beta_topN.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">19.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">19.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">19.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">19.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-file">19.5. Output file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_remove_batch_effects.html">16. beta_remove_batch_effects.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">17. beta_selectNBest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">18. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">19. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">20. beta_tSNE.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">21. beta_topN.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">21.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">21.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">21.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">21.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-file">21.5. Output file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">20. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">21. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">22. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">23. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">24. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">25. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">26. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">27. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">22. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">23. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">24. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">25. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">26. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">27. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">28. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">29. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">30. predict_sex.py</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -128,7 +126,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">19. </span>beta_topN.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">21. </span>beta_topN.py</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/beta_topN.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -139,9 +137,9 @@
            <div itemprop="articleBody">
              
   <section id="beta-topn-py">
-<h1><span class="section-number">19. </span>beta_topN.py<a class="headerlink" href="#beta-topn-py" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">21. </span>beta_topN.py<a class="headerlink" href="#beta-topn-py" title="Link to this heading"></a></h1>
 <section id="description">
-<h2><span class="section-number">19.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">21.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <p>This program picks the top N rows (according to standard deviation) from the input file.
 The resulting file can be used for clustering and PCA analysis.</p>
 <p><strong>Example of input</strong></p>
@@ -153,7 +151,7 @@ The resulting file can be used for clustering and PCA analysis.</p>
 </div>
 </section>
 <section id="options">
-<h2><span class="section-number">19.2. </span>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">21.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <dl>
 <dt>Options:</dt><dd><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -179,19 +177,19 @@ deviation) to keep. default=1000</p>
 </dl>
 </section>
 <section id="input-files-examples">
-<h2><span class="section-number">19.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">21.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
 </ul>
 </section>
 <section id="command">
-<h2><span class="section-number">19.4. </span>Command<a class="headerlink" href="#command" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">21.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_topN.py -i test_05_TwoGroup.tsv.gz -c 500 -o test_05_TwoGroup
 </pre></div>
 </div>
 </section>
 <section id="output-file">
-<h2><span class="section-number">19.5. </span>Output file<a class="headerlink" href="#output-file" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">21.5. </span>Output file<a class="headerlink" href="#output-file" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>test_05_TwoGroup.sortedStdev.tsv</p></li>
 <li><p>test_05_TwoGroup.sortedStdev.topN.tsv</p></li>
@@ -203,15 +201,15 @@ deviation) to keep. default=1000</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="beta_tSNE.html" class="btn btn-neutral float-left" title="18. beta_tSNE.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beta_trichotmize.html" class="btn btn-neutral float-right" title="20. beta_trichotmize.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="beta_tSNE.html" class="btn btn-neutral float-left" title="20. beta_tSNE.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_trichotmize.html" class="btn btn-neutral float-right" title="22. beta_trichotmize.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Liguo Wang.
-      <span class="lastupdated">Last updated on Sep 05, 2024.
+      <span class="lastupdated">Last updated on Oct 07, 2025.
       </span></p>
   </div>
 

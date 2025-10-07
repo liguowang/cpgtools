@@ -3,7 +3,9 @@
 """
 Description
 -----------
-This program corrects batch effect.
+This program corrects batch effect using the "combat" algorithm:
+
+W. Evan Johnson, et al, Adjusting batch effects in microarray expression data using empirical Bayes methods, Biostatistics, 2007.
 
 Example of input data file
 ---------------------------
