@@ -62,37 +62,8 @@ Example input files
 ~~~~~~~~~~~~~~~~~~~
 
 - `test_12_threebatch.beta.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.beta.tsv.gz>`_
+- `test_12_threebatch.beta.100K_NAs.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.beta.100K_NAs.tsv.gz/>`_ (with 100,000 missign values)
 - `test_12_threebatch.batch.csv <https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.batch.csv>`_
-
-Command example
----------------
-
-::
-
-   $ beta_combat.py \
-       -i test_12_threebatch.beta.tsv.gz \
-       -g test_12_threebatch.batch.csv \
-       -o output
-
-Example log (abridged)
-~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-   @ 2025-10-07 10:14:37: Reading input file: "test_12_threebatch.beta.tsv.gz" ...
-   @ 2025-10-07 10:14:38: 0 rows with missing values were removed.
-   @ 2025-10-07 10:14:38: Reading group file: "test_12_threebatch.batch.csv" ...
-   @ 2025-10-07 10:14:38: Group/batch "test_12_threebatch.batch.csv" contains 11 samples
-   ['plate_1', 'plate_1', 'plate_1', 'plate_1', 'plate_2', 'plate_2', 'plate_2', 'plate_2', 'plate_3', 'plate_3', 'plate_3']
-   @ 2025-10-07 10:14:38: Generate boxplot before correction. Save to 'output.boxplot.png'
-   @ 2025-10-07 10:14:39: Removing batch effect ...
-   Found 3 batches.
-   Adjusting for 0 covariate(s) or covariate level(s).
-   Standardizing Data across genes.
-   Fitting L/S model and finding priors.
-   Finding parametric adjustments.
-   Adjusting the Data
-   @ 2025-10-07 10:14:51: Generate boxplot after correction. Save to 'output.boxplot_combat.png'
 
 Options
 -------
@@ -114,6 +85,29 @@ Options
                          of each sample.
    -o OUT_FILE, --output=OUT_FILE
                          The prefix of the output file.
+
+Command example (input file has no missing values)
+--------------------------------------------------
+
+::
+
+   $ beta_combat.py \
+       -i test_12_threebatch.beta.tsv.gz \
+       -g test_12_threebatch.batch.csv \
+       -o output
+
+Command example (input file has missing values)
+--------------------------------------------------
+
+If the input file has missing values, KNN will be used to impute the missing values first before batch effect correction.
+
+::
+
+   $ beta_combat.py \
+       -i test_12_threebatch.beta.100K_NAs.tsv.gz \
+       -g test_12_threebatch.batch.csv \
+       -o output
+
 
 Outputs (input file has no missing values)
 -------------------------------------------

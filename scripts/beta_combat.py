@@ -167,8 +167,8 @@ def main():
     if total_na > 0:
         for i,j in na_locations:
             df_corrected.iat[i, j] = np.nan
-    printlog("Save data after combat to \"%s\", keep orignal missing values ..." % beta_out2)
-    df_corrected.to_csv(beta_out2,sep="\t",na_rep='NA')
+        printlog("Save data after combat to \"%s\", keep orignal missing values ..." % beta_out2)
+        df_corrected.to_csv(beta_out2,sep="\t",na_rep='NA')
 
 if __name__=='__main__':
     main()    
