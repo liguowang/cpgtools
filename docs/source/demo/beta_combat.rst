@@ -1,4 +1,4 @@
-beta_remove_batch_effects.py
+beta_combat.py
 ============================
 
 Correct beta-value matrices for technical (batch) effects using the
@@ -7,7 +7,7 @@ Correct beta-value matrices for technical (batch) effects using the
 Overview
 --------
 
-``beta_remove_batch_effects.py`` takes a CpG × sample beta matrix and a
+``beta_combat.py`` takes a CpG × sample beta matrix and a
 sample-to-batch mapping, applies ComBat, and writes an adjusted matrix
 plus before/after QC boxplots.
 
@@ -16,7 +16,7 @@ Synopsis
 
 ::
 
-   beta_remove_batch_effects.py \
+   beta_combat.py \
      -i <beta_matrix.tsv[.gz]> \
      -g <batch_map.csv> \
      -o <output_prefix>
@@ -69,7 +69,7 @@ Command example
 
 ::
 
-   $ beta_remove_batch_effects.py \
+   $ beta_combat.py \
        -i test_12_threebatch.beta.tsv.gz \
        -g test_12_threebatch.batch.csv \
        -o output

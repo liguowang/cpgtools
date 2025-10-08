@@ -1,83 +1,109 @@
 .. role:: raw-math(raw)
-    :format: latex html
+   :format: latex html
 
-Input file and data format
-===========================
+Input File and Data Format
+==========================
 
-BED file
+BED File
 --------
-BED (Browser Extensible Data) format is commonly used to describe blocks of genome. The
-BED format consists of one line per feature, each containing 3-12 columns of data. It is
-0-based (meaning the first base of a chromosome is numbered 0). It is s left-open,
-right-closed. For example, the bed entry "chr1 10 15" contains the 11-th, 12-th, 13-th,
-14-th and 15-th bases of chromosome-1.
 
-BED12 file
-	The standard BED file which has 12 fields. Each row in this file describes a
-	gene or an array of disconnected genomic regions. Details are described `here <https://genome.ucsc.edu/FAQ/FAQformat.html#format1>`_
-BED3 file 
-	Only has the first three required fields (chrom, chromStart, chromEnd). Each row is
-	used to represent a single genomic region where "score" and "strand" are not necessary.
-BED3+ file
-	Has at least three columns (chrom, chromStart, chromEnd). It could have other
-	columns, but these additional columns will be ignored.
-BED6 file
-	Has the first six fields (chrom, chromStart, chromEnd, name, score, strand). Each row
-	is used to represent a single genomic region and their associated scores, or in cases
-	where "strand" information is essential.
-BED6+ file
-	Has at least six columns (chrom, chromStart, chromEnd, name, score, stand). It could
-	have other columns, but these additional columns will be ignored.
+The **BED** (Browser Extensible Data) format is commonly used to describe blocks of genomic regions.  
+Each line in a BED file represents one genomic feature and contains between **3 and 12 columns** of data.  
 
-Proportion values
+The BED format is **0-based**, meaning the first base of a chromosome is numbered **0**, and it follows a **left-open, right-closed** interval convention.  
+For example, the BED entry ``chr1 10 15`` corresponds to the **11th to 15th bases** of chromosome 1 (i.e., bases 11–15 inclusive).
+
+**BED Variants**
+
+- **BED12 file**  
+  The standard BED format containing 12 fields. Each line represents a gene or a set of disconnected genomic regions.  
+  Detailed specifications are available `here <https://genome.ucsc.edu/FAQ/FAQformat.html#format1>`_.
+
+- **BED3 file**  
+  Contains only the first three required fields: ``chrom``, ``chromStart``, and ``chromEnd``.  
+  Each line represents a single genomic region where *score* and *strand* information are not required.
+
+- **BED3+ file**  
+  Contains at least three columns (``chrom``, ``chromStart``, ``chromEnd``).  
+  Any additional columns will be **ignored**.
+
+- **BED6 file**  
+  Includes the first six fields: ``chrom``, ``chromStart``, ``chromEnd``, ``name``, ``score``, and ``strand``.  
+  Each line represents a single genomic region and may include strand information or associated scores.
+
+- **BED6+ file**  
+  Contains at least six columns (``chrom``, ``chromStart``, ``chromEnd``, ``name``, ``score``, ``strand``).  
+  Any columns beyond these six will be **ignored**.
+
+---
+
+Proportion Values
 -----------------
-In `bisulfite sequencing <https://en.wikipedia.org/wiki/Bisulfite_sequencing>`_
-(RRBS or WGBS), the methylation level of a particular CpG or
-region can be represented by a "proportion" value. We define the proportion value as a
-pair of integers separated by comma (",") with the first integer (m, 0 <- m <- n)
-representing "number of methylated reads" and the second integer (n, n >- 0) representing
-"number of total reads". for example:
+
+In `bisulfite sequencing <https://en.wikipedia.org/wiki/Bisulfite_sequencing>`_ (e.g., RRBS or WGBS),  
+the methylation level of a CpG site or region is represented by a **proportion value**.  
+
+A proportion value is a pair of integers separated by a comma (``m,n``), where:
+
+- **m** = number of methylated reads (``0 ≤ m ≤ n``)  
+- **n** = total number of reads (``n ≥ 0``)
+
+For example:
+
 ::
- 
- 0,10	1,27	2,159	#Three proportions values indicated 3 hypo-methylated loci 
- 7,7	17,19	30,34	#Three proportions values indicated 3 hyper-methylated loci
 
-Beta values
-------------
-The Beta-value is a value between 0 and 1, which can be interpreted as the approximation
-of the percentage of methylation for a given CpG or locus. One can convert proportion
-value into beta value, but not vice versa. In the equation below, C is the "probe intensity"
-or "read count" of methylated allele, while U is the "probe intensity" or "read count" of
-unmethylated allele.
+   0,10   1,27   2,159   # three hypo-methylated loci
+   7,7    17,19  30,34   # three hyper-methylated loci
+
+---
+
+Beta Values
+-----------
+
+The **Beta-value** represents the proportion of methylation for a given CpG or locus.  
+It ranges from **0 to 1**, and can be interpreted as an approximation of the **percentage of methylation**.
+
+A proportion value can be converted to a Beta-value, but **not vice versa**.  
+In the equation below:
+
+- **C** = probe intensity or read count of the methylated allele  
+- **U** = probe intensity or read count of the unmethylated allele  
 
 .. math::
 
-   \beta=\frac{C}{U+C}, (0 \leq \beta \leq 1)
+   \beta = \frac{C}{U + C}, \quad (0 \leq \beta \leq 1)
 
-M values
+---
+
+M Values
 --------
-The M-value is calculated as the log2 ratio of the probe intensities (or read counts) of
-methylated allele versus unmethylated allele. In the equation below, C is the "probe
-intensity" or "read count" of methylated allele, while U is the "probe intensity" or
-"read count" of unmethylated allele. w is the offset or pseudo count added to both
-denominator and numerator to avoid unexpected big changes and performing log
-transformation on zeros.
+
+The **M-value** represents the log2 ratio of methylated versus unmethylated probe intensities (or read counts).  
+It is calculated as follows:
+
+- **C** = probe intensity or read count of the methylated allele  
+- **U** = probe intensity or read count of the unmethylated allele  
+- **w** = offset (pseudo count) added to both numerator and denominator to prevent division by zero and reduce noise in low-coverage regions.
 
 .. math::
 
-	M=\log _{2}\left(\frac{C+w}{U+w}\right)
+   M = \log_{2}\left(\frac{C + w}{U + w}\right)
 
+---
 
-Convert Beta value to M value or *vice versa*
+Convert Beta-value to M-value or *vice versa*
 ---------------------------------------------
-The relationship between Beta-value and M-value is shown as equation and figure:
+
+The relationship between **Beta-value** and **M-value** can be expressed as:
 
 .. math::
 
-	\beta=\frac{2^{M}}{2^{M}+1} ; M=\log _{2}\left(\frac{\beta}{1-\beta}\right)
-	
+   \beta = \frac{2^{M}}{2^{M} + 1} \quad ; \quad M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)
+
+The following figure illustrates this relationship:
+
 .. image:: _static/beta_vs_M_curve.png
    :align: center
-   :height: 400 px
-   :width: 400 px
-   :scale: 80 %  
+   :height: 400px
+   :width: 400px
+   :scale: 80%

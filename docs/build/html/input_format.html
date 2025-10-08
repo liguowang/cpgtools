@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Input file and data format &mdash; CpGtools documentation</title>
+  <title>1. Input File and Data Format &mdash; CpGtools documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c97855ec" />
@@ -53,12 +53,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Input file and data format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bed-file">1.1. BED file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#proportion-values">1.2. Proportion values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#beta-values">1.3. Beta values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#m-values">1.4. M values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#convert-beta-value-to-m-value-or-vice-versa">1.5. Convert Beta value to M value or <em>vice versa</em></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Input File and Data Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bed-file">1.1. BED File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proportion-values">1.2. Proportion Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beta-values">1.3. Beta Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#m-values">1.4. M Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convert-beta-value-to-m-value-or-vice-versa">1.5. Convert Beta-value to M-value or <em>vice versa</em></a></li>
 </ul>
 </li>
 </ul>
@@ -127,7 +127,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">1. </span>Input file and data format</li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Input File and Data Format</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/input_format.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,72 +138,82 @@
            <div itemprop="articleBody">
              
   <section id="input-file-and-data-format">
-<h1><span class="section-number">1. </span>Input file and data format<a class="headerlink" href="#input-file-and-data-format" title="Link to this heading"></a></h1>
+<h1><span class="section-number">1. </span>Input File and Data Format<a class="headerlink" href="#input-file-and-data-format" title="Link to this heading"></a></h1>
 <section id="bed-file">
-<h2><span class="section-number">1.1. </span>BED file<a class="headerlink" href="#bed-file" title="Link to this heading"></a></h2>
-<p>BED (Browser Extensible Data) format is commonly used to describe blocks of genome. The
-BED format consists of one line per feature, each containing 3-12 columns of data. It is
-0-based (meaning the first base of a chromosome is numbered 0). It is s left-open,
-right-closed. For example, the bed entry “chr1 10 15” contains the 11-th, 12-th, 13-th,
-14-th and 15-th bases of chromosome-1.</p>
-<dl class="simple">
-<dt>BED12 file</dt><dd><p>The standard BED file which has 12 fields. Each row in this file describes a
-gene or an array of disconnected genomic regions. Details are described <a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">here</a></p>
-</dd>
-<dt>BED3 file</dt><dd><p>Only has the first three required fields (chrom, chromStart, chromEnd). Each row is
-used to represent a single genomic region where “score” and “strand” are not necessary.</p>
-</dd>
-<dt>BED3+ file</dt><dd><p>Has at least three columns (chrom, chromStart, chromEnd). It could have other
-columns, but these additional columns will be ignored.</p>
-</dd>
-<dt>BED6 file</dt><dd><p>Has the first six fields (chrom, chromStart, chromEnd, name, score, strand). Each row
-is used to represent a single genomic region and their associated scores, or in cases
-where “strand” information is essential.</p>
-</dd>
-<dt>BED6+ file</dt><dd><p>Has at least six columns (chrom, chromStart, chromEnd, name, score, stand). It could
-have other columns, but these additional columns will be ignored.</p>
-</dd>
-</dl>
+<h2><span class="section-number">1.1. </span>BED File<a class="headerlink" href="#bed-file" title="Link to this heading"></a></h2>
+<p>The <strong>BED</strong> (Browser Extensible Data) format is commonly used to describe blocks of genomic regions.
+Each line in a BED file represents one genomic feature and contains between <strong>3 and 12 columns</strong> of data.</p>
+<p>The BED format is <strong>0-based</strong>, meaning the first base of a chromosome is numbered <strong>0</strong>, and it follows a <strong>left-open, right-closed</strong> interval convention.
+For example, the BED entry <code class="docutils literal notranslate"><span class="pre">chr1</span> <span class="pre">10</span> <span class="pre">15</span></code> corresponds to the <strong>11th to 15th bases</strong> of chromosome 1 (i.e., bases 11–15 inclusive).</p>
+<p><strong>BED Variants</strong></p>
+<ul class="simple">
+<li><p><strong>BED12 file</strong>
+The standard BED format containing 12 fields. Each line represents a gene or a set of disconnected genomic regions.
+Detailed specifications are available <a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">here</a>.</p></li>
+<li><p><strong>BED3 file</strong>
+Contains only the first three required fields: <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, and <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>.
+Each line represents a single genomic region where <em>score</em> and <em>strand</em> information are not required.</p></li>
+<li><p><strong>BED3+ file</strong>
+Contains at least three columns (<code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>).
+Any additional columns will be <strong>ignored</strong>.</p></li>
+<li><p><strong>BED6 file</strong>
+Includes the first six fields: <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code>, and <code class="docutils literal notranslate"><span class="pre">strand</span></code>.
+Each line represents a single genomic region and may include strand information or associated scores.</p></li>
+<li><p><strong>BED6+ file</strong>
+Contains at least six columns (<code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code>, <code class="docutils literal notranslate"><span class="pre">strand</span></code>).
+Any columns beyond these six will be <strong>ignored</strong>.</p></li>
+</ul>
+<p>—</p>
 </section>
 <section id="proportion-values">
-<h2><span class="section-number">1.2. </span>Proportion values<a class="headerlink" href="#proportion-values" title="Link to this heading"></a></h2>
-<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Bisulfite_sequencing">bisulfite sequencing</a>
-(RRBS or WGBS), the methylation level of a particular CpG or
-region can be represented by a “proportion” value. We define the proportion value as a
-pair of integers separated by comma (“,”) with the first integer (m, 0 &lt;- m &lt;- n)
-representing “number of methylated reads” and the second integer (n, n &gt;- 0) representing
-“number of total reads”. for example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">27</span>    <span class="mi">2</span><span class="p">,</span><span class="mi">159</span>   <span class="c1">#Three proportions values indicated 3 hypo-methylated loci</span>
-<span class="mi">7</span><span class="p">,</span><span class="mi">7</span>    <span class="mi">17</span><span class="p">,</span><span class="mi">19</span>   <span class="mi">30</span><span class="p">,</span><span class="mi">34</span>   <span class="c1">#Three proportions values indicated 3 hyper-methylated loci</span>
+<h2><span class="section-number">1.2. </span>Proportion Values<a class="headerlink" href="#proportion-values" title="Link to this heading"></a></h2>
+<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Bisulfite_sequencing">bisulfite sequencing</a> (e.g., RRBS or WGBS),
+the methylation level of a CpG site or region is represented by a <strong>proportion value</strong>.</p>
+<p>A proportion value is a pair of integers separated by a comma (<code class="docutils literal notranslate"><span class="pre">m,n</span></code>), where:</p>
+<ul class="simple">
+<li><p><strong>m</strong> = number of methylated reads (<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">≤</span> <span class="pre">m</span> <span class="pre">≤</span> <span class="pre">n</span></code>)</p></li>
+<li><p><strong>n</strong> = total number of reads (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">≥</span> <span class="pre">0</span></code>)</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">27</span>   <span class="mi">2</span><span class="p">,</span><span class="mi">159</span>   <span class="c1"># three hypo-methylated loci</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">7</span>    <span class="mi">17</span><span class="p">,</span><span class="mi">19</span>  <span class="mi">30</span><span class="p">,</span><span class="mi">34</span>   <span class="c1"># three hyper-methylated loci</span>
 </pre></div>
 </div>
+<p>—</p>
 </section>
 <section id="beta-values">
-<h2><span class="section-number">1.3. </span>Beta values<a class="headerlink" href="#beta-values" title="Link to this heading"></a></h2>
-<p>The Beta-value is a value between 0 and 1, which can be interpreted as the approximation
-of the percentage of methylation for a given CpG or locus. One can convert proportion
-value into beta value, but not vice versa. In the equation below, C is the “probe intensity”
-or “read count” of methylated allele, while U is the “probe intensity” or “read count” of
-unmethylated allele.</p>
+<h2><span class="section-number">1.3. </span>Beta Values<a class="headerlink" href="#beta-values" title="Link to this heading"></a></h2>
+<p>The <strong>Beta-value</strong> represents the proportion of methylation for a given CpG or locus.
+It ranges from <strong>0 to 1</strong>, and can be interpreted as an approximation of the <strong>percentage of methylation</strong>.</p>
+<p>A proportion value can be converted to a Beta-value, but <strong>not vice versa</strong>.
+In the equation below:</p>
+<ul class="simple">
+<li><p><strong>C</strong> = probe intensity or read count of the methylated allele</p></li>
+<li><p><strong>U</strong> = probe intensity or read count of the unmethylated allele</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\beta=\frac{C}{U+C}, (0 \leq \beta \leq 1)\]</div>
+\[\beta = \frac{C}{U + C}, \quad (0 \leq \beta \leq 1)\]</div>
+<p>—</p>
 </section>
 <section id="m-values">
-<h2><span class="section-number">1.4. </span>M values<a class="headerlink" href="#m-values" title="Link to this heading"></a></h2>
-<p>The M-value is calculated as the log2 ratio of the probe intensities (or read counts) of
-methylated allele versus unmethylated allele. In the equation below, C is the “probe
-intensity” or “read count” of methylated allele, while U is the “probe intensity” or
-“read count” of unmethylated allele. w is the offset or pseudo count added to both
-denominator and numerator to avoid unexpected big changes and performing log
-transformation on zeros.</p>
+<h2><span class="section-number">1.4. </span>M Values<a class="headerlink" href="#m-values" title="Link to this heading"></a></h2>
+<p>The <strong>M-value</strong> represents the log2 ratio of methylated versus unmethylated probe intensities (or read counts).
+It is calculated as follows:</p>
+<ul class="simple">
+<li><p><strong>C</strong> = probe intensity or read count of the methylated allele</p></li>
+<li><p><strong>U</strong> = probe intensity or read count of the unmethylated allele</p></li>
+<li><p><strong>w</strong> = offset (pseudo count) added to both numerator and denominator to prevent division by zero and reduce noise in low-coverage regions.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[M=\log _{2}\left(\frac{C+w}{U+w}\right)\]</div>
+\[M = \log_{2}\left(\frac{C + w}{U + w}\right)\]</div>
+<p>—</p>
 </section>
 <section id="convert-beta-value-to-m-value-or-vice-versa">
-<h2><span class="section-number">1.5. </span>Convert Beta value to M value or <em>vice versa</em><a class="headerlink" href="#convert-beta-value-to-m-value-or-vice-versa" title="Link to this heading"></a></h2>
-<p>The relationship between Beta-value and M-value is shown as equation and figure:</p>
+<h2><span class="section-number">1.5. </span>Convert Beta-value to M-value or <em>vice versa</em><a class="headerlink" href="#convert-beta-value-to-m-value-or-vice-versa" title="Link to this heading"></a></h2>
+<p>The relationship between <strong>Beta-value</strong> and <strong>M-value</strong> can be expressed as:</p>
 <div class="math notranslate nohighlight">
-\[\beta=\frac{2^{M}}{2^{M}+1} ; M=\log _{2}\left(\frac{\beta}{1-\beta}\right)\]</div>
+\[\beta = \frac{2^{M}}{2^{M} + 1} \quad ; \quad M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)\]</div>
+<p>The following figure illustrates this relationship:</p>
 <a class="reference internal image-reference" href="_images/beta_vs_M_curve.png"><img alt="_images/beta_vs_M_curve.png" class="align-center" src="_images/beta_vs_M_curve.png" style="width: 320.0px; height: 320.0px;" />
 </a>
 </section>

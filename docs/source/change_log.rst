@@ -1,6 +1,11 @@
 CpGtools Release history
 =========================
 
+Version 2.0.4
+-------------
+
+Add :code:`beta_combat.py`
+
 Version 2.0.3
 -------------
 

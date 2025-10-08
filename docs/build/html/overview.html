@@ -47,10 +47,10 @@
               <p class="caption" role="heading"><span class="caption-text">CpGtools Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cpg-position-analysis-modules">1.1. CpG position analysis modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cpg-signal-analysis-modules">1.2. CpG signal analysis modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#differential-cpg-analysis-modules">1.3. Differential CpG analysis modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#predictive-modules">1.4. Predictive modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpg-position-analysis-modules">1.1. CpG Position Analysis Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpg-signal-analysis-modules">1.2. CpG Signal Analysis Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differential-cpg-analysis-modules">1.3. Differential CpG Analysis Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#predictive-modules">1.4. Predictive Modules</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
@@ -137,21 +137,23 @@
              
   <section id="overview">
 <h1><span class="section-number">1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<p>CpGtools package provides a number of Python programs to annotate, QC, visualize, and
-analyze DNA methylation data generated from Illumina
-<a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">HumanMethylation450 BeadChip (450K)</a>,
-<cite>MethylationEPIC BeadChip (850K) &lt;https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf&gt;</cite>, <cite>930K &lt;https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html&gt;</cite> or
-<a class="reference external" href="https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html">RRBS / WGBS</a>.</p>
-<p>These programs can be divided into four classes:</p>
+<p>The <strong>CpGtools</strong> package provides a collection of Python programs designed to annotate, perform quality control (QC), visualize, and analyze DNA methylation data generated from the following Illumina platforms:</p>
 <ul class="simple">
-<li><p>CpG position analysis modules</p></li>
-<li><p>CpG signal analysis modules</p></li>
-<li><p>Differential CpG analysis modules</p></li>
-<li><p>Predictive modules (under development)</p></li>
+<li><p><a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">HumanMethylation450 BeadChip (450K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf">MethylationEPIC BeadChip (850K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html">Infinium MethylationEPIC v2.0 (930K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html">Reduced Representation Bisulfite Sequencing (RRBS) / Whole Genome Bisulfite Sequencing (WGBS)</a></p></li>
+</ul>
+<p>The CpGtools modules are organized into four main categories:</p>
+<ul class="simple">
+<li><p><strong>CpG position analysis modules</strong></p></li>
+<li><p><strong>CpG signal analysis modules</strong></p></li>
+<li><p><strong>Differential CpG analysis modules</strong></p></li>
+<li><p><strong>Predictive modules</strong> (under development)</p></li>
 </ul>
 <section id="cpg-position-analysis-modules">
-<h2><span class="section-number">1.1. </span>CpG position analysis modules<a class="headerlink" href="#cpg-position-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules are primarily used to analyze CpG’s genomic locations.</p>
+<h2><span class="section-number">1.1. </span>CpG Position Analysis Modules<a class="headerlink" href="#cpg-position-analysis-modules" title="Link to this heading"></a></h2>
+<p>These modules focus on analyzing CpG genomic locations and their annotations.</p>
 <table class="docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
@@ -188,8 +190,8 @@ analyze DNA methylation data generated from Illumina
 </table>
 </section>
 <section id="cpg-signal-analysis-modules">
-<h2><span class="section-number">1.2. </span>CpG signal analysis modules<a class="headerlink" href="#cpg-signal-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules are primarily used to analyze CpG’s DNA methylation beta values</p>
+<h2><span class="section-number">1.2. </span>CpG Signal Analysis Modules<a class="headerlink" href="#cpg-signal-analysis-modules" title="Link to this heading"></a></h2>
+<p>These modules analyze CpG methylation beta values across samples and genomic regions.</p>
 <table class="docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
@@ -236,10 +238,11 @@ analyze DNA methylation data generated from Illumina
 </tr>
 </tbody>
 </table>
+<p>—</p>
 </section>
 <section id="differential-cpg-analysis-modules">
-<h2><span class="section-number">1.3. </span>Differential CpG analysis modules<a class="headerlink" href="#differential-cpg-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules are primarily used to identify CpGs that are differentially methylated between groups</p>
+<h2><span class="section-number">1.3. </span>Differential CpG Analysis Modules<a class="headerlink" href="#differential-cpg-analysis-modules" title="Link to this heading"></a></h2>
+<p>These modules identify CpGs that are differentially methylated between experimental or biological groups.</p>
 <table class="docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>
@@ -270,8 +273,8 @@ analyze DNA methylation data generated from Illumina
 </table>
 </section>
 <section id="predictive-modules">
-<h2><span class="section-number">1.4. </span>Predictive modules<a class="headerlink" href="#predictive-modules" title="Link to this heading"></a></h2>
-<p>These modules are primarily used to predict phenotypes from DNA methylation data</p>
+<h2><span class="section-number">1.4. </span>Predictive Modules<a class="headerlink" href="#predictive-modules" title="Link to this heading"></a></h2>
+<p>These modules aim to predict phenotypes or biological attributes from DNA methylation profiles.</p>
 <table class="docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p>Name</p></td>

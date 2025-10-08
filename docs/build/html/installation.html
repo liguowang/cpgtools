@@ -49,9 +49,9 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites">2.1. Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-dependencies">2.2. Python Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-using-pip3-from-pypi-or-github">2.3. Install CpGtools using pip3 from PyPI or github</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-from-source-code">2.4. Install CpGtools from source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">2.2. Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-using-pip3">2.3. Install CpGtools using pip3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-cpgtools-from-source">2.4. Install CpGtools from Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrade-cpgtools">2.5. Upgrade CpGtools</a></li>
 </ul>
 </li>
@@ -59,7 +59,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input file and data format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input File and Data Format</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -138,62 +138,69 @@
              
   <section id="installation">
 <h1><span class="section-number">2. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p>CpGtools are written in Python. Python3 (v3.5.x) is required to run all programs in
-CpGtools. Some programs also need R and R libraries to generate graphs and fit linear and
-beta-binomial models.</p>
+<p><strong>CpGtools</strong> is written in Python and requires <strong>Python 3.5</strong> or later.
+Some tools within CpGtools also require <strong>R</strong> and specific <strong>R libraries</strong> to generate plots and fit linear or beta-binomial models.</p>
 <section id="prerequisites">
 <h2><span class="section-number">2.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>Note: You need to install these tools if they are not available from your computer.</p>
+<p>If these dependencies are not already installed on your system, please install them first:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.python.org/downloads/">Python 3</a></p></li>
 <li><p><a class="reference external" href="https://pip.pypa.io/en/stable/installing/">pip3</a></p></li>
 <li><p><a class="reference external" href="https://www.r-project.org/">R</a></p></li>
-<li><p>R library <a class="reference external" href="https://cran.r-project.org/package-aod">aod</a> (only required by <strong>dmc_bb.py</strong>)</p></li>
-<li><p>R library <a class="reference external" href="https://cran.r-project.org/web/packages/beanplot/index.html">beanplot</a>
-(only needed by <strong>beta_jitter_plot.py</strong>)</p></li>
+<li><p>R package <a class="reference external" href="https://cran.r-project.org/package=aod">aod</a> (required by <strong>dmc_bb.py</strong>)</p></li>
+<li><p>R package <a class="reference external" href="https://cran.r-project.org/web/packages/beanplot/index.html">beanplot</a> (required by <strong>beta_jitter_plot.py</strong>)</p></li>
 </ul>
 </section>
-<section id="python-dependencies">
-<h2><span class="section-number">2.2. </span>Python Dependencies<a class="headerlink" href="#python-dependencies" title="Link to this heading"></a></h2>
-<p>Note: You do NOT need to install these packages manually, as they will be automatically
-installed if you use <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">pip3</a> to install CpGtools.</p>
+<section id="dependencies">
+<h2><span class="section-number">2.2. </span>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>You do <strong>not</strong> need to install these manually — <cite>pip3</cite> will automatically install them when you install CpGtools.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a></p></li>
 <li><p><a class="reference external" href="http://www.numpy.org/">numpy</a></p></li>
 <li><p><a class="reference external" href="https://www.scipy.org/">scipy</a></p></li>
-<li><p><a class="reference external" href="https://www.scilearn.com/">sklearn</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/">scikit-learn</a></p></li>
 <li><p><a class="reference external" href="https://pypi.org/project/weblogo/">weblogo</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/umap-learn/">umap-learn</a></p></li>
+<li><p><a class="reference external" href="https://github.com/iskandr/fancyimpute">fancyimpute</a></p></li>
 <li><p><a class="reference external" href="https://github.com/bxlab/bx-python">bx-python</a></p></li>
+<li><p><a class="reference external" href="https://github.com/epigenelabs/pyComBat">pycombat</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
 </ul>
 </section>
-<section id="install-cpgtools-using-pip3-from-pypi-or-github">
-<h2><span class="section-number">2.3. </span>Install CpGtools using pip3 from <a class="reference external" href="https://pypi.org/project/cpgtools/">PyPI</a> or <a class="reference external" href="https://github.com/liguowang/cpgtools">github</a><a class="headerlink" href="#install-cpgtools-using-pip3-from-pypi-or-github" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip3 install cpgtools
-or
-$ pip3 install git+https://github.com/liguowang/cpgtools.git
+<section id="install-cpgtools-using-pip3">
+<h2><span class="section-number">2.3. </span>Install CpGtools using pip3<a class="headerlink" href="#install-cpgtools-using-pip3" title="Link to this heading"></a></h2>
+<p>You can install CpGtools directly from <strong>PyPI</strong> or <strong>GitHub</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>cpgtools
+<span class="c1"># or</span>
+$<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>git+https://github.com/liguowang/cpgtools.git
 </pre></div>
 </div>
 </section>
-<section id="install-cpgtools-from-source-code">
-<h2><span class="section-number">2.4. </span>Install CpGtools from source code<a class="headerlink" href="#install-cpgtools-from-source-code" title="Link to this heading"></a></h2>
-<p>First, download the latest <a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/">CpGtools</a>,
-and then execute the following commands</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tar zxf cpgtools-VERSION.tar.gz
-$ cd cpgtools-VERSION
-$ python3 setup.py install  #install CpGtools to the default location
-or
-$ python3 setup.py install --root-/home/my_pylib/  #install CpGtools to user specified location
+<section id="install-cpgtools-from-source">
+<h2><span class="section-number">2.4. </span>Install CpGtools from Source<a class="headerlink" href="#install-cpgtools-from-source" title="Link to this heading"></a></h2>
+<p>To install CpGtools from source:</p>
+<ol class="arabic simple">
+<li><p>Download the latest release from
+<a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/">CpGtools on SourceForge</a>.</p></li>
+<li><p>Extract and install:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tar<span class="w"> </span>zxf<span class="w"> </span>cpgtools-VERSION.tar.gz
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>cpgtools-VERSION
+$<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="w"> </span>install<span class="w">          </span><span class="c1"># install to the default location</span>
+<span class="c1"># or</span>
+$<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="w"> </span>install<span class="w"> </span>--root<span class="o">=</span>/home/my_pylib/<span class="w">  </span><span class="c1"># install to a custom location</span>
 </pre></div>
 </div>
-<p>After the installation is completed, you probably need to setup up the environment variables
-(Below is only an example. Change according to your system configuration)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export PYTHONPATH-/home/my_pylib/python3.7/site-packages:$PYTHONPATH
+<p>After installation, you may need to set up your environment variables.
+Below is an example (adjust the path to match your setup):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/home/my_pylib/python3.7/site-packages:<span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
 </section>
 <section id="upgrade-cpgtools">
 <h2><span class="section-number">2.5. </span>Upgrade CpGtools<a class="headerlink" href="#upgrade-cpgtools" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip3 install cpgtools --upgrade
+<p>To upgrade to the latest version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>cpgtools
 </pre></div>
 </div>
 </section>

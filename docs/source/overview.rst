@@ -1,22 +1,25 @@
 Overview
 =========
 
-CpGtools package provides a number of Python programs to annotate, QC, visualize, and
-analyze DNA methylation data generated from Illumina
-`HumanMethylation450 BeadChip (450K) <https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html>`_, 
-`MethylationEPIC BeadChip (850K) <https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf>`, `930K <https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html>` or
-`RRBS / WGBS <https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html>`_.
+The **CpGtools** package provides a collection of Python programs designed to annotate, perform quality control (QC), visualize, and analyze DNA methylation data generated from the following Illumina platforms:
 
-These programs can be divided into four classes:
+- `HumanMethylation450 BeadChip (450K) <https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html>`_
+- `MethylationEPIC BeadChip (850K) <https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf>`_
+- `Infinium MethylationEPIC v2.0 (930K) <https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html>`_
+- `Reduced Representation Bisulfite Sequencing (RRBS) / Whole Genome Bisulfite Sequencing (WGBS) <https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html>`_
 
-- CpG position analysis modules
-- CpG signal analysis modules
-- Differential CpG analysis modules
-- Predictive modules (under development)
+The CpGtools modules are organized into four main categories:
 
-CpG position analysis modules
+- **CpG position analysis modules**
+- **CpG signal analysis modules**
+- **Differential CpG analysis modules**
+- **Predictive modules** (under development)
+
+
+CpG Position Analysis Modules
 -----------------------------
-These modules are primarily used to analyze CpG's genomic locations. 
+
+These modules focus on analyzing CpG genomic locations and their annotations.
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                |
@@ -40,9 +43,12 @@ These modules are primarily used to analyze CpG's genomic locations.
 | `CpG_to_gene.py <https://cpgtools.readthedocs.io/en/latest/demo/CpG_to_gene.html>`_                                                                                                            | Assign CpGs to their putative target genes. It uses the algorithm similar to `GREAT <http://great.stanford.edu/public/html/>`_.                                                                                                                                                                                            |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-CpG signal analysis modules
-----------------------------
-These modules are primarily used to analyze CpG's DNA methylation beta values 
+
+CpG Signal Analysis Modules
+---------------------------
+
+These modules analyze CpG methylation beta values across samples and genomic regions.
+
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                |
@@ -71,12 +77,16 @@ These modules are primarily used to analyze CpG's DNA methylation beta values
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `beta_selectNbest.py <https://cpgtools.readthedocs.io/en/latest/demo/beta_selectNBest.html>`_                                                                                                  | Select the K best features using ANOVA, Mutual information or Chi-squared stat.                                                                                                                                                                                                                                            |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `beta_remove_batch_effects.py <https://cpgtools.readthedocs.io/en/latest/demo/beta_remove_batch_effects.html>`_                                                                                | Corrects batch effect using the `combat <https://pubmed.ncbi.nlm.nih.gov/16632515/>`_ algorithm.                                                                                                                                                                                                                           |
+| `beta_combat.py <https://cpgtools.readthedocs.io/en/latest/demo/beta_combat.html>`_                                                                                                            | Corrects batch effect using the `combat <https://pubmed.ncbi.nlm.nih.gov/16632515/>`_ algorithm.                                                                                                                                                                                                                           |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Differential CpG analysis modules
-----------------------------------
-These modules are primarily used to identify CpGs that are differentially methylated between groups
+---
+
+Differential CpG Analysis Modules
+---------------------------------
+
+These modules identify CpGs that are differentially methylated between experimental or biological groups.
+
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                |
@@ -96,9 +106,12 @@ These modules are primarily used to identify CpGs that are differentially methyl
 | `dmc_ttest.py <https://cpgtools.readthedocs.io/en/latest/demo/dmc_ttest.html>`_                                                                                                                | Differential CpG analysis using T test. (for 450K/850K data)                                                                                                                                                                                                                                                               |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Predictive modules
+
+Predictive Modules
 ------------------
-These modules are primarily used to predict phenotypes from DNA methylation data
+
+These modules aim to predict phenotypes or biological attributes from DNA methylation profiles.
+
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                |
