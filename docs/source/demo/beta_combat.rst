@@ -99,19 +99,36 @@ Options
 
 ::
 
-   --version                   show program's version number and exit
-   -h, --help                  show this help message and exit
-   -i, --input_file PATH       Tab-separated beta matrix; first row = sample IDs,
-                               first column = CpG IDs. Can be .gz compressed.
-   -g, --group PATH            Comma-separated batch map with columns: Sample,Group.
-   -o, --output PREFIX         Output file prefix (no extension).
+   --version             show program's version number and exit
+   -h, --help            show this help message and exit
+   -i INPUT_FILE, --input_file=INPUT_FILE
+                         Tab-separated data frame file containing beta values
+                         with the 1st row containing sample IDs and the 1st
+                         column containing CpG IDs.
+   --axis=AXIS_CHOICE    How to do imputation (using the KNN algorithm) if the
+                         input file has missing values. 1: search columns for k
+                         nearest neighbours; 0: Search rows for k nearest
+                         neighbours. default=1
+   -g GROUP_FILE, --group=GROUP_FILE
+                         Comma-separated group file defining the batch groups
+                         of each sample.
+   -o OUT_FILE, --output=OUT_FILE
+                         The prefix of the output file.
 
-Outputs
--------
+Outputs (input file has no missing values)
+-------------------------------------------
 
-- ``<prefix>.combat.tsv`` — beta matrix after ComBat batch correction  
-- ``<prefix>.boxplot.png`` — distribution of beta values **before** correction  
-- ``<prefix>.boxplot_combat.png`` — distribution of beta values **after** correction  
+- ``<prefix>.combat.tsv`` — beta matrix after ComBat batch correction
+- ``<prefix>.boxplot.png`` — distribution of beta values **before** batch effect correction  
+- ``<prefix>.boxplot_combat.png`` — distribution of beta values **after** batch effect correction  
+
+Outputs (input file with missing values)
+------------------------------------------
+
+- ``<prefix>.combat.tsv`` — beta matrix after ComBat batch correction (missing vlaues are predicted using KNN)
+- ``<prefix>.combat_withNAs.tsv`` - beta matrix after ComBat batch correction (keep missing values)
+- ``<prefix>.boxplot.png`` — distribution of beta values **before** batch effect correction  
+- ``<prefix>.boxplot_combat.png`` — distribution of beta values **after** batch effect correction  
 
 Figures
 -------
@@ -129,7 +146,6 @@ Figures
 Notes & tips
 ------------
 
-- Rows with any missing values are removed prior to correction.  
 - Ensure all sample IDs in the beta matrix appear exactly once in the batch map.  
 - Batch labels (``Group``) can be any strings (e.g., ``plate_1``, ``chip_B``), as long as they consistently identify batches.  
 - If biological covariates should be adjusted for, handle them upstream before running this script (this wrapper applies basic ComBat only).  
