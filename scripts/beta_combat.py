@@ -78,7 +78,7 @@ def main():
     usage="%prog [options]" + "\n"
     parser = OptionParser(usage,version="%prog " + __version__)
     parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
-    #parser.add_option("--impute",action="store_true",default=False,dest="imputation",help="If set, use 'K-Nearest Neighbors' to impute missing values. Otherwise, all rows with missing values will be removed. default=%default")
+    parser.add_option("-k",action="store",type="int", default=3, dest="n_neighbors",help="Number of neighbors to use for imputation. default=%default")
     parser.add_option("--axis",type="choice",choices=[0,1],default=1,dest="axis_choice",help="How to do imputation (using the KNN algorithm) if the input file has missing values. 1: search columns for k nearest neighbours; 0: Search rows for k nearest neighbours. default=%default")
     parser.add_option("-g","--group",action="store",type="string",dest="group_file",help="Comma-separated group file defining the batch groups of each sample.")
     parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
@@ -114,7 +114,7 @@ def main():
     if total_na > 0:
         printlog("Imputing missing values using KNN ...")
         na_locations = nan_indices(df1.to_numpy())
-        imputer = KNNImputer()
+        imputer = KNNImputer(n_neighbors = options.n_neighbors)
         if options.axis_choice == 1:
             input_df = df1.T
             after = imputer.fit_transform(input_df)

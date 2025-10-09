@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. beta_combat.py &mdash; CpGtools documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. beta_jitter_plot.py" href="beta_jitter_plot.html" />
+    <link rel="prev" title="11. beta_UMAP.py" href="beta_UMAP.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CpGtools
+              <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">CpGtools Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset.html">1. Pre-compiled datasets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. beta_combat.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">12.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">12.2. Input files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-matrix-tsv-or-tsv-gz">12.2.1. Beta matrix (TSV or TSV.GZ)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-map-csv">12.2.2. Batch map (CSV)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-input-files">12.2.3. Example input files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#options">12.3. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-examples">12.4. Command examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#no-missing-values">12.4.1. No missing values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#with-missing-values-knn-imputation-applied-first">12.4.2. With missing values (KNN imputation applied first)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#outputs">12.5. Outputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-without-missing-values">12.5.1. Input without missing values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-with-missing-values">12.5.2. Input with missing values</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#figures">12.6. Figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-tips">12.7. Notes &amp; tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">12.8. Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">13. beta_jitter_plot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">14. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">15. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">16. beta_profile_region.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">17. beta_selectNBest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">18. beta_stacked_barplot.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">19. beta_stats.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">20. beta_tSNE.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">21. beta_topN.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">22. beta_trichotmize.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">23. dmc_Bayes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">24. dmc_bb.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">25. dmc_fisher.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">26. dmc_glm.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">27. dmc_logit.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">28. dmc_nonparametric.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">29. dmc_ttest.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">30. predict_sex.py</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html">1. Compare Differential CpG Analysis Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_diff_tools.html#p-value-distributions">2. P-value distributions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CpGtools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">12. </span>beta_combat.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/demo/beta_combat.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="beta-combat-py">
+<h1><span class="section-number">12. </span>beta_combat.py<a class="headerlink" href="#beta-combat-py" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">12.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_combat.py</span></code> takes a CpG × sample beta matrix and a sample→batch mapping, applies
+<a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">ComBat</a>, and writes an adjusted matrix plus before/after QC boxplots. If the input contains missing values, KNN imputation is performed prior to batch correction.</p>
+</section>
+<section id="input-files">
+<h2><span class="section-number">12.2. </span>Input files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-matrix-tsv-or-tsv-gz">
+<h3><span class="section-number">12.2.1. </span>Beta matrix (TSV or TSV.GZ)<a class="headerlink" href="#beta-matrix-tsv-or-tsv-gz" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Delimiter:</strong> tab</p></li>
+<li><p><strong>Header:</strong> first row contains sample IDs</p></li>
+<li><p><strong>Index:</strong> first column contains CpG IDs</p></li>
+<li><p><strong>Values:</strong> beta values in [0, 1]</p></li>
+<li><p><strong>Missing values:</strong> if the file contains missing values, KNN will be used for imputation.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>  <span class="n">Sample_02</span>  <span class="n">Sample_03</span>  <span class="n">Sample_04</span>
+<span class="n">cg_001</span>   <span class="mf">0.831035</span>   <span class="mf">0.878022</span>   <span class="mf">0.794427</span>   <span class="mf">0.880911</span>
+<span class="n">cg_002</span>   <span class="mf">0.249544</span>   <span class="mf">0.209949</span>   <span class="mf">0.234294</span>   <span class="mf">0.236680</span>
+<span class="n">cg_003</span>   <span class="mf">0.845065</span>   <span class="mf">0.843957</span>   <span class="mf">0.840184</span>   <span class="mf">0.824286</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-map-csv">
+<h3><span class="section-number">12.2.2. </span>Batch map (CSV)<a class="headerlink" href="#batch-map-csv" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Delimiter:</strong> comma</p></li>
+<li><p><strong>Columns:</strong> <code class="docutils literal notranslate"><span class="pre">Sample,Group</span></code></p></li>
+<li><p><strong>Sample IDs:</strong> must match the beta-matrix header exactly (case-sensitive)</p></li>
+<li><p><strong>Grouping:</strong> each sample belongs to exactly one batch (e.g., plate, chip)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">plate_1</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">plate_1</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">plate_2</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">plate_2</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="example-input-files">
+<h3><span class="section-number">12.2.3. </span>Example input files<a class="headerlink" href="#example-input-files" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.beta.tsv.gz">test_12_threebatch.beta.tsv.gz</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.beta.100K_NAs.tsv.gz/">test_12_threebatch.beta.100K_NAs.tsv.gz</a> (with 100,000 missing values)</p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_12_threebatch.batch.csv">test_12_threebatch.batch.csv</a></p></li>
+</ul>
+</section>
+</section>
+<section id="options">
+<h2><span class="section-number">12.3. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">version</span>             <span class="n">show</span> <span class="n">program</span><span class="s1">&#39;s version number and exit</span>
+<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+
+<span class="o">-</span><span class="n">i</span> <span class="n">INPUT_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">input_file</span><span class="o">=</span><span class="n">INPUT_FILE</span>
+                      <span class="n">Tab</span><span class="o">-</span><span class="n">separated</span> <span class="n">data</span> <span class="n">frame</span> <span class="k">with</span> <span class="n">the</span> <span class="mi">1</span><span class="n">st</span> <span class="n">row</span> <span class="k">as</span> <span class="n">sample</span> <span class="n">IDs</span>
+                      <span class="ow">and</span> <span class="n">the</span> <span class="mi">1</span><span class="n">st</span> <span class="n">column</span> <span class="k">as</span> <span class="n">CpG</span> <span class="n">IDs</span><span class="o">.</span> <span class="n">Accepts</span> <span class="o">.</span><span class="n">tsv</span> <span class="ow">or</span> <span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span><span class="o">.</span>
+
+<span class="o">-</span><span class="n">k</span> <span class="n">N_NEIGHBORS</span>        <span class="n">Number</span> <span class="n">of</span> <span class="n">neighbors</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">imputation</span><span class="o">.</span> <span class="n">default</span><span class="o">=</span><span class="mi">3</span>
+<span class="o">--</span><span class="n">axis</span><span class="o">=</span><span class="n">AXIS_CHOICE</span>    <span class="n">For</span> <span class="n">KNN</span> <span class="n">imputation</span> <span class="n">when</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">has</span> <span class="n">missing</span> <span class="n">values</span><span class="p">:</span>
+                      <span class="mi">1</span><span class="p">:</span> <span class="n">search</span> <span class="n">columns</span> <span class="n">to</span> <span class="n">find</span> <span class="n">the</span> <span class="n">nearest</span> <span class="n">neighbors</span><span class="o">.</span>
+                      <span class="mi">0</span><span class="p">:</span> <span class="n">search</span> <span class="n">rows</span> <span class="n">to</span> <span class="n">find</span> <span class="n">the</span> <span class="n">nearest</span> <span class="n">neighbors</span><span class="o">.</span>
+                      <span class="n">default</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="o">-</span><span class="n">g</span> <span class="n">GROUP_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span><span class="o">=</span><span class="n">GROUP_FILE</span>
+                      <span class="n">Comma</span><span class="o">-</span><span class="n">separated</span> <span class="n">file</span> <span class="n">mapping</span> <span class="n">samples</span> <span class="n">to</span> <span class="n">batch</span> <span class="n">groups</span><span class="o">.</span>
+
+<span class="o">-</span><span class="n">o</span> <span class="n">OUT_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">OUT_FILE</span>
+                      <span class="n">Output</span> <span class="n">prefix</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">generated</span> <span class="n">files</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="command-examples">
+<h2><span class="section-number">12.4. </span>Command examples<a class="headerlink" href="#command-examples" title="Link to this heading"></a></h2>
+<section id="no-missing-values">
+<h3><span class="section-number">12.4.1. </span>No missing values<a class="headerlink" href="#no-missing-values" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ beta_combat.py \
+    -i test_12_threebatch.beta.tsv.gz \
+    -g test_12_threebatch.batch.csv \
+    -o output
+</pre></div>
+</div>
+</section>
+<section id="with-missing-values-knn-imputation-applied-first">
+<h3><span class="section-number">12.4.2. </span>With missing values (KNN imputation applied first)<a class="headerlink" href="#with-missing-values-knn-imputation-applied-first" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ beta_combat.py \
+    -i test_12_threebatch.beta.100K_NAs.tsv.gz \
+    -g test_12_threebatch.batch.csv \
+    -o output
+</pre></div>
+</div>
+</section>
+</section>
+<section id="outputs">
+<h2><span class="section-number">12.5. </span>Outputs<a class="headerlink" href="#outputs" title="Link to this heading"></a></h2>
+<section id="input-without-missing-values">
+<h3><span class="section-number">12.5.1. </span>Input without missing values<a class="headerlink" href="#input-without-missing-values" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.combat.tsv</span></code> — beta matrix after ComBat batch correction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot.png</span></code> — distribution <strong>before</strong> batch correction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot_combat.png</span></code> — distribution <strong>after</strong> batch correction</p></li>
+</ul>
+</section>
+<section id="input-with-missing-values">
+<h3><span class="section-number">12.5.2. </span>Input with missing values<a class="headerlink" href="#input-with-missing-values" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.combat.tsv</span></code> — beta matrix after ComBat (missing values imputed via KNN)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.combat_withNAs.tsv</span></code> — beta matrix after ComBat <strong>without</strong> imputation (original NAs retained)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot.png</span></code> — distribution <strong>before</strong> batch correction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.boxplot_combat.png</span></code> — distribution <strong>after</strong> batch correction</p></li>
+</ul>
+</section>
+</section>
+<section id="figures">
+<h2><span class="section-number">12.6. </span>Figures<a class="headerlink" href="#figures" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/output.boxplot.png"><img alt="Boxplot of beta values before ComBat" src="../_images/output.boxplot.png" style="width: 600px; height: 400px;" />
+</a>
+<a class="reference internal image-reference" href="../_images/output.boxplot_combat.png"><img alt="Boxplot of beta values after ComBat" src="../_images/output.boxplot_combat.png" style="width: 600px; height: 400px;" />
+</a>
+</section>
+<section id="notes-tips">
+<h2><span class="section-number">12.7. </span>Notes &amp; tips<a class="headerlink" href="#notes-tips" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Ensure every sample ID in the beta matrix appears exactly once in the batch map.</p></li>
+<li><p>Batch labels in <code class="docutils literal notranslate"><span class="pre">Group</span></code> can be any strings (e.g., <code class="docutils literal notranslate"><span class="pre">plate_1</span></code>, <code class="docutils literal notranslate"><span class="pre">chip_B</span></code>) as long as they consistently identify batches.</p></li>
+<li><p>If biological covariates need to be adjusted for, incorporate them upstream (this wrapper performs basic ComBat only).</p></li>
+</ul>
+</section>
+<section id="reference">
+<h2><span class="section-number">12.8. </span>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
+<p>Johnson, W.E., Li, C., &amp; Rabinovic, A. (2007). <em>Adjusting batch effects in microarray expression
+data using empirical Bayes methods.</em> <strong>Biostatistics</strong>, 8(1), 118–127. DOI: see
+<a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">PubMed 16632515</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="beta_UMAP.html" class="btn btn-neutral float-left" title="11. beta_UMAP.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_jitter_plot.html" class="btn btn-neutral float-right" title="13. beta_jitter_plot.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Liguo Wang.
+      <span class="lastupdated">Last updated on Oct 09, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

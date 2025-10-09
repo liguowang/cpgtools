@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>12. beta_jitter_plot.py &mdash; CpGtools documentation</title>
+  <title>13. beta_jitter_plot.py &mdash; CpGtools documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. beta_m_conversion.py" href="beta_m_conversion.html" />
-    <link rel="prev" title="11. beta_UMAP.py" href="beta_UMAP.html" /> 
+    <link rel="next" title="14. beta_m_conversion.py" href="beta_m_conversion.html" />
+    <link rel="prev" title="12. beta_combat.py" href="beta_combat.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,7 +52,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input file and data format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -71,18 +71,18 @@
 <li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">12. beta_jitter_plot.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">12.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">12.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">12.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">12.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">12.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">13. beta_jitter_plot.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">13.1. Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">13.2. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">13.3. Input files (examples)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command">13.4. Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">13.5. Output files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">13. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">14. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">15. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_remove_batch_effects.html">16. beta_remove_batch_effects.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">14. beta_m_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">15. beta_profile_gene_centered.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">16. beta_profile_region.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">17. beta_selectNBest.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">18. beta_stacked_barplot.py</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beta_stats.html">19. beta_stats.py</a></li>
@@ -126,7 +126,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">12. </span>beta_jitter_plot.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">13. </span>beta_jitter_plot.py</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/beta_jitter_plot.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,9 +137,9 @@
            <div itemprop="articleBody">
              
   <section id="beta-jitter-plot-py">
-<h1><span class="section-number">12. </span>beta_jitter_plot.py<a class="headerlink" href="#beta-jitter-plot-py" title="Link to this heading"></a></h1>
+<h1><span class="section-number">13. </span>beta_jitter_plot.py<a class="headerlink" href="#beta-jitter-plot-py" title="Link to this heading"></a></h1>
 <section id="description">
-<h2><span class="section-number">12.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<h2><span class="section-number">13.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <p>This program generates jitter plot (a.k.a. strip chart) and bean plot for each sample (column)</p>
 <p><strong>Example of input</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>  <span class="n">Sample_01</span>       <span class="n">Sample_02</span>       <span class="n">Sample_03</span>       <span class="n">Sample_04</span>
@@ -157,7 +157,7 @@ your sample ID must start with a letter.</p></li>
 </ul>
 </section>
 <section id="options">
-<h2><span class="section-number">12.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<h2><span class="section-number">13.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <blockquote>
 <div><dl class="option-list">
 <dt><kbd><span class="option">--version</span></kbd></dt>
@@ -183,19 +183,19 @@ jitter plot is over-crowded. default=0.5</p>
 </div></blockquote>
 </section>
 <section id="input-files-examples">
-<h2><span class="section-number">12.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">13.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv</a></p></li>
 </ul>
 </section>
 <section id="command">
-<h2><span class="section-number">12.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
+<h2><span class="section-number">13.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_jitterPlot.py -f 1 -i test_05_TwoGroup.tsv.gz -o Jitter
 </pre></div>
 </div>
 </section>
 <section id="output-files">
-<h2><span class="section-number">12.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<h2><span class="section-number">13.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Jitter.r</p></li>
 <li><p>Jitter.pdf</p></li>
@@ -209,15 +209,15 @@ jitter plot is over-crowded. default=0.5</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="beta_UMAP.html" class="btn btn-neutral float-left" title="11. beta_UMAP.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beta_m_conversion.html" class="btn btn-neutral float-right" title="13. beta_m_conversion.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="beta_combat.html" class="btn btn-neutral float-left" title="12. beta_combat.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_m_conversion.html" class="btn btn-neutral float-right" title="14. beta_m_conversion.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Liguo Wang.
-      <span class="lastupdated">Last updated on Oct 07, 2025.
+      <span class="lastupdated">Last updated on Oct 09, 2025.
       </span></p>
   </div>
 
