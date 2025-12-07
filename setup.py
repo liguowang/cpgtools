@@ -21,7 +21,7 @@ script_files = [
 "scripts/beta_tSNE.py",
 "scripts/beta_topN.py",
 "scripts/beta_trichotmize.py",
-"scripts/beta_remove_batch_effects.py",
+"scripts/beta_combat.py",
 "scripts/dmc_Bayes.py",
 "scripts/dmc_bb.py",
 "scripts/dmc_fisher.py",
