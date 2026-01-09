@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 #Project's meta data
 [project]
-version = "2.0.4"
+version = "2.0.5"
 name = "cpgtools"
 authors = [
   {name="Liguo Wang", email="wangliguo78@gmail.com"},
