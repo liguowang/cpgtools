@@ -17,6 +17,7 @@ cg_003	0.845065	0.843957	0.840184	0.824286
 import sys,os
 import collections
 import numpy as np
+import pandas as pd
 from scipy import stats
 from cpgmodule._version import __version__
 from optparse import OptionParser
@@ -38,6 +39,7 @@ def main():
 	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta or M values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (.gz, .bz2).")
 	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",default="Beta", help="Input data type either \"Beta\" or \"M\". default=%default")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The output file.")
+	parser.add_option("-e", "--epsilon",action="store",type='float', dest="offset", default=1e-6, help="The offset to clamp β values away from 0 and 1.")
 	(options,args)=parser.parse_args()
 	
 	print ()
@@ -72,18 +74,13 @@ def main():
 			print (l, file=FOUT)
 		else:
 			probe_ID = f[0]
-			input_values = f[1:]
+			input_values = pd.to_numeric(f[1:], errors="coerce")
 			output_values = []
-			for iv in input_values:
-				#deal with non-numerical values
-				try:
-					if options.data_type.lower() == "beta":
-						ov = np.log2(float(iv)/(1.0 - float(iv)))
-					elif options.data_type.lower() == "m":
-						ov = (2**float(iv))/(2**float(iv) + 1)
-				except:
-					ov = np.nan
-				output_values.append(ov)
+			if options.data_type.lower() == "beta":
+				beta_clipped = np.clip(input_values, options.offset, 1 - options.offset)
+				output_values = np.log2(beta_clipped/(1.0 - beta_clipped))
+			elif options.data_type.lower() == "m":
+				output_values = (2**input_values/(2**input_values + 1))
 			print (probe_ID + '\t' + '\t'.join([str(i) for i in output_values]), file=FOUT)
 		line_num += 1
 
@@ -91,15 +88,3 @@ def main():
 	
 if __name__=='__main__':
 	main()				
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
