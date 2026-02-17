@@ -39,7 +39,7 @@ def main():
 	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta or M values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (.gz, .bz2).")
 	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",default="Beta", help="Input data type either \"Beta\" or \"M\". default=%default")
 	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The output file.")
-	parser.add_option("-e", "--epsilon",action="store",type='float', dest="offset", default=1e-6, help="The offset to clamp β values away from 0 and 1.")
+	parser.add_option("-e", "--epsilon",action="store",type='float', dest="offset", default=1e-6, help="The offset to clamp β values away from 0 and 1. default=%default")
 	(options,args)=parser.parse_args()
 	
 	print ()
