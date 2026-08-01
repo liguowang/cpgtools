@@ -1,11 +1,10 @@
-include MANIFEST.in
 include README.md
-include PKG-INFO
-include LICENSE
+include LICENSE.txt
+include setup.py
 
-include distribute_setup.py
 recursive-include src *.pyx
 recursive-include src *.py
 recursive-include src *.pkl
+
 recursive-include scripts *
-recursive-include doc *
+recursive-include docs * 

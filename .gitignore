@@ -1,6 +1,52 @@
-dist/*
-build/*
-data_anno/*
-test/*
-update.pl
-ToDo
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Packaging
+*.whl
+*.tar.gz
+
+# Test outputs
+test/
+test_clock/
+test_deconv/
+test_imputation/
+
+# Project data
+data_anno/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Static analysis
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log

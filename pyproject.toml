@@ -1,49 +1,49 @@
-#Declaring the build backend
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-#Project's meta data
 [project]
-version = "2.0.5"
 name = "cpgtools"
-authors = [
-  {name="Liguo Wang", email="wangliguo78@gmail.com"},
-]
-maintainers = [
-  {name = "Liguo Wang", email = "wangliguo78@gmail.com"}
-]
-description = "Tools to analyze and visualize DNA methylation data"
+version = "3.0.0"
+
+description = "Python tools for DNA methylation analysis, imputation, epigenetic clocks, and cell-type deconvolution."
+
 readme = "README.md"
-license = "MIT"
-requires-python = ">=3.5"
+license = {text = "MIT"}
+
+requires-python = ">=3.9"
+
+authors = [
+    {name = "Liguo Wang", email = "wangliguo78@gmail.com"},
+]
 
 dependencies = [
-	"numpy",
-	"scipy",
-	"scikit-learn",
-	"weblogo",
-	"bx-python",
-	"pandas",
-	"umap-learn",
-	"fancyimpute",
-	"pycombat",
-	"matplotlib",
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "pandas>=1.5",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "umap-learn>=0.5",
+    "bx-python>=0.11",
+    "weblogo>=3.7",
+    "pycombat>=0.20",
+    "fancyimpute>=0.7",
 ]
 
-classifiers=[
-	"Programming Language :: Python :: 3",
-	'Development Status :: 4 - Beta',
-	'Environment :: Console',
-	'Intended Audience :: Science/Research',
-	'Operating System :: MacOS :: MacOS X',
-	'Operating System :: POSIX',
-	'Topic :: Scientific/Engineering :: Bio-Informatics',
+keywords = [
+    "dna methylation",
+    "epigenetics",
+    "epigenetic clock",
+    "cell deconvolution",
+    "450K",
+    "EPIC",
+    "RRBS",
+    "WGBS",
 ]
 
-keywords = ["DNA methylation", "EPIC", "450K", "850K", "935K", "RRBS", "WGBS"]
-
-[project.urls]
-Documentation = "https://cpgtools.readthedocs.io/en/latest/index.html"
-Repository = "https://github.com/liguowang/cpgtools.git"
-
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]

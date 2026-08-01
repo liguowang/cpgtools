@@ -1,27 +1,69 @@
-## Install CpGtools using [pip](https://pip.pypa.io/en/stable/)
+[![PyPI](https://img.shields.io/pypi/v/cpgtools.svg)](https://pypi.org/project/cpgtools/)
+[![Python](https://img.shields.io/pypi/pyversions/cpgtools.svg)](https://pypi.org/project/cpgtools/)
+[![Documentation](https://readthedocs.org/projects/cpgtools/badge/?version=latest)](https://cpgtools.readthedocs.io/)
+[![Downloads](https://static.pepy.tech/badge/cpgtools)](https://pepy.tech/project/cpgtools)
 
-1. (Optional) Create Virtual Environments (Note: `venv` is available in Python 3.3 and later. You can also use [virtualenv](https://packaging.python.org/en/latest/key_projects/#virtualenv))
+# CpGtools
 
- `$ python3 -m venv my_env` (will create a directory called my_env)
- 
- `$ source my_env/bin/activate`
+CpGtools is a Python package for analyzing DNA methylation data generated
+from Illumina Infinium arrays and sequencing-based methylation assays. It
+provides tools for data preprocessing, quality control, imputation,
+epigenetic clock estimation, deconvolution, and downstream analysis.
 
-2. Install CpGtools
+## Features
 
- `$ pip install cpgtools`
- 
- or
- 
- `$ pip install git+https://github.com/liguowang/cpgtools.git`
+- Read and preprocess DNA methylation matrices
+- Missing-value imputation
+- DNA methylation age estimation (epigenetic clocks)
+- Cell-type deconvolution
+- Differential methylation analysis
+- Data visualization
 
-3. Upgrade
+## Installation
 
- `$ pip install cpgtools --upgrade`
+Install the latest stable release from PyPI:
 
-4. Uninstall
+```bash
+pip install cpgtools
+```
 
- `pip -y uninstall cpgtools`
+Or install the latest development version from GitHub:
+
+```bash
+pip install git+https://github.com/liguowang/cpgtools.git
+```
+
+### (Optional) Create a virtual environment
+
+Using a virtual environment is recommended but not required.
+
+```bash
+python3 -m venv cpgtools-env
+source cpgtools-env/bin/activate
+```
+
+## Upgrade
+
+```bash
+pip install --upgrade cpgtools
+```
+
+## Uninstall
+
+```bash
+pip uninstall -y cpgtools
+```
 
 ## Documentation
 
-https://cpgtools.readthedocs.io/en/latest/
+Documentation is available at:
+
+https://cpgtools.readthedocs.io/
+
+## Source Code
+
+https://github.com/liguowang/cpgtools
+
+## License
+
+CpGtools is distributed under the MIT License.
