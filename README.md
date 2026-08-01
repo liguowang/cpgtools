@@ -67,3 +67,18 @@ https://github.com/liguowang/cpgtools
 ## License
 
 CpGtools is distributed under the MIT License.
+
+## Citation
+
+If you use **CpGtools** in your research, please cite:
+
+> Wei T, Nie J, Larson NB, Ye Z, Eckel-Passow JE, Robertson KD,
+> Kocher J-P, Wang L.
+> **CpGtools: a python package for DNA methylation analysis.**
+> *Bioinformatics*. 2021;37(11):1598-1599.
+> doi:10.1093/bioinformatics/btz916.
+> PMID: 31808791. :contentReference[oaicite:0]{index=0}
+
+The publication is available at:
+
+https://pubmed.ncbi.nlm.nih.gov/31808791/
