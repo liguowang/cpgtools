@@ -9,6 +9,7 @@ script_files = [
 "scripts/CpG_distrb_region.py",
 "scripts/CpG_logo.py",
 "scripts/CpG_to_gene.py",
+"scripts/beta_impute.py",
 "scripts/beta_PCA.py",
 "scripts/beta_UMAP.py",
 "scripts/beta_jitter_plot.py",
