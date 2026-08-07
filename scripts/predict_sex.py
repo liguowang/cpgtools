@@ -1,126 +1,440 @@
 #!/usr/bin/env python3
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
 """
-#==============================================================================
-Predict sex based on the semi-methylation (also known as genomic imprinting) 
-ratio. This method leverages the fact that, due to X chromosome inactivation,
-females have a higher proportion of semi-methylated CpGs on their X chromosomes.
-A log2(ratio) greater than 0 indicates a female, while a log2(ratio) less than
-0 indicates a male.
+Description
+-----------
+Predict biological sex from X-chromosome methylation using the
+semi-methylation (SM) ratio.
 
-Example of input data file
----------------------------
-CpG_ID    Sample_01    Sample_02    Sample_03    Sample_04
-cg_001    0.831035    0.878022    0.794427    0.880911
-cg_002    0.249544    0.209949    0.234294    0.236680
-cg_003    0.845065    0.843957    0.840184    0.824286
+The method uses the observation that X-chromosome inactivation produces a
+higher proportion of semi-methylated CpGs in samples with two X chromosomes.
 
-Example of output file
-----------------------
-Sample_ID    log2_SM_ratio    Predicted_sex
-Sample_01    -2.249628052954919      Male
-Sample_02    -2.2671726671830674     Male
-Sample_03    1.4530581933290616      Female
-Sample_04    1.4808015115356654      Female
+For each sample, X-linked CpGs are divided into three beta-value ranges:
 
-...
+* low:  0.0 <= beta <= 0.2
+* mid:  0.3 <= beta <= 0.7
+* high: 0.8 <= beta <= 1.0
 
+The score is:
+
+    log2_SM_ratio = log2(mid / (low + high))
+
+A score greater than the selected cutoff is predicted as Female; a score
+lower than the cutoff is predicted as Male. A score exactly equal to the
+cutoff, or an undefined score, is reported as Unknown.
+
+Example input
+-------------
+    CpG_ID    Sample_01    Sample_02    Sample_03
+    cg_001    0.831035     0.878022     0.794427
+    cg_002    0.249544     0.209949     0.234294
+    cg_003    0.845065     0.843957     0.840184
+
+Example output
+--------------
+    Sample_ID    log2_SM_ratio    Predicted_sex
+    Sample_01    -2.249628        Male
+    Sample_02    -2.267173        Male
+    Sample_03     1.453058        Female
 """
+
+import argparse
+import math
 import sys
+from pathlib import Path
+
 import numpy as np
-from optparse import OptionParser
-from cpgmodule.utils import printlog
-from cpgmodule import ireader
 import pandas as pd
+
+from cpgmodule import ireader
 from cpgmodule._version import __version__
+from cpgmodule.utils import printlog
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
 
-    
-def main():
-    
-    usage="%prog [options]" + "\n"
-    parser = OptionParser(usage,version="%prog " + __version__)
-    parser.add_option("-i","--input_file",action="store", type="string",dest="input_file", help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
-    parser.add_option("-x","--xprobe",action="store", type="string",dest="xprobe_file", help="File with CpG IDs mapped to the X chromosome, with one probe listed per row.")
-    parser.add_option("-c","--cut",action="store", type='float', dest="cutoff", default=0.0, help="The cutoff of log2(SM ratio) to determine the sex prediction. Log2(SM ratio) greater than this cutoff indicates a female, while a log2(ratio) less than this cutoff indicates a male. default=%default")
-    parser.add_option("-o","--output",action="store", type='string', dest="out_file", help="The prefix of the output file.")
-    (options,args)=parser.parse_args()
-    
-    print ()
-    if not (options.input_file):
-        print (__doc__)
-        parser.print_help()
-        sys.exit(101)
-    if not (options.xprobe_file):
-        print (__doc__)
-        parser.print_help()
-        sys.exit(102)    
-    if not (options.out_file):
-        print (__doc__)
-        parser.print_help()
-        sys.exit(103)    
-    
-    printlog("Reading X probes from: \"%s\"" % (options.xprobe_file))
-    x_cpgs = set()
-    for l in ireader.reader(options.xprobe_file):
-        l = l.strip()
-        if l.startswith('#'):
+LOW_RANGE = (0.0, 0.2)
+MID_RANGE = (0.3, 0.7)
+HIGH_RANGE = (0.8, 1.0)
+
+
+def build_parser():
+    """Build and return the command-line argument parser."""
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    parser.add_argument(
+        "-i",
+        "--input_file",
+        required=True,
+        help=(
+            "Tab-separated beta-value matrix. The first row contains sample "
+            "IDs and the first column contains CpG IDs."
+        ),
+    )
+
+    parser.add_argument(
+        "-x",
+        "--xprobe",
+        dest="xprobe_file",
+        required=True,
+        help=(
+            "File containing CpG IDs mapped to chromosome X, one ID per line. "
+            "Blank lines and lines beginning with '#' are ignored."
+        ),
+    )
+
+    parser.add_argument(
+        "-c",
+        "--cut",
+        dest="cutoff",
+        type=float,
+        default=0.0,
+        help=(
+            "Cutoff for log2(SM ratio). Values greater than the cutoff are "
+            "predicted Female; values below it are predicted Male "
+            "[default: %(default)s]."
+        ),
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        dest="out_file",
+        required=True,
+        help=(
+            "Output prefix. Predictions are written to "
+            "<prefix>.predicted_sex.tsv."
+        ),
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+
+    return parser
+
+
+def read_x_probes(xprobe_file):
+    """
+    Read X-chromosome CpG IDs.
+
+    Returns
+    -------
+    set[str]
+        Unique X-linked CpG IDs.
+    """
+    printlog(f'Reading X probes from: "{xprobe_file}"')
+
+    probes = set()
+
+    for raw_line in ireader.reader(xprobe_file):
+        line = raw_line.strip()
+
+        if not line or line.startswith("#"):
             continue
-        x_cpgs.add(l)
-    printlog("Total %d X probes loaded." % len(x_cpgs))
-    
-    printlog("Reading input file: \"%s\"" % (options.input_file))
-    df1 = pd.read_csv(options.input_file, index_col = 0, sep="\t")
-    #print (df1)
-    
-    #remove any rows with NAs
-    df2 = df1.dropna(axis=0, how='any')
-    printlog("%d CpGs with missing values were removed." % (len(df1) - len(df2)))
-    #print (df2)
-    
-    sample_cpg_ids = df2.index
-    sample_names = df2.columns
-    found_x_cpgs = list(x_cpgs & set(sample_cpg_ids))
-    printlog("Found %d CpGs located on the chrX from file: %s" % (len(found_x_cpgs), options.input_file))
-    
-    # only X probes in df3
-    df3 = df2.loc[list(found_x_cpgs)]
-    #pd.DataFrame.to_csv(df3, options.out_file + '.tmp.tsv', sep="\t", index_label="sample")
-    
-    low_beta_range = [0, 0.2]
-    mid_beta_range = [0.3, 0.7]
-    high_beta_range = [0.8, 1.0]
-    
-    output = {}
-    for s in sample_names:
-        output[s] = {}
-        low_beta_count = pd.cut(df3[s], low_beta_range).count()
-        mid_beta_count = pd.cut(df3[s], mid_beta_range).count()
-        high_beta_count = pd.cut(df3[s], high_beta_range).count()
-        try:
-            ratio = np.log2(mid_beta_count/(low_beta_count + high_beta_count))
-        except:
-           ratio = np.nan
-        output[s]['log2_SM_ratio'] = ratio
-        
-        if ratio > options.cutoff:
-            output[s]['Predicted_sex'] = 'Female'
-        elif ratio < options.cutoff:
-            output[s]['Predicted_sex'] = 'Male'
-        else:
-            output[s]['Predicted_sex'] = 'Unknown'
-    df_out = pd.DataFrame(output).T
-    
-    outfile = options.out_file + '.predicted_sex.tsv'
-    printlog("Writing to file: \"%s\"" % outfile)
-    pd.DataFrame.to_csv(df_out, outfile, sep="\t", index_label="Sample_ID")
 
-if __name__=='__main__':
-    main()    
+        probes.add(line)
+
+    if not probes:
+        raise ValueError(
+            f'No X-chromosome CpG IDs were found in "{xprobe_file}"'
+        )
+
+    printlog(f"Total {len(probes)} X probes loaded.")
+
+    return probes
+
+
+def read_beta_matrix(input_file):
+    """
+    Read a beta-value matrix.
+
+    Non-numeric values are converted to NaN rather than causing entire CpG
+    rows to be discarded.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Numeric beta-value matrix indexed by CpG ID.
+    """
+    printlog(f'Reading input file: "{input_file}"')
+
+    try:
+        frame = pd.read_csv(
+            input_file,
+            index_col=0,
+            sep="\t",
+        )
+    except Exception as exc:
+        raise ValueError(
+            f'Cannot read beta-value matrix "{input_file}": {exc}'
+        ) from exc
+
+    if frame.empty:
+        raise ValueError("Input beta-value matrix is empty")
+
+    if frame.columns.empty:
+        raise ValueError("Input beta-value matrix contains no samples")
+
+    if not frame.index.is_unique:
+        raise ValueError("CpG IDs in the input matrix are not unique")
+
+    if not frame.columns.is_unique:
+        raise ValueError("Sample IDs in the input matrix are not unique")
+
+    numeric = frame.apply(
+        pd.to_numeric,
+        errors="coerce",
+    )
+
+    invalid_count = int(numeric.isna().sum().sum())
+    if invalid_count:
+        printlog(
+            f"{invalid_count} missing/non-numeric beta value(s) will be "
+            "ignored on a per-sample basis."
+        )
+
+    return numeric
+
+
+def select_x_probes(beta_matrix, x_probes, input_file=None):
+    """
+    Select X-linked CpGs found in the beta matrix.
+
+    Returns
+    -------
+    pandas.DataFrame
+        X-linked subset of the beta matrix.
+    """
+    found = beta_matrix.index.intersection(sorted(x_probes))
+
+    source = f' from file "{input_file}"' if input_file else ""
+    printlog(
+        f"Found {len(found)} X-linked CpGs{source}."
+    )
+
+    if len(found) == 0:
+        raise ValueError(
+            "None of the supplied X-chromosome CpG IDs were found in the "
+            "input beta-value matrix"
+        )
+
+    return beta_matrix.loc[found]
+
+
+def _count_range(values, lower, upper):
+    """Count finite beta values within an inclusive interval."""
+    array = np.asarray(values, dtype=float)
+    valid = np.isfinite(array)
+
+    return int(
+        np.sum(
+            valid
+            & (array >= lower)
+            & (array <= upper)
+        )
+    )
+
+
+def calculate_sm_ratio(
+    values,
+    low_range=LOW_RANGE,
+    mid_range=MID_RANGE,
+    high_range=HIGH_RANGE,
+):
+    """
+    Calculate log2 semi-methylation ratio for one sample.
+
+    Returns
+    -------
+    tuple
+        log2 ratio, low count, mid count, high count, valid X-CpG count.
+    """
+    array = np.asarray(values, dtype=float)
+    valid_count = int(np.sum(np.isfinite(array)))
+
+    low_count = _count_range(
+        array,
+        low_range[0],
+        low_range[1],
+    )
+    mid_count = _count_range(
+        array,
+        mid_range[0],
+        mid_range[1],
+    )
+    high_count = _count_range(
+        array,
+        high_range[0],
+        high_range[1],
+    )
+
+    denominator = low_count + high_count
+
+    # The historical method is undefined when either the numerator or
+    # denominator is zero. Report NaN instead of relying on divide-by-zero
+    # warnings or infinities.
+    if mid_count == 0 or denominator == 0:
+        ratio = math.nan
+    else:
+        ratio = math.log2(mid_count / denominator)
+
+    return (
+        ratio,
+        low_count,
+        mid_count,
+        high_count,
+        valid_count,
+    )
+
+
+def predict_from_ratio(ratio, cutoff=0.0):
+    """Convert a log2 SM ratio to a sex prediction."""
+    if not math.isfinite(ratio):
+        return "Unknown"
+
+    if ratio > cutoff:
+        return "Female"
+
+    if ratio < cutoff:
+        return "Male"
+
+    return "Unknown"
+
+
+def predict_samples(beta_matrix, cutoff=0.0):
+    """
+    Predict sex for each sample in an X-linked beta matrix.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Per-sample SM-ratio calculations and predictions.
+    """
+    rows = []
+
+    for sample_id in beta_matrix.columns:
+        (
+            ratio,
+            low_count,
+            mid_count,
+            high_count,
+            valid_count,
+        ) = calculate_sm_ratio(beta_matrix[sample_id].to_numpy())
+
+        rows.append(
+            {
+                "Sample_ID": sample_id,
+                "log2_SM_ratio": ratio,
+                "Predicted_sex": predict_from_ratio(
+                    ratio,
+                    cutoff=cutoff,
+                ),
+                "X_CpGs_used": valid_count,
+                "Low_beta_CpGs": low_count,
+                "Mid_beta_CpGs": mid_count,
+                "High_beta_CpGs": high_count,
+            }
+        )
+
+    return pd.DataFrame(rows).set_index("Sample_ID")
+
+
+def run_predict_sex(
+    input_file,
+    xprobe_file,
+    output_prefix,
+    cutoff=0.0,
+):
+    """
+    Run X-chromosome semi-methylation sex prediction.
+
+    Returns
+    -------
+    str
+        Path to the generated prediction table.
+    """
+    x_probes = read_x_probes(xprobe_file)
+
+    beta_matrix = read_beta_matrix(input_file)
+
+    x_beta_matrix = select_x_probes(
+        beta_matrix,
+        x_probes,
+        input_file=input_file,
+    )
+
+    predictions = predict_samples(
+        x_beta_matrix,
+        cutoff=cutoff,
+    )
+
+    output_path = Path(
+        f"{output_prefix}.predicted_sex.tsv"
+    )
+
+    if output_path.parent != Path("."):
+        output_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+    printlog(f'Writing to file: "{output_path}"')
+
+    predictions.to_csv(
+        output_path,
+        sep="\t",
+        index_label="Sample_ID",
+        na_rep="NaN",
+    )
+
+    return str(output_path)
+
+
+def main(argv=None):
+    """
+    Command-line entry point.
+
+    Parameters
+    ----------
+    argv : list[str] or None
+        Optional command-line argument list. When None, argparse reads
+        ``sys.argv``. Passing a list allows this function to be called directly
+        from the CpGtools dispatcher or from tests.
+
+    Returns
+    -------
+    int
+        Process-style return code.
+    """
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    try:
+        run_predict_sex(
+            input_file=args.input_file,
+            xprobe_file=args.xprobe_file,
+            output_prefix=args.out_file,
+            cutoff=args.cutoff,
+        )
+    except (OSError, RuntimeError, ValueError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

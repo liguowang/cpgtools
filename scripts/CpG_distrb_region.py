@@ -1,146 +1,366 @@
 #!/usr/bin/env python3
 
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
+"""Summarize CpG distribution across user-defined genomic region classes.
+
+The program accepts one CpG BED3+ file and multiple BED3+ annotation files.
+The order of annotation files defines priority. Regions from lower-priority
+files are merged and then have all higher-priority regions subtracted, making
+the final region classes mutually exclusive.
+
+For each annotation class, the program reports:
+
+* priority order
+* annotation name
+* number of non-overlapping regions
+* total annotated size in bp
+* raw CpG count
+* CpG density per kilobase
+
+Compressed BED files are supported through the CpGtools reader.
 """
-Description
------------
-This program calculates the distribution of CpG over user-specified genomic regions. 
 
-Notes
-------
- 1. A maximum of 10 BED files (define 10 different genomic regions) can be analyzed
-    together. 
- 2. The *order* of BED files determines the *priority order*. Overlapped
-    genomic regions will be kept in the BED file with the highest priority and removed
-    from BED files of lower priorities.  For example, users provided 3 BED files via  "-i
-    promoters.bed,enhancers.bed,intergenic.bed", then if an enhancer region is overlapped
-    with promoters, *the overlapped part* will be removed from "enhancers.bed".
- 3. BED files can be regular or compressed by 'gzip' or 'bz'.
-#=========================================================================================
-"""
+from __future__ import annotations
 
+import argparse
+from pathlib import Path
+from typing import Optional, Sequence
 
-import sys,os
-import collections
-import subprocess
-import numpy as np
-from optparse import OptionParser
-from cpgmodule import ireader
-from cpgmodule.utils import *
+import matplotlib.pyplot as plt
+import pandas as pd
+
 from cpgmodule import BED
 from cpgmodule._version import __version__
+from cpgmodule.utils import count_over_range, printlog, read_CpG_bed, read_bed_as_list
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
 
-def main():
-	
-	usage="%prog [options]" + "\n"
-	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--cpg",action="store",type="string",dest="cpg_file",help="BED file specifying the C position. This BED file should have at least three columns (Chrom, ChromStart, ChromeEnd).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2).")
-	parser.add_option("-b","--bed",action="store",type="string",dest="bed_files",help="List of comma separated BED files specifying the genomic regions.")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
-	(options,args)=parser.parse_args()
-	
-	print ()
+class RegionDistributionError(RuntimeError):
+    """Raised when CpG distribution analysis across regions fails."""
 
-	if not (options.cpg_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
-		
-	if not (options.bed_files):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
-				
-	if not (options.out_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(102)	
 
-	FOUT = open(options.out_file + '.txt','w')
-	ROUT = open(options.out_file + '.r','w')
-	
-	#step1: read CpG file
-	printlog("Reading CpG file: \"%s\"" % (options.cpg_file))
-	cpg_ranges = read_CpG_bed(options.cpg_file)
-	
-	#step2: check BED file
-	printlog("Checking BED files: \"%s\"" % (options.bed_files))
-	input_bed_files = options.bed_files.replace(' ','').split(',')
-	for i in input_bed_files:
-		if os.path.exists(i):
-			print("\t%s" % i, file=sys.stderr)
-		else:
-			print("\"%s\" does not exist!" % i, file=sys.stderr)
-			sys.exit(103)
-	
-	#step3: read, merge, and subtract BED file
-	dat = {}
-	result = [("Priority_order", "Name", "Number_of_regions", "Size_of_regions(bp)", "CpG_raw_count", "CpG_count_per_KB")]
-	
-	#step3.1: read the first BED file
-	i = 0
-	printlog("Reading BED file: \"%s\"" % (input_bed_files[i]))
-	file_name = os.path.basename(input_bed_files[i])
-	tmp = read_bed_as_list(input_bed_files[i])
-	printlog("Merging overlap entries in BED file: \"%s\"" % (input_bed_files[i]))
-	dat[i] = BED.unionBed3(tmp)
-	printlog("Counting CpGs ...")
-	(size,count) = count_over_range(dat[i], cpg_ranges)
-	result.append([str(i), file_name, len(dat[i]), size, count, count*1000.0/size])	#Class, number_of_region, size_of_region, CpG_raw_count, CpG_count_perKb
-	
-	#step3.2: read the remaining BED files
-	for i in range(1, len(input_bed_files)):
-		printlog("Reading BED file: \"%s\"" % (input_bed_files[i]))
-		file_name = os.path.basename(input_bed_files[i])
-		tmp = read_bed_as_list(input_bed_files[i])
-		printlog("Merging overlap entries in BED file: \"%s\"" % (input_bed_files[i]))
-		dat[i] = BED.unionBed3(tmp)
-		
-		for j in range(0,i):
-			printlog("Subtract \"%s\" from \"%s\"" % (input_bed_files[j], input_bed_files[i]))
-			dat[i] = BED.subtractBed3(dat[i],  dat[j])
-		(size,count) = count_over_range(dat[i], cpg_ranges)
-		result.append([str(i), file_name, len(dat[i]), size, count, count*1000.0/size])
-			
-	print('\n')
-	names=[]	#[0,1,2,3,4,...]
-	labels = []	#[bed names]
-	density=[]
-	for tmp in result:
-		print ('\t'.join([str(i) for i in tmp]), file=FOUT)
-		names.append(tmp[0])
-		labels.append(tmp[1])
-		density.append(tmp[5])
-	FOUT.close()
-	
-	print("name = c(%s)" % ','.join(['"' + i + '"' for i in names[1:]]), file=ROUT)
-	print("values = c(%s)" % ','.join([str(i) for i in density[1:]]), file=ROUT)
-	print ('pdf("%s", width=8, height=6)' % (options.out_file + '.pdf'), file=ROUT)
-	print ('layout(matrix(c(1,1,2,1,1,2), nrow=2, byrow=TRUE))', file=ROUT)
-	print ('barplot(values,names.arg=name,col="blue",ylab="CpG per Kb")', file=ROUT)
-	print ("plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')", file=ROUT)
-	for name,label in zip(names[1:], labels[1:]):
-		x_pos = 0.0
-		y_pos = 1-(int(name)*9.0 +5)/200 
-		print ("text(x=%f, y=%f, labels=c(\"%s = %s\"),adj=c(0,0))" % (x_pos, y_pos,name,label), file=ROUT)
-	print ('dev.off()', file=ROUT)
-	
-	ROUT.close()
-	
-	printlog("Running R script ...")
-	try:
-		subprocess.call("Rscript " + options.out_file + '.r', shell=True)
-	except:
-		print ("Cannot generate pdf file from " + options.out_file + '.r', file=sys.stderr)
-		pass		
+def build_parser() -> argparse.ArgumentParser:
+    """Build and return the command-line parser."""
+    parser = argparse.ArgumentParser(
+        prog="cpgtools CpG_distrb_region",
+        description=(
+            "Calculate CpG distribution across prioritized user-defined "
+            "genomic region classes."
+        ),
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "-i",
+        "--cpg",
+        dest="cpg_file",
+        required=True,
+        type=Path,
+        help=(
+            "Input CpG BED3+ file. Only chromosome/start/end are required. "
+            "Compressed input is supported."
+        ),
+    )
+    parser.add_argument(
+        "-b",
+        "--bed",
+        dest="bed_files",
+        required=True,
+        nargs="+",
+        type=Path,
+        help=(
+            "One or more BED3+ files defining genomic region classes, listed "
+            "from highest to lowest priority. A comma-separated list is also "
+            "accepted for backward compatibility."
+        ),
+    )
+    parser.add_argument(
+        "-n",
+        "--names",
+        nargs="+",
+        default=None,
+        help=(
+            "Optional names for the region classes. Must match the number of "
+            "BED files. Comma-separated names are also accepted."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--out_prefix",
+        "--output",
+        dest="out_prefix",
+        required=True,
+        type=Path,
+        help="Output filename prefix, optionally including a directory.",
+    )
+    parser.add_argument(
+        "--format",
+        choices=("png", "pdf", "both"),
+        default="pdf",
+        help="Plot output format.",
+    )
+    parser.add_argument(
+        "--dpi",
+        type=int,
+        default=300,
+        help="Resolution of PNG output.",
+    )
+    parser.add_argument(
+        "--width",
+        type=float,
+        default=8.0,
+        help="Plot width in inches.",
+    )
+    parser.add_argument(
+        "--height",
+        type=float,
+        default=6.0,
+        help="Plot height in inches.",
+    )
+    parser.add_argument(
+        "--no_plot",
+        action="store_true",
+        help="Write the summary table without generating a plot.",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+    return parser
 
-if __name__=='__main__':
-	main()	
-	
+
+def expand_comma_separated(values: Sequence[object]) -> list[str]:
+    """Expand argparse values that may contain comma-separated entries."""
+    expanded: list[str] = []
+    for value in values:
+        expanded.extend(
+            item.strip()
+            for item in str(value).split(",")
+            if item.strip()
+        )
+    return expanded
+
+
+def validate_args(args: argparse.Namespace, parser: argparse.ArgumentParser) -> None:
+    """Normalize and validate command-line arguments."""
+    args.bed_files = [Path(p) for p in expand_comma_separated(args.bed_files)]
+
+    if not args.cpg_file.is_file():
+        parser.error(f"CpG BED file does not exist: {args.cpg_file}")
+
+    if not args.bed_files:
+        parser.error("At least one region BED file is required.")
+
+    for bed_file in args.bed_files:
+        if not bed_file.is_file():
+            parser.error(f"Region BED file does not exist: {bed_file}")
+
+    if args.names is not None:
+        args.names = expand_comma_separated(args.names)
+        if len(args.names) != len(args.bed_files):
+            parser.error(
+                "--names must contain exactly one name for each BED file."
+            )
+
+    if args.dpi < 1:
+        parser.error("--dpi must be at least 1")
+
+    if args.width <= 0 or args.height <= 0:
+        parser.error("--width and --height must be greater than zero")
+
+
+def safe_union(intervals):
+    """Merge BED3 intervals and safely handle empty inputs."""
+    if not intervals:
+        return []
+    return BED.unionBed3(intervals)
+
+
+def safe_subtract(intervals, higher_priority):
+    """Subtract higher-priority intervals while safely handling empties."""
+    if not intervals:
+        return []
+    if not higher_priority:
+        return intervals
+    return BED.subtractBed3(intervals, higher_priority)
+
+
+def load_and_prioritize_regions(
+    bed_files: Sequence[Path],
+    region_names: Sequence[str],
+) -> list[tuple[str, list]]:
+    """Load, merge, and prioritize region BED files."""
+    prioritized: list[tuple[str, list]] = []
+    higher_priority_union = []
+
+    for priority, (bed_file, region_name) in enumerate(
+        zip(bed_files, region_names)
+    ):
+        printlog(
+            f'Reading region BED file #{priority}: "{bed_file}" '
+            f'({region_name})'
+        )
+
+        intervals = read_bed_as_list(str(bed_file))
+        merged = safe_union(intervals)
+
+        if priority > 0:
+            printlog(
+                f'Subtracting higher-priority regions from "{region_name}" ...'
+            )
+            merged = safe_subtract(merged, higher_priority_union)
+
+        prioritized.append((region_name, merged))
+
+        if merged:
+            higher_priority_union = safe_union(
+                higher_priority_union + merged
+            )
+
+    return prioritized
+
+
+def summarize_regions(
+    prioritized_regions: Sequence[tuple[str, list]],
+    cpg_ranges,
+) -> pd.DataFrame:
+    """Calculate region coverage and CpG density for each class."""
+    rows = []
+
+    for priority, (region_name, intervals) in enumerate(prioritized_regions):
+        printlog(f'Counting CpGs in "{region_name}" ...')
+
+        if intervals:
+            size, count = count_over_range(intervals, cpg_ranges)
+            size = int(size)
+            count = int(count)
+        else:
+            size = 0
+            count = 0
+
+        density = count * 1000.0 / size if size > 0 else 0.0
+
+        rows.append(
+            {
+                "Priority_order": priority,
+                "Name": region_name,
+                "Number_of_regions": len(intervals),
+                "Size_of_regions_bp": size,
+                "CpG_raw_count": count,
+                "CpG_count_per_KB": density,
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def plot_summary(
+    summary: pd.DataFrame,
+    output_path: Path,
+    *,
+    dpi: int,
+    width: float,
+    height: float,
+) -> None:
+    """Create a CpG-density bar plot across prioritized region classes."""
+    figure, axis = plt.subplots(figsize=(width, height))
+
+    x = range(len(summary))
+    axis.bar(
+        x,
+        summary["CpG_count_per_KB"].to_numpy(dtype=float),
+        width=0.75,
+    )
+
+    axis.set_xticks(list(x))
+    axis.set_xticklabels(
+        summary["Name"].astype(str).tolist(),
+        rotation=30,
+        ha="right",
+    )
+    axis.set_ylabel("CpG count per kb")
+    axis.set_xlabel("Genomic region class")
+    axis.set_title("CpG density across prioritized genomic regions")
+
+    figure.tight_layout()
+
+    save_kwargs = {"dpi": dpi} if output_path.suffix.lower() == ".png" else {}
+    figure.savefig(output_path, **save_kwargs)
+    plt.close(figure)
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    """Command-line entry point."""
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    validate_args(args, parser)
+
+    args.out_prefix.parent.mkdir(parents=True, exist_ok=True)
+
+    region_names = (
+        args.names
+        if args.names is not None
+        else [path.name for path in args.bed_files]
+    )
+
+    if len(set(region_names)) != len(region_names):
+        parser.error("Region names must be unique.")
+
+    table_path = Path(f"{args.out_prefix}.region_distribution.tsv")
+
+    try:
+        printlog(f'Reading CpG file: "{args.cpg_file}"')
+        cpg_ranges = read_CpG_bed(str(args.cpg_file))
+
+        prioritized_regions = load_and_prioritize_regions(
+            bed_files=args.bed_files,
+            region_names=region_names,
+        )
+
+        summary = summarize_regions(
+            prioritized_regions=prioritized_regions,
+            cpg_ranges=cpg_ranges,
+        )
+
+        printlog(f'Writing region distribution table: "{table_path}"')
+        summary.to_csv(
+            table_path,
+            sep="\t",
+            index=False,
+            float_format="%.6f",
+        )
+
+        if not args.no_plot:
+            extensions = ("png", "pdf") if args.format == "both" else (args.format,)
+
+            for extension in extensions:
+                plot_path = Path(
+                    f"{args.out_prefix}.region_distribution.{extension}"
+                )
+                printlog(f'Writing region distribution plot: "{plot_path}"')
+                plot_summary(
+                    summary=summary,
+                    output_path=plot_path,
+                    dpi=args.dpi,
+                    width=args.width,
+                    height=args.height,
+                )
+
+    except RegionDistributionError as exc:
+        parser.exit(1, f"Error: {exc}\n")
+    except Exception as exc:
+        parser.exit(1, f"Error: {exc}\n")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

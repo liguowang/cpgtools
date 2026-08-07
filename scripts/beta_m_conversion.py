@@ -1,90 +1,92 @@
 #!/usr/bin/env python3
 
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
+"""Convert DNA methylation beta values to M values, or M values to beta values.
+
+Features
+--------
+* Supports plain text and compressed input (.gz, .bz2, .xz).
+* Preserves the CpG identifier column.
+* Uses an epsilon offset to avoid infinite M values when beta values are 0 or 1.
+* Writes tab-delimited output.
+
+Conversion formulas
+-------------------
+Beta -> M
+
+    M = log2(beta / (1 - beta))
+
+M -> Beta
+
+    Beta = 2**M / (2**M + 1)
 """
-Description
------------
-Convert Beta-value into M-value or vice versa
 
-Example of input
------------------
-CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
-cg_001	0.831035	0.878022	0.794427	0.880911
-cg_002	0.249544	0.209949	0.234294	0.236680
-cg_003	0.845065	0.843957	0.840184	0.824286
-"""
+from __future__ import annotations
 
+import argparse
+import sys
+from pathlib import Path
 
-import sys,os
-import collections
 import numpy as np
 import pandas as pd
-from scipy import stats
+
 from cpgmodule._version import __version__
-from optparse import OptionParser
-from cpgmodule import ireader
-from cpgmodule.utils import *
+from cpgmodule.utils import printlog
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
 
-	
+def read_table(path: Path) -> pd.DataFrame:
+    return pd.read_csv(path, sep=None, engine="python", compression="infer")
+
+
 def main():
-	usage="%prog [options]"
-	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta or M values with the 1st row containing sample IDs and the 1st column containing CpG IDs. This file can be a regular text file or compressed file (.gz, .bz2).")
-	parser.add_option("-d","--dtype",action="store",type='string', dest="data_type",default="Beta", help="Input data type either \"Beta\" or \"M\". default=%default")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The output file.")
-	parser.add_option("-e", "--epsilon",action="store",type='float', dest="offset", default=1e-6, help="The offset to clamp β values away from 0 and 1. default=%default")
-	(options,args)=parser.parse_args()
-	
-	print ()
+    parser = argparse.ArgumentParser(
+        description="Convert DNA methylation beta values and M values.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument("-i","--input_file",required=True,type=Path,
+                        help="Input beta or M-value matrix.")
+    parser.add_argument("-d","--dtype",choices=("Beta","M","beta","m"),
+                        default="Beta",
+                        help="Input matrix type.")
+    parser.add_argument("-o","--out_prefix",required=True,
+                        help="Output file prefix.")
+    parser.add_argument("-e","--epsilon",type=float,default=1e-6,
+                        help="Clamp beta values away from 0 and 1.")
+    args = parser.parse_args()
 
-	if not (options.input_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
-	if not (options.data_type):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)				
-	if not (options.out_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(103)	
-	
-	FOUT = open(options.out_file, 'w')		
-	
-	if options.data_type.lower() == "beta":
-		printlog("Convert Beta-value file \"%s\" into M-value file \"%s\" ..." % (options.input_file, options.out_file))
-	elif options.data_type.lower() == "m":
-		printlog("Convert M-value file \"%s\" into Beta-value file \"%s\" ..." % (options.input_file, options.out_file))
-	else:
-		print ("Data type must be \"Beta\" or \"M\"", file=sys.stderr)
-		sys.exit(0)
-		
-	line_num = 1
-	for l in ireader.reader(options.input_file):
-		f = l.split()
-		if line_num == 1:
-			print (l, file=FOUT)
-		else:
-			probe_ID = f[0]
-			input_values = pd.to_numeric(f[1:], errors="coerce")
-			output_values = []
-			if options.data_type.lower() == "beta":
-				beta_clipped = np.clip(input_values, options.offset, 1 - options.offset)
-				output_values = np.log2(beta_clipped/(1.0 - beta_clipped))
-			elif options.data_type.lower() == "m":
-				output_values = (2**input_values/(2**input_values + 1))
-			print (probe_ID + '\t' + '\t'.join([str(i) for i in output_values]), file=FOUT)
-		line_num += 1
+    df = read_table(args.input_file)
+    if df.shape[1] < 2:
+        parser.error("Input must contain one CpG column and at least one sample column.")
 
-	FOUT.close()
-	
-if __name__=='__main__':
-	main()				
+    out = Path(args.out_prefix)
+
+    ids = df.iloc[:,0]
+    vals = df.iloc[:,1:].apply(pd.to_numeric, errors="coerce")
+
+    if args.dtype.lower() == "beta":
+        printlog(f'Converting Beta values in "{args.input_file}" to M values...')
+        vals = np.log2(np.clip(vals, args.epsilon, 1-args.epsilon) /
+                       (1 - np.clip(vals, args.epsilon, 1-args.epsilon)))
+        outfile = out.with_suffix(".m.tsv")
+    else:
+        printlog(f'Converting M values in "{args.input_file}" to Beta values...')
+        vals = (2.0 ** vals) / ((2.0 ** vals) + 1.0)
+        outfile = out.with_suffix(".beta.tsv")
+
+    result = pd.concat([ids, vals], axis=1)
+    result.to_csv(outfile, sep="\t", index=False, float_format="%.6f")
+
+    printlog(f'Saved converted matrix to "{outfile}".')
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

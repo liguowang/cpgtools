@@ -1,99 +1,289 @@
 #!/usr/bin/env python3
 
-"""
-#=========================================================================================
-This program picks the top N rows (according to standard deviation) from the input file.
-The resulting file can be used for clustering/PCA analysis.
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
-Example of input data file
----------------------------
-CpG_ID	Sample_01	Sample_02	Sample_03	Sample_04
-cg_001	0.831035	0.878022	0.794427	0.880911
-cg_002	0.249544	0.209949	0.234294	0.236680
-cg_003	0.845065	0.843957	0.840184	0.824286
+"""Select the top N CpGs according to a row-wise summary score.
+
+The input matrix must contain CpG identifiers in the first column and sample
+values in the remaining columns. CpGs can be ranked by standard deviation,
+variance, mean, median, or median absolute deviation (MAD).
+
+Two output files are written:
+
+* ``PREFIX.ranked.tsv``: all retained CpGs with their ranking score.
+* ``PREFIX.topN.tsv``: the top-ranked CpGs without the score column.
 """
 
-import sys,os
-import collections
-import subprocess
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+from typing import Optional, Sequence
+
 import numpy as np
-from optparse import OptionParser
-from cpgmodule._version import __version__
-from cpgmodule import ireader
-from cpgmodule.utils import *
-from cpgmodule import BED
 import pandas as pd
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
+from cpgmodule._version import __version__
+from cpgmodule.utils import printlog
 
-	
-def main():
-	
-	usage="%prog [options]" + "\n"
-	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="Tab-separated data frame file containing beta values with the 1st row containing sample IDs and the 1st column containing CpG IDs.")
-	parser.add_option("-c","--count",action="store",type='int', dest="cpg_count", default=1000, help="Number of most variable CpGs (ranked by standard deviation) to keep. default=%default" )
-	parser.add_option("-s","--score",action="store",type='string', dest="score_type", default='std', help="The type of score used to rank CpGs. Must be one of 'std' or 'mean'. default=%default" )
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
-	(options,args)=parser.parse_args()
-	
-	print ()
-	if not (options.input_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
-	
-	if not (options.out_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(103)	
-	
-	printlog("Reading input file: \"%s\"" % (options.input_file))
-	df1 = pd.read_csv(options.input_file, index_col = 0, sep="\t")
-	
-	#remove any rows with NAs
-	df2 = df1.dropna(axis=0, how='any')
-	printlog("%d rows with missing values were removed." % (len(df1) - len(df2)))
-	
 
-	
-	if options.score_type.lower() == 'std':
-		#calculate stdev for each row
-		row_stds = df2.std(axis=1)
-		df2.loc[:, 'Stdev'] =  row_stds
+class TopNError(RuntimeError):
+    """Raised when input validation or ranking fails."""
 
-		#sorted data frame by stdev (decreasingly). Then take the top count,. Then remove Stdev column
-		printlog("Sorting by the standard deviation (decreasingly) ... ")
-		df3 = df2.sort_values(by=['Stdev'], ascending=False)
-		
-		printlog("Data frame with sorted Stdev is saved to file: %s" % options.out_file + '.sortedStdev.tsv')
-		df3.to_csv(options.out_file + '.sortedStdev.tsv', sep = "\t",float_format='%.6f')
-			
-		df4 = df3[0:options.cpg_count].drop('Stdev',axis=1)
-		printlog("Top %d rows of Data frame is saved to file: %s" % (options.cpg_count, options.out_file + '.sortedStdev.topN.tsv'))
-		df4.to_csv(options.out_file + '.sortedStdev.topN.tsv', sep="\t",float_format='%.6f')
-	elif options.score_type.lower() == 'mean':
-		#calculate mean for each row
-		row_means = df2.mean(axis=1)
-		df2['Mean'] =  row_means
 
-		#sorted data frame by mean (decreasingly). Then take the top count,. Then remove Stdev column
-		printlog("Sorting by the mean (decreasingly) ... ")
-		df3 = df2.sort_values(by=['Mean'], ascending=False)
-		
-		printlog("Data frame with sorted Mean is saved to file: %s" % options.out_file + '.sortedMean.tsv')
-		df3.to_csv(options.out_file + '.sortedMean.tsv', sep = "\t",float_format='%.6f')
-			
-		df4 = df3[0:options.cpg_count].drop('Mean',axis=1)
-		printlog("Top %d rows of Data frame is saved to file: %s" % (options.cpg_count, options.out_file + '.sortedMean.topN.tsv'))
-		df4.to_csv(options.out_file + '.sortedMean.topN.tsv', sep="\t",float_format='%.6f')
-	
+def build_parser() -> argparse.ArgumentParser:
+    """Build and return the command-line parser."""
+    parser = argparse.ArgumentParser(
+        prog="cpgtools beta_topN",
+        description=(
+            "Rank CpGs by a row-wise score and retain the top N features for "
+            "downstream analyses such as PCA or clustering."
+        ),
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "-i",
+        "--input_file",
+        required=True,
+        type=Path,
+        help=(
+            "Input tabular matrix. The first column contains CpG IDs and "
+            "remaining columns contain sample values. Compressed input is supported."
+        ),
+    )
+    parser.add_argument(
+        "-c",
+        "--count",
+        "--top",
+        dest="top_n",
+        type=int,
+        default=1000,
+        help="Number of top-ranked CpGs to retain.",
+    )
+    parser.add_argument(
+        "-s",
+        "--score",
+        choices=("std", "var", "mean", "median", "mad"),
+        default="std",
+        help="Row-wise score used to rank CpGs.",
+    )
+    parser.add_argument(
+        "--ascending",
+        action="store_true",
+        help="Sort from smallest to largest score instead of descending order.",
+    )
+    parser.add_argument(
+        "--na_policy",
+        choices=("drop", "omit"),
+        default="drop",
+        help=(
+            "How to handle missing values. 'drop' removes any CpG containing a "
+            "missing value; 'omit' computes the score from available values."
+        ),
+    )
+    parser.add_argument(
+        "--min_valid",
+        type=int,
+        default=2,
+        help=(
+            "Minimum number of non-missing sample values required per CpG when "
+            "--na_policy omit is used."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--out_prefix",
+        "--output",
+        dest="out_prefix",
+        required=True,
+        type=Path,
+        help="Output filename prefix, optionally including a directory.",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+    return parser
 
-if __name__=='__main__':
-	main()	
+
+def validate_args(args: argparse.Namespace, parser: argparse.ArgumentParser) -> None:
+    """Validate command-line arguments."""
+    if not args.input_file.is_file():
+        parser.error(f"Input file does not exist: {args.input_file}")
+    if args.top_n < 1:
+        parser.error("--count/--top must be at least 1")
+    if args.min_valid < 1:
+        parser.error("--min_valid must be at least 1")
+
+
+def read_matrix(path: Path) -> pd.DataFrame:
+    """Read and validate the input feature matrix."""
+    printlog(f'Reading input matrix: "{path}"')
+    try:
+        data = pd.read_csv(
+            path,
+            sep=None,
+            engine="python",
+            compression="infer",
+            index_col=0,
+        )
+    except Exception as exc:
+        raise TopNError(f"Cannot read input file {path}: {exc}") from exc
+
+    if data.shape[1] < 1:
+        raise TopNError("Input must contain at least one sample column.")
+
+    if data.index.has_duplicates:
+        duplicates = data.index[data.index.duplicated()].astype(str).unique().tolist()
+        raise TopNError(
+            "Duplicate CpG identifiers were found: " + ", ".join(duplicates[:10])
+        )
+
+    if data.columns.duplicated().any():
+        duplicates = data.columns[data.columns.duplicated()].astype(str).tolist()
+        raise TopNError(
+            "Duplicate sample identifiers were found: " + ", ".join(duplicates[:10])
+        )
+
+    numeric = data.apply(pd.to_numeric, errors="coerce")
+    if numeric.notna().sum().sum() == 0:
+        raise TopNError("No numeric sample values were found in the input matrix.")
+
+    return numeric
+
+
+def median_absolute_deviation(data: pd.DataFrame, skipna: bool) -> pd.Series:
+    """Calculate row-wise median absolute deviation."""
+    medians = data.median(axis=1, skipna=skipna)
+    deviations = data.sub(medians, axis=0).abs()
+    return deviations.median(axis=1, skipna=skipna)
+
+
+def compute_scores(
+    data: pd.DataFrame,
+    score_type: str,
+    na_policy: str,
+    min_valid: int,
+) -> tuple[pd.DataFrame, pd.Series]:
+    """Filter CpGs and calculate row-wise ranking scores."""
+    original_count = len(data)
+
+    if na_policy == "drop":
+        filtered = data.dropna(axis=0, how="any")
+        removed = original_count - len(filtered)
+        printlog(f"Removed {removed} CpGs containing missing values.")
+        skipna = False
+    else:
+        valid_counts = data.notna().sum(axis=1)
+        filtered = data.loc[valid_counts >= min_valid]
+        removed = original_count - len(filtered)
+        printlog(
+            f"Removed {removed} CpGs with fewer than {min_valid} valid values."
+        )
+        skipna = True
+
+    if filtered.empty:
+        raise TopNError("No CpGs remain after missing-value filtering.")
+
+    if score_type == "std":
+        scores = filtered.std(axis=1, skipna=skipna, ddof=1)
+    elif score_type == "var":
+        scores = filtered.var(axis=1, skipna=skipna, ddof=1)
+    elif score_type == "mean":
+        scores = filtered.mean(axis=1, skipna=skipna)
+    elif score_type == "median":
+        scores = filtered.median(axis=1, skipna=skipna)
+    elif score_type == "mad":
+        scores = median_absolute_deviation(filtered, skipna=skipna)
+    else:  # Defensive check; argparse already restricts this value.
+        raise TopNError(f"Unsupported score type: {score_type}")
+
+    finite_scores = np.isfinite(scores.to_numpy(dtype=float))
+    if not finite_scores.all():
+        bad_count = int((~finite_scores).sum())
+        printlog(f"Removed {bad_count} CpGs with undefined ranking scores.")
+        filtered = filtered.loc[finite_scores]
+        scores = scores.loc[finite_scores]
+
+    if filtered.empty:
+        raise TopNError("No CpGs have finite ranking scores.")
+
+    return filtered, scores.astype(float)
+
+
+def rank_features(
+    data: pd.DataFrame,
+    scores: pd.Series,
+    ascending: bool,
+) -> pd.DataFrame:
+    """Return the feature matrix sorted by score with score and rank columns."""
+    ranked = data.copy()
+    ranked.insert(0, "Score", scores)
+    ranked = ranked.sort_values(
+        by="Score",
+        ascending=ascending,
+        kind="mergesort",
+    )
+    ranked.insert(1, "Rank", np.arange(1, len(ranked) + 1, dtype=int))
+    return ranked
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    """Command-line entry point."""
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    validate_args(args, parser)
+
+    args.out_prefix.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        matrix = read_matrix(args.input_file)
+        filtered, scores = compute_scores(
+            data=matrix,
+            score_type=args.score,
+            na_policy=args.na_policy,
+            min_valid=args.min_valid,
+        )
+        ranked = rank_features(filtered, scores, ascending=args.ascending)
+
+        selected_count = min(args.top_n, len(ranked))
+        if args.top_n > len(ranked):
+            printlog(
+                f"Requested {args.top_n} CpGs, but only {len(ranked)} are available; "
+                f"retaining all {len(ranked)} CpGs."
+            )
+
+        ranked_path = Path(f"{args.out_prefix}.ranked.tsv")
+        top_path = Path(f"{args.out_prefix}.topN.tsv")
+        ids_path = Path(f"{args.out_prefix}.topN_ids.txt")
+
+        printlog(f'Writing ranked feature table: "{ranked_path}"')
+        ranked.to_csv(ranked_path, sep="\t", float_format="%.6f")
+
+        top_matrix = ranked.iloc[:selected_count].drop(columns=["Score", "Rank"])
+        printlog(f'Writing top {selected_count} feature matrix: "{top_path}"')
+        top_matrix.to_csv(top_path, sep="\t", float_format="%.6f")
+
+        printlog(f'Writing selected CpG identifiers: "{ids_path}"')
+        ids_path.write_text(
+            "\n".join(map(str, top_matrix.index)) + "\n",
+            encoding="utf-8",
+        )
+
+    except TopNError as exc:
+        parser.exit(1, f"Error: {exc}\n")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

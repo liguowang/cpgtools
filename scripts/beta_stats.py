@@ -1,101 +1,283 @@
 #!/usr/bin/env python3
 
-"""
-Description
------------
-This program gives basic information on CpGs located in each genomic region. 
-It adds six columns to the input BED file:
- 1. Number of CpGs detected in the genomic region
- 2. Min methylation level
- 3. Max methylation level
- 4. Average methylation level across all CpGs
- 5. Median methylation level across all CpGs
- 6. Standard deviation
- 
-Example of input BED6+ file
----------------------------
-chr22   44021512        44021513        cg24055475      0.9231  -
-chr13   111568382       111568383       cg06540715      0.1071  +
-chr20   44033594        44033595        cg21482942      0.6122  -
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
+"""Summarize DNA methylation values within user-defined genomic regions.
+
+The input methylation file must be BED6 or BED6+ with beta values in column 5.
+The region file must be BED3 or BED3+. All original region columns are preserved,
+and the following summary columns are appended:
+
+* CpG_count
+* Minimum_beta
+* Maximum_beta
+* Mean_beta
+* Median_beta
+* Standard_deviation
+
+Coordinates are interpreted as zero-based, half-open BED intervals.
 """
 
+from __future__ import annotations
 
-import sys,os
-import collections
-import subprocess
-import numpy as np
-from optparse import OptionParser
-from cpgmodule._version import __version__
+import argparse
+import math
+from pathlib import Path
+from typing import Optional, Sequence
+
 from cpgmodule import ireader
-from cpgmodule.utils import *
-from cpgmodule import BED
+from cpgmodule._version import __version__
+from cpgmodule.utils import printlog, read_CpG_bed, stats_over_range
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
 
-def main():
-	usage="%prog [options]" + "\n"
-	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="BED6+ file specifying the C position. This BED file should have at least six columns (Chrom, ChromStart, ChromeEnd, Name, Beta_value, Strand).  Note: the first base in a chromosome is numbered 0. This file can be a regular text file or compressed file (.gz, .bz2)")
-	parser.add_option("-r","--region",action="store",type="string",dest="region_file",help="BED3+ file of genomic regions. This BED file should have at least 3 columns (Chrom, ChromStart, ChromeEnd).")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file.")
-	(options,args)=parser.parse_args()
-	
-	print ()
+STAT_COLUMNS = (
+    "CpG_count",
+    "Minimum_beta",
+    "Maximum_beta",
+    "Mean_beta",
+    "Median_beta",
+    "Standard_deviation",
+)
 
-	if not (options.input_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
+def build_header(region_file: Path) -> list[str]:
+    """Infer the number of input columns and append statistic columns."""
+    for _, line in iter_region_lines(region_file):
+        column_count = len(line.split())
 
-	if not (options.region_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(102)
-				
-	if not (options.out_file):
-		print (__doc__)
-		parser.print_help()
-		sys.exit(103)	
-	
-	FOUT = open(options.out_file + '.txt','w')
-	
-	#step1: read CpG file
-	printlog("Reading CpG file: \"%s\"" % (options.input_file))
-	cpg_ranges = read_CpG_bed(options.input_file)
-		
-	#step2: read region file
-	printlog("Reading BED file: \"%s\"" % (options.region_file))
-	
-	printlog("Writing to: \"%s\"" % (options.out_file + '.txt'))
-	region_list = []
-	for l in ireader.reader(options.region_file):
-		if l.startswith('#'):
-			continue
-		if l.startswith('track'):
-			continue
-		if l.startswith('browser'):
-			continue
-		f = l.split()
-		if len(f) < 3:
-			continue
-		try:
-			chrom = f[0]
-			st = int(f[1])
-			end = int(f[2])
-		except:
-			print (l + '\t' + '\t'.join(['NA']*6, file=FOUT))
-			continue
-		tmp = stats_over_range(cpg_ranges, chrom, st, end)
-		print (l + '\t' + '\t'.join([str(i) for i in tmp]), file=FOUT)		
-	
-	FOUT.close()
+        if column_count < 3:
+            raise BetaStatsError(
+                "Region file must contain at least three columns."
+            )
 
-if __name__=='__main__':
-	main()	
-				
+        input_columns = ["chrom", "start", "end"]
+
+        if column_count > 3:
+            input_columns.extend(
+                f"column_{index}"
+                for index in range(4, column_count + 1)
+            )
+
+        return input_columns + list(STAT_COLUMNS)
+
+    raise BetaStatsError("Region file contains no valid data records.")
+    
+class BetaStatsError(RuntimeError):
+    """Raised when input validation or regional summarization fails."""
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Build and return the command-line parser."""
+    parser = argparse.ArgumentParser(
+        prog="cpgtools beta_stats",
+        description=(
+            "Calculate CpG counts and methylation summary statistics within "
+            "user-defined genomic regions. Six additional columns will be \
+            appended to the input file, including: CpG_count, Minimum_beta, \
+            Maximum_beta, Mean_beta, Median_beta, Standard_deviation."
+        ),
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "-i",
+        "--input_file",
+        required=True,
+        type=Path,
+        help=(
+            "Input BED6+ methylation file. Column 5 must contain beta values. "
+            "Compressed input is supported by the CpGtools reader."
+        ),
+    )
+    parser.add_argument(
+        "-r",
+        "--region",
+        required=True,
+        type=Path,
+        help=(
+            "BED3 file containing genomic regions. Original columns are "
+            "preserved in the output."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--out_prefix",
+        "--output",
+        dest="out_prefix",
+        required=True,
+        type=Path,
+        help="Output filename prefix, optionally including a directory.",
+    )
+    parser.add_argument(
+        "--header",
+        action="store_true",
+        help="Write a header row to the output table.",
+    )
+    parser.add_argument(
+        "--na_rep",
+        default="NA",
+        help="Text used for unavailable statistics.",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+    return parser
+
+
+def validate_args(args: argparse.Namespace, parser: argparse.ArgumentParser) -> None:
+    """Validate command-line arguments."""
+    if not args.input_file.is_file():
+        parser.error(f"Input methylation file does not exist: {args.input_file}")
+    if not args.region.is_file():
+        parser.error(f"Region file does not exist: {args.region}")
+    if "\t" in args.na_rep or "\n" in args.na_rep:
+        parser.error("--na_rep cannot contain tabs or newlines")
+
+
+def format_stat(value, na_rep: str) -> str:
+    """Format a statistic for tabular output."""
+    if value is None:
+        return na_rep
+
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if math.isnan(numeric) or math.isinf(numeric):
+        return na_rep
+
+    if numeric.is_integer():
+        return str(int(numeric))
+
+    return f"{numeric:.6f}"
+
+
+def iter_region_lines(path: Path):
+    """Yield nonempty, non-directive lines from a BED-like region file."""
+    for line_number, raw_line in enumerate(ireader.reader(str(path)), start=1):
+        line = raw_line.rstrip("\r\n")
+        stripped = line.strip()
+
+        if not stripped:
+            continue
+        if stripped.startswith(("#", "track", "browser")):
+            continue
+
+        yield line_number, line
+
+
+def summarize_regions(
+    cpg_ranges,
+    region_file: Path,
+    output_file: Path,
+    write_header: bool,
+    na_rep: str,
+) -> tuple[int, int]:
+    """Summarize methylation values for each region and write the result."""
+    processed = 0
+    invalid = 0
+
+    with output_file.open("w", encoding="utf-8") as output_handle:
+        if write_header:
+            header = build_header(region_file)
+            output_handle.write("\t".join(header) + "\n")
+
+        for line_number, line in iter_region_lines(region_file):
+            fields = line.split()
+
+            if len(fields) < 3:
+                invalid += 1
+                output_handle.write(
+                    line + "\t" + "\t".join([na_rep] * len(STAT_COLUMNS)) + "\n"
+                )
+                continue
+
+            chrom = fields[0]
+
+            try:
+                start = int(fields[1])
+                end = int(fields[2])
+            except ValueError:
+                invalid += 1
+                output_handle.write(
+                    line + "\t" + "\t".join([na_rep] * len(STAT_COLUMNS)) + "\n"
+                )
+                continue
+
+            if start < 0 or end <= start:
+                invalid += 1
+                output_handle.write(
+                    line + "\t" + "\t".join([na_rep] * len(STAT_COLUMNS)) + "\n"
+                )
+                continue
+
+            try:
+                statistics = stats_over_range(cpg_ranges, chrom, start, end)
+            except Exception as exc:
+                raise BetaStatsError(
+                    f"Failed to summarize region on line {line_number}: {exc}"
+                ) from exc
+
+            formatted = [format_stat(value, na_rep) for value in statistics]
+            if len(formatted) != len(STAT_COLUMNS):
+                raise BetaStatsError(
+                    "stats_over_range() returned "
+                    f"{len(formatted)} values; expected {len(STAT_COLUMNS)}."
+                )
+
+            output_handle.write(line + "\t" + "\t".join(formatted) + "\n")
+            processed += 1
+
+    return processed, invalid
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    """Command-line entry point."""
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    validate_args(args, parser)
+
+    args.out_prefix.parent.mkdir(parents=True, exist_ok=True)
+    output_file = Path(f"{args.out_prefix}.region_stats.tsv")
+
+    try:
+        printlog(f'Reading CpG methylation file: "{args.input_file}"')
+        cpg_ranges = read_CpG_bed(str(args.input_file))
+
+        printlog(f'Reading genomic regions: "{args.region}"')
+        printlog(f'Writing regional methylation statistics: "{output_file}"')
+
+        processed, invalid = summarize_regions(
+            cpg_ranges=cpg_ranges,
+            region_file=args.region,
+            output_file=output_file,
+            write_header=args.header,
+            na_rep=args.na_rep,
+        )
+
+        printlog(f"Processed {processed} valid genomic regions.")
+        if invalid:
+            printlog(
+                f"Warning: {invalid} invalid region lines were written with "
+                f"{args.na_rep!r} statistics."
+            )
+
+    except BetaStatsError as exc:
+        parser.exit(1, f"Error: {exc}\n")
+    except Exception as exc:
+        parser.exit(1, f"Error: {exc}\n")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

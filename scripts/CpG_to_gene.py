@@ -1,141 +1,370 @@
 #!/usr/bin/env python3
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
 """
 Description
 -----------
-This program annotates CpGs by assigning them to their putative target genes. Follows the 
-"Basel plus extension" rules used by GREAT(http://great.stanford.edu/public/html/index.php)
- 
- * Basal regulatory domain*
-   is a user-defined genomic region around the TSS (transcription start site). By default,
-   from TSS upstream 5kb to TSS downstream 1Kb is considered as the gene's *basal regulatory
-   domain*. When defining a gene's "basal regulatory domain", the other nearby genes will be
-   ignored (which means different genes' basal regulatory domains can be overlapped.)
+Annotate CpGs by assigning them to putative target genes using the
+"basal plus extension" rules used by GREAT.
 
- * Extended regulatory domain*
-   The gene regulatory domain is extended in both directions to the nearest gene's "basal 
-   regulatory domain" but no more than the maximum extension (default = 1000 kb) in one
-   direction.
+Basal regulatory domain
+~~~~~~~~~~~~~~~~~~~~~~~
+A user-defined genomic region around the transcription start site (TSS).
+By default, the basal domain extends 5 kb upstream and 1 kb downstream of
+the TSS. Nearby genes are ignored when defining a gene's basal domain, so
+basal domains from different genes may overlap.
+
+Extended regulatory domain
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+A gene's regulatory domain is extended in both directions to the nearest
+gene's basal regulatory domain, but by no more than the maximum extension
+distance (default: 1,000 kb) in either direction.
 
 Notes
 -----
- 1. Genes that are assigned to a particular CpG largely depends on gene annotation. A
-    "conservative" gene model (such as Refseq curated protein coding genes) is recommended. 
- 2. In the gene model, multiple isoforms should be merged into a single gene.
-#=========================================================================================
+1. CpG-to-gene assignment depends strongly on the gene annotation used.
+   A conservative gene model, such as curated protein-coding RefSeq genes,
+   is recommended.
+2. Multiple isoforms of the same gene should ideally be merged into one
+   representative gene model before running this command.
 """
 
+import argparse
+import sys
+from pathlib import Path
 
-import sys,os
-import collections
-import subprocess
-import numpy as np
-from optparse import OptionParser
 from cpgmodule import ireader
-from cpgmodule.utils import *
-from cpgmodule.region2gene import *
 from cpgmodule._version import __version__
+from cpgmodule.region2gene import getBasalDomains, geteExtendedDomains
+from cpgmodule.utils import printlog
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
 
-def main():
-	
-	usage="%prog [options]" + "\n"
-	parser = OptionParser(usage,version="%prog " + __version__)
-	parser.add_option("-i","--input_file",action="store",type="string",dest="input_file",help="BED3+ file specifying the C position. BED3+ file could be a regular text file or compressed file (.gz, .bz2). [required]")
-	parser.add_option("-r","--refgene",action="store",type="string",dest="gene_file",help="Reference gene model in BED12 format (https://genome.ucsc.edu/FAQ/FAQformat.html#format1). \"One gene one transcript\" is recommended. Since most genes have multiple transcripts; one can collapse multiple transcripts of the same gene into a single super transcript or select the canonical transcript.")
-	parser.add_option("-u","--basal-up",action="store",type="int",dest="basal_up_size",default=5000,help="Size of extension to upstream of TSS (used to define gene's \"basal regulatory domain\"). default=%default (bp)")
-	parser.add_option("-d","--basal-down",action="store",type="int",dest="basal_down_size",default=1000,help="Size of extension to downstream of TSS (used to define gene's basal regulatory domain). default=%default (bp)")
-	parser.add_option("-e","--extension",action="store",type="int",dest="extension_size",default=1000000,help="Size of extension to both up- and down-stream of TSS (used to define gene's \"extended regulatory domain\"). default=%default (bp)")
-	parser.add_option("-o","--output",action="store",type='string', dest="out_file",help="The prefix of the output file. Two additional columns will be appended to the original BED file with the last column indicating \"genes whose extended regulatory domain are overlapped with the CpG\", the 2nd last column indicating \"genes whose basal regulatory domain are overlapped with the CpG\". [required]")
-	(options,args)=parser.parse_args()
-	
-	print ()
+def build_parser():
+    """Build and return the command-line argument parser."""
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
 
-	if not (options.input_file):
-		#print ('You must specify input file(s)',file=sys.stderr)
-		print (__doc__)
-		parser.print_help()
-		sys.exit(101)
-	if not (options.gene_file):
-		#print ('You must specify the chrom size file',file=sys.stderr)
-		print (__doc__)
-		parser.print_help()
-		sys.exit(102)
-	if not (options.out_file):
-		#print ('You must specify the output file',file=sys.stderr)
-		print (__doc__)
-		parser.print_help()
-		sys.exit(103)	
-	
-	FOUT = open(options.out_file + '.associated_genes.txt','w')
-	print ("#The last column contains genes whose extended regulatory domain are overlapped with the CpG", file=FOUT)
-	print ("#The 2nd last column contains genes whose basal regulatory domain are overlapped with the CpG", file=FOUT)
-	print ("#\"//\" indicates no genes are found", file=FOUT)
-	
-	printlog("Calculate basal regulatory domain from: \"%s\" ..." % (options.gene_file))
-	basal_domains = getBasalDomains(bedfile = options.gene_file, up = options.basal_up_size, down = options.basal_down_size, printit = False)
-	
-	printlog("Calculate extended regulatory domain from: \"%s\" ..." % (options.gene_file))
-	extended_domains = geteExtendedDomains(basal_ranges = basal_domains, bedfile = options.gene_file, up = options.basal_up_size, down = options.basal_down_size, ext=options.extension_size, printit = False)
-	
-	#overlap = extended_domains['chr1'].find(2161048,2161049)
-	
-	printlog("Assigning CpG to gene ...")
-	for l in ireader.reader(options.input_file):
-		if l.startswith('#'):
-			print (l, file=FOUT)
-			continue
-		if l.startswith('track'):
-			continue
-		if l.startswith('browser'):
-			continue
-		try:
-			f = l.split()
-			chrom = f[0]	
-			start = int(f[1])
-			end = int(f[2])
-		except:
-			print ("Invalid BED line: %s" % l, file=sys.stderr)
-			continue
-						
-		
-		basal_genes = set()	#genes whose basal domain is overlapped with CpG
-		if chrom not in basal_domains:
-			basal_genes.add('//')
-		else:
-			overlaps = basal_domains[chrom].find(start,end)
-			if len(overlaps) == 0:
-				basal_genes.add('//')
-			else:
-				for o in overlaps:
-					basal_genes.add(o.value)
-		
-		extend_genes = set()	#genes whose extended domain is overlapped with CpG
-		if chrom not in extended_domains:
-			extend_genes.add('//')
-		else:
-			overlaps = extended_domains[chrom].find(start,end)
-			if len(overlaps) == 0:
-				extend_genes.add('//')
-			else:
-				for o in overlaps:
-					extend_genes.add(o.value)
-		
-		
-		extend_genes = extend_genes - basal_genes
-		if len(extend_genes) == 0:
-			extend_genes.add('//')
-		print (l + '\t' + ';'.join(basal_genes) + '\t' + ';'.join(extend_genes), file=FOUT)
-	FOUT.close()
+    parser.add_argument(
+        "-i",
+        "--input_file",
+        required=True,
+        help=(
+            "BED3+ file specifying CpG positions. The file may be plain text "
+            "or compressed (.gz, .bz2)."
+        ),
+    )
 
-if __name__=='__main__': 
-	main()	
-		
-	
+    parser.add_argument(
+        "-r",
+        "--refgene",
+        dest="gene_file",
+        required=True,
+        help=(
+            "Reference gene model in BED12 format. One gene per transcript "
+            "record is recommended; for genes with multiple isoforms, use a "
+            "collapsed or canonical transcript representation."
+        ),
+    )
+
+    parser.add_argument(
+        "-u",
+        "--basal-up",
+        dest="basal_up_size",
+        type=int,
+        default=5000,
+        help=(
+            "Upstream extension from the TSS used to define the basal "
+            "regulatory domain [default: %(default)s bp]."
+        ),
+    )
+
+    parser.add_argument(
+        "-d",
+        "--basal-down",
+        dest="basal_down_size",
+        type=int,
+        default=1000,
+        help=(
+            "Downstream extension from the TSS used to define the basal "
+            "regulatory domain [default: %(default)s bp]."
+        ),
+    )
+
+    parser.add_argument(
+        "-e",
+        "--extension",
+        dest="extension_size",
+        type=int,
+        default=1_000_000,
+        help=(
+            "Maximum extension from the TSS used to define the extended "
+            "regulatory domain [default: %(default)s bp]."
+        ),
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        dest="out_file",
+        required=True,
+        help=(
+            "Output prefix. Results are written to "
+            "<prefix>.associated_genes.txt."
+        ),
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+
+    return parser
+
+
+def validate_args(args, parser=None):
+    """Validate parsed command-line arguments."""
+    if args.basal_up_size < 0:
+        message = "--basal-up must be zero or greater"
+        if parser is not None:
+            parser.error(message)
+        raise ValueError(message)
+
+    if args.basal_down_size < 0:
+        message = "--basal-down must be zero or greater"
+        if parser is not None:
+            parser.error(message)
+        raise ValueError(message)
+
+    if args.extension_size < 0:
+        message = "--extension must be zero or greater"
+        if parser is not None:
+            parser.error(message)
+        raise ValueError(message)
+
+
+def parse_bed_record(line, line_number):
+    """
+    Parse a BED3+ record.
+
+    Returns
+    -------
+    tuple or None
+        (chrom, start, end) for a valid record, otherwise None.
+    """
+    fields = line.split()
+
+    if len(fields) < 3:
+        print(
+            f"Invalid BED line {line_number}: expected at least 3 columns: "
+            f"{line}",
+            file=sys.stderr,
+        )
+        return None
+
+    try:
+        chrom = fields[0]
+        start = int(fields[1])
+        end = int(fields[2])
+    except ValueError:
+        print(
+            f"Invalid BED coordinates on line {line_number}: {line}",
+            file=sys.stderr,
+        )
+        return None
+
+    if start < 0:
+        print(
+            f"Invalid BED start on line {line_number}: {start}",
+            file=sys.stderr,
+        )
+        return None
+
+    if end < start:
+        print(
+            f"BED start cannot be greater than end on line {line_number}: "
+            f"{line}",
+            file=sys.stderr,
+        )
+        return None
+
+    return chrom, start, end
+
+
+def overlapping_gene_names(domain_map, chrom, start, end):
+    """
+    Return gene names whose regulatory domains overlap a BED interval.
+
+    The historical CpGtools sentinel "//" is returned when no gene overlaps.
+    """
+    if chrom not in domain_map:
+        return {"//"}
+
+    overlaps = domain_map[chrom].find(start, end)
+    if not overlaps:
+        return {"//"}
+
+    return {overlap.value for overlap in overlaps}
+
+
+def annotate_cpgs(
+    input_file,
+    gene_file,
+    output_prefix,
+    basal_up_size=5000,
+    basal_down_size=1000,
+    extension_size=1_000_000,
+):
+    """
+    Annotate CpGs with genes whose basal or extended domains overlap them.
+
+    Returns
+    -------
+    str
+        Path to the generated output file.
+    """
+    output_path = Path(f"{output_prefix}.associated_genes.txt")
+
+    if output_path.parent != Path("."):
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    printlog(
+        f'Calculate basal regulatory domain from: "{gene_file}" ...'
+    )
+    basal_domains = getBasalDomains(
+        bedfile=gene_file,
+        up=basal_up_size,
+        down=basal_down_size,
+        printit=False,
+    )
+
+    printlog(
+        f'Calculate extended regulatory domain from: "{gene_file}" ...'
+    )
+    extended_domains = geteExtendedDomains(
+        basal_ranges=basal_domains,
+        bedfile=gene_file,
+        up=basal_up_size,
+        down=basal_down_size,
+        ext=extension_size,
+        printit=False,
+    )
+
+    printlog("Assigning CpG to gene ...")
+
+    with open(output_path, "w") as fout:
+        print(
+            "#The last column contains genes whose extended regulatory "
+            "domain are overlapped with the CpG",
+            file=fout,
+        )
+        print(
+            "#The 2nd last column contains genes whose basal regulatory "
+            "domain are overlapped with the CpG",
+            file=fout,
+        )
+        print('#"//" indicates no genes are found', file=fout)
+
+        for line_number, raw_line in enumerate(
+            ireader.reader(input_file), start=1
+        ):
+            line = raw_line.rstrip("\r\n")
+
+            if not line:
+                continue
+
+            if line.startswith("#"):
+                print(line, file=fout)
+                continue
+
+            if line.startswith("track") or line.startswith("browser"):
+                continue
+
+            parsed = parse_bed_record(line, line_number)
+            if parsed is None:
+                continue
+
+            chrom, start, end = parsed
+
+            basal_genes = overlapping_gene_names(
+                basal_domains,
+                chrom,
+                start,
+                end,
+            )
+
+            extended_genes = overlapping_gene_names(
+                extended_domains,
+                chrom,
+                start,
+                end,
+            )
+
+            # Preserve historical behavior: genes already reported in the
+            # basal column are removed from the extended-only column.
+            extended_only = extended_genes - basal_genes
+
+            if not extended_only:
+                extended_only = {"//"}
+
+            print(
+                line
+                + "\t"
+                + ";".join(sorted(basal_genes))
+                + "\t"
+                + ";".join(sorted(extended_only)),
+                file=fout,
+            )
+
+    return str(output_path)
+
+
+def main(argv=None):
+    """
+    Command-line entry point.
+
+    Parameters
+    ----------
+    argv : list[str] or None
+        Optional argument list. When None, argparse reads sys.argv.
+        Passing a list allows this function to be called cleanly from a
+        CpGtools dispatcher or from tests.
+
+    Returns
+    -------
+    int
+        Process-style return code: 0 on success, nonzero on failure.
+    """
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    try:
+        validate_args(args, parser=parser)
+
+        annotate_cpgs(
+            input_file=args.input_file,
+            gene_file=args.gene_file,
+            output_prefix=args.out_file,
+            basal_up_size=args.basal_up_size,
+            basal_down_size=args.basal_down_size,
+            extension_size=args.extension_size,
+        )
+    except (OSError, RuntimeError, ValueError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
