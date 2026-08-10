@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
 import sys
 from cpgmodule import ireader
 import collections
@@ -7,19 +19,10 @@ import numpy as np
 from cpgmodule import ireader
 import logging
 
-
 def revcomp(dna):
 	'''reverse complement DNA sequences'''
 	tab = str.maketrans('ACGTNX*-','TGCANX*-')
 	return dna.upper().translate(tab)[::-1]
-
-#def is_number(s):
-#	try:
-#		float(s)
-#		return True
-#	except ValueError:
-#		return False
-
 
 def colors(n):
 	'''

@@ -1,27 +1,19 @@
-#!/usr/bin/env python
-'''DNA/protein motif visualization and scan'''
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
-#import built-in modules
 import sys,os
 from collections import defaultdict
 from scipy import stats 
 import itertools
 
-#import third-party modules
 import numpy as np
-#changes to the paths
-
-#changing history to this module
-
-
-__author__ = "Liguo Wang"
-__copyright__ = ""
-__credits__ = []
-__license__ = "GPLv2"
-__version__ = "1.0.0"
-__maintainer__ = "Liguo Wang"
-__email__ = "Wang.Liguo@mayo.edu"
-__status__ = "Development" #Prototype or Production
 
 class PSSM (object):
 	'''

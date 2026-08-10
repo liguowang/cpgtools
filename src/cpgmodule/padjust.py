@@ -12,11 +12,11 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-# You should have received a copy of the GNU General Public License
-# along with structure_threader. If not, see <http://www.gnu.org/licenses/>.
+# Modifications Copyright (c) 2024-2026 Liguo Wang
+# Modified for use in CpGtools.
+#
+# See LICENSE.txt and the relevant third-party license notices for details.
 
-# Taken from https://stackoverflow.com/a/21739593/3091595, ported to python 3
-# and improved readability.
 import numpy as np
 
 def multiple_testing_correction(pvalues, correction_type="FDR"):

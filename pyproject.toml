@@ -23,7 +23,6 @@ dependencies = [
     "bx-python>=0.11",
     "weblogo>=3.7",
     "pycombat>=0.20",
-    "fancyimpute>=0.7",
 ]
 
 keywords = [
@@ -47,3 +46,48 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
+
+[project.scripts]
+epical = "cpgmodule.cli.epical:main"
+beta_combat = "cpgmodule.cli.beta_combat:main"
+beta_deconvolution = "cpgmodule.cli.beta_deconvolution:main"
+beta_impute = "cpgmodule.cli.beta_impute:main"
+beta_jitter_plot = "cpgmodule.cli.beta_jitter_plot:main"
+beta_m_conversion = "cpgmodule.cli.beta_m_conversion:main"
+beta_PCA = "cpgmodule.cli.beta_PCA:main"
+beta_profile_gene_centered = "cpgmodule.cli.beta_profile_gene_centered:main"
+beta_profile_region = "cpgmodule.cli.beta_profile_region:main"
+beta_selectNBest = "cpgmodule.cli.beta_selectNBest:main"
+beta_stacked_barplot = "cpgmodule.cli.beta_stacked_barplot:main"
+beta_stats = "cpgmodule.cli.beta_stats:main"
+beta_topN = "cpgmodule.cli.beta_topN:main"
+beta_trichotmize = "cpgmodule.cli.beta_trichotmize:main"
+beta_tSNE = "cpgmodule.cli.beta_tSNE:main"
+beta_UMAP = "cpgmodule.cli.beta_UMAP:main"
+CpG_aggregation = "cpgmodule.cli.CpG_aggregation:main"
+CpG_anno_position = "cpgmodule.cli.CpG_anno_position:main"
+CpG_anno_probe = "cpgmodule.cli.CpG_anno_probe:main"
+CpG_density_gene_centered = "cpgmodule.cli.CpG_density_gene_centered:main"
+CpG_distrb_chrom = "cpgmodule.cli.CpG_distrb_chrom:main"
+CpG_distrb_gene_centered = "cpgmodule.cli.CpG_distrb_gene_centered:main"
+CpG_distrb_region = "cpgmodule.cli.CpG_distrb_region:main"
+CpG_logo = "cpgmodule.cli.CpG_logo:main"
+CpG_to_gene = "cpgmodule.cli.CpG_to_gene:main"
+dmc_Bayes = "cpgmodule.cli.dmc_Bayes:main"
+dmc_bb = "cpgmodule.cli.dmc_bb:main"
+dmc_fisher = "cpgmodule.cli.dmc_fisher:main"
+dmc_glm = "cpgmodule.cli.dmc_glm:main"
+dmc_logit = "cpgmodule.cli.dmc_logit:main"
+dmc_nonparametric = "cpgmodule.cli.dmc_nonparametric:main"
+dmc_ttest = "cpgmodule.cli.dmc_ttest:main"
+predict_sex = "cpgmodule.cli.predict_sex:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+

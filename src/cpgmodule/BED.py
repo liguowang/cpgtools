@@ -1,23 +1,19 @@
-#!/usr/bin/env python
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
-#import built-in modules
 import os,sys
-import re
-import string
-import warnings
-import string
-import collections
-import math
-from operator import itemgetter
-from itertools import groupby
 
-
-#import third-party modules
 from bx.bitset import *
 from bx.bitset_builders import *
 from bx.intervals import *
 
-#from itertools import *
 from cpgmodule import ireader
 
 BED12 = '''
@@ -36,18 +32,6 @@ BED12 = '''
 
 Detailed description of BED format: https://genome.ucsc.edu/FAQ/FAQformat.html#format1
 '''
-
-
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__license__ = "GPL"
-__version__="0.1.0"
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
-
-
 
 class ParseBED:
 	'''
@@ -112,15 +96,15 @@ class ParseBED:
 
 			chrom = f[0]
 			chrom_start = int(f[1])
-			name = f[4]
+			#name = f[4]
 			strand = f[5]
 			cdsStart = int(f[6])
 			cdsEnd = int(f[7])
-			blockCount = int(f[9])
+			#blockCount = int(f[9])
 			blockSizes = [ int(i) for i in f[10].strip(',').split(',') ]
 			blockStarts = [ chrom_start + int(i) for i in f[11].strip(',').split(',') ]
-			cds_exons = []
-			genome_seq_index = []
+			#cds_exons = []
+			#genome_seq_index = []
 			for base,offset in zip( blockStarts, blockSizes ):
 				if (base + offset) < cdsStart: continue
 				if base > cdsEnd: continue
@@ -156,11 +140,11 @@ class ParseBED:
 
 			chrom = f[0]
 			chrom_start = int(f[1])
-			name = f[4]
+			#name = f[4]
 			strand = f[5]
 			cdsStart = int(f[6])
 			cdsEnd = int(f[7])
-			blockCount = int(f[9])
+			#blockCount = int(f[9])
 			blockSizes = [ int(i) for i in f[10].strip(',').split(',') ]
 			blockStarts = [ chrom_start + int(i) for i in f[11].strip(',').split(',') ]
 			exon_start = []
@@ -213,115 +197,178 @@ class ParseBED:
 			return reblocks
 				
 	def getIntrons(self, itype, uniquify=True, stranded=True):
-		'''
-		Get Intron regions from BED-12 file. 
-		separated bed file, each row represents one intron
-		
-		itype = :
-		* 'all': all introns
-		* 'first': Only return the first intron of each gene. The gene should have at least 1 intron. 
-		* 'internal': return all internal introns. The gene should have at least 3 introns. 
-		* 'last': Return the last intron. The gene should have at least 2 introns. 
-		* 'cds': Return introns within CDS region. 
-		* 'utr': Return introns within UTR regions. 
-		'''
+	    """
+	    Extract intron regions from a BED12 transcript annotation.
 
-		reblocks=[]
-		for l in ireader.reader(self.f):
-			l = l.strip()
-			if l.startswith(('#','track','browser')):continue
-			f = l.split()
-			chrom = f[0]
-			chrom_start = int(f[1])
-			name = f[4]
-			strand = f[5]
-			cdsStart = int(f[6])
-			cdsEnd = int(f[7])
-			blockCount = int(f[9])
-			if blockCount == 1:continue
-			blockSizes = [ int(i) for i in f[10].strip(',').split(',') ]
-			blockStarts = [ chrom_start + int(i) for i in f[11].strip(',').split(',') ]
-			exon_start = []
-			exon_end = []
-			for base,offset in zip( blockStarts, blockSizes ):
-				exon_start.append(base)
-				exon_end.append(base+offset)
-	   	   
-			intron_start = exon_end[:-1]
-			intron_end=exon_start[1:]
-			
-			intron_list = list(zip(intron_start,intron_end))
-			intron_number = len(intron_list)
-			
-			if itype == 'all':
-				for (st,end) in intron_list:
-					if stranded:
-						reblocks.append((chrom,st,end, strand))
-					else:
-						reblocks.append((chrom,st,end))
+	    Parameters
+	    ----------
+	    itype : {"all", "first", "internal", "last", "cds", "utr"}
+	        Type of introns to return.
 
-			elif itype == 'first':
-				if intron_number == 0:
-					continue
-				if strand == '-':
-					if stranded:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
-					else:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
-				else:
-					if stranded:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
-					else:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
-			
-			elif itype == 'last':
-				if intron_number < 2:
-					continue
-				if strand == '-':
-					if stranded:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
-					else:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))
-				else:
-					if stranded:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1], strand))
-					else:
-						reblocks.append((chrom, intron_list[-1][0], intron_list[-1][1]))			
-			elif itype == 'internal':
-				if intron_number < 3:
-					continue
-				for (st,end) in intron_list[1:-1]:
-					if stranded:
-						reblocks.append((chrom,st,end, strand))
-					else:
-						reblocks.append((chrom,st,end))
-			
-			elif itype == 'cds':
-				for (st,end) in  intron_list:
-					if end < cdsStart: continue
-					if st > cdsEnd: continue
-					if stranded:
-						reblocks.append((chrom,st,end, strand))
-					else:
-						reblocks.append((chrom,st,end))
-			elif itype == 'utr':
-				for (st,end) in  intron_list:
-					if end < cdsStart:
-						if stranded:
-							reblocks.append((chrom,st,end, strand))
-						else:
-							reblocks.append((chrom,st,end))
-					if st > cdsEnd:
-						if stranded:
-							reblocks.append((chrom,st,end, strand))
-						else:
-							reblocks.append((chrom,st,end))
-									
-		#self.f.seek(0)
-		if uniquify:
-			return list(set(reblocks))
-		else:
-			return reblocks
+	        * ``all``:
+	          Return all introns.
+	        * ``first``:
+	          Return the first intron in transcript orientation.
+	          Transcripts must contain at least one intron.
+	        * ``internal``:
+	          Return introns excluding the first and last introns.
+	          Transcripts must contain at least three introns.
+	        * ``last``:
+	          Return the last intron in transcript orientation.
+	          Transcripts must contain at least two introns.
+	        * ``cds``:
+	          Return introns overlapping the coding region.
+	        * ``utr``:
+	          Return introns located entirely outside the coding region.
+
+	    uniquify : bool, optional
+	        Remove duplicate intervals before returning them.
+
+	    stranded : bool, optional
+	        Include strand as the fourth field of each returned interval.
+
+	    Returns
+	    -------
+	    list
+	        Intron intervals as ``(chrom, start, end)`` or
+	        ``(chrom, start, end, strand)`` tuples.
+
+	    Notes
+	    -----
+	    BED12 exon blocks are stored in ascending genomic-coordinate order.
+	    For minus-strand transcripts, the intron list is reversed before selecting
+	    first, internal, and last introns so that these categories are defined in
+	    transcript 5'-to-3' orientation.
+	    """
+	    valid_types = {"all", "first", "internal", "last", "cds", "utr"}
+	    if itype not in valid_types:
+	        raise ValueError(
+	            f"Unsupported intron type: {itype!r}. "
+	            f"Choose from: {', '.join(sorted(valid_types))}."
+	        )
+
+	    reblocks = []
+
+	    def append_interval(chrom, start, end, strand):
+	        if start >= end:
+	            return
+
+	        if stranded:
+	            reblocks.append((chrom, start, end, strand))
+	        else:
+	            reblocks.append((chrom, start, end))
+
+	    for line in ireader.reader(self.f):
+	        line = line.strip()
+
+	        if not line or line.startswith(("#", "track", "browser")):
+	            continue
+
+	        fields = line.split()
+	        if len(fields) < 12:
+	            raise ValueError(
+	                "Input gene annotation must be in BED12 format. "
+	                f"Found {len(fields)} columns in line: {line}"
+	            )
+
+	        chrom = fields[0]
+	        chrom_start = int(fields[1])
+	        strand = fields[5]
+	        cds_start = int(fields[6])
+	        cds_end = int(fields[7])
+	        block_count = int(fields[9])
+
+	        if strand not in {"+", "-"}:
+	            raise ValueError(
+	                f"Invalid transcript strand {strand!r}; expected '+' or '-'."
+	            )
+
+	        if block_count < 2:
+	            continue
+
+	        block_sizes = [
+	            int(value)
+	            for value in fields[10].rstrip(",").split(",")
+	            if value
+	        ]
+	        relative_block_starts = [
+	            int(value)
+	            for value in fields[11].rstrip(",").split(",")
+	            if value
+	        ]
+
+	        if (
+	            len(block_sizes) != block_count
+	            or len(relative_block_starts) != block_count
+	        ):
+	            raise ValueError(
+	                "BED12 blockCount does not match blockSizes/blockStarts "
+	                f"for transcript {fields[3]!r}."
+	            )
+
+	        exon_starts = [
+	            chrom_start + relative_start
+	            for relative_start in relative_block_starts
+	        ]
+	        exon_ends = [
+	            start + size
+	            for start, size in zip(exon_starts, block_sizes)
+	        ]
+
+	        genomic_introns = [
+	            (left_exon_end, right_exon_start)
+	            for left_exon_end, right_exon_start
+	            in zip(exon_ends[:-1], exon_starts[1:])
+	            if left_exon_end < right_exon_start
+	        ]
+
+	        if not genomic_introns:
+	            continue
+
+	        # Convert genomic order to transcript 5'-to-3' order.
+	        transcript_introns = (
+	            genomic_introns
+	            if strand == "+"
+	            else list(reversed(genomic_introns))
+	        )
+
+	        if itype == "all":
+	            selected_introns = genomic_introns
+
+	        elif itype == "first":
+	            selected_introns = [transcript_introns[0]]
+
+	        elif itype == "last":
+	            if len(transcript_introns) < 2:
+	                continue
+	            selected_introns = [transcript_introns[-1]]
+
+	        elif itype == "internal":
+	            if len(transcript_introns) < 3:
+	                continue
+	            selected_introns = transcript_introns[1:-1]
+
+	        elif itype == "cds":
+	            selected_introns = [
+	                (start, end)
+	                for start, end in genomic_introns
+	                if start < cds_end and end > cds_start
+	            ]
+
+	        else:  # itype == "utr"
+	            selected_introns = [
+	                (start, end)
+	                for start, end in genomic_introns
+	                if end <= cds_start or start >= cds_end
+	            ]
+
+	        for start, end in selected_introns:
+	            append_interval(chrom, start, end, strand)
+
+	    if uniquify:
+	        return list(dict.fromkeys(reblocks))
+
+	    return reblocks
 
 
 	def getIntergenic(self,direction='up', size=2000, uniquify=True, stranded = True):

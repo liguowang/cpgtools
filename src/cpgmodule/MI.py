@@ -1,23 +1,18 @@
-#!/usr/bin/env python
-'''calculate mutual information of two lists of numbers or symbols'''
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
 import numpy as np
 
 from collections import Counter
 from sklearn.feature_selection import mutual_info_classif
 from sklearn.metrics import mutual_info_score
-
-
-__author__ = "Liguo Wang"
-__copyright__ = ""
-__credits__ = []
-__license__ = "GPLv2"
-__version__ = "1.0.0"
-__maintainer__ = "Liguo Wang"
-__email__ = "Wang.Liguo@mayo.edu"
-__status__ = "Development" #Prototype or Production
-
-
 
 
 def Mutual_information1(x,y):

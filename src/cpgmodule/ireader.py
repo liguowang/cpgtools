@@ -1,8 +1,13 @@
-"""
-read compressed (.gz .bz) files
-"""
-#!/usr/bin/env python
-# encoding: utf-8
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: wangliguo78@gmail.com
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
 
 import bz2
 import gzip

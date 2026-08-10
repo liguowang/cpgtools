@@ -1,0 +1,2 @@
+python3 -m pytest -v tests/test_beta_impute_cli.py
+python3 -m pytest -v tests/test_epical_cli.py
