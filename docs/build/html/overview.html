@@ -47,14 +47,15 @@
               <p class="caption" role="heading"><span class="caption-text">CpGtools Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cpg-position-analysis-modules">1.1. CpG Position Analysis Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cpg-signal-analysis-modules">1.2. CpG Signal Analysis Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#differential-cpg-analysis-modules">1.3. Differential CpG Analysis Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#predictive-modules">1.4. Predictive Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpg-position-analysis">1.1. CpG Position Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpg-signal-analysis">1.2. CpG Signal Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differential-methylation-analysis">1.3. Differential Methylation Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#predictive-analysis">1.4. Predictive Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#missing-value-imputation">1.5. Missing-value Imputation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
@@ -138,154 +139,306 @@
              
   <section id="overview">
 <h1><span class="section-number">1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<p>The <strong>CpGtools</strong> package provides a collection of Python programs designed to annotate, perform quality control (QC), visualize, and analyze DNA methylation data generated from the following Illumina platforms:</p>
+<p><strong>CpGtools</strong> is a Python package providing a comprehensive collection of
+command-line tools for the analysis of DNA methylation data. The package
+supports methylation data generated from both microarray and sequencing
+platforms, including:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">HumanMethylation450 BeadChip (450K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/documents/products/datasheets/datasheet_CytoSNP850K_POP.pdf">MethylationEPIC BeadChip (850K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html">Infinium MethylationEPIC v2.0 (930K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html">Reduced Representation Bisulfite Sequencing (RRBS) / Whole Genome Bisulfite Sequencing (WGBS)</a></p></li>
+<li><p><a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">Illumina HumanMethylation450 BeadChip (450K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylationepic-beadchip-kit.html">Illumina MethylationEPIC BeadChip (EPIC, 850K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html">Illumina Infinium MethylationEPIC v2.0 (EPIC v2, 930K)</a></p></li>
+<li><p><a class="reference external" href="https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html">Reduced Representation Bisulfite Sequencing (RRBS)</a></p></li>
+<li><p>Whole-Genome Bisulfite Sequencing (WGBS)</p></li>
 </ul>
-<p>The CpGtools modules are organized into four main categories:</p>
+<p>CpGtools provides utilities for</p>
 <ul class="simple">
-<li><p><strong>CpG position analysis modules</strong></p></li>
-<li><p><strong>CpG signal analysis modules</strong></p></li>
-<li><p><strong>Differential CpG analysis modules</strong></p></li>
-<li><p><strong>Predictive modules</strong> (under development)</p></li>
+<li><p>annotating CpGs and genomic regions,</p></li>
+<li><p>summarizing and visualizing DNA methylation profiles,</p></li>
+<li><p>identifying differentially methylated CpGs,</p></li>
+<li><p>imputing missing values using a wide range of statistical and
+machine-learning algorithms, and</p></li>
+<li><p>predicting biological phenotypes from DNA methylation profiles.</p></li>
 </ul>
-<section id="cpg-position-analysis-modules">
-<h2><span class="section-number">1.1. </span>CpG Position Analysis Modules<a class="headerlink" href="#cpg-position-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules focus on analyzing CpG genomic locations and their annotations.</p>
-<table class="docutils align-default">
+<p>The modules are organized into the following functional categories:</p>
+<ol class="arabic simple">
+<li><p><strong>CpG Position Analysis</strong> – annotate CpGs and characterize their genomic
+distribution.</p></li>
+<li><p><strong>CpG Signal Analysis</strong> – summarize, normalize, transform, and visualize
+DNA methylation signals.</p></li>
+<li><p><strong>Missing-value Imputation</strong> – simulate, evaluate, and impute missing
+values in DNA methylation matrices.</p></li>
+<li><p><strong>Differential Methylation Analysis</strong> – identify differentially methylated
+CpGs using statistical and regression-based approaches.</p></li>
+<li><p><strong>Predictive Analysis</strong> – predict biological phenotypes and sample
+characteristics from DNA methylation profiles.</p></li>
+</ol>
+<p>Most tools are designed for command-line use and follow a consistent interface.
+Detailed documentation, usage examples, and command-line options are available
+on the corresponding documentation pages.</p>
+<section id="cpg-position-analysis">
+<h2><span class="section-number">1.1. </span>CpG Position Analysis<a class="headerlink" href="#cpg-position-analysis" title="Link to this heading"></a></h2>
+<p>These modules annotate CpGs, summarize their genomic distribution, and
+characterize their relationships with genes and other genomic features.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">CpG position analysis modules</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>Name</p></td>
-<td><p>Description</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_aggregation.py</span></code></p></td>
+<td><p>Aggregate CpG methylation values within user-defined genomic regions
+(e.g., promoters, CpG islands, gene bodies, and exons).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_aggregation.html">CpG_aggregation.py</a></p></td>
-<td><p>Aggregate proportion values of CpGs that located in give genomic regions (eg. CpG islands, promoters, exons, etc.).</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_position.py</span></code></p></td>
+<td><p>Annotate CpGs according to their genomic coordinates using built-in
+or user-supplied annotation files.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_anno_position.html">CpG_anno_position.py</a></p></td>
-<td><p>Add annotation information CpGs according to their genomic coordinates.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_probe.py</span></code></p></td>
+<td><p>Annotate Illumina HumanMethylation450 (450K), EPIC (850K), and
+EPIC v2 probes with genomic and functional information.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_anno_probe.html">CpG_anno_probe.py</a></p></td>
-<td><p>Add annotation information to 450K/850K probes.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_density_gene_centered.py</span></code></p></td>
+<td><p>Calculate and visualize CpG density across gene-centered genomic
+regions, including upstream, gene body, and downstream regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_density_gene_centered.html">CpG_density_gene_centered.py</a></p></td>
-<td><p>Generate the <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/CpG_density.png">CpG density (count) profile</a> over gene body and the up/down-stream intergenic regions.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_chrom.py</span></code></p></td>
+<td><p>Summarize the chromosomal distribution of CpGs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_chrom.html">CpG_distrb_chrom.py</a></p></td>
-<td><p>Calculate the distribution of CpG over chromosomes.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_gene_centered.py</span></code></p></td>
+<td><p>Summarize the distribution of CpGs across gene-centered genomic
+features.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_gene_centered.html">CpG_distrb_gene_centered.py</a></p></td>
-<td><p>Calculate the distribution of CpG over <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/geneDist.png">gene-centered genomic regions</a>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_region.py</span></code></p></td>
+<td><p>Summarize the distribution of CpGs across user-defined genomic
+regions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_distrb_region.html">CpG_distrb_region.py</a></p></td>
-<td><p>Calculate the distribution of CpG over <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/regionDist.png">user-specified genomic regions</a>.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_logo.py</span></code></p></td>
+<td><p>Generate DNA sequence logos and position weight matrices for CpGs
+and their flanking sequences.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_logo.html">CpG_logo.py</a></p></td>
-<td><p>Generate a <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/450_CH.logo.png">DNA motif logo</a> and matrices for a given set of CpGs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/CpG_to_gene.html">CpG_to_gene.py</a></p></td>
-<td><p>Assign CpGs to their putative target genes. It uses the algorithm similar to <a class="reference external" href="http://great.stanford.edu/public/html/">GREAT</a>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_to_gene.py</span></code></p></td>
+<td><p>Assign CpGs to putative target genes using an algorithm similar to
+<a class="reference external" href="http://great.stanford.edu/public/html/">GREAT</a>.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="cpg-signal-analysis-modules">
-<h2><span class="section-number">1.2. </span>CpG Signal Analysis Modules<a class="headerlink" href="#cpg-signal-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules analyze CpG methylation beta values across samples and genomic regions.</p>
-<table class="docutils align-default">
+<section id="cpg-signal-analysis">
+<h2><span class="section-number">1.2. </span>CpG Signal Analysis<a class="headerlink" href="#cpg-signal-analysis" title="Link to this heading"></a></h2>
+<p>These modules summarize, transform, normalize, visualize, and explore DNA
+methylation signals across CpGs and samples. Most modules support both
+DNA methylation <strong>beta-value</strong> and <strong>M-value</strong> matrices.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">CpG signal analysis modules</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>Name</p></td>
-<td><p>Description</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_combat.py</span></code></p></td>
+<td><p>Correct batch effects using the
+<a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">ComBat</a> algorithm.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_PCA.html">beta_PCA.py</a></p></td>
-<td><p>Perform <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a> (principal component analysis) for samples.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_jitter_plot.py</span></code></p></td>
+<td><p>Generate jitter plots (strip charts) and bean plots to visualize the
+distribution of methylation values for each sample.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_jitter_plot.html">beta_jitter_plot.py</a></p></td>
-<td><p>Generate <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/Jitter.png">jitter plot</a> (a.k.a. strip chart) and bean plot for each sample.”</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_m_conversion.py</span></code></p></td>
+<td><p>Convert DNA methylation beta values to M values, or vice versa.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_m_conversion.html">beta_m_conversion.py</a></p></td>
-<td><p>Convert Beta-value into M-value or <em>vice versa</em>.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_PCA.py</span></code></p></td>
+<td><p>Perform principal component analysis (PCA) to explore sample
+relationships and identify major sources of variation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_profile_gene_centered.html">beta_profile_gene_centered.py</a></p></td>
-<td><p>Calculate the <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/gene_profile.png">methylation profile</a> (i.e., average beta value) for genomic regions around genes.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_gene_centered.py</span></code></p></td>
+<td><p>Calculate and visualize average methylation profiles across
+gene-centered genomic regions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_profile_region.html">beta_profile_region.py</a></p></td>
-<td><p>Calculate <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/region_profile.png">methylation profile</a> (i.e. average beta value) around the user-specified genomic regions.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_region.py</span></code></p></td>
+<td><p>Calculate and visualize average methylation profiles across
+user-defined genomic regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_stacked_barplot.html">beta_stacked_barplot.py</a></p></td>
-<td><p>Create <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/_images/stacked_bar.png">stacked barplot</a> for each sample. The stacked barplot showing the proportions of CpGs whose beta values are falling into [0,0.25], [0.25,0.5], [0.5,0.75],[0.75,1]</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_selectNBest.py</span></code></p></td>
+<td><p>Select the most informative CpGs using ANOVA, mutual information,
+or chi-square feature selection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_stats.html">beta_stats.py</a></p></td>
-<td><p>Summarize basic information on CpGs located in each genomic region.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stacked_barplot.py</span></code></p></td>
+<td><p>Generate stacked bar plots showing the proportions of CpGs within
+different methylation intervals for each sample.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_tSNE.html">beta_tSNE.py</a></p></td>
-<td><p>Perform <a class="reference external" href="https://lvdmaaten.github.io/tsne/">t-SNE</a> (t-Distributed Stochastic Neighbor Embedding) analysis for samples.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stats.py</span></code></p></td>
+<td><p>Summarize methylation statistics for CpGs within genomic regions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_topN.html">beta_topN.py</a></p></td>
-<td><p>Select the top N most variable CpGs (according to standard deviation) from the input file.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_topN.py</span></code></p></td>
+<td><p>Select the most variable CpGs according to standard deviation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_trichotmize.html">beta_trichotmize.py</a></p></td>
-<td><p>Use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.mixture.BayesianGaussianMixture.html">Bayesian Gaussian Mixture model</a> to trichotmize beta values into three status: ‘Un-methylated’,’Semi-methylated’, ‘Full-methylated’, and ‘unassigned’.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_trichotomize.py</span></code></p></td>
+<td><p>Classify beta values into unmethylated, partially methylated,
+methylated, or unassigned states using a Bayesian Gaussian mixture
+model.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_UMAP.html">beta_UMAP.py</a></p></td>
-<td><p>Perform <a class="reference external" href="https://github.com/lmcinnes/umap">UMAP</a> (Uniform Manifold Approximation and Projection) for samples.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_tSNE.py</span></code></p></td>
+<td><p>Perform t-distributed stochastic neighbor embedding (t-SNE) for
+visualization of sample relationships.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_selectNBest.html">beta_selectNbest.py</a></p></td>
-<td><p>Select the K best features using ANOVA, Mutual information or Chi-squared stat.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_combat.html">beta_combat.py</a></p></td>
-<td><p>Corrects batch effect using the <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">combat</a> algorithm.</p></td>
-</tr>
-</tbody>
-</table>
-<p>—</p>
-</section>
-<section id="differential-cpg-analysis-modules">
-<h2><span class="section-number">1.3. </span>Differential CpG Analysis Modules<a class="headerlink" href="#differential-cpg-analysis-modules" title="Link to this heading"></a></h2>
-<p>These modules identify CpGs that are differentially methylated between experimental or biological groups.</p>
-<table class="docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p>Name</p></td>
-<td><p>Description</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_Bayes.html">dmc_Bayes.py</a></p></td>
-<td><p>Differential CpG analysis using the Bayesian approach. (for 450K/850K data)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_bb.html">dmc_bb.py</a></p></td>
-<td><p>Differential CpG analysis using the beta-binomial model. (for RRBS/WGBS count data)</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_fisher.html">dmc_fisher.py</a></p></td>
-<td><p>Differential CpG analysis using Fisher’s Exact Test. (for RRBS/WGBS count data)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_glm.html">dmc_glm.py</a></p></td>
-<td><p>Differential CpG analysis using the <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_linear_model">GLM</a> generalized liner model. (for 450K/850K data)</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_logit.html">dmc_logit.py</a></p></td>
-<td><p>Differential CpG analysis using logistic regression model. (for RRBS/WGBS count data)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_nonparametric.html">dmc_nonparametric.py</a></p></td>
-<td><p>Differential CpG analysis using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html">Mann-Whitney U test</a> for two group comparison, and the <a class="reference external" href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis H-test</a> for multiple groups comparison.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/dmc_ttest.html">dmc_ttest.py</a></p></td>
-<td><p>Differential CpG analysis using T test. (for 450K/850K data)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_UMAP.py</span></code></p></td>
+<td><p>Perform Uniform Manifold Approximation and Projection (UMAP) for
+visualization of sample relationships.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="predictive-modules">
-<h2><span class="section-number">1.4. </span>Predictive Modules<a class="headerlink" href="#predictive-modules" title="Link to this heading"></a></h2>
-<p>These modules aim to predict phenotypes or biological attributes from DNA methylation profiles.</p>
-<table class="docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p>Name</p></td>
-<td><p>Description</p></td>
+<section id="differential-methylation-analysis">
+<h2><span class="section-number">1.3. </span>Differential Methylation Analysis<a class="headerlink" href="#differential-methylation-analysis" title="Link to this heading"></a></h2>
+<p>These modules identify <strong>differentially methylated CpGs (DMCs)</strong> between
+experimental or biological groups using statistical tests, regression models,
+and Bayesian methods. Different modules are available for Illumina methylation
+arrays (450K, EPIC, and EPIC v2) and bisulfite sequencing data (RRBS/WGBS).</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Differential methylation analysis modules</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/predict_sex.html">predict_sex.py</a></p></td>
-<td><p>Predict sex based on the semi-methylation (also known as genomic imprinting) ratio.</p></td>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_Bayes.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs using a Bayesian statistical
+model. Designed for Illumina methylation array data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_bb.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
+using a beta-binomial model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_fisher.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
+using Fisher’s exact test.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_glm.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs using a generalized linear
+model (GLM). Designed for Illumina methylation array data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_logit.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
+using logistic regression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_nonparametric.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs using nonparametric tests,
+including the Mann–Whitney U test for two-group comparisons and the
+Kruskal–Wallis test for multiple-group comparisons.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_ttest.py</span></code></p></td>
+<td><p>Identify differentially methylated CpGs using Student’s <em>t</em>-test.
+Designed for Illumina methylation array data.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="predictive-analysis">
+<h2><span class="section-number">1.4. </span>Predictive Analysis<a class="headerlink" href="#predictive-analysis" title="Link to this heading"></a></h2>
+<p>These modules predict biological phenotypes or sample characteristics from
+DNA methylation profiles. Additional predictive models will be incorporated
+in future releases.</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Predictive analysis modules</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">predict_sex.py</span></code></p></td>
+<td><p>Predict the biological sex of a sample using DNA methylation patterns
+on sex chromosomes and CpGs associated with genomic imprinting.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-value-imputation">
+<h2><span class="section-number">1.5. </span>Missing-value Imputation<a class="headerlink" href="#missing-value-imputation" title="Link to this heading"></a></h2>
+<p>These modules simulate, summarize, evaluate, and impute missing values in DNA
+methylation matrices. The framework supports both <strong>beta-value</strong> and
+<strong>M-value</strong> matrices and provides a broad range of statistical,
+machine-learning, and genomics-informed imputation algorithms.</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Missing-value imputation modules</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_impute.py</span></code></p></td>
+<td><p>A comprehensive framework for DNA methylation missing-value analysis.
+Supports data simulation, missing-value insertion, multiple
+imputation algorithms, and quantitative evaluation of imputation
+accuracy.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="code docutils literal notranslate"><span class="pre">beta_impute.py</span></code> command provides the following functionality:</p>
+<ul class="simple">
+<li><p><strong>Simulation and benchmarking</strong></p>
+<ul>
+<li><p>Generate synthetic DNA methylation matrices with user-defined dimensions
+and missing-value rates.</p></li>
+<li><p>Insert missing values into existing matrices for benchmarking and method
+comparison.</p></li>
+</ul>
+</li>
+<li><p><strong>Missing-value assessment</strong></p>
+<ul>
+<li><p>Count missing values for each CpG and sample.</p></li>
+<li><p>Remove incomplete rows or columns when required.</p></li>
+</ul>
+</li>
+<li><p><strong>Missing-value imputation</strong></p>
+<ul>
+<li><p>Simple statistical methods (constant, mean, median, minimum, maximum,
+and random-value imputation).</p></li>
+<li><p>Moving-window imputation.</p></li>
+<li><p>K-nearest neighbors (KNN).</p></li>
+<li><p>Reference-based KNN using an external complete methylation matrix.</p></li>
+<li><p>Iterative Buck regression.</p></li>
+<li><p>Iterative Random Forest regression.</p></li>
+<li><p>SoftImpute low-rank matrix completion.</p></li>
+<li><p>MOREL for systematic block-wise missingness.</p></li>
+<li><p>Genomic nearest-neighbor (GNN) imputation using neighboring CpGs.</p></li>
+</ul>
+</li>
+<li><p><strong>Performance evaluation</strong></p>
+<ul>
+<li><p>Compare imputed values with a complete reference (truth) matrix.</p></li>
+<li><p>Report Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and
+coefficient of determination (R²) for the imputed values.</p></li>
+</ul>
+</li>
+</ul>
+<p>For detailed documentation, available algorithms, command-line options, and
+examples, see <a class="reference internal" href="demo/beta_impute.html"><span class="doc">beta_impute.py</span></a>.</p>
 </section>
 </section>
 
