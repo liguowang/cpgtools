@@ -29,7 +29,7 @@ from impute_module.bootstrap import fill_GNN
 __author__ = "Liguo Wang"
 __license__ = "MIT"
 
-LOGGER = logging.getLogger("nafiller")
+LOGGER = logging.getLogger(__name__)
 
 def load_morel_groups(
     path: str | Path | None,) -> Mapping[str, Sequence[str]] | None:
@@ -280,7 +280,7 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,)
     
     parser.add_argument("-v", "--version", action="version",
-        version=f"nafiller {__version__}",)
+        version=f"beta_impute {__version__}",)
    
     parser.add_argument("--debug", action="store_true", 
         help="Enable debug logging.")

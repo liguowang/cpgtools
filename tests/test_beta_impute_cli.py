@@ -92,8 +92,7 @@ def test_version(capsys):
 
     assert exc.value.code == 0
     captured = capsys.readouterr()
-    assert "nafiller" in captured.out
-
+    assert "beta_impute" in captured.out
 
 @pytest.mark.parametrize(
     "command",
