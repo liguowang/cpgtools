@@ -5,7 +5,8 @@ version = "3.0.0"
 description = "Python tools for DNA methylation analysis, imputation, epigenetic clocks, and cell-type deconvolution."
 
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
+license-files = ["LICENSE.txt"]
 
 requires-python = ">=3.9"
 
@@ -40,7 +41,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
@@ -83,11 +83,7 @@ dmc_ttest = "cpgmodule.cli.dmc_ttest:main"
 predict_sex = "cpgmodule.cli.predict_sex:main"
 
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77.0.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src"]
-
-
-
