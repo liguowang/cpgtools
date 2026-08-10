@@ -10,6 +10,7 @@ env/
 
 # Build artifacts
 build/
+docs/build/
 dist/
 *.egg-info/
 .eggs/
@@ -24,6 +25,7 @@ test/
 test_clock/
 test_deconv/
 test_imputation/
+test_cpgtools/
 
 # Project data
 data_anno/
