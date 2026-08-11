@@ -9,18 +9,19 @@
   <title>3. CpGtools Release History &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=978f7b89" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=09beee0d"></script>
+      <script src="_static/documentation_options.js?v=acc74ff5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Input File and Data Format" href="input_format.html" />
+    <link rel="next" title="1. Input Files and Data Formats" href="input_format.html" />
     <link rel="prev" title="2. Installation" href="installation.html" /> 
 </head>
 
@@ -32,8 +33,8 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            CpGtools
+          <a href="index.html">
+            
               <img src="_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -49,22 +50,51 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. CpGtools Release History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#version-3-0-0">3.1. Version 3.0.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-2-0-4">3.2. Version 2.0.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-2-0-3">3.3. Version 2.0.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-2-0-1">3.4. Version 2.0.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-10-0">3.5. Version 1.10.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-0-8">3.6. Version 1.0.8</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-0-7">3.7. Version 1.0.7</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-0-2">3.8. Version 1.0.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-0-1">3.9. Version 1.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-3-0-0">3.1. Version 3.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#new-features">3.1.1. New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-and-packaging-changes">3.1.2. Command-line and packaging changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">3.1.3. Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-2-0-4">3.2. Version 2.0.4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.2.1. New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-2-0-3">3.3. Version 2.0.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">3.3.1. Bug fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-2-0-1">3.4. Version 2.0.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.4.1. New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-10-0">3.5. Version 1.10.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.5.1. New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0-8">3.6. Version 1.0.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.6.1. Bug fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0-7">3.7. Version 1.0.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.7.1. New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0-2">3.8. Version 1.0.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.8.1. New features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0-1">3.9. Version 1.0.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.9.1. New features</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-0">3.10. Version 1.0.0</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -111,7 +141,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -146,104 +176,134 @@
 <h1><span class="section-number">3. </span>CpGtools Release History<a class="headerlink" href="#cpgtools-release-history" title="Link to this heading"></a></h1>
 <section id="version-3-0-0">
 <h2><span class="section-number">3.1. </span>Version 3.0.0<a class="headerlink" href="#version-3-0-0" title="Link to this heading"></a></h2>
-<p>Major release introducing a comprehensive DNA methylation missing-value
-imputation framework.</p>
-<p>New features</p>
+<p>Version 3.0.0 is a major release that expands CpGtools with epigenetic-clock
+analysis, missing-value imputation, cell-type deconvolution, and a modernized
+command-line and packaging structure.</p>
+<section id="new-features">
+<h3><span class="section-number">3.1.1. </span>New features<a class="headerlink" href="#new-features" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">beta_impute.py</span></code>, a unified command-line framework for DNA
-methylation missing-value analysis.</p></li>
-<li><p>Added multiple imputation algorithms, including:</p>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">epical</span></code>, a unified command-line interface for calculating DNA
+methylation age and related aging measures using multiple published
+epigenetic clocks.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_impute</span></code>, a unified framework for DNA methylation
+missing-value analysis and imputation.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_deconvolution</span></code> for estimating cell-type proportions from
+DNA methylation profiles.</p></li>
+<li><p>Added imputation methods including:</p>
 <ul>
-<li><p>Constant replacement</p></li>
-<li><p>Mean, median, minimum, and maximum imputation</p></li>
-<li><p>Random-value imputation</p></li>
-<li><p>Moving-window imputation</p></li>
-<li><p>K-nearest neighbors (KNN)</p></li>
-<li><p>Reference-based KNN</p></li>
-<li><p>Iterative Buck regression</p></li>
-<li><p>Iterative Random Forest</p></li>
-<li><p>SoftImpute matrix completion</p></li>
-<li><p>MOREL block-wise imputation</p></li>
-<li><p>Genomic nearest-neighbor (GNN) imputation</p></li>
+<li><p>constant, mean, median, minimum, maximum, and random-value imputation;</p></li>
+<li><p>moving-window and K-nearest-neighbor (KNN) imputation;</p></li>
+<li><p>reference-based KNN;</p></li>
+<li><p>iterative Buck regression and Random Forest regression;</p></li>
+<li><p>SoftImpute matrix completion;</p></li>
+<li><p>MOREL block-wise imputation; and</p></li>
+<li><p>genomic nearest-neighbor (GNN) imputation.</p></li>
 </ul>
 </li>
-<li><p>Added utilities for</p>
-<ul>
-<li><p>generating synthetic methylation matrices,</p></li>
-<li><p>inserting missing values into existing matrices,</p></li>
-<li><p>summarizing missing values, and</p></li>
-<li><p>evaluating imputation accuracy against a truth matrix using MAE, RMSE,
-and R².</p></li>
+<li><p>Added utilities for generating synthetic methylation matrices, inserting
+missing values, summarizing missingness, and evaluating imputation accuracy
+against a truth matrix using MAE, RMSE, and <span class="math notranslate nohighlight">\(R^2\)</span>.</p></li>
 </ul>
-</li>
-</ul>
-<p>Documentation</p>
+</section>
+<section id="command-line-and-packaging-changes">
+<h3><span class="section-number">3.1.2. </span>Command-line and packaging changes<a class="headerlink" href="#command-line-and-packaging-changes" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added comprehensive documentation for <code class="code docutils literal notranslate"><span class="pre">beta_impute.py</span></code>,
-including installation instructions, algorithm selection guidance,
-and usage examples.</p></li>
+<li><p>Standardized command-line programs as installed console commands.</p></li>
+<li><p>Reorganized command-line modules under <code class="docutils literal notranslate"><span class="pre">cpgmodule.cli</span></code>.</p></li>
+<li><p>Refactored <code class="docutils literal notranslate"><span class="pre">epical</span></code> into a registry-based CLI architecture.</p></li>
+<li><p>Added automated tests for <code class="docutils literal notranslate"><span class="pre">epical</span></code> and <code class="docutils literal notranslate"><span class="pre">beta_impute</span></code>.</p></li>
+<li><p>Modernized package configuration using <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and the <code class="docutils literal notranslate"><span class="pre">src</span></code>
+package layout.</p></li>
+<li><p>Updated dependency and license metadata for modern Python packaging.</p></li>
 </ul>
+</section>
+<section id="documentation">
+<h3><span class="section-number">3.1.3. </span>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Expanded documentation for <code class="docutils literal notranslate"><span class="pre">epical</span></code>, <code class="docutils literal notranslate"><span class="pre">beta_impute</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">beta_deconvolution</span></code>.</p></li>
+<li><p>Clarified input-file conventions, including the default methylation-matrix
+orientation of CpGs in rows and samples in columns.</p></li>
+<li><p>Updated installation and command-line usage documentation.</p></li>
+</ul>
+</section>
 </section>
 <section id="version-2-0-4">
 <h2><span class="section-number">3.2. </span>Version 2.0.4<a class="headerlink" href="#version-2-0-4" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id1">
+<h3><span class="section-number">3.2.1. </span>New features<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">beta_combat.py</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_combat</span></code> for batch-effect correction.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-2-0-3">
 <h2><span class="section-number">3.3. </span>Version 2.0.3<a class="headerlink" href="#version-2-0-3" title="Link to this heading"></a></h2>
-<p>Bug fixes</p>
+<section id="bug-fixes">
+<h3><span class="section-number">3.3.1. </span>Bug fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Fixed an issue in the ANOVA workflow where p-values and adjusted p-values
 were reported as missing for all CpGs.</p></li>
 </ul>
 </section>
+</section>
 <section id="version-2-0-1">
 <h2><span class="section-number">3.4. </span>Version 2.0.1<a class="headerlink" href="#version-2-0-1" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id2">
+<h3><span class="section-number">3.4.1. </span>New features<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">predict_sex.py</span></code>.</p></li>
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">beta_selectNBest.py</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">predict_sex</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_selectNBest</span></code>.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-1-10-0">
 <h2><span class="section-number">3.5. </span>Version 1.10.0<a class="headerlink" href="#version-1-10-0" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id3">
+<h3><span class="section-number">3.5.1. </span>New features<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">beta_UMAP.py</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_UMAP</span></code>.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-1-0-8">
 <h2><span class="section-number">3.6. </span>Version 1.0.8<a class="headerlink" href="#version-1-0-8" title="Link to this heading"></a></h2>
-<p>Bug fixes</p>
+<section id="id4">
+<h3><span class="section-number">3.6.1. </span>Bug fixes<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Fixed an issue in <code class="code docutils literal notranslate"><span class="pre">beta_tSNE.py</span></code> and <code class="code docutils literal notranslate"><span class="pre">beta_PCA.py</span></code> when sample
-identifiers were numeric.</p></li>
+<li><p>Fixed an issue in <code class="docutils literal notranslate"><span class="pre">beta_tSNE</span></code> and <code class="docutils literal notranslate"><span class="pre">beta_PCA</span></code> when sample identifiers
+were numeric.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-1-0-7">
 <h2><span class="section-number">3.7. </span>Version 1.0.7<a class="headerlink" href="#version-1-0-7" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id5">
+<h3><span class="section-number">3.7.1. </span>New features<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">CpG_density_gene_centered.py</span></code>.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">CpG_density_gene_centered</span></code>.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-1-0-2">
 <h2><span class="section-number">3.8. </span>Version 1.0.2<a class="headerlink" href="#version-1-0-2" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id6">
+<h3><span class="section-number">3.8.1. </span>New features<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">beta_tSNE.py</span></code> for t-distributed stochastic neighbor embedding
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">beta_tSNE</span></code> for t-distributed stochastic neighbor embedding
 (t-SNE) analysis of DNA methylation samples.</p></li>
 </ul>
 </section>
+</section>
 <section id="version-1-0-1">
 <h2><span class="section-number">3.9. </span>Version 1.0.1<a class="headerlink" href="#version-1-0-1" title="Link to this heading"></a></h2>
-<p>New features</p>
+<section id="id7">
+<h3><span class="section-number">3.9.1. </span>New features<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added <code class="code docutils literal notranslate"><span class="pre">CpG_anno_position.py</span></code> for annotating CpGs using pre-built or
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">CpG_anno_position</span></code> for annotating CpGs using pre-built or
 user-supplied genomic annotation files.</p></li>
 </ul>
+</section>
 </section>
 <section id="version-1-0-0">
 <h2><span class="section-number">3.10. </span>Version 1.0.0<a class="headerlink" href="#version-1-0-0" title="Link to this heading"></a></h2>
@@ -256,14 +316,14 @@ user-supplied genomic annotation files.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="2. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="input_format.html" class="btn btn-neutral float-right" title="1. Input File and Data Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="input_format.html" class="btn btn-neutral float-right" title="1. Input Files and Data Formats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

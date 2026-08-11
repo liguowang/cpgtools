@@ -1,50 +1,178 @@
-dmc_nonparametric.py
-======================
+dmc_nonparametric
+=================
 
-Description
+Overview
+--------
+
+``dmc_nonparametric`` performs differential CpG analysis using nonparametric
+tests on DNA methylation Beta-values.
+
+The test is selected automatically from the number of biological groups:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Number of groups
+     - Test
+   * - 2
+     - Two-sided Mann-Whitney U test
+   * - 3 or more
+     - Kruskal-Wallis H-test
+
+The input matrix must have **CpGs/probes in rows** and **samples in columns**.
+
+
+Input Files
 -----------
-This program performs differential CpG analysis using the  `Mann-Whitney U test <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html>`_
-for two group comparison, and the `Kruskal-Wallis H-test <https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance>`_
-for multiple groups comparison.
 
-Options
------------
+Beta-value matrix
+~~~~~~~~~~~~~~~~~
 
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Data file containing beta values with the 1st row
-                        containing sample IDs (must be unique) and the 1st
-                        column containing CpG positions or probe IDs (must be
-                        unique). Except for the 1st row and 1st column, any
-                        non-numerical values will be considered as "missing
-                        values" and ignored. This file can be a regular text
-                        file or compressed file (.gz, .bz2).
-  -g GROUP_FILE, --group=GROUP_FILE
-                        Group file defining the biological group of each
-                        sample. It is a comma-separated two columns file with
-                        the 1st column containing sample IDs, and the 2nd
-                        column containing group IDs. It must have a header
-                        row. Sample IDs should match to the "Data file". Note:
-                        automatically switch to use  Kruskal-Wallis H-test if
-                        more than two groups were defined in this file.
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-                        
+The first row contains sample IDs and the first column contains CpG/probe IDs.
 
-Input files (examples)
-------------------------
+Example::
 
-- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
-- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
-- `test_06_ThreeGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz>`_
-- `test_06_ThreeGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv>`_
+   CpG_ID      Sample_01   Sample_02   Sample_03   Sample_04
+   cg00001099  0.775       0.812       0.623       0.598
+   cg00000363  0.611       0.602       0.470       0.455
 
-Command
------------
-::
- 
- $dmc_nonparametric.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o U_test
- 
- $dmc_nonparametric.py -i test_06_TwoGroup.tsv.gz -g test_06_TwoGroup.grp.csv -o H_test
+Sample IDs must be unique.
 
+Non-numeric and non-finite values are treated as missing and ignored.
+Plain text, ``.gz``, ``.bz2``, and other formats supported by the CpGtools
+reader may be used.
+
+
+Group file
+~~~~~~~~~~
+
+The group file is a comma-separated, two-column file with a header:
+
+* column 1: sample ID
+* column 2: group ID
+
+At least two groups are required.
+
+Example::
+
+   Sample,Group
+   Sample_01,Control
+   Sample_02,Control
+   Sample_03,Case
+   Sample_04,Case
+
+Sample IDs in the group file must be unique and must occur in the
+methylation matrix.
+
+Samples present in the methylation matrix but absent from the group file are
+ignored.
+
+
+Method
+------
+
+Two groups
+~~~~~~~~~~
+
+For exactly two groups, ``dmc_nonparametric`` performs a two-sided
+Mann-Whitney U test using ``scipy.stats.mannwhitneyu``.
+
+If either group has no valid observations for a CpG, the test result is
+missing.
+
+
+Three or more groups
+~~~~~~~~~~~~~~~~~~~~
+
+For three or more groups, the command performs a Kruskal-Wallis H-test using
+``scipy.stats.kruskal``.
+
+Groups with no valid observations for a particular CpG are omitted from that
+CpG's test. If fewer than two groups contain valid observations, the result is
+missing.
+
+After testing all CpGs, valid p-values are adjusted using the CpGtools
+Benjamini-Hochberg multiple-testing procedure.
+
+
+Usage
+-----
+
+Two-group analysis::
+
+   dmc_nonparametric \
+       -i test_05_TwoGroup.tsv.gz \
+       -g test_05_TwoGroup.grp.csv \
+       -o U_test
+
+Three-group analysis::
+
+   dmc_nonparametric \
+       -i test_06_ThreeGroup.tsv.gz \
+       -g test_06_ThreeGroup.grp.csv \
+       -o H_test
+
+Available options are:
+
+* ``-i``, ``--input_file`` -- Beta-value matrix
+* ``-g``, ``--group`` -- sample/group file
+* ``-o``, ``--output`` -- output prefix
+* ``--version`` -- show the CpGtools version
+
+Display all options with::
+
+   dmc_nonparametric -h
+
+
+Output
+------
+
+For output prefix ``U_test``, the command writes:
+
+* ``U_test.pval.txt``
+
+The original input table is preserved and two columns are appended:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 78
+
+   * - Column
+     - Description
+   * - ``pval``
+     - Raw Mann-Whitney U or Kruskal-Wallis p-value.
+   * - ``adj.pval``
+     - Benjamini-Hochberg FDR-adjusted p-value.
+
+Missing statistical results are written as ``NaN`` and are excluded from
+multiple-testing correction.
+
+
+Input-row Handling
+------------------
+
+If a CpG row contains fewer data fields than the header, missing values are
+padded with ``NaN``. Extra fields are ignored. A warning is written in either
+case.
+
+The original input line is preserved in the final output; only ``pval`` and
+``adj.pval`` are appended.
+
+
+Example Data
+------------
+
+Two groups:
+
+* `Beta-value matrix
+  <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+* `Group file
+  <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+
+Three groups:
+
+* `Beta-value matrix
+  <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz>`_
+* `Group file
+  <https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv>`_

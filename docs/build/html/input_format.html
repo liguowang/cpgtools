@@ -6,15 +6,15 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Input File and Data Format &mdash; CpGtools Documentation</title>
+  <title>1. Input Files and Data Formats &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=978f7b89" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=09beee0d"></script>
+      <script src="_static/documentation_options.js?v=acc74ff5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Pre-compiled datasets" href="dataset.html" />
-    <link rel="prev" title="3. CpGtools Release history" href="change_log.html" /> 
+    <link rel="prev" title="3. CpGtools Release History" href="change_log.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,8 +33,8 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            CpGtools
+          <a href="index.html">
+            
               <img src="_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -49,16 +49,28 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Input File and Data Format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bed-file">1.1. BED File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#proportion-values">1.2. Proportion Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#beta-values">1.3. Beta Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#m-values">1.4. M Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#convert-beta-value-to-m-value-or-vice-versa">1.5. Convert Beta-value to M-value or <em>vice versa</em></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Input Files and Data Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#matrix-orientation">1.1. Matrix Orientation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beta-values">1.2. Beta Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#m-values">1.3. M Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-between-beta-values-and-m-values">1.4. Converting Between Beta-values and M-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proportion-values">1.5. Proportion Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bed-files">1.6. BED Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bed-variants">1.6.1. BED Variants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bed12">1.6.1.1. BED12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bed3">1.6.1.2. BED3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1.6.1.3. BED3+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bed6">1.6.1.4. BED6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1.6.1.5. BED6+</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-specific-formats">1.7. Command-Specific Formats</a></li>
 </ul>
 </li>
 </ul>
@@ -107,7 +119,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -128,7 +140,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">1. </span>Input File and Data Format</li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Input Files and Data Formats</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/input_format.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,85 +150,193 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-file-and-data-format">
-<h1><span class="section-number">1. </span>Input File and Data Format<a class="headerlink" href="#input-file-and-data-format" title="Link to this heading"></a></h1>
-<section id="bed-file">
-<h2><span class="section-number">1.1. </span>BED File<a class="headerlink" href="#bed-file" title="Link to this heading"></a></h2>
-<p>The <strong>BED</strong> (Browser Extensible Data) format is commonly used to describe blocks of genomic regions.
-Each line in a BED file represents one genomic feature and contains between <strong>3 and 12 columns</strong> of data.</p>
-<p>The BED format is <strong>0-based</strong>, meaning the first base of a chromosome is numbered <strong>0</strong>, and it follows a <strong>left-open, right-closed</strong> interval convention.
-For example, the BED entry <code class="docutils literal notranslate"><span class="pre">chr1</span> <span class="pre">10</span> <span class="pre">15</span></code> corresponds to the <strong>11th to 15th bases</strong> of chromosome 1 (i.e., bases 11–15 inclusive).</p>
-<p><strong>BED Variants</strong></p>
+  <section id="input-files-and-data-formats">
+<h1><span class="section-number">1. </span>Input Files and Data Formats<a class="headerlink" href="#input-files-and-data-formats" title="Link to this heading"></a></h1>
+<p>CpGtools supports several types of DNA methylation and genomic data, including
+Beta-values, M-values, methylation proportion/count data, and BED files.</p>
+<section id="matrix-orientation">
+<h2><span class="section-number">1.1. </span>Matrix Orientation<a class="headerlink" href="#matrix-orientation" title="Link to this heading"></a></h2>
+<p>For most CpGtools commands that operate on DNA methylation matrices, the input
+matrix is expected to have:</p>
 <ul class="simple">
-<li><p><strong>BED12 file</strong>
-The standard BED format containing 12 fields. Each line represents a gene or a set of disconnected genomic regions.
-Detailed specifications are available <a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">here</a>.</p></li>
-<li><p><strong>BED3 file</strong>
-Contains only the first three required fields: <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, and <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>.
-Each line represents a single genomic region where <em>score</em> and <em>strand</em> information are not required.</p></li>
-<li><p><strong>BED3+ file</strong>
-Contains at least three columns (<code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>).
-Any additional columns will be <strong>ignored</strong>.</p></li>
-<li><p><strong>BED6 file</strong>
-Includes the first six fields: <code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code>, and <code class="docutils literal notranslate"><span class="pre">strand</span></code>.
-Each line represents a single genomic region and may include strand information or associated scores.</p></li>
-<li><p><strong>BED6+ file</strong>
-Contains at least six columns (<code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">chromStart</span></code>, <code class="docutils literal notranslate"><span class="pre">chromEnd</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code>, <code class="docutils literal notranslate"><span class="pre">strand</span></code>).
-Any columns beyond these six will be <strong>ignored</strong>.</p></li>
+<li><p><strong>CpGs (or genomic loci) in rows</strong></p></li>
+<li><p><strong>Samples in columns</strong></p></li>
 </ul>
-<p>—</p>
-</section>
-<section id="proportion-values">
-<h2><span class="section-number">1.2. </span>Proportion Values<a class="headerlink" href="#proportion-values" title="Link to this heading"></a></h2>
-<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Bisulfite_sequencing">bisulfite sequencing</a> (e.g., RRBS or WGBS),
-the methylation level of a CpG site or region is represented by a <strong>proportion value</strong>.</p>
-<p>A proportion value is a pair of integers separated by a comma (<code class="docutils literal notranslate"><span class="pre">m,n</span></code>), where:</p>
-<ul class="simple">
-<li><p><strong>m</strong> = number of methylated reads (<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">≤</span> <span class="pre">m</span> <span class="pre">≤</span> <span class="pre">n</span></code>)</p></li>
-<li><p><strong>n</strong> = total number of reads (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">≥</span> <span class="pre">0</span></code>)</p></li>
-</ul>
+<p>The first row should contain sample IDs, and the first column should contain
+CpG IDs or genomic-locus identifiers.</p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">27</span>   <span class="mi">2</span><span class="p">,</span><span class="mi">159</span>   <span class="c1"># three hypo-methylated loci</span>
-<span class="mi">7</span><span class="p">,</span><span class="mi">7</span>    <span class="mi">17</span><span class="p">,</span><span class="mi">19</span>  <span class="mi">30</span><span class="p">,</span><span class="mi">34</span>   <span class="c1"># three hyper-methylated loci</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>      <span class="n">Sample_1</span>    <span class="n">Sample_2</span>    <span class="n">Sample_3</span>
+<span class="n">cg00000029</span>  <span class="mf">0.432</span>       <span class="mf">0.517</span>       <span class="mf">0.481</span>
+<span class="n">cg00000108</span>  <span class="mf">0.821</span>       <span class="mf">0.793</span>       <span class="mf">0.806</span>
+<span class="n">cg00000165</span>  <span class="mf">0.135</span>       <span class="mf">0.164</span>       <span class="mf">0.142</span>
 </pre></div>
 </div>
-<p>—</p>
+<p>In this example, each row represents one CpG and each column represents one
+sample.</p>
+<p>Unless otherwise specified in the documentation for an individual command,
+users should follow this <strong>CpGs-by-samples</strong> orientation.</p>
+<p>Missing values are generally represented as <code class="docutils literal notranslate"><span class="pre">NA</span></code> or <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Some commands
+also support compressed input files and automatically detect common delimiters
+such as tabs and commas.</p>
+<p>Refer to the documentation for each command for command-specific requirements.</p>
 </section>
 <section id="beta-values">
-<h2><span class="section-number">1.3. </span>Beta Values<a class="headerlink" href="#beta-values" title="Link to this heading"></a></h2>
-<p>The <strong>Beta-value</strong> represents the proportion of methylation for a given CpG or locus.
-It ranges from <strong>0 to 1</strong>, and can be interpreted as an approximation of the <strong>percentage of methylation</strong>.</p>
-<p>A proportion value can be converted to a Beta-value, but <strong>not vice versa</strong>.
-In the equation below:</p>
+<h2><span class="section-number">1.2. </span>Beta Values<a class="headerlink" href="#beta-values" title="Link to this heading"></a></h2>
+<p>A <strong>Beta-value</strong> represents the fraction of methylation at a CpG site or
+genomic locus. It ranges from 0 to 1, where values close to 0 indicate low
+methylation and values close to 1 indicate high methylation.</p>
+<p>For array-based methylation data:</p>
 <ul class="simple">
-<li><p><strong>C</strong> = probe intensity or read count of the methylated allele</p></li>
-<li><p><strong>U</strong> = probe intensity or read count of the unmethylated allele</p></li>
+<li><p><strong>C</strong> = intensity of the methylated allele</p></li>
+<li><p><strong>U</strong> = intensity of the unmethylated allele</p></li>
 </ul>
+<p>The Beta-value is defined as:</p>
 <div class="math notranslate nohighlight">
-\[\beta = \frac{C}{U + C}, \quad (0 \leq \beta \leq 1)\]</div>
-<p>—</p>
+\[\beta = \frac{C}{U + C}, \quad 0 \leq \beta \leq 1\]</div>
+<p>For sequencing-based data, the same concept can be applied using methylated
+and unmethylated read counts.</p>
+<p>Because a Beta-value contains only the ratio between methylated and total
+signal or read count, the original methylated and unmethylated intensities or
+read counts cannot generally be recovered from the Beta-value alone.</p>
 </section>
 <section id="m-values">
-<h2><span class="section-number">1.4. </span>M Values<a class="headerlink" href="#m-values" title="Link to this heading"></a></h2>
-<p>The <strong>M-value</strong> represents the log2 ratio of methylated versus unmethylated probe intensities (or read counts).
-It is calculated as follows:</p>
+<h2><span class="section-number">1.3. </span>M Values<a class="headerlink" href="#m-values" title="Link to this heading"></a></h2>
+<p>An <strong>M-value</strong> represents the <span class="math notranslate nohighlight">\(\log_2\)</span> ratio of methylated to
+unmethylated probe intensities or read counts.</p>
+<p>Let:</p>
 <ul class="simple">
-<li><p><strong>C</strong> = probe intensity or read count of the methylated allele</p></li>
-<li><p><strong>U</strong> = probe intensity or read count of the unmethylated allele</p></li>
-<li><p><strong>w</strong> = offset (pseudo count) added to both numerator and denominator to prevent division by zero and reduce noise in low-coverage regions.</p></li>
+<li><p><strong>C</strong> = intensity or read count of the methylated allele</p></li>
+<li><p><strong>U</strong> = intensity or read count of the unmethylated allele</p></li>
+<li><p><strong>w</strong> = an offset (pseudocount) added to prevent division by zero and reduce
+instability when intensities or read counts are small</p></li>
 </ul>
+<p>The M-value is calculated as:</p>
 <div class="math notranslate nohighlight">
 \[M = \log_{2}\left(\frac{C + w}{U + w}\right)\]</div>
-<p>—</p>
+<p>Unlike Beta-values, which are bounded between 0 and 1, M-values are unbounded
+and can take both positive and negative values.</p>
 </section>
-<section id="convert-beta-value-to-m-value-or-vice-versa">
-<h2><span class="section-number">1.5. </span>Convert Beta-value to M-value or <em>vice versa</em><a class="headerlink" href="#convert-beta-value-to-m-value-or-vice-versa" title="Link to this heading"></a></h2>
-<p>The relationship between <strong>Beta-value</strong> and <strong>M-value</strong> can be expressed as:</p>
+<section id="converting-between-beta-values-and-m-values">
+<h2><span class="section-number">1.4. </span>Converting Between Beta-values and M-values<a class="headerlink" href="#converting-between-beta-values-and-m-values" title="Link to this heading"></a></h2>
+<p>When no offset is included in the transformation, Beta-values and M-values are
+related by:</p>
 <div class="math notranslate nohighlight">
-\[\beta = \frac{2^{M}}{2^{M} + 1} \quad ; \quad M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)\]</div>
-<p>The following figure illustrates this relationship:</p>
-<a class="reference internal image-reference" href="_images/beta_vs_M_curve.png"><img alt="_images/beta_vs_M_curve.png" class="align-center" src="_images/beta_vs_M_curve.png" style="width: 320px; height: 320px;" />
+\[\beta = \frac{2^{M}}{2^{M} + 1}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)\]</div>
+<p>Thus, Beta-values and M-values can be mathematically transformed into one
+another, subject to the assumptions of the transformation.</p>
+<p>The following figure illustrates their relationship:</p>
+<a class="reference internal image-reference" href="_images/beta_vs_M_curve.png"><img alt="Relationship between DNA methylation Beta-values and M-values" class="align-center" src="_images/beta_vs_M_curve.png" style="width: 320px; height: 320px;" />
 </a>
+</section>
+<section id="proportion-values">
+<h2><span class="section-number">1.5. </span>Proportion Values<a class="headerlink" href="#proportion-values" title="Link to this heading"></a></h2>
+<p>For <a class="reference external" href="https://en.wikipedia.org/wiki/Bisulfite_sequencing">bisulfite sequencing</a> data, such as RRBS or
+WGBS, CpGtools may represent methylation measurements using methylated-read
+and total-read counts.</p>
+<p>A proportion value is represented as two integers separated by a comma:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span><span class="n">n</span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><strong>m</strong> = number of methylated reads, with <span class="math notranslate nohighlight">\(0 \leq m \leq n\)</span></p></li>
+<li><p><strong>n</strong> = total number of reads, with <span class="math notranslate nohighlight">\(n \geq 0\)</span></p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">27</span>   <span class="mi">2</span><span class="p">,</span><span class="mi">159</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">7</span>    <span class="mi">17</span><span class="p">,</span><span class="mi">19</span>  <span class="mi">30</span><span class="p">,</span><span class="mi">34</span>
+</pre></div>
+</div>
+<p>The first row contains examples of relatively low methylation, whereas the
+second row contains examples of relatively high methylation.</p>
+<p>When <span class="math notranslate nohighlight">\(n &gt; 0\)</span>, the corresponding methylation fraction is:</p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{m}{n}\]</div>
+<p>Unlike a Beta-value alone, the <code class="docutils literal notranslate"><span class="pre">m,n</span></code> representation retains information
+about sequencing depth. For example, <code class="docutils literal notranslate"><span class="pre">1,2</span></code> and <code class="docutils literal notranslate"><span class="pre">50,100</span></code> both correspond
+to a Beta-value of 0.5, but they are supported by very different numbers of
+sequencing reads.</p>
+<p>Commands that require proportion/count data expect the <code class="docutils literal notranslate"><span class="pre">m,n</span></code> representation
+rather than Beta-values. Refer to the documentation for the individual command
+to determine which input representation is required.</p>
+</section>
+<section id="bed-files">
+<h2><span class="section-number">1.6. </span>BED Files<a class="headerlink" href="#bed-files" title="Link to this heading"></a></h2>
+<p>The <strong>BED</strong> (Browser Extensible Data) format is commonly used to describe
+genomic intervals. Each line represents one genomic feature or interval and
+contains between 3 and 12 standard BED fields, depending on the BED variant.</p>
+<p>BED coordinates are <strong>0-based and half-open</strong>. The start coordinate is
+included and the end coordinate is excluded.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">10</span>    <span class="mi">15</span>
+</pre></div>
+</div>
+<p>represents the BED interval <code class="docutils literal notranslate"><span class="pre">chr1:10-15</span></code>. In 1-based inclusive coordinates,
+this corresponds to bases 11 through 15.</p>
+<section id="bed-variants">
+<h3><span class="section-number">1.6.1. </span>BED Variants<a class="headerlink" href="#bed-variants" title="Link to this heading"></a></h3>
+<section id="bed12">
+<h4><span class="section-number">1.6.1.1. </span>BED12<a class="headerlink" href="#bed12" title="Link to this heading"></a></h4>
+<p>The standard 12-field BED representation. It can describe features containing
+multiple blocks, such as genes or transcripts with multiple exons.</p>
+<p>Detailed specifications are available from the <a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">UCSC BED format documentation</a>.</p>
+</section>
+<section id="bed3">
+<h4><span class="section-number">1.6.1.2. </span>BED3<a class="headerlink" href="#bed3" title="Link to this heading"></a></h4>
+<p>BED3 contains the three required BED fields:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chrom</span>    <span class="n">chromStart</span>    <span class="n">chromEnd</span>
+</pre></div>
+</div>
+<p>Each line represents a single genomic interval.</p>
+</section>
+<section id="id1">
+<h4><span class="section-number">1.6.1.3. </span>BED3+<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>BED3+ contains at least the three required BED fields:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chrom</span>    <span class="n">chromStart</span>    <span class="n">chromEnd</span>    <span class="o">...</span>
+</pre></div>
+</div>
+<p>For CpGtools commands that accept BED3+ input, additional columns that are not
+required by the command are ignored.</p>
+</section>
+<section id="bed6">
+<h4><span class="section-number">1.6.1.4. </span>BED6<a class="headerlink" href="#bed6" title="Link to this heading"></a></h4>
+<p>BED6 contains six fields:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chrom</span>    <span class="n">chromStart</span>    <span class="n">chromEnd</span>    <span class="n">name</span>    <span class="n">score</span>    <span class="n">strand</span>
+</pre></div>
+</div>
+<p>This representation adds a feature name, score, and strand to the genomic
+interval.</p>
+</section>
+<section id="id2">
+<h4><span class="section-number">1.6.1.5. </span>BED6+<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>BED6+ contains at least the six BED6 fields:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chrom</span>    <span class="n">chromStart</span>    <span class="n">chromEnd</span>    <span class="n">name</span>    <span class="n">score</span>    <span class="n">strand</span>    <span class="o">...</span>
+</pre></div>
+</div>
+<p>For CpGtools commands that accept BED6+ input, additional columns that are not
+required by the command are ignored.</p>
+</section>
+</section>
+</section>
+<section id="command-specific-formats">
+<h2><span class="section-number">1.7. </span>Command-Specific Formats<a class="headerlink" href="#command-specific-formats" title="Link to this heading"></a></h2>
+<p>The formats described above are general conventions used throughout CpGtools.
+Individual commands may require additional columns, metadata files, genomic
+annotations, count data, or a particular matrix representation.</p>
+<p>Although most CpGtools commands expect <strong>CpGs in rows and samples in columns</strong>,
+some commands use specialized input formats. Users should therefore check the
+documentation for the specific command before running an analysis.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> option to display the input requirements and
+available options for a command. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_impute</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">beta_deconvolution</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">epical</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">dmc_bb</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -224,7 +344,7 @@ It is calculated as follows:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="change_log.html" class="btn btn-neutral float-left" title="3. CpGtools Release history" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="change_log.html" class="btn btn-neutral float-left" title="3. CpGtools Release History" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="dataset.html" class="btn btn-neutral float-right" title="1. Pre-compiled datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -232,7 +352,7 @@ It is calculated as follows:</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

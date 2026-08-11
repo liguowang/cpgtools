@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>20. beta_stats.py &mdash; CpGtools Documentation</title>
+  <title>21. beta_stats &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="21. beta_tSNE.py" href="beta_tSNE.html" />
-    <link rel="prev" title="19. beta_stacked_barplot.py" href="beta_stacked_barplot.html" /> 
+    <link rel="next" title="22. beta_tSNE" href="beta_tSNE.html" />
+    <link rel="prev" title="20. beta_stacked_barplot" href="beta_stacked_barplot.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,44 +60,50 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">20. beta_stats.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">20.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">20.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">20.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">20.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">20.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">21. beta_stats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">21.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">21.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpg-methylation-file">21.2.1. CpG methylation file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#region-file">21.2.2. Region file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">21.3. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">21.4. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">21.5. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -106,7 +112,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -127,7 +133,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">20. </span>beta_stats.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">21. </span>beta_stats</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/beta_stats.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,66 +143,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="beta-stats-py">
-<h1><span class="section-number">20. </span>beta_stats.py<a class="headerlink" href="#beta-stats-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">20.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program gives basic information on CpGs located in each genomic region. It adds 6
-columns to the input BED file:</p>
-<ol class="arabic simple">
-<li><p>Number of CpGs detected in the genomic region</p></li>
-<li><p>Min methylation level</p></li>
-<li><p>Max methylation level</p></li>
-<li><p>Average methylation level across all CpGs</p></li>
-<li><p>Median methylation level across all CpGs</p></li>
-<li><p>Standard deviation</p></li>
-</ol>
-</section>
-<section id="options">
-<h2><span class="section-number">20.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>BED6+ file specifying the C position. This BED file
-should have at least six columns (Chrom, ChromStart,
-ChromeEnd, Name, Beta_value, Strand).  Note: the first
-base in a chromosome is numbered 0. This file can be a
-regular text file or compressed file (.gz, .bz2)</p>
-</dd>
-<dt><kbd><span class="option">-r <var>REGION_FILE</var></span>, <span class="option">--region=<var>REGION_FILE</var></span></kbd></dt>
-<dd><p>BED3+ file of genomic regions. This BED file should
-have at least 3 columns (Chrom, ChromStart,
-ChromeEnd).</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">20.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+  <section id="beta-stats">
+<h1><span class="section-number">21. </span>beta_stats<a class="headerlink" href="#beta-stats" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">21.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_stats</span></code> summarizes CpG methylation values within user-defined genomic
+regions.</p>
+<p>For each region, six columns are appended:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz">test_02.bed6.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download">hg19.RefSeq.union.1Kpromoter.bed</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CpG_count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Minimum_beta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Maximum_beta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mean_beta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Median_beta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Standard_deviation</span></code></p></li>
 </ul>
+<p>BED coordinates are interpreted as <strong>0-based, half-open</strong> intervals.</p>
 </section>
-<section id="command">
-<h2><span class="section-number">20.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_stats.py -r hg19.RefSeq.union.1Kpromoter.bed.gz -i test_02.bed6.gz -o region_stats
+<section id="input-files">
+<h2><span class="section-number">21.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="cpg-methylation-file">
+<h3><span class="section-number">21.2.1. </span>CpG methylation file<a class="headerlink" href="#cpg-methylation-file" title="Link to this heading"></a></h3>
+<p>A BED6 or BED6+ file. Column 5 must contain Beta-values. Compressed input is
+supported.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr22</span>   <span class="mi">44021512</span>    <span class="mi">44021513</span>    <span class="n">cg24055475</span>    <span class="mf">0.9231</span>    <span class="o">-</span>
+<span class="n">chr13</span>   <span class="mi">111568382</span>   <span class="mi">111568383</span>   <span class="n">cg06540715</span>    <span class="mf">0.1071</span>    <span class="o">+</span>
+<span class="n">chr20</span>   <span class="mi">44033594</span>    <span class="mi">44033595</span>    <span class="n">cg21482942</span>    <span class="mf">0.6122</span>    <span class="o">-</span>
 </pre></div>
 </div>
 </section>
-<section id="output-files">
-<h2><span class="section-number">20.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<section id="region-file">
+<h3><span class="section-number">21.2.2. </span>Region file<a class="headerlink" href="#region-file" title="Link to this heading"></a></h3>
+<p>A BED3 or BED3+ file containing the genomic regions to summarize. All original
+region columns are preserved in the output.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">15864</span>    <span class="mi">15865</span>
+<span class="n">chr1</span>    <span class="mi">18826</span>    <span class="mi">18827</span>
+<span class="n">chr1</span>    <span class="mi">29406</span>    <span class="mi">29407</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2><span class="section-number">21.3. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_stats</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_02</span><span class="o">.</span><span class="n">bed6</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">r</span> <span class="n">hg19</span><span class="o">.</span><span class="n">RefSeq</span><span class="o">.</span><span class="n">union</span><span class="mf">.1</span><span class="n">Kpromoter</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">region_stats</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
 <ul class="simple">
-<li><p>region_stats.txt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--header</span></code> – add a header row to the output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--na_rep</span></code> – text used when statistics are unavailable (default: <code class="docutils literal notranslate"><span class="pre">NA</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_stats</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2><span class="section-number">21.4. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">region_stats</span></code>, the command writes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">region_stats.region_stats.tsv</span></code></p></li>
+</ul>
+<p>Invalid region records are retained and filled with the value specified by
+<code class="docutils literal notranslate"><span class="pre">--na_rep</span></code>.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">21.5. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz">CpG BED6 file</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download">Example promoter regions</a></p></li>
 </ul>
 </section>
 </section>
@@ -205,15 +227,15 @@ ChromeEnd).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="beta_stacked_barplot.html" class="btn btn-neutral float-left" title="19. beta_stacked_barplot.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beta_tSNE.html" class="btn btn-neutral float-right" title="21. beta_tSNE.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="beta_stacked_barplot.html" class="btn btn-neutral float-left" title="20. beta_stacked_barplot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_tSNE.html" class="btn btn-neutral float-right" title="22. beta_tSNE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

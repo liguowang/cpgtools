@@ -1,109 +1,250 @@
-.. role:: raw-math(raw)
-   :format: latex html
+Input Files and Data Formats
+============================
 
-Input File and Data Format
-==========================
+CpGtools supports several types of DNA methylation and genomic data, including
+Beta-values, M-values, methylation proportion/count data, and BED files.
 
-BED File
---------
 
-The **BED** (Browser Extensible Data) format is commonly used to describe blocks of genomic regions.  
-Each line in a BED file represents one genomic feature and contains between **3 and 12 columns** of data.  
+Matrix Orientation
+------------------
 
-The BED format is **0-based**, meaning the first base of a chromosome is numbered **0**, and it follows a **left-open, right-closed** interval convention.  
-For example, the BED entry ``chr1 10 15`` corresponds to the **11th to 15th bases** of chromosome 1 (i.e., bases 11–15 inclusive).
+For most CpGtools commands that operate on DNA methylation matrices, the input
+matrix is expected to have:
 
-**BED Variants**
+* **CpGs (or genomic loci) in rows**
+* **Samples in columns**
 
-- **BED12 file**  
-  The standard BED format containing 12 fields. Each line represents a gene or a set of disconnected genomic regions.  
-  Detailed specifications are available `here <https://genome.ucsc.edu/FAQ/FAQformat.html#format1>`_.
+The first row should contain sample IDs, and the first column should contain
+CpG IDs or genomic-locus identifiers.
 
-- **BED3 file**  
-  Contains only the first three required fields: ``chrom``, ``chromStart``, and ``chromEnd``.  
-  Each line represents a single genomic region where *score* and *strand* information are not required.
+For example::
 
-- **BED3+ file**  
-  Contains at least three columns (``chrom``, ``chromStart``, ``chromEnd``).  
-  Any additional columns will be **ignored**.
+    CpG_ID      Sample_1    Sample_2    Sample_3
+    cg00000029  0.432       0.517       0.481
+    cg00000108  0.821       0.793       0.806
+    cg00000165  0.135       0.164       0.142
 
-- **BED6 file**  
-  Includes the first six fields: ``chrom``, ``chromStart``, ``chromEnd``, ``name``, ``score``, and ``strand``.  
-  Each line represents a single genomic region and may include strand information or associated scores.
+In this example, each row represents one CpG and each column represents one
+sample.
 
-- **BED6+ file**  
-  Contains at least six columns (``chrom``, ``chromStart``, ``chromEnd``, ``name``, ``score``, ``strand``).  
-  Any columns beyond these six will be **ignored**.
+Unless otherwise specified in the documentation for an individual command,
+users should follow this **CpGs-by-samples** orientation.
 
----
+Missing values are generally represented as ``NA`` or ``NaN``. Some commands
+also support compressed input files and automatically detect common delimiters
+such as tabs and commas.
 
-Proportion Values
------------------
+Refer to the documentation for each command for command-specific requirements.
 
-In `bisulfite sequencing <https://en.wikipedia.org/wiki/Bisulfite_sequencing>`_ (e.g., RRBS or WGBS),  
-the methylation level of a CpG site or region is represented by a **proportion value**.  
-
-A proportion value is a pair of integers separated by a comma (``m,n``), where:
-
-- **m** = number of methylated reads (``0 ≤ m ≤ n``)  
-- **n** = total number of reads (``n ≥ 0``)
-
-For example:
-
-::
-
-   0,10   1,27   2,159   # three hypo-methylated loci
-   7,7    17,19  30,34   # three hyper-methylated loci
-
----
 
 Beta Values
 -----------
 
-The **Beta-value** represents the proportion of methylation for a given CpG or locus.  
-It ranges from **0 to 1**, and can be interpreted as an approximation of the **percentage of methylation**.
+A **Beta-value** represents the fraction of methylation at a CpG site or
+genomic locus. It ranges from 0 to 1, where values close to 0 indicate low
+methylation and values close to 1 indicate high methylation.
 
-A proportion value can be converted to a Beta-value, but **not vice versa**.  
-In the equation below:
+For array-based methylation data:
 
-- **C** = probe intensity or read count of the methylated allele  
-- **U** = probe intensity or read count of the unmethylated allele  
+* **C** = intensity of the methylated allele
+* **U** = intensity of the unmethylated allele
+
+The Beta-value is defined as:
 
 .. math::
 
-   \beta = \frac{C}{U + C}, \quad (0 \leq \beta \leq 1)
+   \beta = \frac{C}{U + C}, \quad 0 \leq \beta \leq 1
 
----
+For sequencing-based data, the same concept can be applied using methylated
+and unmethylated read counts.
+
+Because a Beta-value contains only the ratio between methylated and total
+signal or read count, the original methylated and unmethylated intensities or
+read counts cannot generally be recovered from the Beta-value alone.
+
 
 M Values
 --------
 
-The **M-value** represents the log2 ratio of methylated versus unmethylated probe intensities (or read counts).  
-It is calculated as follows:
+An **M-value** represents the :math:`\log_2` ratio of methylated to
+unmethylated probe intensities or read counts.
 
-- **C** = probe intensity or read count of the methylated allele  
-- **U** = probe intensity or read count of the unmethylated allele  
-- **w** = offset (pseudo count) added to both numerator and denominator to prevent division by zero and reduce noise in low-coverage regions.
+Let:
+
+* **C** = intensity or read count of the methylated allele
+* **U** = intensity or read count of the unmethylated allele
+* **w** = an offset (pseudocount) added to prevent division by zero and reduce
+  instability when intensities or read counts are small
+
+The M-value is calculated as:
 
 .. math::
 
    M = \log_{2}\left(\frac{C + w}{U + w}\right)
 
----
+Unlike Beta-values, which are bounded between 0 and 1, M-values are unbounded
+and can take both positive and negative values.
 
-Convert Beta-value to M-value or *vice versa*
----------------------------------------------
 
-The relationship between **Beta-value** and **M-value** can be expressed as:
+Converting Between Beta-values and M-values
+-------------------------------------------
+
+When no offset is included in the transformation, Beta-values and M-values are
+related by:
 
 .. math::
 
-   \beta = \frac{2^{M}}{2^{M} + 1} \quad ; \quad M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)
+   \beta = \frac{2^{M}}{2^{M} + 1}
 
-The following figure illustrates this relationship:
+and:
+
+.. math::
+
+   M = \log_{2}\left(\frac{\beta}{1 - \beta}\right)
+
+Thus, Beta-values and M-values can be mathematically transformed into one
+another, subject to the assumptions of the transformation.
+
+The following figure illustrates their relationship:
 
 .. image:: _static/beta_vs_M_curve.png
    :align: center
    :height: 400px
    :width: 400px
    :scale: 80%
+   :alt: Relationship between DNA methylation Beta-values and M-values
+
+
+Proportion Values
+-----------------
+
+For `bisulfite sequencing
+<https://en.wikipedia.org/wiki/Bisulfite_sequencing>`_ data, such as RRBS or
+WGBS, CpGtools may represent methylation measurements using methylated-read
+and total-read counts.
+
+A proportion value is represented as two integers separated by a comma::
+
+    m,n
+
+where:
+
+* **m** = number of methylated reads, with :math:`0 \leq m \leq n`
+* **n** = total number of reads, with :math:`n \geq 0`
+
+For example::
+
+    0,10   1,27   2,159
+    7,7    17,19  30,34
+
+The first row contains examples of relatively low methylation, whereas the
+second row contains examples of relatively high methylation.
+
+When :math:`n > 0`, the corresponding methylation fraction is:
+
+.. math::
+
+   \beta = \frac{m}{n}
+
+Unlike a Beta-value alone, the ``m,n`` representation retains information
+about sequencing depth. For example, ``1,2`` and ``50,100`` both correspond
+to a Beta-value of 0.5, but they are supported by very different numbers of
+sequencing reads.
+
+Commands that require proportion/count data expect the ``m,n`` representation
+rather than Beta-values. Refer to the documentation for the individual command
+to determine which input representation is required.
+
+
+BED Files
+---------
+
+The **BED** (Browser Extensible Data) format is commonly used to describe
+genomic intervals. Each line represents one genomic feature or interval and
+contains between 3 and 12 standard BED fields, depending on the BED variant.
+
+BED coordinates are **0-based and half-open**. The start coordinate is
+included and the end coordinate is excluded.
+
+For example::
+
+    chr1    10    15
+
+represents the BED interval ``chr1:10-15``. In 1-based inclusive coordinates,
+this corresponds to bases 11 through 15.
+
+
+BED Variants
+~~~~~~~~~~~~
+
+BED12
+^^^^^
+
+The standard 12-field BED representation. It can describe features containing
+multiple blocks, such as genes or transcripts with multiple exons.
+
+Detailed specifications are available from the `UCSC BED format documentation
+<https://genome.ucsc.edu/FAQ/FAQformat.html#format1>`_.
+
+
+BED3
+^^^^
+
+BED3 contains the three required BED fields::
+
+    chrom    chromStart    chromEnd
+
+Each line represents a single genomic interval.
+
+
+BED3+
+^^^^^
+
+BED3+ contains at least the three required BED fields::
+
+    chrom    chromStart    chromEnd    ...
+
+For CpGtools commands that accept BED3+ input, additional columns that are not
+required by the command are ignored.
+
+
+BED6
+^^^^
+
+BED6 contains six fields::
+
+    chrom    chromStart    chromEnd    name    score    strand
+
+This representation adds a feature name, score, and strand to the genomic
+interval.
+
+
+BED6+
+^^^^^
+
+BED6+ contains at least the six BED6 fields::
+
+    chrom    chromStart    chromEnd    name    score    strand    ...
+
+For CpGtools commands that accept BED6+ input, additional columns that are not
+required by the command are ignored.
+
+
+Command-Specific Formats
+------------------------
+
+The formats described above are general conventions used throughout CpGtools.
+Individual commands may require additional columns, metadata files, genomic
+annotations, count data, or a particular matrix representation.
+
+Although most CpGtools commands expect **CpGs in rows and samples in columns**,
+some commands use specialized input formats. Users should therefore check the
+documentation for the specific command before running an analysis.
+
+Use the ``-h`` or ``--help`` option to display the input requirements and
+available options for a command. For example::
+
+    beta_impute -h
+    beta_deconvolution -h
+    epical -h
+    dmc_bb -h

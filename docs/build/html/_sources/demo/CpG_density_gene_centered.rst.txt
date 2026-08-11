@@ -1,82 +1,110 @@
-CpG_density_gene_centered.py
-============================
+CpG_density_gene_centered
+=========================
 
-Description
-------------
-This program calculates the CpG density (count) profile over gene body as well as its up-
-down-stream regions. It is useful to visualize how CpGs are distributed around genes.
-
-Specifically, the up-stream region, gene region (from TSS to TES) and down-stream region
-will be equally divided into 100 bins, then CpG count was aggregated over a total of 300 bins
-from 5' to 3' (upstream bins, gene bins, downstrem bins).
-
-
-Options
+Overview
 --------
 
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        BED file specifying the C position. This BED file
-                        should have at least three columns (Chrom, ChromStart,
-                        ChromeEnd).  Note: the first base in a chromosome is
-                        numbered 0. This file can be a regular text file or
-                        compressed file (.gz, .bz2).
-  -r GENE_FILE, --refgene=GENE_FILE
-                        Reference gene model in standard BED6+ format.
-  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
-                        Maximum extension size from TES (transcription end
-                        site) to down-stream to define the "downstream
-                        intergenic region (DIR)". Note: (1) The actual used
-                        DIR size can be smaller because the extending process
-                        could stop earlier if it reaches the boundary of
-                        another nearby gene. (2) If the actual used DIR size
-                        is smaller than cutoff defined by "-c/--SizeCut", the
-                        gene will be skipped.  default=2000 (bp)
-  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
-                        Maximum extension size from TSS (transcription start
-                        site) to up-stream to define the "upstream intergenic
-                        region (UIR)". Note: (1) The actual used UIR size can
-                        be smaller because the extending process could stop
-                        earlier if it reaches the boundary of another nearby
-                        gene. (2) If the actual used UIR size is smaller than
-                        cutoff defined by "-c/--SizeCut", the gene will be
-                        skipped. default=2000 (bp)
-  -c MINIMUM_SIZE, --SizeCut=MINIMUM_SIZE
-                        The minimum gene size. Gene size is defined as the
-                        genomic size between TSS and TES, including both exons
-                        and introns. default=200 (bp)
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.                        
+``CpG_density_gene_centered`` generates a transcript-oriented CpG density
+profile across three gene-centered regions:
 
-Input files (examples)
-----------------------
+* upstream of the transcription start site (TSS)
+* gene body from TSS to transcription end site (TES)
+* downstream of the TES
 
-- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
-- `hg19.RefSeq.union.bed.gz <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_                        
+Each region is normalized into bins by CpGtools' density calculation
+(currently 100 bins per region), producing a 5'-to-3' metagene profile.
 
-Command
+Upstream and downstream extensions are constrained by neighboring genes, so
+the actual flanking regions may be shorter than the requested maximum.
+
+
+Input Files
 -----------
 
-::
+CpG file
+~~~~~~~~
 
- $ python3 CpG_density_gene_centered.py -r hg19.RefSeq.union.bed  -i 850K_probe.hg19.bed3 -o CpG_density
- @ 2020-03-11 14:57:10: Reading CpG file: "850K_probe.hg19.bed3"
- @ 2020-03-11 14:57:14: Reading reference gene model: "hg19.RefSeq.union.bed"
- @ 2020-03-11 14:57:14: Calculating CpG density ...
- @ 2020-03-11 14:57:15: Wrting data to : "CpG_density.tsv"
- @ 2020-03-11 14:57:15: Running R script to: 'CpG_density.r'
- null device
-          1
-          
-Output files
--------------
+The CpG input must be BED3 or BED3+ and contain genomic CpG positions.
 
-- CpG_density.tsv
-- CpG_density.r
-- CpG_density.pdf
+Example::
+
+   chr1    10847    10848
+   chr1    10849    10850
+   chr1    15864    15865
+
+Compressed input is supported by the CpGtools reader.
+
+
+Reference gene model
+~~~~~~~~~~~~~~~~~~~~
+
+The reference gene model must be BED6+ and include strand information so that
+TSS, TES, upstream, and downstream directions can be determined.
+
+
+Usage
+-----
+
+Basic usage::
+
+   CpG_density_gene_centered \
+       -i 850K_probe.hg19.bed3.gz \
+       -r hg19.RefSeq.union.bed.gz \
+       -o CpG_density
+
+Useful options include:
+
+* ``-u``, ``--upstream`` -- maximum upstream extension from the TSS in bp
+  (default: 2000)
+* ``-d``, ``--downstream`` -- maximum downstream extension from the TES in bp
+  (default: 2000)
+* ``-c``, ``--min_gene_size``, ``--SizeCut`` -- minimum transcript span from
+  TSS to TES (default: 200 bp)
+* ``--format {png,pdf,both}`` -- plot output format (default: ``pdf``)
+* ``--dpi`` -- PNG resolution (default: 300)
+* ``--width`` -- plot width in inches (default: 10)
+* ``--height`` -- plot height in inches (default: 5)
+* ``--no_plot`` -- write the density table without generating a plot
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   CpG_density_gene_centered -h
+
+
+Output
+------
+
+For output prefix ``CpG_density``, the command always writes:
+
+* ``CpG_density.CpG_density.tsv`` -- normalized CpG density profile
+
+The table contains:
+
+* ``Group`` -- ``Upstream``, ``GeneBody``, or ``Downstream``
+* ``Position`` -- normalized bin position within the region
+* ``CpG_count`` -- CpG count for that bin
+
+Unless ``--no_plot`` is used, the command also writes one or more plots:
+
+* ``CpG_density.CpG_density.pdf``
+* ``CpG_density.CpG_density.png``
+
+Use ``--format both`` to generate both plot formats.
+
+
+Example Data
+------------
+
+* `850K probe BED3 file <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
+* `hg19 RefSeq gene model <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_
+
+
+Example Figure
+--------------
 
 .. image:: ../_static/CpG_density.png
-   :height: 400 px
-   :width: 600 px
-   :scale: 100 %  
+   :height: 400px
+   :width: 600px
+   :scale: 100%
+   :alt: Gene-centered CpG density profile

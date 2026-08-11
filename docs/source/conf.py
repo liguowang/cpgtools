@@ -53,7 +53,7 @@ html_show_sphinx = False
 html_show_copyright = True
 
 html_theme_options = {
-    "logo_only": False,
+    "logo_only": True,
     "display_version": True,
     "prev_next_buttons_location": "bottom",
     "style_external_links": False,

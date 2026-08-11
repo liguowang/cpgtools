@@ -1,102 +1,163 @@
-dmc_Bayes.py
-=============
+dmc_Bayes
+=========
 
-Description
+Overview
+--------
+
+``dmc_Bayes`` estimates methylation differences between two groups using a
+Bayesian Markov chain Monte Carlo (MCMC) approach inspired by John Kruschke's
+BEST framework (Bayesian Estimation Supersedes the t test).
+
+For each CpG/probe, the command estimates:
+
+* posterior mean for group 1;
+* posterior mean for group 2;
+* posterior difference of means;
+* 95% highest density interval (HDI) for the difference; and
+* posterior probability that the difference is on the same side of zero as
+  the posterior median.
+
+Because an independent MCMC chain is fitted for every CpG, this method is much
+slower than a standard t test. Multiple worker processes are recommended for
+large datasets.
+
+
+Input Files
 -----------
 
-Different from statistical testing, this program tries to estimates "how different the
-means between the two groups are" using the Bayesian approach. An `MCMC <https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo>`_
-is used to estimate the "means", "difference of means", "95% HDI (highest posterior density interval)",
-and the posterior probability that the HDI does NOT include "0".
+Methylation matrix
+~~~~~~~~~~~~~~~~~~
 
-It is similar to John Kruschke's `BEST algorithm <http://www.indiana.edu/~kruschke/BEST/>`_
-(Bayesian Estimation Supersedes T test)
+The input matrix must have **CpGs/probes in rows** and **samples in columns**.
+The first row contains sample IDs and the first column contains CpG/probe IDs.
 
-**Notes**
+Example::
 
-- This program is much slower than T-test due to MCMC (Markov chain Monte Carlo) step. 
-  Running it with multiple threads is highly recommended.
+   CpG_ID      Sample_01   Sample_02   Sample_03   Sample_04
+   cg00001099  0.73        0.81        0.79        0.84
+   cg00000363  0.62        0.59        0.45        0.49
 
-
-Options
-----------
-
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Data file containing beta values with the 1st row
-                        containing sample IDs (must be unique) and the 1st
-                        column containing CpG positions or probe IDs (must be
-                        unique). Except for the 1st row and 1st column, any
-                        non-numerical values will be considered as "missing
-                        values" and ignored. This file can be a regular text
-                        file or compressed file (.gz, .bz2).
-  -g GROUP_FILE, --group=GROUP_FILE
-                        Group file defining the biological group of each
-                        sample. It is a comma-separated 2 columns file with
-                        the 1st column containing sample IDs, and the 2nd
-                        column containing group IDs.  It must have a header
-                        row. Sample IDs should match to the "Data file". Note:
-                        Only for two group comparison.
-  -n N_ITER, --niter=N_ITER
-                        Iteration times when using MCMC Metropolis-Hastings's
-                        agorithm to draw samples from the posterior
-                        distribution. default=5000
-  -b N_BURN, --burnin=N_BURN
-                        Number of simulated samples to discard. Thes initial
-                        samples are usually not completely valid because the
-                        Markov Chain has not stabilized to the stationary
-                        distribution. default=500.
-  -p N_PROCESS, --processor=N_PROCESS
-                        The number of processes. default=1
-  -s SEED, --seed=SEED  The seed used by the random number generator.
-                        default=99
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
+Non-numeric and non-finite values are treated as missing and ignored.
+Plain-text, ``.gz``, and ``.bz2`` inputs are supported.
 
 
+Group file
+~~~~~~~~~~
 
-Input files (examples)
-------------------------
+The group file is a comma-separated, two-column file with a header:
 
-- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
-- `test_05_TwoGroup.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_
+* column 1: sample ID
+* column 2: group ID
 
-Command
----------
+Exactly two groups are required.
 
-::
+Example::
 
- $  dmc_Bayes.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv.gz -p 10 -o dmc_output                        
+   Sample,Group
+   Sample_01,Control
+   Sample_02,Control
+   Sample_03,Case
+   Sample_04,Case
 
-Output files
------------------
+All samples listed in the group file must be present in the methylation
+matrix. Samples present in the matrix but absent from the group file are not
+used.
 
-- **dmc_output.bayes.tsv**: this file consists of 6 columns:
- 
- 1. ID : CpG ID
- 2. *mu1* : Mean methylation level estimated from group1
- 3. *mu2* : Mean methylation level estimated from gropu2
- 4. *mu_diff* : Difference between mu1 and mu2
- 5. *mu_diff* (95% HDI) : 95% of "High Density Interval" of *mu_diff*. The HDI indicates which
-    points of distribution are most credible. This interval spans 95% of *mu_diff*'s
-    distribution. 
- 6. The probability that *mu1* and *mu2* are different. 
+The two group IDs are sorted internally; ``mu1`` corresponds to the first
+group in sorted order and ``mu2`` to the second.
 
 
-::
+Usage
+-----
 
- $head -10 dmc_output.bayes.tsv
- 
- ID	mu1	mu2	mu_diff	mu_diff (95% HDI)	Probability
- cg00001099	0.775209	0.795404	-0.020196	(-0.065148,0.023974)	0.811024
- cg00000363	0.610565	0.469523	0.141042	(0.030769,0.232965)	0.994665
- cg00000884	0.845973	0.873761	-0.027787	(-0.051976,-0.004398)	0.984882
- cg00000714	0.190868	0.199233	-0.008365	(-0.030071,0.014006)	0.816141
- cg00000957	0.772905	0.827528	-0.054623	(-0.092116,-0.016465)	0.995327
- cg00000292	0.748394	0.766326	-0.017932	(-0.051286,0.012583)	0.889729
- cg00000807	0.729162	0.683732	0.045430	(-0.001523,0.086588)	0.981551
- cg00000721	0.935903	0.935080	0.000823	(-0.013210,0.018628)	0.508686
- cg00000948	0.898609	0.897536	0.001073	(-0.020663,0.026813)	0.518238
+Basic usage::
 
-mu1 and mu2 can be considered as *significantly* different if the 95% HDI does NOT include zero. 
+   dmc_Bayes \
+       -i test_05_TwoGroup.tsv.gz \
+       -g test_05_TwoGroup.grp.csv \
+       -p 10 \
+       -o dmc_output
+
+Useful options include:
+
+* ``-n``, ``--niter`` -- number of MCMC iterations (default: 5000)
+* ``-b``, ``--burnin`` -- number of initial MCMC iterations discarded as
+  burn-in (default: 500)
+* ``-p``, ``--processor`` -- number of worker processes (default: 1)
+* ``-s``, ``--seed`` -- random-number seed (default: 99)
+* ``-o``, ``--output`` -- output prefix
+
+``--niter`` must be greater than 1, ``--burnin`` must be non-negative and
+smaller than ``--niter``, and ``--processor`` must be positive.
+
+Display all options with::
+
+   dmc_Bayes -h
+
+
+Output
+------
+
+For output prefix ``dmc_output``, the command writes:
+
+* ``dmc_output.bayes.tsv``
+
+The output contains six columns:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 26 74
+
+   * - Column
+     - Description
+   * - ``ID``
+     - CpG/probe ID.
+   * - ``mu1``
+     - Posterior mean methylation level for group 1.
+   * - ``mu2``
+     - Posterior mean methylation level for group 2.
+   * - ``mu_diff``
+     - Posterior mean difference, ``mu1 - mu2``.
+   * - ``mu_diff (95% HDI)``
+     - 95% highest density interval of the posterior difference.
+   * - ``Probability``
+     - Posterior probability that the difference has the same sign as its
+       posterior median. For a positive median this is
+       :math:`P(\mu_1-\mu_2>0)`; for a negative median this is
+       :math:`P(\mu_1-\mu_2<0)`.
+
+Example::
+
+   ID           mu1      mu2      mu_diff    mu_diff (95% HDI)      Probability
+   cg00001099   0.775209 0.795404 -0.020196  (-0.065148,0.023974)   0.811024
+   cg00000363   0.610565 0.469523  0.141042  (0.030769,0.232965)    0.994665
+
+
+Interpretation
+--------------
+
+A 95% HDI that does not include zero indicates that the posterior difference
+is credibly separated from zero under this model.
+
+``Probability`` should not be interpreted as a frequentist p-value. It
+summarizes the posterior directional probability of the estimated difference.
+
+A CpG with fewer than two valid observations in either group is reported with
+``nan`` values because the model cannot be fitted for that CpG.
+
+
+Reproducibility
+---------------
+
+The random seed is deterministic. Each CpG receives a separate seed derived
+from ``--seed`` and its row order, so results remain reproducible when using
+multiple worker processes.
+
+
+Example Data
+------------
+
+* `Methylation matrix
+  <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
+* `Group file
+  <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv>`_

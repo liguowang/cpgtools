@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>29. dmc_nonparametric.py &mdash; CpGtools Documentation</title>
+  <title>30. dmc_nonparametric &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="30. dmc_ttest.py" href="dmc_ttest.html" />
-    <link rel="prev" title="28. dmc_logit.py" href="dmc_logit.html" /> 
+    <link rel="next" title="31. dmc_ttest" href="dmc_ttest.html" />
+    <link rel="prev" title="29. dmc_logit" href="dmc_logit.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,43 +60,56 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">29. dmc_nonparametric.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">29.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">29.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">29.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">29.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">30. dmc_nonparametric</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">30.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">30.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-value-matrix">30.2.1. Beta-value matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-file">30.2.2. Group file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method">30.3. Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#two-groups">30.3.1. Two groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#three-or-more-groups">30.3.2. Three or more groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">30.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">30.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-row-handling">30.6. Input-row Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">30.7. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -105,7 +118,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -126,7 +139,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">29. </span>dmc_nonparametric.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">30. </span>dmc_nonparametric</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/dmc_nonparametric.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,64 +149,169 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dmc-nonparametric-py">
-<h1><span class="section-number">29. </span>dmc_nonparametric.py<a class="headerlink" href="#dmc-nonparametric-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">29.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program performs differential CpG analysis using the  <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html">Mann-Whitney U test</a>
-for two group comparison, and the <a class="reference external" href="https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance">Kruskal-Wallis H-test</a>
-for multiple groups comparison.</p>
+  <section id="dmc-nonparametric">
+<h1><span class="section-number">30. </span>dmc_nonparametric<a class="headerlink" href="#dmc-nonparametric" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">30.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dmc_nonparametric</span></code> performs differential CpG analysis using nonparametric
+tests on DNA methylation Beta-values.</p>
+<p>The test is selected automatically from the number of biological groups:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Number of groups</p></th>
+<th class="head"><p>Test</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Two-sided Mann-Whitney U test</p></td>
+</tr>
+<tr class="row-odd"><td><p>3 or more</p></td>
+<td><p>Kruskal-Wallis H-test</p></td>
+</tr>
+</tbody>
+</table>
+<p>The input matrix must have <strong>CpGs/probes in rows</strong> and <strong>samples in columns</strong>.</p>
 </section>
-<section id="options">
-<h2><span class="section-number">29.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Data file containing beta values with the 1st row
-containing sample IDs (must be unique) and the 1st
-column containing CpG positions or probe IDs (must be
-unique). Except for the 1st row and 1st column, any
-non-numerical values will be considered as “missing
-values” and ignored. This file can be a regular text
-file or compressed file (.gz, .bz2).</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
-<dd><p>Group file defining the biological group of each
-sample. It is a comma-separated two columns file with
-the 1st column containing sample IDs, and the 2nd
-column containing group IDs. It must have a header
-row. Sample IDs should match to the “Data file”. Note:
-automatically switch to use  Kruskal-Wallis H-test if
-more than two groups were defined in this file.</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">29.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv">test_05_TwoGroup.grp.csv</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz">test_06_ThreeGroup.tsv.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv">test_06_ThreeGroup.grp.csv</a></p></li>
-</ul>
-</section>
-<section id="command">
-<h2><span class="section-number">29.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$dmc_nonparametric.py -i test_05_TwoGroup.tsv.gz -g test_05_TwoGroup.grp.csv -o U_test
-
-$dmc_nonparametric.py -i test_06_TwoGroup.tsv.gz -g test_06_TwoGroup.grp.csv -o H_test
+<section id="input-files">
+<h2><span class="section-number">30.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-value-matrix">
+<h3><span class="section-number">30.2.1. </span>Beta-value matrix<a class="headerlink" href="#beta-value-matrix" title="Link to this heading"></a></h3>
+<p>The first row contains sample IDs and the first column contains CpG/probe IDs.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>      <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>
+<span class="n">cg00001099</span>  <span class="mf">0.775</span>       <span class="mf">0.812</span>       <span class="mf">0.623</span>       <span class="mf">0.598</span>
+<span class="n">cg00000363</span>  <span class="mf">0.611</span>       <span class="mf">0.602</span>       <span class="mf">0.470</span>       <span class="mf">0.455</span>
 </pre></div>
 </div>
+<p>Sample IDs must be unique.</p>
+<p>Non-numeric and non-finite values are treated as missing and ignored.
+Plain text, <code class="docutils literal notranslate"><span class="pre">.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.bz2</span></code>, and other formats supported by the CpGtools
+reader may be used.</p>
+</section>
+<section id="group-file">
+<h3><span class="section-number">30.2.2. </span>Group file<a class="headerlink" href="#group-file" title="Link to this heading"></a></h3>
+<p>The group file is a comma-separated, two-column file with a header:</p>
+<ul class="simple">
+<li><p>column 1: sample ID</p></li>
+<li><p>column 2: group ID</p></li>
+</ul>
+<p>At least two groups are required.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">Control</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">Control</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">Case</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">Case</span>
+</pre></div>
+</div>
+<p>Sample IDs in the group file must be unique and must occur in the
+methylation matrix.</p>
+<p>Samples present in the methylation matrix but absent from the group file are
+ignored.</p>
+</section>
+</section>
+<section id="method">
+<h2><span class="section-number">30.3. </span>Method<a class="headerlink" href="#method" title="Link to this heading"></a></h2>
+<section id="two-groups">
+<h3><span class="section-number">30.3.1. </span>Two groups<a class="headerlink" href="#two-groups" title="Link to this heading"></a></h3>
+<p>For exactly two groups, <code class="docutils literal notranslate"><span class="pre">dmc_nonparametric</span></code> performs a two-sided
+Mann-Whitney U test using <code class="docutils literal notranslate"><span class="pre">scipy.stats.mannwhitneyu</span></code>.</p>
+<p>If either group has no valid observations for a CpG, the test result is
+missing.</p>
+</section>
+<section id="three-or-more-groups">
+<h3><span class="section-number">30.3.2. </span>Three or more groups<a class="headerlink" href="#three-or-more-groups" title="Link to this heading"></a></h3>
+<p>For three or more groups, the command performs a Kruskal-Wallis H-test using
+<code class="docutils literal notranslate"><span class="pre">scipy.stats.kruskal</span></code>.</p>
+<p>Groups with no valid observations for a particular CpG are omitted from that
+CpG’s test. If fewer than two groups contain valid observations, the result is
+missing.</p>
+<p>After testing all CpGs, valid p-values are adjusted using the CpGtools
+Benjamini-Hochberg multiple-testing procedure.</p>
+</section>
+</section>
+<section id="usage">
+<h2><span class="section-number">30.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Two-group analysis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_nonparametric</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_05_TwoGroup</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_05_TwoGroup</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">U_test</span>
+</pre></div>
+</div>
+<p>Three-group analysis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_nonparametric</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_06_ThreeGroup</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_06_ThreeGroup</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">H_test</span>
+</pre></div>
+</div>
+<p>Available options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>, <code class="docutils literal notranslate"><span class="pre">--input_file</span></code> – Beta-value matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>, <code class="docutils literal notranslate"><span class="pre">--group</span></code> – sample/group file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--version</span></code> – show the CpGtools version</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_nonparametric</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2><span class="section-number">30.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">U_test</span></code>, the command writes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">U_test.pval.txt</span></code></p></li>
+</ul>
+<p>The original input table is preserved and two columns are appended:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pval</span></code></p></td>
+<td><p>Raw Mann-Whitney U or Kruskal-Wallis p-value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">adj.pval</span></code></p></td>
+<td><p>Benjamini-Hochberg FDR-adjusted p-value.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Missing statistical results are written as <code class="docutils literal notranslate"><span class="pre">NaN</span></code> and are excluded from
+multiple-testing correction.</p>
+</section>
+<section id="input-row-handling">
+<h2><span class="section-number">30.6. </span>Input-row Handling<a class="headerlink" href="#input-row-handling" title="Link to this heading"></a></h2>
+<p>If a CpG row contains fewer data fields than the header, missing values are
+padded with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Extra fields are ignored. A warning is written in either
+case.</p>
+<p>The original input line is preserved in the final output; only <code class="docutils literal notranslate"><span class="pre">pval</span></code> and
+<code class="docutils literal notranslate"><span class="pre">adj.pval</span></code> are appended.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">30.7. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<p>Two groups:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">Beta-value matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.grp.csv">Group file</a></p></li>
+</ul>
+<p>Three groups:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.tsv.gz">Beta-value matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_06_ThreeGroup.grp.csv">Group file</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -201,15 +319,15 @@ $dmc_nonparametric.py -i test_06_TwoGroup.tsv.gz -g test_06_TwoGroup.grp.csv -o 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dmc_logit.html" class="btn btn-neutral float-left" title="28. dmc_logit.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dmc_ttest.html" class="btn btn-neutral float-right" title="30. dmc_ttest.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dmc_logit.html" class="btn btn-neutral float-left" title="29. dmc_logit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmc_ttest.html" class="btn btn-neutral float-right" title="31. dmc_ttest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

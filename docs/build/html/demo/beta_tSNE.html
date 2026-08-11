@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>21. beta_tSNE.py &mdash; CpGtools Documentation</title>
+  <title>22. beta_tSNE &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="22. beta_topN.py" href="beta_topN.html" />
-    <link rel="prev" title="20. beta_stats.py" href="beta_stats.html" /> 
+    <link rel="next" title="23. beta_topN" href="beta_topN.html" />
+    <link rel="prev" title="21. beta_stats" href="beta_stats.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,43 +60,52 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">21. beta_tSNE.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">21.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">21.2. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">21.3. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">21.4. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">22. beta_tSNE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">22.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">22.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-matrix">22.2.1. Beta matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-file">22.2.2. Group file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#missing-values-and-preprocessing">22.3. Missing Values and Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">22.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">22.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">22.6. Example Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-figure">22.7. Example Figure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -105,7 +114,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -126,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">21. </span>beta_tSNE.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">22. </span>beta_tSNE</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/beta_tSNE.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,127 +145,130 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="beta-tsne-py">
-<h1><span class="section-number">21. </span>beta_tSNE.py<a class="headerlink" href="#beta-tsne-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">21.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program performs <a class="reference external" href="https://lvdmaaten.github.io/tsne/">t-SNE (t-Distributed Stochastic Neighbor Embedding)</a>
-analysis for samples.</p>
-<p><strong>Example of input data file</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span>     <span class="n">Sample_01</span>       <span class="n">Sample_02</span>       <span class="n">Sample_03</span>       <span class="n">Sample_04</span>
-<span class="n">cg_001</span> <span class="mf">0.831035</span>        <span class="mf">0.878022</span>        <span class="mf">0.794427</span>        <span class="mf">0.880911</span>
-<span class="n">cg_002</span> <span class="mf">0.249544</span>        <span class="mf">0.209949</span>        <span class="mf">0.234294</span>        <span class="mf">0.236680</span>
-<span class="n">cg_003</span> <span class="mf">0.845065</span>        <span class="mf">0.843957</span>        <span class="mf">0.840184</span>        <span class="mf">0.824286</span>
-<span class="o">...</span>
+  <section id="beta-tsne">
+<h1><span class="section-number">22. </span>beta_tSNE<a class="headerlink" href="#beta-tsne" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">22.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_tSNE</span></code> performs t-distributed stochastic neighbor embedding (t-SNE) on
+DNA methylation samples.</p>
+<p>The input matrix must have <strong>CpGs in rows</strong> and <strong>samples in columns</strong>. CpGs
+are treated as features and samples as observations.</p>
+<p>A sample-group file is optional and can be used to color samples in the plot.</p>
+</section>
+<section id="input-files">
+<h2><span class="section-number">22.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-matrix">
+<h3><span class="section-number">22.2.1. </span>Beta matrix<a class="headerlink" href="#beta-matrix" title="Link to this heading"></a></h3>
+<p>The first column contains CpG IDs and the remaining columns contain sample
+Beta-values. Common delimiters and compressed input are supported.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>
+<span class="n">cg_001</span>   <span class="mf">0.831035</span>    <span class="mf">0.878022</span>    <span class="mf">0.794427</span>    <span class="mf">0.880911</span>
+<span class="n">cg_002</span>   <span class="mf">0.249544</span>    <span class="mf">0.209949</span>    <span class="mf">0.234294</span>    <span class="mf">0.236680</span>
+<span class="n">cg_003</span>   <span class="mf">0.845065</span>    <span class="mf">0.843957</span>    <span class="mf">0.840184</span>    <span class="mf">0.824286</span>
 </pre></div>
 </div>
-<p><strong>Example of input group file</strong></p>
+<p>CpG IDs and sample IDs must be unique.</p>
+</section>
+<section id="group-file">
+<h3><span class="section-number">22.2.2. </span>Group file<a class="headerlink" href="#group-file" title="Link to this heading"></a></h3>
+<p>The optional group file contains two columns: sample ID and group label.
+Comma- and tab-delimited files are supported, with or without a header.</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
 <span class="n">Sample_01</span><span class="p">,</span><span class="n">normal</span>
 <span class="n">Sample_02</span><span class="p">,</span><span class="n">normal</span>
 <span class="n">Sample_03</span><span class="p">,</span><span class="n">tumor</span>
-<span class="n">Sample_04</span><span class="p">,</span><span class="n">tumo</span>
-<span class="o">...</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">tumor</span>
 </pre></div>
 </div>
-<p><strong>Notes</strong></p>
-<ul class="simple">
-<li><p>Rows with missing values will be removed</p></li>
-<li><p>Beta values will be standardized into z scores</p></li>
-<li><p>Only the first two components will be visualized</p></li>
-<li><p>Different perplexity values can result in significantly different results</p></li>
-<li><p>Even with same data and save parameters, different run might give you (slightly)
-different result. It is perfectly fine to run t-SNE a number of times (with the same
-data and parameters), and to select the visualization with the lowest value of the
-objective function as your final visualization.</p></li>
-</ul>
-<p>Options:</p>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Tab-separated data frame file containing beta values
-with the 1st row containing sample IDs and the 1st
-column containing CpG IDs.</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
-<dd><p>Comma-separated group file defining the biological
-groups of each sample. Different groups will be
-colored differently in the t-SNE plot. Supports a
-maximum of 20 groups.</p>
-</dd>
-<dt><kbd><span class="option">-p <var>PERPLEXITY_VALUE</var></span>, <span class="option">--perplexity=<var>PERPLEXITY_VALUE</var></span></kbd></dt>
-<dd><p>This is a tunable parameter of t-SNE, and has a
-profound effect on the resulting 2D map. Consider
-selecting a value between 5 and 50, and the selected
-value should be smaller than the number of samples
-(i.e., number of points on the t-SNE 2D map). Default
-= 5</p>
-</dd>
-<dt><kbd><span class="option">-n <var>N_COMPONENTS</var></span>, <span class="option">--ncomponent=<var>N_COMPONENTS</var></span></kbd></dt>
-<dd><p>Number of components. default=2</p>
-</dd>
-<dt><kbd><span class="option">--n_iter=<var>N_ITERATIONS</var></span></kbd></dt>
-<dd><p>The maximum number of iterations for the optimization.
-Should be at least 250. default=5000</p>
-</dd>
-<dt><kbd><span class="option">--learning_rate=<var>LEARNING_RATE</var></span></kbd></dt>
-<dd><p>The learning rate for t-SNE is usually in the range
-[10.0, 1000.0]. If the learning rate is too high, the
-data may look like a ‘ball’ with any point
-approximately equidistant from its nearest neighbors.
-If the learning rate is too low, most points may look
-compressed in a dense cloud with few outliers. If the
-cost function gets stuck in a bad local minimum
-increasing the learning rate may help. default=200.0</p>
-</dd>
-<dt><kbd><span class="option">-l</span>, <span class="option">--label</span></kbd></dt>
-<dd><p>If True, sample ids will be added underneath the data
-point. default=False</p>
-</dd>
-<dt><kbd><span class="option">-c <var>PLOT_CHAR</var></span>, <span class="option">--char=<var>PLOT_CHAR</var></span></kbd></dt>
-<dd><p>Ploting character: 1 = ‘dot’, 2 = ‘circle’. default=1</p>
-</dd>
-<dt><kbd><span class="option">-a <var>PLOT_ALPHA</var></span>, <span class="option">--alpha=<var>PLOT_ALPHA</var></span></kbd></dt>
-<dd><p>Opacity of dots. default=0.5</p>
-</dd>
-<dt><kbd><span class="option">-x <var>LEGEND_LOCATION</var></span>, <span class="option">--loc=<var>LEGEND_LOCATION</var></span></kbd></dt>
-<dd><p>Location of legend panel: 1 = ‘topright’, 2 =
-‘bottomright’, 3 = ‘bottomleft’, 4 = ‘topleft’.
-default=1</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
+<p>If a group file is supplied, every sample in the Beta matrix must be present
+in the group file.</p>
+<p>If no group file is supplied, all samples are assigned to one group named
+<code class="docutils literal notranslate"><span class="pre">All_samples</span></code>.</p>
 </section>
-<section id="input-files-examples">
-<h2><span class="section-number">21.2. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv">cirrHCV_vs_normal.data.tsv</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv">cirrHCV_vs_normal.grp.csv</a></p></li>
-</ul>
 </section>
-<section id="command">
-<h2><span class="section-number">21.3. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_tSNE.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o HCV_vs_normal
+<section id="missing-values-and-preprocessing">
+<h2><span class="section-number">22.3. </span>Missing Values and Preprocessing<a class="headerlink" href="#missing-values-and-preprocessing" title="Link to this heading"></a></h2>
+<p>By default:</p>
+<ul class="simple">
+<li><p>CpGs containing any missing value are removed.</p></li>
+<li><p>zero-variance CpGs are removed.</p></li>
+<li><p>CpG features are standardized across samples before t-SNE.</p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--na_policy</span> <span class="pre">impute</span></code> to replace missing values with the per-CpG mean.
+CpGs containing only missing values are removed before imputation.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--no_standardize</span></code> to skip feature standardization.</p>
+</section>
+<section id="usage">
+<h2><span class="section-number">22.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_tSNE</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">cirrHCV_vs_normal</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">tsv</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">cirrHCV_vs_normal</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">HCV_vs_normal</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--perplexity</span></code> – t-SNE perplexity (default: 5.0); must be
+smaller than the number of samples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code>, <code class="docutils literal notranslate"><span class="pre">--n_components</span></code>, <code class="docutils literal notranslate"><span class="pre">--ncomponent</span></code> – embedding dimensions,
+either 2 or 3 (default: 2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--max_iter</span></code>, <code class="docutils literal notranslate"><span class="pre">--n_iter</span></code> – maximum optimization iterations
+(default: 5000)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--learning_rate</span></code> – <code class="docutils literal notranslate"><span class="pre">auto</span></code> or a positive numeric value
+(default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--init</span> <span class="pre">{pca,random}</span></code> – initialization method (default: <code class="docutils literal notranslate"><span class="pre">pca</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--metric</span></code> – distance metric accepted by scikit-learn t-SNE
+(default: <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--early_exaggeration</span></code> – early-exaggeration factor (default: 12.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--seed</span></code> – random seed (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--na_policy</span> <span class="pre">{drop,impute}</span></code> – missing-value handling
+(default: <code class="docutils literal notranslate"><span class="pre">drop</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no_standardize</span></code> – skip CpG standardization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--label</span></code> – add sample IDs to the plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--marker</span> <span class="pre">{circle,dot}</span></code> – plot marker style (default: <code class="docutils literal notranslate"><span class="pre">circle</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--alpha</span></code> – point opacity (default: 0.8)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--point_size</span></code> – point size (default: 45)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--legend_location</span></code> – legend position (default: <code class="docutils literal notranslate"><span class="pre">best</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,pdf,both}</span></code> – plot format (default: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--dpi</span></code> – PNG resolution (default: 300)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--width</span></code> / <code class="docutils literal notranslate"><span class="pre">--height</span></code> – plot size in inches (default: 8 x 8)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no_plot</span></code> – write coordinates without generating a plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_tSNE</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
-<section id="output-files">
-<h2><span class="section-number">21.4. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<section id="output">
+<h2><span class="section-number">22.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">HCV_vs_normal</span></code>, the command always writes:</p>
 <ul class="simple">
-<li><p>HCV_vs_normal.t-SNE.r</p></li>
-<li><p>HCV_vs_normal.t-SNE.tsv</p></li>
-<li><p>HCV_vs_normal.t-SNE.pdf</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HCV_vs_normal.tSNE.tsv</span></code> – t-SNE coordinates and group labels</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/HCV_vs_normal.tSNE.png"><img alt="../_images/HCV_vs_normal.tSNE.png" src="../_images/HCV_vs_normal.tSNE.png" style="width: 450px; height: 450px;" />
+<p>Unless <code class="docutils literal notranslate"><span class="pre">--no_plot</span></code> is used, it also writes one or more plots:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HCV_vs_normal.tSNE.pdf</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HCV_vs_normal.tSNE.png</span></code></p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">both</span></code> to generate both plot formats.</p>
+<p>The coordinate table contains <code class="docutils literal notranslate"><span class="pre">tSNE1</span></code> and <code class="docutils literal notranslate"><span class="pre">tSNE2</span></code> for a 2D embedding,
+and also <code class="docutils literal notranslate"><span class="pre">tSNE3</span></code> when <code class="docutils literal notranslate"><span class="pre">--n_components</span> <span class="pre">3</span></code> is used. Plotting always uses the
+first two dimensions.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">22.6. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv">Beta matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv">Group file</a></p></li>
+</ul>
+</section>
+<section id="example-figure">
+<h2><span class="section-number">22.7. </span>Example Figure<a class="headerlink" href="#example-figure" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/HCV_vs_normal.tSNE.png"><img alt="t-SNE plot of DNA methylation samples" src="../_images/HCV_vs_normal.tSNE.png" style="width: 450px; height: 450px;" />
 </a>
 </section>
 </section>
@@ -265,15 +277,15 @@ default=1</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="beta_stats.html" class="btn btn-neutral float-left" title="20. beta_stats.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beta_topN.html" class="btn btn-neutral float-right" title="22. beta_topN.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="beta_stats.html" class="btn btn-neutral float-left" title="21. beta_stats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_topN.html" class="btn btn-neutral float-right" title="23. beta_topN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

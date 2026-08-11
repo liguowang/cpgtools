@@ -1,111 +1,148 @@
-beta_tSNE.py
-=============
+beta_tSNE
+=========
 
-Description
+Overview
+--------
+
+``beta_tSNE`` performs t-distributed stochastic neighbor embedding (t-SNE) on
+DNA methylation samples.
+
+The input matrix must have **CpGs in rows** and **samples in columns**. CpGs
+are treated as features and samples as observations.
+
+A sample-group file is optional and can be used to color samples in the plot.
+
+
+Input Files
+-----------
+
+Beta matrix
+~~~~~~~~~~~
+
+The first column contains CpG IDs and the remaining columns contain sample
+Beta-values. Common delimiters and compressed input are supported.
+
+Example::
+
+   CpG_ID   Sample_01   Sample_02   Sample_03   Sample_04
+   cg_001   0.831035    0.878022    0.794427    0.880911
+   cg_002   0.249544    0.209949    0.234294    0.236680
+   cg_003   0.845065    0.843957    0.840184    0.824286
+
+CpG IDs and sample IDs must be unique.
+
+
+Group file
+~~~~~~~~~~
+
+The optional group file contains two columns: sample ID and group label.
+Comma- and tab-delimited files are supported, with or without a header.
+
+Example::
+
+   Sample,Group
+   Sample_01,normal
+   Sample_02,normal
+   Sample_03,tumor
+   Sample_04,tumor
+
+If a group file is supplied, every sample in the Beta matrix must be present
+in the group file.
+
+If no group file is supplied, all samples are assigned to one group named
+``All_samples``.
+
+
+Missing Values and Preprocessing
+--------------------------------
+
+By default:
+
+* CpGs containing any missing value are removed.
+* zero-variance CpGs are removed.
+* CpG features are standardized across samples before t-SNE.
+
+Use ``--na_policy impute`` to replace missing values with the per-CpG mean.
+CpGs containing only missing values are removed before imputation.
+
+Use ``--no_standardize`` to skip feature standardization.
+
+
+Usage
+-----
+
+Basic usage::
+
+   beta_tSNE \
+       -i cirrHCV_vs_normal.data.tsv \
+       -g cirrHCV_vs_normal.grp.csv \
+       -o HCV_vs_normal
+
+Useful options include:
+
+* ``-p``, ``--perplexity`` -- t-SNE perplexity (default: 5.0); must be
+  smaller than the number of samples
+* ``-n``, ``--n_components``, ``--ncomponent`` -- embedding dimensions,
+  either 2 or 3 (default: 2)
+* ``--max_iter``, ``--n_iter`` -- maximum optimization iterations
+  (default: 5000)
+* ``--learning_rate`` -- ``auto`` or a positive numeric value
+  (default: ``auto``)
+* ``--init {pca,random}`` -- initialization method (default: ``pca``)
+* ``--metric`` -- distance metric accepted by scikit-learn t-SNE
+  (default: ``euclidean``)
+* ``--early_exaggeration`` -- early-exaggeration factor (default: 12.0)
+* ``--seed`` -- random seed (default: 0)
+* ``--na_policy {drop,impute}`` -- missing-value handling
+  (default: ``drop``)
+* ``--no_standardize`` -- skip CpG standardization
+* ``--label`` -- add sample IDs to the plot
+* ``--marker {circle,dot}`` -- plot marker style (default: ``circle``)
+* ``--alpha`` -- point opacity (default: 0.8)
+* ``--point_size`` -- point size (default: 45)
+* ``--legend_location`` -- legend position (default: ``best``)
+* ``--format {png,pdf,both}`` -- plot format (default: ``pdf``)
+* ``--dpi`` -- PNG resolution (default: 300)
+* ``--width`` / ``--height`` -- plot size in inches (default: 8 x 8)
+* ``--no_plot`` -- write coordinates without generating a plot
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   beta_tSNE -h
+
+
+Output
+------
+
+For output prefix ``HCV_vs_normal``, the command always writes:
+
+* ``HCV_vs_normal.tSNE.tsv`` -- t-SNE coordinates and group labels
+
+Unless ``--no_plot`` is used, it also writes one or more plots:
+
+* ``HCV_vs_normal.tSNE.pdf``
+* ``HCV_vs_normal.tSNE.png``
+
+Use ``--format both`` to generate both plot formats.
+
+The coordinate table contains ``tSNE1`` and ``tSNE2`` for a 2D embedding,
+and also ``tSNE3`` when ``--n_components 3`` is used. Plotting always uses the
+first two dimensions.
+
+
+Example Data
 ------------
 
-This program performs `t-SNE (t-Distributed Stochastic Neighbor Embedding) <https://lvdmaaten.github.io/tsne/>`_
-analysis for samples.
+* `Beta matrix <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
+* `Group file <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv>`_
 
-**Example of input data file**
-::
 
- ID	Sample_01	Sample_02	Sample_03	Sample_04
- cg_001	0.831035	0.878022	0.794427	0.880911
- cg_002	0.249544	0.209949	0.234294	0.236680
- cg_003	0.845065	0.843957	0.840184	0.824286
- ...
- 
-**Example of input group file**
-::
-
- Sample,Group
- Sample_01,normal
- Sample_02,normal
- Sample_03,tumor
- Sample_04,tumo
- ...                         
-
-**Notes**
-
-- Rows with missing values will be removed
-- Beta values will be standardized into z scores
-- Only the first two components will be visualized
-- Different perplexity values can result in significantly different results
-- Even with same data and save parameters, different run might give you (slightly)
-  different result. It is perfectly fine to run t-SNE a number of times (with the same
-  data and parameters), and to select the visualization with the lowest value of the
-  objective function as your final visualization.
-
-Options:
-
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Tab-separated data frame file containing beta values
-                        with the 1st row containing sample IDs and the 1st
-                        column containing CpG IDs.
-  -g GROUP_FILE, --group=GROUP_FILE
-                        Comma-separated group file defining the biological
-                        groups of each sample. Different groups will be
-                        colored differently in the t-SNE plot. Supports a
-                        maximum of 20 groups.
-  -p PERPLEXITY_VALUE, --perplexity=PERPLEXITY_VALUE
-                        This is a tunable parameter of t-SNE, and has a
-                        profound effect on the resulting 2D map. Consider
-                        selecting a value between 5 and 50, and the selected
-                        value should be smaller than the number of samples
-                        (i.e., number of points on the t-SNE 2D map). Default
-                        = 5
-  -n N_COMPONENTS, --ncomponent=N_COMPONENTS
-                        Number of components. default=2
-  --n_iter=N_ITERATIONS
-                        The maximum number of iterations for the optimization.
-                        Should be at least 250. default=5000
-  --learning_rate=LEARNING_RATE
-                        The learning rate for t-SNE is usually in the range
-                        [10.0, 1000.0]. If the learning rate is too high, the
-                        data may look like a ‘ball’ with any point
-                        approximately equidistant from its nearest neighbors.
-                        If the learning rate is too low, most points may look
-                        compressed in a dense cloud with few outliers. If the
-                        cost function gets stuck in a bad local minimum
-                        increasing the learning rate may help. default=200.0
-  -l, --label           If True, sample ids will be added underneath the data
-                        point. default=False
-  -c PLOT_CHAR, --char=PLOT_CHAR
-                        Ploting character: 1 = 'dot', 2 = 'circle'. default=1
-  -a PLOT_ALPHA, --alpha=PLOT_ALPHA
-                        Opacity of dots. default=0.5
-  -x LEGEND_LOCATION, --loc=LEGEND_LOCATION
-                        Location of legend panel: 1 = 'topright', 2 =
-                        'bottomright', 3 = 'bottomleft', 4 = 'topleft'.
-                        default=1
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-                        
-                        
-Input files (examples)
--------------------------
-
-- `cirrHCV_vs_normal.data.tsv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
-- `cirrHCV_vs_normal.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv>`_
-
-Command
-----------
-::
-
- $beta_tSNE.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o HCV_vs_normal
-
-Output files
----------------
-
-- HCV_vs_normal.t-SNE.r
-- HCV_vs_normal.t-SNE.tsv                          
-- HCV_vs_normal.t-SNE.pdf
+Example Figure
+--------------
 
 .. image:: ../_static/HCV_vs_normal.tSNE.png
-   :height: 450 px
-   :width: 450 px
-   :scale: 100 %  
-
+   :height: 450px
+   :width: 450px
+   :scale: 100%
+   :alt: t-SNE plot of DNA methylation samples

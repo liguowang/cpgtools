@@ -6,22 +6,23 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6. CpG_distrb_gene_centered.py &mdash; CpGtools Documentation</title>
+  <title>6. CpG_distrb_gene_centered &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. CpG_distrb_region.py" href="CpG_distrb_region.html" />
-    <link rel="prev" title="5. CpG_distrb_chrom.py" href="CpG_distrb_chrom.html" /> 
+    <link rel="next" title="7. CpG_distrb_region" href="CpG_distrb_region.html" />
+    <link rel="prev" title="5. CpG_distrb_chrom" href="CpG_distrb_chrom.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +33,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +49,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,44 +61,51 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. CpG_distrb_gene_centered.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">6.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">6.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">6.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">6.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">6.5. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. CpG_distrb_gene_centered</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">6.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">6.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpg-file">6.2.1. CpG file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference-gene-model">6.2.2. Reference gene model</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">6.3. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">6.4. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">6.5. Example Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-figure">6.6. Example Figure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -106,7 +114,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -127,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">6. </span>CpG_distrb_gene_centered.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>CpG_distrb_gene_centered</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/CpG_distrb_gene_centered.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,85 +145,139 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cpg-distrb-gene-centered-py">
-<h1><span class="section-number">6. </span>CpG_distrb_gene_centered.py<a class="headerlink" href="#cpg-distrb-gene-centered-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">6.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program calculates the distribution of CpG over gene-centered genomic regions
-including ‘Coding exons’, ‘UTR exons’, ‘Introns’, ‘ Upstream intergenic regions’, and
-‘Downsteam intergenic regions’.</p>
-<p><strong>Notes</strong></p>
-<p>Please note, a particular genomic region can be assigned to different groups listed above,
-because most genes have multiple transcripts, and different genes could overlap on the
-genome. For example, an exon of gene A could be located in an intron of gene B. To address
-this issue, we define the priority order as  below:</p>
+  <section id="cpg-distrb-gene-centered">
+<h1><span class="section-number">6. </span>CpG_distrb_gene_centered<a class="headerlink" href="#cpg-distrb-gene-centered" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_gene_centered</span></code> summarizes CpG distribution across prioritized
+gene-centered genomic annotations.</p>
+<p>The genome is partitioned into five annotation classes:</p>
 <ul class="simple">
+<li><p>coding exons</p></li>
+<li><p>UTR exons</p></li>
+<li><p>introns</p></li>
+<li><p>upstream regions of transcription start sites (TSS)</p></li>
+<li><p>downstream regions of transcription end sites (TES)</p></li>
+</ul>
+<p>Because transcript annotations can overlap, the classes are made
+non-overlapping using the following priority:</p>
+<ol class="arabic simple">
 <li><p>Coding exons</p></li>
 <li><p>UTR exons</p></li>
 <li><p>Introns</p></li>
-<li><p>Upstream intergenic regions</p></li>
-<li><p>Downstream intergenic regions</p></li>
-</ul>
-<p>Higher-priority group override the low-priority group. For example, if a certain part
-of an intron is overlapped with an exon of other transcripts/genes, the overlapped part will
-be considered as exon (i.e., removed from intron) since “exon” has higher priority.</p>
+<li><p>Upstream of TSS</p></li>
+<li><p>Downstream of TES</p></li>
+</ol>
+<p>Higher-priority annotations override lower-priority annotations. For example,
+a region annotated as both exon and intron is counted as exon.</p>
 </section>
-<section id="options">
-<h2><span class="section-number">6.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>BED file specifying the C position. This BED file
-should have at least three columns (Chrom, ChromStart,
-ChromeEnd).  Note: the first base in a chromosome is
-numbered 0. This file can be a regular text file or
-compressed file (.gz, .bz2).</p>
-</dd>
-<dt><kbd><span class="option">-r <var>GENE_FILE</var></span>, <span class="option">--refgene=<var>GENE_FILE</var></span></kbd></dt>
-<dd><p>Reference gene model in standard BED-12 format
-(<a class="reference external" href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">https://genome.ucsc.edu/FAQ/FAQformat.html#format1</a>).</p>
-</dd>
-<dt><kbd><span class="option">-d <var>DOWNSTREAM_SIZE</var></span>, <span class="option">--downstream=<var>DOWNSTREAM_SIZE</var></span></kbd></dt>
-<dd><p>Size of down-stream intergenic region w.r.t. TES
-(transcription end site). default=2000 (bp)</p>
-</dd>
-<dt><kbd><span class="option">-u <var>UPSTREAM_SIZE</var></span>, <span class="option">--upstream=<var>UPSTREAM_SIZE</var></span></kbd></dt>
-<dd><p>Size of up-stream intergenic region w.r.t. TSS
-(transcription start site). default=2000 (bp)</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
+<section id="input-files">
+<h2><span class="section-number">6.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="cpg-file">
+<h3><span class="section-number">6.2.1. </span>CpG file<a class="headerlink" href="#cpg-file" title="Link to this heading"></a></h3>
+<p>The CpG input must be BED3 or BED3+ and contain genomic CpG positions.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">10847</span>    <span class="mi">10848</span>
+<span class="n">chr1</span>    <span class="mi">10849</span>    <span class="mi">10850</span>
+<span class="n">chr1</span>    <span class="mi">15864</span>    <span class="mi">15865</span>
+</pre></div>
+</div>
+<p>Compressed input is supported by the CpGtools reader.</p>
 </section>
-<section id="input-files-examples">
-<h2><span class="section-number">6.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+<section id="reference-gene-model">
+<h3><span class="section-number">6.2.2. </span>Reference gene model<a class="headerlink" href="#reference-gene-model" title="Link to this heading"></a></h3>
+<p>The reference gene model must be in BED12 format.</p>
+</section>
+</section>
+<section id="usage">
+<h2><span class="section-number">6.3. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_distrb_gene_centered</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="mi">850</span><span class="n">K_probe</span><span class="o">.</span><span class="n">hg19</span><span class="o">.</span><span class="n">bed3</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">r</span> <span class="n">hg19</span><span class="o">.</span><span class="n">RefSeq</span><span class="o">.</span><span class="n">union</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">geneDist</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz">850K_probe.hg19.bed3.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz">hg19.RefSeq.union.bed.gz</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-u</span></code>, <code class="docutils literal notranslate"><span class="pre">--upstream</span></code> – upstream region size relative to the TSS
+(default: 2000 bp)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--downstream</span></code> – downstream region size relative to the TES
+(default: 2000 bp)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,pdf,both}</span></code> – plot output format
+(default: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--dpi</span></code> – PNG resolution (default: 300)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--width</span></code> – plot width in inches (default: 8)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--height</span></code> – plot height in inches (default: 6)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no_plot</span></code> – write the summary table without generating a plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
 </ul>
-</section>
-<section id="command">
-<h2><span class="section-number">6.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ CpG_distrb_gene_centered.py -i 850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o geneDist
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_distrb_gene_centered</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
-<section id="output-files">
-<h2><span class="section-number">6.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<section id="output">
+<h2><span class="section-number">6.4. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">geneDist</span></code>, the command always writes:</p>
 <ul class="simple">
-<li><p>geneDist.tsv</p></li>
-<li><p>geneDist.r</p></li>
-<li><p>geneDist.pdf</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geneDist.gene_centered_distribution.tsv</span></code> – gene-centered CpG summary</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/geneDist.png"><img alt="../_images/geneDist.png" src="../_images/geneDist.png" style="width: 600px; height: 400px;" />
+<p>The table contains:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Priority_order</span></code></p></td>
+<td><p>Numeric priority of the annotation class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Name</span></code></p></td>
+<td><p>Annotation class.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Number_of_regions</span></code></p></td>
+<td><p>Number of non-overlapping intervals in the class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Size_of_regions_bp</span></code></p></td>
+<td><p>Total number of annotated bases.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_raw_count</span></code></p></td>
+<td><p>Number of CpGs overlapping the class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_count_per_KB</span></code></p></td>
+<td><p>CpG density per kilobase.</p></td>
+</tr>
+</tbody>
+</table>
+<p>CpG density is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{CpG\ count\ per\ KB}
+=
+\frac{\mathrm{CpG\ raw\ count} \times 1000}
+     {\mathrm{Size\ of\ regions\ in\ bp}}\]</div>
+<p>Unless <code class="docutils literal notranslate"><span class="pre">--no_plot</span></code> is used, the command also writes one or more plots:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">geneDist.gene_centered_distribution.pdf</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geneDist.gene_centered_distribution.png</span></code></p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">both</span></code> to generate both plot formats.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">6.5. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz">850K probe BED3 file</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz">hg19 RefSeq BED12 gene model</a></p></li>
+</ul>
+</section>
+<section id="example-figure">
+<h2><span class="section-number">6.6. </span>Example Figure<a class="headerlink" href="#example-figure" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/geneDist.png"><img alt="CpG distribution across gene-centered genomic regions" src="../_images/geneDist.png" style="width: 600px; height: 400px;" />
 </a>
 </section>
 </section>
@@ -224,15 +286,15 @@ compressed file (.gz, .bz2).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="CpG_distrb_chrom.html" class="btn btn-neutral float-left" title="5. CpG_distrb_chrom.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CpG_distrb_region.html" class="btn btn-neutral float-right" title="7. CpG_distrb_region.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CpG_distrb_chrom.html" class="btn btn-neutral float-left" title="5. CpG_distrb_chrom" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CpG_distrb_region.html" class="btn btn-neutral float-right" title="7. CpG_distrb_region" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

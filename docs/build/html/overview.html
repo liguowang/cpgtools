@@ -9,14 +9,15 @@
   <title>1. Overview &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=978f7b89" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=09beee0d"></script>
+      <script src="_static/documentation_options.js?v=acc74ff5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,8 +33,8 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            CpGtools
+          <a href="index.html">
+            
               <img src="_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -49,9 +50,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#cpg-position-analysis">1.1. CpG Position Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cpg-signal-analysis">1.2. CpG Signal Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#differential-methylation-analysis">1.3. Differential Methylation Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#predictive-analysis">1.4. Predictive Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#missing-value-imputation">1.5. Missing-value Imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#missing-value-imputation">1.3. Missing-value Imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cell-type-deconvolution">1.4. Cell-type Deconvolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differential-methylation-analysis">1.5. Differential Methylation Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#epigenetic-aging-analysis">1.6. Epigenetic Aging Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-usage">1.7. Command-line Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
@@ -59,7 +62,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -106,7 +109,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -139,306 +142,422 @@
              
   <section id="overview">
 <h1><span class="section-number">1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<p><strong>CpGtools</strong> is a Python package providing a comprehensive collection of
-command-line tools for the analysis of DNA methylation data. The package
-supports methylation data generated from both microarray and sequencing
-platforms, including:</p>
+<p><strong>CpGtools</strong> is a Python package providing command-line tools for DNA
+methylation analysis. It supports data from Illumina methylation arrays
+(450K, EPIC, and EPIC v2) and bisulfite sequencing platforms such as RRBS
+and WGBS.</p>
+<p>Most CpGtools commands that operate on methylation matrices expect
+<strong>CpGs in rows and samples in columns</strong>, unless otherwise stated by the
+individual command.</p>
+<p>Some key functions of CpGtools include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://support.illumina.com/array/array_kits/infinium_humanmethylation450_beadchip_kit.html">Illumina HumanMethylation450 BeadChip (450K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylationepic-beadchip-kit.html">Illumina MethylationEPIC BeadChip (EPIC, 850K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/products/by-type/microarray-kits/infinium-methylation-epic.html">Illumina Infinium MethylationEPIC v2.0 (EPIC v2, 930K)</a></p></li>
-<li><p><a class="reference external" href="https://www.illumina.com/science/sequencing-method-explorer/kits-and-arrays/rrbs-seq-scrrbs.html">Reduced Representation Bisulfite Sequencing (RRBS)</a></p></li>
-<li><p>Whole-Genome Bisulfite Sequencing (WGBS)</p></li>
+<li><p>CpG annotation, visualization, Beta-M transformation</p></li>
+<li><p>dimensionality reduction</p></li>
+<li><p>missing-value imputation;</p></li>
+<li><p>cell-type deconvolution;</p></li>
+<li><p>differential methylation analysis;</p></li>
+<li><p>epigenetic clocks</p></li>
+<li><p>phenotype prediction</p></li>
 </ul>
-<p>CpGtools provides utilities for</p>
-<ul class="simple">
-<li><p>annotating CpGs and genomic regions,</p></li>
-<li><p>summarizing and visualizing DNA methylation profiles,</p></li>
-<li><p>identifying differentially methylated CpGs,</p></li>
-<li><p>imputing missing values using a wide range of statistical and
-machine-learning algorithms, and</p></li>
-<li><p>predicting biological phenotypes from DNA methylation profiles.</p></li>
-</ul>
-<p>The modules are organized into the following functional categories:</p>
-<ol class="arabic simple">
-<li><p><strong>CpG Position Analysis</strong> – annotate CpGs and characterize their genomic
-distribution.</p></li>
-<li><p><strong>CpG Signal Analysis</strong> – summarize, normalize, transform, and visualize
-DNA methylation signals.</p></li>
-<li><p><strong>Missing-value Imputation</strong> – simulate, evaluate, and impute missing
-values in DNA methylation matrices.</p></li>
-<li><p><strong>Differential Methylation Analysis</strong> – identify differentially methylated
-CpGs using statistical and regression-based approaches.</p></li>
-<li><p><strong>Predictive Analysis</strong> – predict biological phenotypes and sample
-characteristics from DNA methylation profiles.</p></li>
-</ol>
-<p>Most tools are designed for command-line use and follow a consistent interface.
-Detailed documentation, usage examples, and command-line options are available
-on the corresponding documentation pages.</p>
+<p>The main command groups are summarized below.</p>
 <section id="cpg-position-analysis">
 <h2><span class="section-number">1.1. </span>CpG Position Analysis<a class="headerlink" href="#cpg-position-analysis" title="Link to this heading"></a></h2>
-<p>These modules annotate CpGs, summarize their genomic distribution, and
-characterize their relationships with genes and other genomic features.</p>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">CpG position analysis modules</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<p>Tools for annotating CpGs and characterizing their genomic distribution.</p>
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 28.0%" />
-<col style="width: 72.0%" />
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_aggregation.py</span></code></p></td>
-<td><p>Aggregate CpG methylation values within user-defined genomic regions
-(e.g., promoters, CpG islands, gene bodies, and exons).</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_aggregation</span></code></p></td>
+<td><p>Aggregate CpG methylation values within genomic regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_position.py</span></code></p></td>
-<td><p>Annotate CpGs according to their genomic coordinates using built-in
-or user-supplied annotation files.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_position</span></code></p></td>
+<td><p>Annotate CpGs using genomic coordinates.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_probe.py</span></code></p></td>
-<td><p>Annotate Illumina HumanMethylation450 (450K), EPIC (850K), and
-EPIC v2 probes with genomic and functional information.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_anno_probe</span></code></p></td>
+<td><p>Annotate Illumina 450K, EPIC, and EPIC v2 probes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_density_gene_centered.py</span></code></p></td>
-<td><p>Calculate and visualize CpG density across gene-centered genomic
-regions, including upstream, gene body, and downstream regions.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_density_gene_centered</span></code></p></td>
+<td><p>Calculate CpG density across gene-centered regions.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_chrom.py</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_chrom</span></code></p></td>
 <td><p>Summarize the chromosomal distribution of CpGs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_gene_centered.py</span></code></p></td>
-<td><p>Summarize the distribution of CpGs across gene-centered genomic
-features.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_gene_centered</span></code></p></td>
+<td><p>Summarize CpG distribution across gene-centered features.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_region.py</span></code></p></td>
-<td><p>Summarize the distribution of CpGs across user-defined genomic
-regions.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_distrb_region</span></code></p></td>
+<td><p>Summarize CpG distribution across user-defined regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_logo.py</span></code></p></td>
-<td><p>Generate DNA sequence logos and position weight matrices for CpGs
-and their flanking sequences.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_logo</span></code></p></td>
+<td><p>Generate sequence logos for CpGs and flanking sequences.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_to_gene.py</span></code></p></td>
-<td><p>Assign CpGs to putative target genes using an algorithm similar to
-<a class="reference external" href="http://great.stanford.edu/public/html/">GREAT</a>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CpG_to_gene</span></code></p></td>
+<td><p>Assign CpGs to putative target genes using a GREAT-like approach.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="cpg-signal-analysis">
 <h2><span class="section-number">1.2. </span>CpG Signal Analysis<a class="headerlink" href="#cpg-signal-analysis" title="Link to this heading"></a></h2>
-<p>These modules summarize, transform, normalize, visualize, and explore DNA
-methylation signals across CpGs and samples. Most modules support both
-DNA methylation <strong>beta-value</strong> and <strong>M-value</strong> matrices.</p>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">CpG signal analysis modules</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p>Tools for transforming, summarizing, visualizing, and exploring DNA
+methylation matrices.</p>
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 28.0%" />
-<col style="width: 72.0%" />
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_combat.py</span></code></p></td>
-<td><p>Correct batch effects using the
-<a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/16632515/">ComBat</a> algorithm.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_combat</span></code></p></td>
+<td><p>Correct batch effects using ComBat.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_jitter_plot.py</span></code></p></td>
-<td><p>Generate jitter plots (strip charts) and bean plots to visualize the
-distribution of methylation values for each sample.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_jitter_plot</span></code></p></td>
+<td><p>Visualize sample methylation distributions.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_m_conversion.py</span></code></p></td>
-<td><p>Convert DNA methylation beta values to M values, or vice versa.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_m_conversion</span></code></p></td>
+<td><p>Convert between Beta-values and M-values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_PCA.py</span></code></p></td>
-<td><p>Perform principal component analysis (PCA) to explore sample
-relationships and identify major sources of variation.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_PCA</span></code></p></td>
+<td><p>Perform principal component analysis.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_gene_centered.py</span></code></p></td>
-<td><p>Calculate and visualize average methylation profiles across
-gene-centered genomic regions.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_gene_centered</span></code></p></td>
+<td><p>Plot methylation profiles across gene-centered regions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_region.py</span></code></p></td>
-<td><p>Calculate and visualize average methylation profiles across
-user-defined genomic regions.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_profile_region</span></code></p></td>
+<td><p>Plot methylation profiles across user-defined regions.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_selectNBest.py</span></code></p></td>
-<td><p>Select the most informative CpGs using ANOVA, mutual information,
-or chi-square feature selection.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_selectNBest</span></code></p></td>
+<td><p>Select informative CpGs using feature-selection methods.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stacked_barplot.py</span></code></p></td>
-<td><p>Generate stacked bar plots showing the proportions of CpGs within
-different methylation intervals for each sample.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stacked_barplot</span></code></p></td>
+<td><p>Summarize methylation states with stacked bar plots.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stats.py</span></code></p></td>
-<td><p>Summarize methylation statistics for CpGs within genomic regions.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_stats</span></code></p></td>
+<td><p>Calculate methylation statistics.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_topN.py</span></code></p></td>
-<td><p>Select the most variable CpGs according to standard deviation.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_topN</span></code></p></td>
+<td><p>Select highly variable CpGs.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_trichotomize.py</span></code></p></td>
-<td><p>Classify beta values into unmethylated, partially methylated,
-methylated, or unassigned states using a Bayesian Gaussian mixture
-model.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_trichotmize</span></code></p></td>
+<td><p>Classify CpGs into methylation states.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_tSNE.py</span></code></p></td>
-<td><p>Perform t-distributed stochastic neighbor embedding (t-SNE) for
-visualization of sample relationships.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beta_tSNE</span></code></p></td>
+<td><p>Perform t-SNE dimensionality reduction.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_UMAP.py</span></code></p></td>
-<td><p>Perform Uniform Manifold Approximation and Projection (UMAP) for
-visualization of sample relationships.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="differential-methylation-analysis">
-<h2><span class="section-number">1.3. </span>Differential Methylation Analysis<a class="headerlink" href="#differential-methylation-analysis" title="Link to this heading"></a></h2>
-<p>These modules identify <strong>differentially methylated CpGs (DMCs)</strong> between
-experimental or biological groups using statistical tests, regression models,
-and Bayesian methods. Different modules are available for Illumina methylation
-arrays (450K, EPIC, and EPIC v2) and bisulfite sequencing data (RRBS/WGBS).</p>
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-text">Differential methylation analysis modules</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
-<colgroup>
-<col style="width: 28.0%" />
-<col style="width: 72.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_Bayes.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs using a Bayesian statistical
-model. Designed for Illumina methylation array data.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_bb.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
-using a beta-binomial model.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_fisher.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
-using Fisher’s exact test.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_glm.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs using a generalized linear
-model (GLM). Designed for Illumina methylation array data.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_logit.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs from RRBS/WGBS count data
-using logistic regression.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_nonparametric.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs using nonparametric tests,
-including the Mann–Whitney U test for two-group comparisons and the
-Kruskal–Wallis test for multiple-group comparisons.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_ttest.py</span></code></p></td>
-<td><p>Identify differentially methylated CpGs using Student’s <em>t</em>-test.
-Designed for Illumina methylation array data.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="predictive-analysis">
-<h2><span class="section-number">1.4. </span>Predictive Analysis<a class="headerlink" href="#predictive-analysis" title="Link to this heading"></a></h2>
-<p>These modules predict biological phenotypes or sample characteristics from
-DNA methylation profiles. Additional predictive models will be incorporated
-in future releases.</p>
-<table class="docutils align-default" id="id4">
-<caption><span class="caption-text">Predictive analysis modules</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
-<colgroup>
-<col style="width: 28.0%" />
-<col style="width: 72.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">predict_sex.py</span></code></p></td>
-<td><p>Predict the biological sex of a sample using DNA methylation patterns
-on sex chromosomes and CpGs associated with genomic imprinting.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_UMAP</span></code></p></td>
+<td><p>Perform UMAP dimensionality reduction.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="missing-value-imputation">
-<h2><span class="section-number">1.5. </span>Missing-value Imputation<a class="headerlink" href="#missing-value-imputation" title="Link to this heading"></a></h2>
-<p>These modules simulate, summarize, evaluate, and impute missing values in DNA
-methylation matrices. The framework supports both <strong>beta-value</strong> and
-<strong>M-value</strong> matrices and provides a broad range of statistical,
-machine-learning, and genomics-informed imputation algorithms.</p>
-<table class="docutils align-default" id="id5">
-<caption><span class="caption-text">Missing-value imputation modules</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<h2><span class="section-number">1.3. </span>Missing-value Imputation<a class="headerlink" href="#missing-value-imputation" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_impute</span></code> provides a unified interface for detecting, simulating,
+evaluating, and imputing missing values in methylation matrices. Imputation
+performance can optionally be evaluated against a truth matrix using MAE,
+RMSE, and <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 76.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Brief description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">constant</span></code></p></td>
+<td><p>Replace all missing values with a user-specified constant.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code></p></td>
+<td><p>Replace missing values with row-wise or column-wise means.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">median</span></code></p></td>
+<td><p>Replace missing values with row-wise or column-wise medians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min</span></code> / <code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>Replace missing values with row-wise or column-wise minima or maxima.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rand</span></code></p></td>
+<td><p>Replace missing values using randomly selected observed values from the
+same row or column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">refknn</span></code></p></td>
+<td><p>Use K-nearest neighbors from an external complete reference matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mw</span></code></p></td>
+<td><p>Impute from neighboring values in a moving window using the mean or
+median.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">knn</span></code></p></td>
+<td><p>Use scikit-learn KNN imputation within the input methylation matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">buck</span></code></p></td>
+<td><p>Iterative regression imputation based on the method of Buck (1960).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rf</span></code></p></td>
+<td><p>Iteratively predict missing values with Random Forest regression.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">softimpute</span></code></p></td>
+<td><p>Low-rank matrix completion using iterative soft-thresholded SVD.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">morel</span></code></p></td>
+<td><p>Impute systematic block-wise missingness using Random Forest or a dense
+neural network, with KNN for sporadic missing values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gnn</span></code></p></td>
+<td><p>Impute from genomically neighboring CpGs, optionally restricted by
+candidate cis-regulatory elements.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The command also provides utilities such as <code class="docutils literal notranslate"><span class="pre">toy</span></code>, <code class="docutils literal notranslate"><span class="pre">insertna</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dropna</span></code>, and <code class="docutils literal notranslate"><span class="pre">countna</span></code> for generating test matrices and inspecting
+missingness.</p>
+<p>For details, see <a class="reference internal" href="demo/beta_impute.html"><span class="doc">beta_impute.py</span></a>.</p>
+</section>
+<section id="cell-type-deconvolution">
+<h2><span class="section-number">1.4. </span>Cell-type Deconvolution<a class="headerlink" href="#cell-type-deconvolution" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_deconvolution</span></code> estimates cell-type proportions from bulk DNA
+methylation profiles using a reference methylation matrix and constrained
+least-squares methods.</p>
+<p>The current reference panel includes the following cell-type labels:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>Cell type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Bmem</span></code></p></td>
+<td><p>B memory cells</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Bnv</span></code></p></td>
+<td><p>B naïve cells</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CD4Tmem</span></code></p></td>
+<td><p>CD4+ memory T cells</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CD4Tnv</span></code></p></td>
+<td><p>CD4+ naïve T cells</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CD8Tmem</span></code></p></td>
+<td><p>CD8+ memory T cells</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CD8Tnv</span></code></p></td>
+<td><p>CD8+ naïve T cells</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Treg</span></code></p></td>
+<td><p>Regulatory T cells</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NK</span></code></p></td>
+<td><p>Natural killer cells</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Bas</span></code></p></td>
+<td><p>Basophils</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Neu</span></code></p></td>
+<td><p>Neutrophils</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Eos</span></code></p></td>
+<td><p>Eosinophils</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Mono</span></code></p></td>
+<td><p>Monocytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>Use <code class="docutils literal notranslate"><span class="pre">beta_deconvolution</span> <span class="pre">-h</span></code> for input requirements and available options.</p>
+</section>
+<section id="differential-methylation-analysis">
+<h2><span class="section-number">1.5. </span>Differential Methylation Analysis<a class="headerlink" href="#differential-methylation-analysis" title="Link to this heading"></a></h2>
+<p>Tools for identifying differentially methylated CpGs (DMCs) using array
+Beta-values or sequencing-derived methylation counts.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_Bayes</span></code></p></td>
+<td><p>Bayesian differential methylation analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_bb</span></code></p></td>
+<td><p>Beta-binomial analysis of RRBS/WGBS methylation counts.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_fisher</span></code></p></td>
+<td><p>Fisher’s exact test for sequencing-derived methylation counts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_glm</span></code></p></td>
+<td><p>Generalized linear model analysis.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_logit</span></code></p></td>
+<td><p>Logistic-regression analysis of methylation counts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_nonparametric</span></code></p></td>
+<td><p>Mann–Whitney U and Kruskal–Wallis tests.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmc_ttest</span></code></p></td>
+<td><p>Student’s <em>t</em>-test for methylation-array data.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="epigenetic-aging-analysis">
+<h2><span class="section-number">1.6. </span>Epigenetic Aging Analysis<a class="headerlink" href="#epigenetic-aging-analysis" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">epical</span></code> provides a unified interface for DNA methylation age prediction
+and related epigenetic aging measures. It includes human, pediatric,
+gestational-age, tissue-specific, mouse, and pan-mammalian models.</p>
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 28.0%" />
 <col style="width: 72.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Module</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>Clock / model</p></th>
+<th class="head"><p>Brief description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">beta_impute.py</span></code></p></td>
-<td><p>A comprehensive framework for DNA methylation missing-value analysis.
-Supports data simulation, missing-value insertion, multiple
-imputation algorithms, and quantitative evaluation of imputation
-accuracy.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Horvath13</span></code></p></td>
+<td><p>Original Horvath multi-tissue human DNAm age clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Horvath13_shrunk</span></code></p></td>
+<td><p>Reduced-CpG version of the Horvath multi-tissue clock.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Horvath18</span></code></p></td>
+<td><p>Horvath skin-and-blood clock for several cultured and primary tissues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Levine</span></code></p></td>
+<td><p>DNAm PhenoAge, developed to capture aging-related phenotypic risk in
+blood.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hannum</span></code></p></td>
+<td><p>Blood-based human DNAm age clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Zhang_EN</span></code></p></td>
+<td><p>Zhang human age predictor fitted using elastic-net regression.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Zhang_BLUP</span></code></p></td>
+<td><p>Zhang human age predictor based on a BLUP model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AltumAge</span></code></p></td>
+<td><p>Deep-learning DNAm age predictor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Lu_DNAmTL</span></code></p></td>
+<td><p>DNA methylation estimator of telomere length.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Weidner</span></code></p></td>
+<td><p>Compact human blood DNAm age predictor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Lin</span></code></p></td>
+<td><p>Human DNAm age predictor based on age-associated CpGs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ENCen100</span></code></p></td>
+<td><p>Epigenetic age model based on the EN/Cen 100-CpG signature.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ENCen40</span></code></p></td>
+<td><p>Reduced 40-CpG version of the EN/Cen model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DunedinPACE</span></code></p></td>
+<td><p>Estimates the pace of biological aging rather than chronological age.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Ped_Wu</span></code></p></td>
+<td><p>Pediatric DNAm age model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PedBE</span></code></p></td>
+<td><p>Pediatric buccal epigenetic age clock.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Bohlin</span></code></p></td>
+<td><p>Gestational-age predictor developed by Bohlin and colleagues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Haftorn</span></code></p></td>
+<td><p>Gestational-age predictor developed by Haftorn and colleagues.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Knight</span></code></p></td>
+<td><p>Gestational-age predictor developed by Knight and colleagues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Mayne</span></code></p></td>
+<td><p>Gestational-age predictor developed by Mayne and colleagues.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Lee_CPC</span></code></p></td>
+<td><p>Lee gestational-age model based on cord-blood cell proportions/CpGs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Lee_RPC</span></code></p></td>
+<td><p>Lee robust placental/gestational-age model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GA_Lee_rRPC</span></code></p></td>
+<td><p>Refined version of the Lee RPC gestational-age model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Cortical</span></code></p></td>
+<td><p>DNAm age clock optimized for human cortical tissue.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MEAT</span></code></p></td>
+<td><p>Muscle Epigenetic Age Test for skeletal muscle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EPM</span></code></p></td>
+<td><p>Epigenetic Pacemaker model for estimating epigenetic state changes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WLMT</span></code></p></td>
+<td><p>Whole-lifespan, multi-tissue mouse DNAm age clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">YOMT</span></code></p></td>
+<td><p>Multi-tissue mouse DNAm age predictor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mmLiver</span></code></p></td>
+<td><p>Mouse liver-specific DNAm age predictor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mmBlood</span></code></p></td>
+<td><p>Mouse blood-specific DNAm age predictor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mammClock1</span></code></p></td>
+<td><p>Pan-mammalian multi-tissue DNAm age clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mammClock2</span></code></p></td>
+<td><p>Pan-mammalian multi-tissue DNAm age clock using an alternative CpG set.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mammClock3</span></code></p></td>
+<td><p>Pan-mammalian multi-tissue DNAm age clock using an alternative CpG set.</p></td>
 </tr>
 </tbody>
 </table>
-<p>The <code class="code docutils literal notranslate"><span class="pre">beta_impute.py</span></code> command provides the following functionality:</p>
-<ul class="simple">
-<li><p><strong>Simulation and benchmarking</strong></p>
-<ul>
-<li><p>Generate synthetic DNA methylation matrices with user-defined dimensions
-and missing-value rates.</p></li>
-<li><p>Insert missing values into existing matrices for benchmarking and method
-comparison.</p></li>
-</ul>
-</li>
-<li><p><strong>Missing-value assessment</strong></p>
-<ul>
-<li><p>Count missing values for each CpG and sample.</p></li>
-<li><p>Remove incomplete rows or columns when required.</p></li>
-</ul>
-</li>
-<li><p><strong>Missing-value imputation</strong></p>
-<ul>
-<li><p>Simple statistical methods (constant, mean, median, minimum, maximum,
-and random-value imputation).</p></li>
-<li><p>Moving-window imputation.</p></li>
-<li><p>K-nearest neighbors (KNN).</p></li>
-<li><p>Reference-based KNN using an external complete methylation matrix.</p></li>
-<li><p>Iterative Buck regression.</p></li>
-<li><p>Iterative Random Forest regression.</p></li>
-<li><p>SoftImpute low-rank matrix completion.</p></li>
-<li><p>MOREL for systematic block-wise missingness.</p></li>
-<li><p>Genomic nearest-neighbor (GNN) imputation using neighboring CpGs.</p></li>
-</ul>
-</li>
-<li><p><strong>Performance evaluation</strong></p>
-<ul>
-<li><p>Compare imputed values with a complete reference (truth) matrix.</p></li>
-<li><p>Report Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and
-coefficient of determination (R²) for the imputed values.</p></li>
-</ul>
-</li>
-</ul>
-<p>For detailed documentation, available algorithms, command-line options, and
-examples, see <a class="reference internal" href="demo/beta_impute.html"><span class="doc">beta_impute.py</span></a>.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">epical</span> <span class="pre">-h</span></code> to list available clocks and <code class="docutils literal notranslate"><span class="pre">epical</span> <span class="pre">CLOCK</span> <span class="pre">-h</span></code> for
+clock-specific requirements.</p>
+</section>
+<section id="command-line-usage">
+<h2><span class="section-number">1.7. </span>Command-line Usage<a class="headerlink" href="#command-line-usage" title="Link to this heading"></a></h2>
+<p>CpGtools commands are installed as console programs. Use <code class="docutils literal notranslate"><span class="pre">-h</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--help</span></code> to display command-specific input requirements and options, for
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epical</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">beta_impute</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">beta_deconvolution</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">dmc_bb</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>Individual commands may require specialized input formats. See the
+corresponding documentation pages for detailed examples.</p>
 </section>
 </section>
 
@@ -454,7 +573,7 @@ examples, see <a class="reference internal" href="demo/beta_impute.html"><span c
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

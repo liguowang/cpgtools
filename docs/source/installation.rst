@@ -1,54 +1,106 @@
 Installation
 ============
 
-**CpGtools** is a Python package for analyzing DNA methylation data. It runs on
-Linux, macOS, and Windows, and requires **Python 3.9 or later**.
+**CpGtools** is a Python package for DNA methylation analysis. It supports
+Python 3.9 or later and can be installed with ``pip``. Most Python
+dependencies are installed automatically.
 
-Most Python dependencies are installed automatically when CpGtools is
-installed with ``pip``. Some commands additionally require **R** and specific
-R packages.
-
-Prerequisites
--------------
-
-Before installing CpGtools, ensure that the following software is available on
-your system:
-
-* `Python 3 <https://www.python.org/downloads/>`_
-* `pip <https://pip.pypa.io/en/stable/installation/>`_
-
-The following software is optional and is required only by specific
-subcommands:
-
-* `TensorFlow <https://www.tensorflow.org/>`_
-  (required by ``beta_impute.py morel --model DNN``)
-* `R <https://www.r-project.org/>`_
-* R package `aod <https://cran.r-project.org/package=aod>`_
-  (required by ``dmc_bb.py``)
-* R package
-  `beanplot <https://cran.r-project.org/package=beanplot>`_
-  (required by ``beta_jitter_plot.py``)
+Some commands require additional software, such as R or TensorFlow.
 
 
+
+Install in a Virtual Environment
+--------------------------------
+
+Using a virtual environment is recommended because it keeps CpGtools and its
+Python dependencies isolated from the system Python installation and from
+other projects.
+
+Create a virtual environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First, create a new environment using Python's built-in ``venv`` module:
+
+.. code-block:: bash
+
+   python3 -m venv cpgtools-env
+
+Activate the environment:
+
+On Linux or macOS:
+
+.. code-block:: bash
+
+   source cpgtools-env/bin/activate
+
+On Windows Command Prompt:
+
+.. code-block:: bat
+
+   cpgtools-env\Scripts\activate.bat
+
+On Windows PowerShell:
+
+.. code-block:: powershell
+
+   cpgtools-env\Scripts\Activate.ps1
+
+After activation, the environment name usually appears at the beginning of
+the command prompt, for example::
+
+   (cpgtools-env) $
+
+Install CpGtools
+~~~~~~~~~~~~~~~~
+
+Upgrade ``pip`` and install CpGtools from PyPI:
+
+.. code-block:: bash
+
+   python -m pip install --upgrade pip
+   python -m pip install cpgtools
+
+Verify the installation:
+
+.. code-block:: bash
+
+   epical --version
+   beta_impute --version
+
+When finished, leave the virtual environment with:
+
+.. code-block:: bash
+
+   deactivate
+
+To use CpGtools again later, reactivate the same environment rather than
+reinstalling the package.
 
 Install from PyPI
 -----------------
 
-The recommended way to install CpGtools is from the Python Package Index
-(PyPI):
+The recommended installation method is:
 
 .. code-block:: bash
 
-   pip install cpgtools
+   python -m pip install cpgtools
 
-Install the Development Version
--------------------------------
+To upgrade an existing installation:
+
+.. code-block:: bash
+
+   python -m pip install --upgrade cpgtools
+
+
+Install from GitHub
+-------------------
 
 To install the latest development version directly from GitHub:
 
 .. code-block:: bash
 
-   pip install git+https://github.com/liguowang/cpgtools.git
+   python -m pip install git+https://github.com/liguowang/cpgtools.git
+
 
 Install from Source
 -------------------
@@ -59,69 +111,102 @@ Clone the repository and install CpGtools locally:
 
    git clone https://github.com/liguowang/cpgtools.git
    cd cpgtools
-   pip install .
+   python -m pip install .
 
-Alternatively, install in editable (development) mode:
+For development, use an editable installation:
 
 .. code-block:: bash
 
-   pip install -e .
+   python -m pip install -e .
 
-Dependencies
-------------
 
-The following Python packages are installed automatically when CpGtools is
-installed via ``pip``:
+Python Dependencies
+-------------------
+
+The following packages are installed automatically with CpGtools:
 
 * ``numpy``
 * ``scipy``
 * ``pandas``
-* ``matplotlib``
 * ``scikit-learn``
-* ``fancyimpute``
+* ``matplotlib``
 * ``umap-learn``
-* ``weblogo``
 * ``bx-python``
+* ``weblogo``
 * ``pycombat``
 
-
-Optional Python Dependencies
-----------------------------
-
-Most Python dependencies are installed automatically when CpGtools is
-installed via ``pip``. The following package is optional:
-
-* ``tensorflow`` — required only when running the MOREL algorithm with
-  ``--model DNN`` in ``beta_impute.py``. It is **not** required for the
-  default Random Forest implementation (``--model RF``).
-
-To install TensorFlow:
-
-.. code-block:: bash
-
-   pip install tensorflow
+Additional dependencies required by these packages are resolved automatically
+by ``pip``.
 
 
-Upgrade CpGtools
-----------------
+Optional Dependencies
+---------------------
 
-To upgrade an existing installation to the latest release:
+TensorFlow
+~~~~~~~~~~
+
+TensorFlow is required only when using the MOREL imputation method with the
+dense neural-network model:
 
 .. code-block:: bash
 
-   pip install --upgrade cpgtools
+   beta_impute morel --model DNN ...
+
+The default Random Forest model (``--model RF``) does not require TensorFlow.
+
+Install TensorFlow separately if needed:
+
+.. code-block:: bash
+
+   python -m pip install tensorflow
+
+
+R and R Packages
+~~~~~~~~~~~~~~~~
+
+Some CpGtools commands call R and therefore require an R installation.
+
+`R <https://www.r-project.org/>`_
+   Required by commands that execute generated R scripts.
+
+`aod <https://cran.r-project.org/package=aod>`_
+   Required by ``dmc_bb``.
+
+`beanplot <https://cran.r-project.org/package=beanplot>`_
+   Required by ``beta_jitter_plot``.
+
+These R dependencies are not installed automatically by ``pip``.
+
 
 Verify the Installation
 -----------------------
 
-To verify that CpGtools was installed successfully:
+After installation, verify several command-line programs:
 
 .. code-block:: bash
 
-   cpgtools --version
+   epical --version
+   beta_impute --version
+   epical -h
+   beta_impute -h
+   beta_deconvolution -h
 
-or
+You can also verify that the Python package is importable:
 
 .. code-block:: bash
 
-   python -m cpgtools --version
+   python -c "import cpgmodule; print(cpgmodule.__file__)"
+
+
+Troubleshooting
+---------------
+
+If a command is not found after installation, confirm that CpGtools is
+installed in the active Python environment:
+
+.. code-block:: bash
+
+   python -m pip show cpgtools
+
+When using a virtual or Conda environment, make sure that environment is
+activated before installing or running CpGtools.

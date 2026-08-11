@@ -6,21 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. CpG_aggregation.py &mdash; CpGtools Documentation</title>
+  <title>1. CpG_aggregation &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. CpG_anno_position.py" href="CpG_anno_position.html" />
+    <link rel="next" title="2. CpG_anno_position" href="CpG_anno_position.html" />
     <link rel="prev" title="1. Pre-compiled datasets" href="../dataset.html" /> 
 </head>
 
@@ -32,8 +33,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +49,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,44 +61,56 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. CpG_aggregation.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">1.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">1.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">1.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">1.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output">1.5. Output</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. CpG_aggregation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">1.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">1.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpg-file">1.2.1. CpG file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#region-file">1.2.2. Region file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#count-mode-outlier-filtering">1.3. Count-mode Outlier Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">1.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">1.5. Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#count-mode-output">1.5.1. Count-mode Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beta-mode-output">1.5.2. Beta-mode Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#header-and-missing-values">1.6. Header and Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">1.7. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -106,7 +119,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -127,7 +140,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">1. </span>CpG_aggregation.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>CpG_aggregation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/CpG_aggregation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,88 +150,217 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cpg-aggregation-py">
-<h1><span class="section-number">1. </span>CpG_aggregation.py<a class="headerlink" href="#cpg-aggregation-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">1.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>Aggregate proportion values of a list of CpGs that located in give genomic regions
-(eg. CpG islands, promoters, exons, etc.).</p>
-<p><strong>Example of input file</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Chrom</span>  <span class="n">Start</span>   <span class="n">End</span>     <span class="n">score</span>
-<span class="n">chr1</span>   <span class="mi">100017748</span>       <span class="mi">100017749</span>       <span class="mi">3</span><span class="p">,</span><span class="mi">10</span>
-<span class="n">chr1</span>   <span class="mi">100017769</span>       <span class="mi">100017770</span>       <span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
-<span class="n">chr1</span>   <span class="mi">100017853</span>       <span class="mi">100017854</span>       <span class="mi">16</span><span class="p">,</span><span class="mi">21</span>
+  <section id="cpg-aggregation">
+<h1><span class="section-number">1. </span>CpG_aggregation<a class="headerlink" href="#cpg-aggregation" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">1.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CpG_aggregation</span></code> aggregates CpG methylation values over user-defined
+genomic regions such as promoters, CpG islands, exons, or other BED intervals.</p>
+<p>Two input data types are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> – methylated and total read counts, for example <code class="docutils literal notranslate"><span class="pre">3,10</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta</span></code> – Beta-values, for example <code class="docutils literal notranslate"><span class="pre">0.30</span></code></p></li>
+</ul>
+<p>The CpG methylation value must be stored in <strong>column 4</strong> of the CpG BED file.</p>
+</section>
+<section id="input-files">
+<h2><span class="section-number">1.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="cpg-file">
+<h3><span class="section-number">1.2.1. </span>CpG file<a class="headerlink" href="#cpg-file" title="Link to this heading"></a></h3>
+<p>The CpG input must be BED3+ with the methylation value in column 4.
+Compressed input is supported.</p>
+<p>Count-data example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">100017748</span>    <span class="mi">100017749</span>    <span class="mi">3</span><span class="p">,</span><span class="mi">10</span>
+<span class="n">chr1</span>    <span class="mi">100017769</span>    <span class="mi">100017770</span>    <span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
+<span class="n">chr1</span>    <span class="mi">100017853</span>    <span class="mi">100017854</span>    <span class="mi">16</span><span class="p">,</span><span class="mi">21</span>
 </pre></div>
 </div>
-<p><strong>Notes</strong></p>
-<p>Outlier CpG will be removed if the probability of observing its proportion value is less
-than p-cutoff. For example, if alpha set to 0.05, and there are 10 CpGs (n = 10) located in a
-particular genomic region, the p-cutoff of this genomic region is 0.005 (0.05/10). Supposing
-the total reads mapped to this region is 100, out of which 25 are methylated reads (i.e.
-regional methylation level beta = 25/100 = 0.25)</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">count</span></code> input, values must satisfy:</p>
 <ul class="simple">
-<li><p>The probability of observing CpG (3,10) is : <cite>pbinom(q=3, size=10, prob=0.25) = 0.7759</cite></p></li>
-<li><p>The probability of observing CpG (0,10) is : <cite>pbinom(q=0, size=10, prob=0.25) = 0.05631</cite></p></li>
-<li><p>The probability of observing CpG (16,21) is : <cite>pbinom(q=16, size=21, prob=0.25, lower.tail=F) = 1.19e-07</cite> (outlier)</p></li>
+<li><p>methylated reads &gt;= 0</p></li>
+<li><p>total reads &gt;= 0</p></li>
+<li><p>methylated reads &lt;= total reads</p></li>
 </ul>
+<p>Beta-value example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">100017748</span>    <span class="mi">100017749</span>    <span class="mf">0.30</span>
+<span class="n">chr1</span>    <span class="mi">100017769</span>    <span class="mi">100017770</span>    <span class="mf">0.05</span>
+<span class="n">chr1</span>    <span class="mi">100017853</span>    <span class="mi">100017854</span>    <span class="mf">0.76</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">beta</span></code> input, finite values must fall within [0, 1].</p>
 </section>
-<section id="options">
-<h2><span class="section-number">1.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Input CpG file in BED format. The first 3 columns
-contain “Chrom”, “Start”, and “End”. The 4th column
-contains proportion values.</p>
-</dd>
-<dt><kbd><span class="option">-a <var>ALPHA_CUT</var></span>, <span class="option">--alpha=<var>ALPHA_CUT</var></span></kbd></dt>
-<dd><p>The chance of mistakingly assign a particular CpG as
-an outlier for each genomic region. default-0.05</p>
-</dd>
-<dt><kbd><span class="option">-b <var>BED_FILE</var></span>, <span class="option">--bed=<var>BED_FILE</var></span></kbd></dt>
-<dd><p>BED3+ file specifying the genomic regions.</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>Prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
+<section id="region-file">
+<h3><span class="section-number">1.2.2. </span>Region file<a class="headerlink" href="#region-file" title="Link to this heading"></a></h3>
+<p>The region file must be BED3+ and may contain any number of additional
+columns. All original region columns are preserved in the output.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">567292</span>    <span class="mi">568293</span>
+<span class="n">chr1</span>    <span class="mi">713567</span>    <span class="mi">714568</span>
+<span class="n">chr1</span>    <span class="mi">762401</span>    <span class="mi">763402</span>
+</pre></div>
+</div>
 </section>
-<section id="input-files-examples">
-<h2><span class="section-number">1.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+</section>
+<section id="count-mode-outlier-filtering">
+<h2><span class="section-number">1.3. </span>Count-mode Outlier Filtering<a class="headerlink" href="#count-mode-outlier-filtering" title="Link to this heading"></a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">count</span></code> mode, CpG-level outliers are filtered by default.</p>
+<p>For each region, the original regional methylation proportion is calculated
+from all overlapping CpGs with total read count greater than zero:</p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{\sum m_i}{\sum n_i}\]</div>
+<p>where <span class="math notranslate nohighlight">\(m_i\)</span> is the methylated-read count and <span class="math notranslate nohighlight">\(n_i\)</span> is the total
+read count for CpG <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Each CpG is then tested against this regional methylation probability using a
+<strong>two-sided exact binomial test</strong>. A Bonferroni-adjusted cutoff is used:</p>
+<div class="math notranslate nohighlight">
+\[p_{\mathrm{cutoff}} = \frac{\alpha}{N_{\mathrm{CpG}}}\]</div>
+<p>CpGs with <span class="math notranslate nohighlight">\(p &lt; p_{\mathrm{cutoff}}\)</span> are removed before the filtered
+regional methylation value is calculated.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--no_outlier_filter</span></code> to disable this filtering.</p>
+<p>Outlier filtering is applied only in <code class="docutils literal notranslate"><span class="pre">count</span></code> mode.</p>
+</section>
+<section id="usage">
+<h2><span class="section-number">1.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Count data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_aggregation</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_03_RRBS</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">b</span> <span class="n">hg19</span><span class="o">.</span><span class="n">RefSeq</span><span class="o">.</span><span class="n">union</span><span class="mf">.1</span><span class="n">Kpromoter</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">t</span> <span class="n">count</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>Beta-values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_aggregation</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">methylation</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">b</span> <span class="n">regions</span><span class="o">.</span><span class="n">bed</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">t</span> <span class="n">beta</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_03_RRBS.bed.gz">test_03_RRBS.bed.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz">hg19.RefSeq.union.1Kpromoter.bed.gz</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--type</span> <span class="pre">{count,beta}</span></code> – methylation data type in column 4;
+required</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-a</span></code>, <code class="docutils literal notranslate"><span class="pre">--alpha</span></code> – family-wise error rate for count-mode outlier
+filtering (default: 0.05)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no_outlier_filter</span></code> – disable count-mode outlier filtering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--min_cpg</span></code> – minimum number of valid overlapping CpGs required for a
+region (default: 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ddof</span> <span class="pre">{0,1}</span></code> – degrees-of-freedom adjustment used for the standard
+deviation in Beta-value mode (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--header</span></code> – write a header row</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--na_rep</span></code> – text used when summary values are unavailable
+(default: <code class="docutils literal notranslate"><span class="pre">NA</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
 </ul>
-</section>
-<section id="command">
-<h2><span class="section-number">1.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$CpG_aggregation.py -b hg19.RefSeq.union.1Kpromoter.bed.gz  -i test_03_RRBS.bed -o out
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_aggregation</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
 <section id="output">
 <h2><span class="section-number">1.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chr1</span>    <span class="mi">567292</span>  <span class="mi">568293</span>  <span class="mi">3</span>       <span class="mi">0</span>       <span class="mi">93</span>      <span class="mi">3</span>       <span class="mi">0</span>       <span class="mi">93</span>
-<span class="n">chr1</span>    <span class="mi">713567</span>  <span class="mi">714568</span>  <span class="mi">6</span>       <span class="mi">0</span>       <span class="mi">100</span>     <span class="mi">6</span>       <span class="mi">0</span>       <span class="mi">100</span>
-<span class="n">chr1</span>    <span class="mi">762401</span>  <span class="mi">763402</span>  <span class="mi">7</span>       <span class="mi">0</span>       <span class="mi">110</span>     <span class="mi">7</span>       <span class="mi">0</span>       <span class="mi">110</span>
-<span class="n">chr1</span>    <span class="mi">762470</span>  <span class="mi">763471</span>  <span class="mi">10</span>      <span class="mi">0</span>       <span class="mi">158</span>     <span class="mi">10</span>      <span class="mi">0</span>       <span class="mi">158</span>
-<span class="n">chr1</span>    <span class="mi">854571</span>  <span class="mi">855572</span>  <span class="mi">2</span>       <span class="mi">12</span>      <span class="mi">16</span>      <span class="mi">2</span>       <span class="mi">12</span>      <span class="mi">16</span>
-<span class="n">chr1</span>    <span class="mi">860620</span>  <span class="mi">861621</span>  <span class="mi">16</span>      <span class="mi">91</span>      <span class="mi">232</span>     <span class="mi">16</span>      <span class="mi">91</span>      <span class="mi">232</span>
-<span class="n">chr1</span>    <span class="mi">894178</span>  <span class="mi">895179</span>  <span class="mi">12</span>      <span class="mi">151</span>     <span class="mi">229</span>     <span class="mi">41</span>      <span class="mi">506</span>     <span class="mi">735</span>
-</pre></div>
-</div>
-<p><strong>Description</strong></p>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">out</span></code>, the command writes:</p>
 <ul class="simple">
-<li><p>Column1-3: Genome coordinates</p></li>
-<li><p>Column4-6: numbers of “CpG”, “aggregated methyl reads”, and “aggregate total reads” <strong>after</strong>  outlier filtering</p></li>
-<li><p>Column7-9: numbers of “CpG”, “aggregated methyl reads”, and “aggregate total reads” <strong>before</strong>  outlier filtering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">out.aggregation.tsv</span></code></p></li>
+</ul>
+<p>All columns from the region file are retained, and summary columns are
+appended.</p>
+<section id="count-mode-output">
+<h3><span class="section-number">1.5.1. </span>Count-mode Output<a class="headerlink" href="#count-mode-output" title="Link to this heading"></a></h3>
+<p>The following columns are appended:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_CpG_filtered</span></code></p></td>
+<td><p>Number of CpGs retained after outlier filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">N_methyl_filtered</span></code></p></td>
+<td><p>Total methylated reads after filtering.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_total_filtered</span></code></p></td>
+<td><p>Total reads after filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Beta_filtered</span></code></p></td>
+<td><p>Aggregated methylation proportion after filtering.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_CpG_original</span></code></p></td>
+<td><p>Number of valid overlapping CpGs before filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">N_methyl_original</span></code></p></td>
+<td><p>Total methylated reads before filtering.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_total_original</span></code></p></td>
+<td><p>Total reads before filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Beta_original</span></code></p></td>
+<td><p>Aggregated methylation proportion before filtering.</p></td>
+</tr>
+</tbody>
+</table>
+<p>CpGs with total read count equal to zero are not included in count-mode
+aggregation.</p>
+</section>
+<section id="beta-mode-output">
+<h3><span class="section-number">1.5.2. </span>Beta-mode Output<a class="headerlink" href="#beta-mode-output" title="Link to this heading"></a></h3>
+<p>The following columns are appended:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26.0%" />
+<col style="width: 74.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">N_CpG</span></code></p></td>
+<td><p>Number of overlapping Beta-values used.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Mean_beta</span></code></p></td>
+<td><p>Mean Beta-value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Median_beta</span></code></p></td>
+<td><p>Median Beta-value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Min_beta</span></code></p></td>
+<td><p>Minimum Beta-value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Max_beta</span></code></p></td>
+<td><p>Maximum Beta-value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Std_beta</span></code></p></td>
+<td><p>Standard deviation of Beta-values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="header-and-missing-values">
+<h2><span class="section-number">1.6. </span>Header and Missing Values<a class="headerlink" href="#header-and-missing-values" title="Link to this heading"></a></h2>
+<p>By default, no header is written. With <code class="docutils literal notranslate"><span class="pre">--header</span></code>, the original region
+columns are named:</p>
+<p><code class="docutils literal notranslate"><span class="pre">chrom</span></code>, <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">end</span></code>, <code class="docutils literal notranslate"><span class="pre">column_4</span></code>, <code class="docutils literal notranslate"><span class="pre">column_5</span></code>, …</p>
+<p>followed by the aggregation columns.</p>
+<p>If a region has fewer than <code class="docutils literal notranslate"><span class="pre">--min_cpg</span></code> valid overlapping CpGs, the appended
+summary fields are written using <code class="docutils literal notranslate"><span class="pre">--na_rep</span></code>.</p>
+<p>Invalid region records or records with an inconsistent number of columns are
+preserved in the output, with missing summary values appended.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">1.7. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_03_RRBS.bed.gz">RRBS count data</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz">Example promoter regions</a></p></li>
 </ul>
 </section>
 </section>
@@ -228,14 +370,14 @@ an outlier for each genomic region. default-0.05</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../dataset.html" class="btn btn-neutral float-left" title="1. Pre-compiled datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CpG_anno_position.html" class="btn btn-neutral float-right" title="2. CpG_anno_position.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CpG_anno_position.html" class="btn btn-neutral float-right" title="2. CpG_anno_position" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

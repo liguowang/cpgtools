@@ -1,48 +1,91 @@
-beta_topN.py
-=============
+beta_topN
+=========
 
-Description
-------------
-This program picks the top N rows (according to standard deviation) from the input file.
-The resulting file can be used for clustering and PCA analysis.
-
-**Example of input**
-::
-
- CpG_ID  Sample_01       Sample_02       Sample_03       Sample_04
- cg_001  0.831035        0.878022        0.794427        0.880911
- cg_002  0.249544        0.209949        0.234294        0.236680
- cg_003  0.845065        0.843957        0.840184        0.824286
-
-Options
------------
-
-Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Tab-separated data frame file containing beta values
-                        with the 1st row containing sample IDs and the 1st
-                        column containing CpG IDs.
-  -c CPG_COUNT, --count=CPG_COUNT
-                        Number of most variable CpGs (ranked by standard
-                        deviation) to keep. default=1000
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-
-Input files (examples)
-------------------------
-
-- `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_
-
-Command
+Overview
 --------
-::
 
- $beta_topN.py -i test_05_TwoGroup.tsv.gz -c 500 -o test_05_TwoGroup
+``beta_topN`` ranks CpGs by a row-wise summary statistic and retains the top
+N features for downstream analyses such as PCA or clustering.
 
-Output file
+The input matrix should have **CpGs in rows** and **samples in columns**.
+
+
+Ranking Scores
+--------------
+
+Supported row-wise scores are:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Score
+     - Description
+   * - ``std``
+     - Standard deviation across samples. This is the default.
+   * - ``var``
+     - Variance across samples.
+   * - ``mean``
+     - Mean across samples.
+   * - ``median``
+     - Median across samples.
+   * - ``mad``
+     - Median absolute deviation across samples.
+
+
+Input
+-----
+
+The input is a tabular CpG-by-sample matrix. Delimiters are detected
+automatically and compressed input is supported.
+
+Example::
+
+   CpG_ID   Sample_01   Sample_02   Sample_03   Sample_04
+   cg_001   0.831035    0.878022    0.794427    0.880911
+   cg_002   0.249544    0.209949    0.234294    0.236680
+   cg_003   0.845065    0.843957    0.840184    0.824286
+
+
+Usage
+-----
+
+Basic usage::
+
+   beta_topN \
+       -i test_05_TwoGroup.tsv.gz \
+       -c 500 \
+       -o test_05_TwoGroup
+
+Useful options include:
+
+* ``-c``, ``--count``, ``--top`` -- number of CpGs to retain
+  (default: 1000)
+* ``-s``, ``--score`` -- ``std``, ``var``, ``mean``, ``median``, or ``mad``
+* ``--ascending`` -- rank from smallest to largest score
+* ``--na_policy {drop,omit}`` -- remove incomplete CpGs or calculate from
+  available values
+* ``--min_valid`` -- minimum observed values required when
+  ``--na_policy omit`` is used (default: 2)
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   beta_topN -h
+
+
+Output
+------
+
+For output prefix ``test_05_TwoGroup``, the command writes:
+
+* ``test_05_TwoGroup.ranked.tsv`` -- all retained CpGs with ``Score`` and
+  ``Rank`` columns
+* ``test_05_TwoGroup.topN.tsv`` -- top-ranked CpG-by-sample matrix
+* ``test_05_TwoGroup.topN_ids.txt`` -- selected CpG IDs
+
+
+Example Data
 ------------
 
-- test_05_TwoGroup.sortedStdev.tsv
-- test_05_TwoGroup.sortedStdev.topN.tsv
+* `test_05_TwoGroup.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz>`_

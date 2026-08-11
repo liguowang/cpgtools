@@ -9,12 +9,12 @@
   <title>2. Installation &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=978f7b89" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=09beee0d"></script>
+      <script src="_static/documentation_options.js?v=acc74ff5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -32,8 +32,8 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            CpGtools
+          <a href="index.html">
+            
               <img src="_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,21 +48,29 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisites">2.1. Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-in-a-virtual-environment">2.1. Install in a Virtual Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-virtual-environment">2.1.1. Create a virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-cpgtools">2.1.2. Install CpGtools</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-pypi">2.2. Install from PyPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-the-development-version">2.3. Install the Development Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-github">2.3. Install from GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-source">2.4. Install from Source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">2.5. Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-python-dependencies">2.6. Optional Python Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#upgrade-cpgtools">2.7. Upgrade CpGtools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#verify-the-installation">2.8. Verify the Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-dependencies">2.5. Python Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-dependencies">2.6. Optional Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tensorflow">2.6.1. TensorFlow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-and-r-packages">2.6.2. R and R Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verify-the-installation">2.7. Verify the Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">2.8. Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -109,7 +117,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -142,44 +150,75 @@
              
   <section id="installation">
 <h1><span class="section-number">2. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p><strong>CpGtools</strong> is a Python package for analyzing DNA methylation data. It runs on
-Linux, macOS, and Windows, and requires <strong>Python 3.9 or later</strong>.</p>
-<p>Most Python dependencies are installed automatically when CpGtools is
-installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Some commands additionally require <strong>R</strong> and specific
-R packages.</p>
-<section id="prerequisites">
-<h2><span class="section-number">2.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
-<p>Before installing CpGtools, ensure that the following software is available on
-your system:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.python.org/downloads/">Python 3</a></p></li>
-<li><p><a class="reference external" href="https://pip.pypa.io/en/stable/installation/">pip</a></p></li>
-</ul>
-<p>The following software is optional and is required only by specific
-subcommands:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a>
-(required by <code class="docutils literal notranslate"><span class="pre">beta_impute.py</span> <span class="pre">morel</span> <span class="pre">--model</span> <span class="pre">DNN</span></code>)</p></li>
-<li><p><a class="reference external" href="https://www.r-project.org/">R</a></p></li>
-<li><p>R package <a class="reference external" href="https://cran.r-project.org/package=aod">aod</a>
-(required by <code class="docutils literal notranslate"><span class="pre">dmc_bb.py</span></code>)</p></li>
-<li><p>R package
-<a class="reference external" href="https://cran.r-project.org/package=beanplot">beanplot</a>
-(required by <code class="docutils literal notranslate"><span class="pre">beta_jitter_plot.py</span></code>)</p></li>
-</ul>
-</section>
-<section id="install-from-pypi">
-<h2><span class="section-number">2.2. </span>Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Link to this heading"></a></h2>
-<p>The recommended way to install CpGtools is from the Python Package Index
-(PyPI):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cpgtools
+<p><strong>CpGtools</strong> is a Python package for DNA methylation analysis. It supports
+Python 3.9 or later and can be installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Most Python
+dependencies are installed automatically.</p>
+<p>Some commands require additional software, such as R or TensorFlow.</p>
+<section id="install-in-a-virtual-environment">
+<h2><span class="section-number">2.1. </span>Install in a Virtual Environment<a class="headerlink" href="#install-in-a-virtual-environment" title="Link to this heading"></a></h2>
+<p>Using a virtual environment is recommended because it keeps CpGtools and its
+Python dependencies isolated from the system Python installation and from
+other projects.</p>
+<section id="create-a-virtual-environment">
+<h3><span class="section-number">2.1.1. </span>Create a virtual environment<a class="headerlink" href="#create-a-virtual-environment" title="Link to this heading"></a></h3>
+<p>First, create a new environment using Python’s built-in <code class="docutils literal notranslate"><span class="pre">venv</span></code> module:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cpgtools-env
+</pre></div>
+</div>
+<p>Activate the environment:</p>
+<p>On Linux or macOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>cpgtools-env/bin/activate
+</pre></div>
+</div>
+<p>On Windows Command Prompt:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>cpgtools-env\Scripts\activate.bat
+</pre></div>
+</div>
+<p>On Windows PowerShell:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cpgtools-env</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</pre></div>
+</div>
+<p>After activation, the environment name usually appears at the beginning of
+the command prompt, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(cpgtools-env) $
 </pre></div>
 </div>
 </section>
-<section id="install-the-development-version">
-<h2><span class="section-number">2.3. </span>Install the Development Version<a class="headerlink" href="#install-the-development-version" title="Link to this heading"></a></h2>
+<section id="install-cpgtools">
+<h3><span class="section-number">2.1.2. </span>Install CpGtools<a class="headerlink" href="#install-cpgtools" title="Link to this heading"></a></h3>
+<p>Upgrade <code class="docutils literal notranslate"><span class="pre">pip</span></code> and install CpGtools from PyPI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cpgtools
+</pre></div>
+</div>
+<p>Verify the installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epical<span class="w"> </span>--version
+beta_impute<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>When finished, leave the virtual environment with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+<p>To use CpGtools again later, reactivate the same environment rather than
+reinstalling the package.</p>
+</section>
+</section>
+<section id="install-from-pypi">
+<h2><span class="section-number">2.2. </span>Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Link to this heading"></a></h2>
+<p>The recommended installation method is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cpgtools
+</pre></div>
+</div>
+<p>To upgrade an existing installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>cpgtools
+</pre></div>
+</div>
+</section>
+<section id="install-from-github">
+<h2><span class="section-number">2.3. </span>Install from GitHub<a class="headerlink" href="#install-from-github" title="Link to this heading"></a></h2>
 <p>To install the latest development version directly from GitHub:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/liguowang/cpgtools.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/liguowang/cpgtools.git
 </pre></div>
 </div>
 </section>
@@ -188,62 +227,84 @@ subcommands:</p>
 <p>Clone the repository and install CpGtools locally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/liguowang/cpgtools.git
 <span class="nb">cd</span><span class="w"> </span>cpgtools
-pip<span class="w"> </span>install<span class="w"> </span>.
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
-<p>Alternatively, install in editable (development) mode:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<p>For development, use an editable installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
 </section>
-<section id="dependencies">
-<h2><span class="section-number">2.5. </span>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
-<p>The following Python packages are installed automatically when CpGtools is
-installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<section id="python-dependencies">
+<h2><span class="section-number">2.5. </span>Python Dependencies<a class="headerlink" href="#python-dependencies" title="Link to this heading"></a></h2>
+<p>The following packages are installed automatically with CpGtools:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fancyimpute</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">umap-learn</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">weblogo</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">bx-python</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weblogo</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pycombat</span></code></p></li>
 </ul>
+<p>Additional dependencies required by these packages are resolved automatically
+by <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
 </section>
-<section id="optional-python-dependencies">
-<h2><span class="section-number">2.6. </span>Optional Python Dependencies<a class="headerlink" href="#optional-python-dependencies" title="Link to this heading"></a></h2>
-<p>Most Python dependencies are installed automatically when CpGtools is
-installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code>. The following package is optional:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> — required only when running the MOREL algorithm with
-<code class="docutils literal notranslate"><span class="pre">--model</span> <span class="pre">DNN</span></code> in <code class="docutils literal notranslate"><span class="pre">beta_impute.py</span></code>. It is <strong>not</strong> required for the
-default Random Forest implementation (<code class="docutils literal notranslate"><span class="pre">--model</span> <span class="pre">RF</span></code>).</p></li>
-</ul>
-<p>To install TensorFlow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
+<section id="optional-dependencies">
+<h2><span class="section-number">2.6. </span>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading"></a></h2>
+<section id="tensorflow">
+<h3><span class="section-number">2.6.1. </span>TensorFlow<a class="headerlink" href="#tensorflow" title="Link to this heading"></a></h3>
+<p>TensorFlow is required only when using the MOREL imputation method with the
+dense neural-network model:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>beta_impute<span class="w"> </span>morel<span class="w"> </span>--model<span class="w"> </span>DNN<span class="w"> </span>...
+</pre></div>
+</div>
+<p>The default Random Forest model (<code class="docutils literal notranslate"><span class="pre">--model</span> <span class="pre">RF</span></code>) does not require TensorFlow.</p>
+<p>Install TensorFlow separately if needed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
 </pre></div>
 </div>
 </section>
-<section id="upgrade-cpgtools">
-<h2><span class="section-number">2.7. </span>Upgrade CpGtools<a class="headerlink" href="#upgrade-cpgtools" title="Link to this heading"></a></h2>
-<p>To upgrade an existing installation to the latest release:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>cpgtools
-</pre></div>
-</div>
+<section id="r-and-r-packages">
+<h3><span class="section-number">2.6.2. </span>R and R Packages<a class="headerlink" href="#r-and-r-packages" title="Link to this heading"></a></h3>
+<p>Some CpGtools commands call R and therefore require an R installation.</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://www.r-project.org/">R</a></dt><dd><p>Required by commands that execute generated R scripts.</p>
+</dd>
+<dt><a class="reference external" href="https://cran.r-project.org/package=aod">aod</a></dt><dd><p>Required by <code class="docutils literal notranslate"><span class="pre">dmc_bb</span></code>.</p>
+</dd>
+<dt><a class="reference external" href="https://cran.r-project.org/package=beanplot">beanplot</a></dt><dd><p>Required by <code class="docutils literal notranslate"><span class="pre">beta_jitter_plot</span></code>.</p>
+</dd>
+</dl>
+<p>These R dependencies are not installed automatically by <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+</section>
 </section>
 <section id="verify-the-installation">
-<h2><span class="section-number">2.8. </span>Verify the Installation<a class="headerlink" href="#verify-the-installation" title="Link to this heading"></a></h2>
-<p>To verify that CpGtools was installed successfully:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpgtools<span class="w"> </span>--version
+<h2><span class="section-number">2.7. </span>Verify the Installation<a class="headerlink" href="#verify-the-installation" title="Link to this heading"></a></h2>
+<p>After installation, verify several command-line programs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epical<span class="w"> </span>--version
+beta_impute<span class="w"> </span>--version
+epical<span class="w"> </span>-h
+beta_impute<span class="w"> </span>-h
+beta_deconvolution<span class="w"> </span>-h
 </pre></div>
 </div>
-<p>or</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>cpgtools<span class="w"> </span>--version
+<p>You can also verify that the Python package is importable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import cpgmodule; print(cpgmodule.__file__)&quot;</span>
 </pre></div>
 </div>
+</section>
+<section id="troubleshooting">
+<h2><span class="section-number">2.8. </span>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p>If a command is not found after installation, confirm that CpGtools is
+installed in the active Python environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>show<span class="w"> </span>cpgtools
+</pre></div>
+</div>
+<p>When using a virtual or Conda environment, make sure that environment is
+activated before installing or running CpGtools.</p>
 </section>
 </section>
 
@@ -259,7 +320,7 @@ default Random Forest implementation (<code class="docutils literal notranslate"
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

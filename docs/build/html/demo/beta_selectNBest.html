@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>18. beta_selectNBest.py &mdash; CpGtools Documentation</title>
+  <title>19. beta_selectNBest &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. beta_stacked_barplot.py" href="beta_stacked_barplot.html" />
-    <link rel="prev" title="17. beta_profile_region.py" href="beta_profile_region.html" /> 
+    <link rel="next" title="20. beta_stacked_barplot" href="beta_stacked_barplot.html" />
+    <link rel="prev" title="18. beta_profile_region" href="beta_profile_region.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,43 +60,51 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">18. beta_selectNBest.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">18.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">18.2. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">18.3. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-file">18.4. Output file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">19. beta_selectNBest</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">19.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scoring-methods">19.2. Scoring Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">19.3. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-matrix">19.3.1. Beta matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-file">19.3.2. Group file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">19.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">19.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">19.6. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -105,7 +113,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -126,7 +134,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">18. </span>beta_selectNBest.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">19. </span>beta_selectNBest</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/beta_selectNBest.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,71 +144,110 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="beta-selectnbest-py">
-<h1><span class="section-number">18. </span>beta_selectNBest.py<a class="headerlink" href="#beta-selectnbest-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">18.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>Select the K best features according to the K highest scores. Scores can be measured by:</p>
-<ul class="simple">
-<li><p>ANOVA F-value between label/feature for classification tasks.</p></li>
-<li><p>Mutual information for a discrete target.</p></li>
-<li><p>Chi-squared stats of non-negative features for classification tasks.</p></li>
-</ul>
-<p>This is similar to <a class="reference external" href="https://cpgtools.readthedocs.io/en/latest/demo/beta_topN.html">beta_topN.py</a>,
-but requires a group file.</p>
-<p><strong>Example of input</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>  <span class="n">Sample_01</span>       <span class="n">Sample_02</span>       <span class="n">Sample_03</span>       <span class="n">Sample_04</span>
-<span class="n">cg_001</span>  <span class="mf">0.831035</span>        <span class="mf">0.878022</span>        <span class="mf">0.794427</span>        <span class="mf">0.880911</span>
-<span class="n">cg_002</span>  <span class="mf">0.249544</span>        <span class="mf">0.209949</span>        <span class="mf">0.234294</span>        <span class="mf">0.236680</span>
-<span class="n">cg_003</span>  <span class="mf">0.845065</span>        <span class="mf">0.843957</span>        <span class="mf">0.840184</span>        <span class="mf">0.824286</span>
-
-<span class="n">Options</span><span class="p">:</span>
-  <span class="o">--</span><span class="n">version</span>             <span class="n">show</span> <span class="n">program</span><span class="s1">&#39;s version number and exit</span>
-  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">-</span><span class="n">i</span> <span class="n">INPUT_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">input_file</span><span class="o">=</span><span class="n">INPUT_FILE</span>
-                        <span class="n">Tab</span><span class="o">-</span><span class="n">separated</span> <span class="n">data</span> <span class="n">frame</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">beta</span> <span class="n">values</span>
-                        <span class="k">with</span> <span class="n">the</span> <span class="mi">1</span><span class="n">st</span> <span class="n">row</span> <span class="n">containing</span> <span class="n">sample</span> <span class="n">IDs</span> <span class="ow">and</span> <span class="n">the</span> <span class="mi">1</span><span class="n">st</span>
-                        <span class="n">column</span> <span class="n">containing</span> <span class="n">CpG</span> <span class="n">IDs</span><span class="o">.</span>
-  <span class="o">-</span><span class="n">g</span> <span class="n">GROUP_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span><span class="o">=</span><span class="n">GROUP_FILE</span>
-                        <span class="n">Comma</span><span class="o">-</span><span class="n">separated</span> <span class="n">group</span> <span class="n">file</span> <span class="n">defining</span> <span class="n">the</span> <span class="n">biological</span>
-                        <span class="n">groups</span> <span class="n">of</span> <span class="n">each</span> <span class="n">sample</span><span class="o">.</span>
-  <span class="o">-</span><span class="n">c</span> <span class="n">CPG_COUNT</span><span class="p">,</span> <span class="o">--</span><span class="n">topK</span><span class="o">=</span><span class="n">CPG_COUNT</span>
-                        <span class="n">Number</span> <span class="n">of</span> <span class="n">top</span> <span class="n">features</span> <span class="n">to</span> <span class="n">select</span><span class="o">.</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span>
-  <span class="o">-</span><span class="n">s</span> <span class="n">SCORE_FUNCTION</span><span class="p">,</span> <span class="o">--</span><span class="n">score</span><span class="o">-</span><span class="n">function</span><span class="o">=</span><span class="n">SCORE_FUNCTION</span>
-                        <span class="n">Scoring</span> <span class="n">function</span> <span class="n">used</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">the</span> <span class="n">dependency</span>
-                        <span class="n">between</span> <span class="n">features</span> <span class="n">scores</span> <span class="ow">and</span> <span class="n">labels</span><span class="o">.</span> <span class="n">Must</span> <span class="n">be</span> <span class="s2">&quot;chisq&quot;</span>
-                        <span class="p">(</span><span class="n">chi</span><span class="o">-</span><span class="n">squared</span> <span class="n">statistic</span><span class="p">),</span> <span class="s2">&quot;anova&quot;</span> <span class="p">(</span><span class="n">ANOVA</span> <span class="n">F</span><span class="o">-</span><span class="n">value</span><span class="p">),</span> <span class="ow">or</span>
-                        <span class="s2">&quot;mi&quot;</span> <span class="p">(</span><span class="n">mutual</span> <span class="n">information</span><span class="p">)</span><span class="o">.</span> <span class="n">default</span><span class="o">=</span><span class="n">chisq</span>
-  <span class="o">-</span><span class="n">o</span> <span class="n">OUT_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">OUT_FILE</span>
-                        <span class="n">The</span> <span class="n">prefix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span> <span class="n">file</span><span class="o">.</span>
+  <section id="beta-selectnbest">
+<h1><span class="section-number">19. </span>beta_selectNBest<a class="headerlink" href="#beta-selectnbest" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">19.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">beta_selectNBest</span></code> selects CpG features associated with a categorical
+phenotype using scikit-learn feature-selection methods.</p>
+<p>The input matrix must have <strong>CpGs in rows</strong> and <strong>samples in columns</strong>.
+CpGs containing missing values are removed before feature selection, and
+zero-variance CpGs are removed by default.</p>
+</section>
+<section id="scoring-methods">
+<h2><span class="section-number">19.2. </span>Scoring Methods<a class="headerlink" href="#scoring-methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">anova</span></code></p></td>
+<td><p>ANOVA F-statistic for association between methylation values and group
+labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mi</span></code></p></td>
+<td><p>Mutual information between methylation values and group labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chisq</span></code></p></td>
+<td><p>Chi-square statistic. Input values must be non-negative.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="input-files">
+<h2><span class="section-number">19.3. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-matrix">
+<h3><span class="section-number">19.3.1. </span>Beta matrix<a class="headerlink" href="#beta-matrix" title="Link to this heading"></a></h3>
+<p>A tab-delimited matrix with CpG IDs in the first column and samples in the
+remaining columns. Compressed input is supported.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>
+<span class="n">cg_001</span>   <span class="mf">0.831035</span>    <span class="mf">0.878022</span>    <span class="mf">0.794427</span>    <span class="mf">0.880911</span>
+<span class="n">cg_002</span>   <span class="mf">0.249544</span>    <span class="mf">0.209949</span>    <span class="mf">0.234294</span>    <span class="mf">0.236680</span>
+<span class="n">cg_003</span>   <span class="mf">0.845065</span>    <span class="mf">0.843957</span>    <span class="mf">0.840184</span>    <span class="mf">0.824286</span>
 </pre></div>
 </div>
 </section>
-<section id="input-files-examples">
-<h2><span class="section-number">18.2. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">test_05_TwoGroup.tsv.gz</a></p></li>
-</ul>
-</section>
-<section id="command">
-<h2><span class="section-number">18.3. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$beta_selectNBest.py -i test_05_TwoGroup.tsv -g test_05_TwoGroup.grp.csv  -o test_05_out
-
-@ 2024-09-05 09:29:38: Reading input file: &quot;test_05_TwoGroup.tsv&quot;
-@ 2024-09-05 09:29:38: 0 rows with missing values were removed.
-@ 2024-09-05 09:29:38: Transposing data matrix ...
-@ 2024-09-05 09:29:38: Total number of features: 10000
-@ 2024-09-05 09:29:38: Reading group file: &quot;test_05_TwoGroup.grp.csv&quot;
-@ 2024-09-05 09:29:38: Using Chi Square statistic to select features ...
-@ 2024-09-05 09:29:39: Total number of selected features : 100
-@ 2024-09-05 09:29:39: Writing to file: &quot;test_05_out.selectedFeatures.tsv&quot;
+<section id="group-file">
+<h3><span class="section-number">19.3.2. </span>Group file<a class="headerlink" href="#group-file" title="Link to this heading"></a></h3>
+<p>A two-column CSV or TSV file containing sample IDs and categorical group
+labels. A header is optional.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">normal</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">normal</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">tumor</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">tumor</span>
 </pre></div>
 </div>
 </section>
-<section id="output-file">
-<h2><span class="section-number">18.4. </span>Output file<a class="headerlink" href="#output-file" title="Link to this heading"></a></h2>
+</section>
+<section id="usage">
+<h2><span class="section-number">19.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_selectNBest</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_05_TwoGroup</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_05_TwoGroup</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">k</span> <span class="mi">100</span> \
+    <span class="o">-</span><span class="n">s</span> <span class="n">chisq</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">selected</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
 <ul class="simple">
-<li><p>test_05_out.selectedFeatures.tsv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-k</span></code>, <code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--top</span></code>, <code class="docutils literal notranslate"><span class="pre">--topK</span></code> – number of CpGs to select
+(default: 100)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--score_function</span></code>, <code class="docutils literal notranslate"><span class="pre">--score-function</span></code> – <code class="docutils literal notranslate"><span class="pre">anova</span></code>, <code class="docutils literal notranslate"><span class="pre">mi</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">chisq</span></code> (default: <code class="docutils literal notranslate"><span class="pre">chisq</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--random_state</span></code> – random seed for mutual-information scoring</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--keep_constant</span></code> – retain zero-variance CpGs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta_selectNBest</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2><span class="section-number">19.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">selected</span></code>, the command writes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">selected.selected_features.tsv</span></code> – selected CpG-by-sample matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selected.feature_scores.tsv</span></code> – scores, p-values, ranks, and selection
+status for all retained CpGs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selected.selected_cpgs.txt</span></code> – selected CpG IDs</p></li>
+</ul>
+</section>
+<section id="example-data">
+<h2><span class="section-number">19.6. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_05_TwoGroup.tsv.gz">Beta matrix</a></p></li>
 </ul>
 </section>
 </section>
@@ -209,15 +256,15 @@ but requires a group file.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="beta_profile_region.html" class="btn btn-neutral float-left" title="17. beta_profile_region.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beta_stacked_barplot.html" class="btn btn-neutral float-right" title="19. beta_stacked_barplot.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="beta_profile_region.html" class="btn btn-neutral float-left" title="18. beta_profile_region" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beta_stacked_barplot.html" class="btn btn-neutral float-right" title="20. beta_stacked_barplot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

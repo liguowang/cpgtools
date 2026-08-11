@@ -6,22 +6,23 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>31. predict_sex.py &mdash; CpGtools Documentation</title>
+  <title>33. predict_sex &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. Compare Differential CpG Analysis Tools" href="../compare_diff_tools.html" />
-    <link rel="prev" title="30. dmc_ttest.py" href="dmc_ttest.html" /> 
+    <link rel="prev" title="32. epical" href="epical.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +33,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +49,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,43 +61,50 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">31. predict_sex.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">31.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">31.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">31.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">31.4. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">31.5. Output files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#evaluation">31.6. Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">33. predict_sex</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">33.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prediction-rule">33.2. Prediction Rule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">33.3. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beta-value-matrix">33.3.1. Beta-value matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#x-chromosome-cpg-file">33.3.2. X-chromosome CpG file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">33.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">33.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">33.6. Example Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation">33.7. Evaluation</a></li>
 </ul>
 </li>
 </ul>
@@ -107,7 +115,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -128,7 +136,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">31. </span>predict_sex.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">33. </span>predict_sex</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/predict_sex.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,80 +146,190 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="predict-sex-py">
-<h1><span class="section-number">31. </span>predict_sex.py<a class="headerlink" href="#predict-sex-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">31.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>Predict sex based on the semi-methylation (also known as genomic imprinting)
-ratio. This method leverages the fact that, due to X chromosome inactivation,
-females have a higher proportion of semi-methylated CpGs on their X chromosomes.
-A log2(ratio) greater than 0 indicates a female, while a log2(ratio) less than
-0 indicates a male.</p>
+  <section id="predict-sex">
+<h1><span class="section-number">33. </span>predict_sex<a class="headerlink" href="#predict-sex" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">33.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">predict_sex</span></code> predicts biological sex from X-chromosome DNA methylation
+using the semi-methylation (SM) ratio.</p>
+<p>The method uses the observation that X-chromosome inactivation produces a
+higher proportion of semi-methylated CpGs in samples with two X chromosomes.</p>
+<p>For each sample, X-linked CpGs are divided into three Beta-value ranges:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 38.0%" />
+<col style="width: 38.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Beta-value range</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Low</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;=</span> <span class="pre">beta</span> <span class="pre">&lt;=</span> <span class="pre">0.2</span></code></p></td>
+<td><p>Low methylation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mid</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.3</span> <span class="pre">&lt;=</span> <span class="pre">beta</span> <span class="pre">&lt;=</span> <span class="pre">0.7</span></code></p></td>
+<td><p>Semi-methylation range.</p></td>
+</tr>
+<tr class="row-even"><td><p>High</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8</span> <span class="pre">&lt;=</span> <span class="pre">beta</span> <span class="pre">&lt;=</span> <span class="pre">1.0</span></code></p></td>
+<td><p>High methylation.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The score is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\log_2(\mathrm{SM\ ratio})
+=
+\log_2\left(
+\frac{N_{\mathrm{mid}}}
+     {N_{\mathrm{low}} + N_{\mathrm{high}}}
+\right)\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">N_mid</span></code>, <code class="docutils literal notranslate"><span class="pre">N_low</span></code>, and <code class="docutils literal notranslate"><span class="pre">N_high</span></code> are the numbers of X-linked CpGs
+falling in the corresponding Beta-value ranges.</p>
 </section>
-<section id="options">
-<h2><span class="section-number">31.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl>
-<dt>Options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Tab-separated data frame file containing beta values
-with the 1st row containing sample IDs and the 1st
-column containing CpG IDs.</p>
-</dd>
-<dt><kbd><span class="option">-x <var>XPROBE_FILE</var></span>, <span class="option">--xprobe=<var>XPROBE_FILE</var></span></kbd></dt>
-<dd><p>File with CpG IDs mapped to the X chromosome, with one
-probe listed per row.</p>
-</dd>
-<dt><kbd><span class="option">-c <var>CUTOFF</var></span>, <span class="option">--cut=<var>CUTOFF</var></span></kbd></dt>
-<dd><p>The cutoff of log2(SM ratio) to determine the sex
-prediction. Log2(SM ratio) greater than this cutoff
-indicates a female, while a log2(ratio) less than this
-cutoff indicates a male. default=0.0</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">31.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+<section id="prediction-rule">
+<h2><span class="section-number">33.2. </span>Prediction Rule<a class="headerlink" href="#prediction-rule" title="Link to this heading"></a></h2>
+<p>With cutoff <span class="math notranslate nohighlight">\(c\)</span>:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz">test_10.tsv.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz">chrX_CpGs.txt.gz</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log2_SM_ratio</span> <span class="pre">&gt;</span> <span class="pre">c</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Female</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log2_SM_ratio</span> <span class="pre">&lt;</span> <span class="pre">c</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Male</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log2_SM_ratio</span> <span class="pre">==</span> <span class="pre">c</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Unknown</span></code></p></li>
 </ul>
+<p>The default cutoff is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+<p>The prediction is also <code class="docutils literal notranslate"><span class="pre">Unknown</span></code> when the SM ratio is undefined, for
+example when there are no CpGs in the mid range or when the combined low/high
+count is zero.</p>
 </section>
-<section id="command">
-<h2><span class="section-number">31.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict_sex</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">x</span> <span class="n">chrX_CpGs</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">i</span> <span class="n">test_10</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span>
+<section id="input-files">
+<h2><span class="section-number">33.3. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="beta-value-matrix">
+<h3><span class="section-number">33.3.1. </span>Beta-value matrix<a class="headerlink" href="#beta-value-matrix" title="Link to this heading"></a></h3>
+<p>The input must be a <strong>tab-separated</strong> Beta-value matrix with <strong>CpGs in rows</strong>
+and <strong>samples in columns</strong>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>
+<span class="n">cg_001</span>   <span class="mf">0.831035</span>    <span class="mf">0.878022</span>    <span class="mf">0.794427</span>
+<span class="n">cg_002</span>   <span class="mf">0.249544</span>    <span class="mf">0.209949</span>    <span class="mf">0.234294</span>
+<span class="n">cg_003</span>   <span class="mf">0.845065</span>    <span class="mf">0.843957</span>    <span class="mf">0.840184</span>
+</pre></div>
+</div>
+<p>Requirements:</p>
+<ul class="simple">
+<li><p>CpG IDs must be unique.</p></li>
+<li><p>Sample IDs must be unique.</p></li>
+<li><p>At least one sample must be present.</p></li>
+</ul>
+<p>Non-numeric values are converted to missing values and ignored independently
+for each sample.</p>
+</section>
+<section id="x-chromosome-cpg-file">
+<h3><span class="section-number">33.3.2. </span>X-chromosome CpG file<a class="headerlink" href="#x-chromosome-cpg-file" title="Link to this heading"></a></h3>
+<p>The X-probe file contains one X-chromosome CpG ID per line.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cg00000029</span>
+<span class="n">cg00000108</span>
+<span class="n">cg00000165</span>
+</pre></div>
+</div>
+<p>Blank lines and lines beginning with <code class="docutils literal notranslate"><span class="pre">#</span></code> are ignored. Duplicate probe IDs
+are removed automatically.</p>
+<p>At least one supplied X-linked CpG must also be present in the Beta-value
+matrix.</p>
+</section>
+</section>
+<section id="usage">
+<h2><span class="section-number">33.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict_sex</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_10</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">x</span> <span class="n">chrX_CpGs</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p>Use a custom cutoff:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict_sex</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_10</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">x</span> <span class="n">chrX_CpGs</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">--</span><span class="n">cut</span> <span class="mf">0.25</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p>Available options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>, <code class="docutils literal notranslate"><span class="pre">--input_file</span></code> – tab-separated Beta-value matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>, <code class="docutils literal notranslate"><span class="pre">--xprobe</span></code> – X-chromosome CpG-ID file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--cut</span></code> – log2 SM-ratio cutoff (default: 0.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--version</span></code> – show the CpGtools version</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict_sex</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
-<section id="output-files">
-<h2><span class="section-number">31.5. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<section id="output">
+<h2><span class="section-number">33.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">output</span></code>, the command writes:</p>
 <ul class="simple">
-<li><p>output.predicted_sex.tsv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output.predicted_sex.tsv</span></code></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat output.predicted_sex.tsv
-Sample_ID log2_SM_ratio Predicted_sex
-2621  -2.249628052954919  Male
-2622  -2.2671726671830674 Male
-2691  1.4530581933290616  Female
-</pre></div>
-</div>
+<p>The output contains one row per sample:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Sample_ID</span></code></p></td>
+<td><p>Sample identifier from the input matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">log2_SM_ratio</span></code></p></td>
+<td><p>Log2 semi-methylation ratio.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Predicted_sex</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Male</span></code>, <code class="docutils literal notranslate"><span class="pre">Female</span></code>, or <code class="docutils literal notranslate"><span class="pre">Unknown</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">X_CpGs_used</span></code></p></td>
+<td><p>Number of finite X-linked Beta-values available for that sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Low_beta_CpGs</span></code></p></td>
+<td><p>Number of X-linked CpGs with Beta-values in [0.0, 0.2].</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Mid_beta_CpGs</span></code></p></td>
+<td><p>Number of X-linked CpGs with Beta-values in [0.3, 0.7].</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">High_beta_CpGs</span></code></p></td>
+<td><p>Number of X-linked CpGs with Beta-values in [0.8, 1.0].</p></td>
+</tr>
+</tbody>
+</table>
+<p>Undefined numeric ratios are written as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">33.6. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz">Beta-value matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz">X-chromosome CpG list</a></p></li>
+</ul>
 </section>
 <section id="evaluation">
-<h2><span class="section-number">31.6. </span>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading"></a></h2>
-<p>When evaluating this classifier with Illumina HumanMethylation450 BeadChip data (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018">GSE105018</a>) from 832 males and 826 females, the prediction accuracy achieved is 100%.</p>
-<a class="reference internal image-reference" href="../_images/predict_sex.png"><img alt="../_images/predict_sex.png" src="../_images/predict_sex.png" style="width: 650px; height: 650px;" />
+<h2><span class="section-number">33.7. </span>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading"></a></h2>
+<p>In the original CpGtools evaluation using Illumina HumanMethylation450
+BeadChip data from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018">GSE105018</a>, the
+classifier was reported to correctly classify 832 male and 826 female
+samples.</p>
+<a class="reference internal image-reference" href="../_images/predict_sex.png"><img alt="Evaluation of CpGtools sex prediction" src="../_images/predict_sex.png" style="width: 650px; height: 650px;" />
 </a>
 </section>
 </section>
@@ -220,7 +338,7 @@ Sample_ID log2_SM_ratio Predicted_sex
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dmc_ttest.html" class="btn btn-neutral float-left" title="30. dmc_ttest.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="epical.html" class="btn btn-neutral float-left" title="32. epical" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../compare_diff_tools.html" class="btn btn-neutral float-right" title="1. Compare Differential CpG Analysis Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -228,7 +346,7 @@ Sample_ID log2_SM_ratio Predicted_sex
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

@@ -1,85 +1,114 @@
-beta_PCA.py
-=============
+beta_PCA
+========
 
-Description
+Overview
+--------
+
+``beta_PCA`` performs principal component analysis (PCA) on DNA methylation
+Beta-value matrices to visualize relationships among samples.
+
+The input matrix must have **CpGs in rows** and **samples in columns**.
+CpGs containing missing values across the samples used for PCA are removed.
+By default, CpG values are standardized before PCA.
+
+
+Input Files
+-----------
+
+Beta matrix
+~~~~~~~~~~~
+
+The first column contains CpG IDs and the remaining columns contain sample
+Beta-values. Common delimiters and compressed input are supported.
+
+Example::
+
+   CpG_ID   Sample_01   Sample_02   Sample_03   Sample_04
+   cg_001   0.831035    0.878022    0.794427    0.880911
+   cg_002   0.249544    0.209949    0.234294    0.236680
+   cg_003   0.845065    0.843957    0.840184    0.824286
+
+At least two sample columns are required. Duplicate CpG IDs are reduced to the
+first occurrence, whereas sample IDs must be unique.
+
+
+Group file
+~~~~~~~~~~
+
+A two-column sample/group file is required. Comma- and tab-delimited files are
+supported, with or without a header.
+
+Example::
+
+   Sample,Group
+   Sample_01,normal
+   Sample_02,normal
+   Sample_03,tumor
+   Sample_04,tumor
+
+Samples present in the Beta matrix but absent from the group file are excluded
+with a warning. At least two samples must be shared between the two files.
+
+
+Usage
+-----
+
+Basic usage::
+
+   beta_PCA \
+       -i cirrHCV_vs_normal.data.tsv \
+       -g cirrHCV_vs_normal.grp.csv \
+       -o HCV_vs_normal
+
+Useful options include:
+
+* ``-n``, ``--n_components``, ``--ncomponent`` -- number of principal
+  components to calculate (default: 2)
+* ``-l``, ``--label`` -- add sample IDs to the plot
+* ``-c``, ``--marker`` -- plot marker: ``o``, ``.``, ``^``, ``s``, ``D``, or
+  ``x`` (default: ``o``)
+* ``-a``, ``--alpha`` -- point opacity between 0 and 1 (default: 0.7)
+* ``--legend_location`` -- legend position (default: ``best``)
+* ``--loading`` -- write the PCA loading matrix
+* ``--no_standardize`` -- skip CpG standardization before PCA
+* ``--width`` / ``--height`` -- plot size in inches (default: 8 x 8)
+* ``--dpi`` -- plot resolution (default: 300)
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   beta_PCA -h
+
+
+Output
+------
+
+For output prefix ``HCV_vs_normal``, the command writes:
+
+* ``HCV_vs_normal.PCA.tsv`` -- PCA scores for each sample
+* ``HCV_vs_normal.PCA_variance.tsv`` -- explained and cumulative variance for
+  each component
+* ``HCV_vs_normal.PCA.png`` -- PCA scatter plot
+
+When ``--loading`` is used, it also writes:
+
+* ``HCV_vs_normal.PCA_loadings.tsv`` -- CpG loading matrix
+
+The variance explained by each component is also reported to the log.
+
+
+Example Data
 ------------
 
-This program performs `PCA (principal component analysis) <https://en.wikipedia.org/wiki/Principal_component_analysis>`_
-for samples.
+* `Beta matrix <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
+* `Group file <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv>`_
 
-**Example of input data file**
-::
 
- ID	Sample_01	Sample_02	Sample_03	Sample_04
- cg_001	0.831035	0.878022	0.794427	0.880911
- cg_002	0.249544	0.209949	0.234294	0.236680
- cg_003	0.845065	0.843957	0.840184	0.824286
- ...
- 
-**Example of input group file**
-::
-
- Sample,Group
- Sample_01,normal
- Sample_02,normal
- Sample_03,tumor
- Sample_04,tumo
- ...                         
-
-**Notes**
-
-- Rows with missing values will be removed
-- Beta values will be standardized into z scores
-- Only the first two components will be visualized
-- Variance% explained by each component will be printed to screen
-
-Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Tab-separated data frame file containing beta values
-                        with the 1st row containing sample IDs and the 1st
-                        column containing CpG IDs.
-  -g GROUP_FILE, --group=GROUP_FILE
-                        Comma-separated group file defining the biological
-                        groups of each sample. Different groups will be
-                        colored differently in the PCA plot. Supports a
-                        maximum of 20 groups.
-  -n N_COMPONENTS, --ncomponent=N_COMPONENTS
-                        Number of components. default=2
-  -l, --label           If True, sample ids will be added underneath the data
-                        point. default=False
-  -c PLOT_CHAR, --char=PLOT_CHAR
-                        Ploting character: 1 = 'dot', 2 = 'circle'. default=1
-  -a PLOT_ALPHA, --alpha=PLOT_ALPHA
-                        Opacity of dots. default=0.5
-  -x LEGEND_LOCATION, --loc=LEGEND_LOCATION
-                        Location of legend panel: 1 = 'topright', 2 =
-                        'bottomright', 3 = 'bottomleft', 4 = 'topleft'.
-                        default=1
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-
-Input files (examples)
--------------------------
-
-- `cirrHCV_vs_normal.data.tsv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.data.tsv>`_
-- `cirrHCV_vs_normal.grp.csv <https://sourceforge.net/projects/cpgtools/files/test/cirrHCV_vs_normal.grp.csv>`_
-
-Command
-----------
-::
-
- $beta_PCA.py -i cirrHCV_vs_normal.data.tsv -g cirrHCV_vs_normal.grp.csv -o HCV_vs_normal
-
-Output files
----------------
-
-- HCV_vs_normal.PCA.r
-- HCV_vs_normal.PCA.tsv                          
-- HCV_vs_normal.PCA.pdf
+Example Figure
+--------------
 
 .. image:: ../_static/HCV_vs_normal.PCA.png
-   :height: 450 px
-   :width: 450 px
-   :scale: 100 %  
+   :height: 450px
+   :width: 450px
+   :scale: 100%
+   :alt: PCA plot of DNA methylation samples

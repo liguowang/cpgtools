@@ -1,69 +1,193 @@
-predict_sex.py
-==============
+predict_sex
+===========
 
-Description
-------------
-Predict sex based on the semi-methylation (also known as genomic imprinting)
-ratio. This method leverages the fact that, due to X chromosome inactivation,
-females have a higher proportion of semi-methylated CpGs on their X chromosomes.
-A log2(ratio) greater than 0 indicates a female, while a log2(ratio) less than
-0 indicates a male.
+Overview
+--------
 
-Options
------------
+``predict_sex`` predicts biological sex from X-chromosome DNA methylation
+using the semi-methylation (SM) ratio.
 
-  Options:
-    --version             show program's version number and exit
-    -h, --help            show this help message and exit
-    -i INPUT_FILE, --input_file=INPUT_FILE
-                          Tab-separated data frame file containing beta values
-                          with the 1st row containing sample IDs and the 1st
-                          column containing CpG IDs.
-    -x XPROBE_FILE, --xprobe=XPROBE_FILE
-                          File with CpG IDs mapped to the X chromosome, with one
-                          probe listed per row.
-    -c CUTOFF, --cut=CUTOFF
-                          The cutoff of log2(SM ratio) to determine the sex
-                          prediction. Log2(SM ratio) greater than this cutoff
-                          indicates a female, while a log2(ratio) less than this
-                          cutoff indicates a male. default=0.0
-    -o OUT_FILE, --output=OUT_FILE
-                          The prefix of the output file.
+The method uses the observation that X-chromosome inactivation produces a
+higher proportion of semi-methylated CpGs in samples with two X chromosomes.
 
-Input files (examples)
-------------------------
+For each sample, X-linked CpGs are divided into three Beta-value ranges:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 24 38 38
+
+   * - Category
+     - Beta-value range
+     - Interpretation
+   * - Low
+     - ``0.0 <= beta <= 0.2``
+     - Low methylation.
+   * - Mid
+     - ``0.3 <= beta <= 0.7``
+     - Semi-methylation range.
+   * - High
+     - ``0.8 <= beta <= 1.0``
+     - High methylation.
+
+The score is calculated as:
+
+.. math::
+
+   \log_2(\mathrm{SM\ ratio})
+   =
+   \log_2\left(
+   \frac{N_{\mathrm{mid}}}
+        {N_{\mathrm{low}} + N_{\mathrm{high}}}
+   \right)
+
+where ``N_mid``, ``N_low``, and ``N_high`` are the numbers of X-linked CpGs
+falling in the corresponding Beta-value ranges.
 
 
-- `test_10.tsv.gz <https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz>`_
-- `chrX_CpGs.txt.gz <https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz>`_
-
-
-Command
------------
-::
- 
- predict_sex.py -x chrX_CpGs.txt.gz -i test_10.tsv.gz -o output
- 
-Output files
+Prediction Rule
 ---------------
 
-- output.predicted_sex.tsv
+With cutoff :math:`c`:
+
+* ``log2_SM_ratio > c`` -> ``Female``
+* ``log2_SM_ratio < c`` -> ``Male``
+* ``log2_SM_ratio == c`` -> ``Unknown``
+
+The default cutoff is ``0.0``.
+
+The prediction is also ``Unknown`` when the SM ratio is undefined, for
+example when there are no CpGs in the mid range or when the combined low/high
+count is zero.
 
 
-::
-
- $ cat output.predicted_sex.tsv
- Sample_ID log2_SM_ratio Predicted_sex
- 2621  -2.249628052954919  Male
- 2622  -2.2671726671830674 Male
- 2691  1.4530581933290616  Female
-
-Evaluation
+Input Files
 -----------
 
-When evaluating this classifier with Illumina HumanMethylation450 BeadChip data (`GSE105018 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018>`_) from 832 males and 826 females, the prediction accuracy achieved is 100%.
+Beta-value matrix
+~~~~~~~~~~~~~~~~~
+
+The input must be a **tab-separated** Beta-value matrix with **CpGs in rows**
+and **samples in columns**.
+
+Example::
+
+   CpG_ID   Sample_01   Sample_02   Sample_03
+   cg_001   0.831035    0.878022    0.794427
+   cg_002   0.249544    0.209949    0.234294
+   cg_003   0.845065    0.843957    0.840184
+
+Requirements:
+
+* CpG IDs must be unique.
+* Sample IDs must be unique.
+* At least one sample must be present.
+
+Non-numeric values are converted to missing values and ignored independently
+for each sample.
+
+
+X-chromosome CpG file
+~~~~~~~~~~~~~~~~~~~~~
+
+The X-probe file contains one X-chromosome CpG ID per line.
+
+Example::
+
+   cg00000029
+   cg00000108
+   cg00000165
+
+Blank lines and lines beginning with ``#`` are ignored. Duplicate probe IDs
+are removed automatically.
+
+At least one supplied X-linked CpG must also be present in the Beta-value
+matrix.
+
+
+Usage
+-----
+
+Basic usage::
+
+   predict_sex \
+       -i test_10.tsv.gz \
+       -x chrX_CpGs.txt.gz \
+       -o output
+
+Use a custom cutoff::
+
+   predict_sex \
+       -i test_10.tsv.gz \
+       -x chrX_CpGs.txt.gz \
+       --cut 0.25 \
+       -o output
+
+Available options are:
+
+* ``-i``, ``--input_file`` -- tab-separated Beta-value matrix
+* ``-x``, ``--xprobe`` -- X-chromosome CpG-ID file
+* ``-c``, ``--cut`` -- log2 SM-ratio cutoff (default: 0.0)
+* ``-o``, ``--output`` -- output prefix
+* ``--version`` -- show the CpGtools version
+
+Display all options with::
+
+   predict_sex -h
+
+
+Output
+------
+
+For output prefix ``output``, the command writes:
+
+* ``output.predicted_sex.tsv``
+
+The output contains one row per sample:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 28 72
+
+   * - Column
+     - Description
+   * - ``Sample_ID``
+     - Sample identifier from the input matrix.
+   * - ``log2_SM_ratio``
+     - Log2 semi-methylation ratio.
+   * - ``Predicted_sex``
+     - ``Male``, ``Female``, or ``Unknown``.
+   * - ``X_CpGs_used``
+     - Number of finite X-linked Beta-values available for that sample.
+   * - ``Low_beta_CpGs``
+     - Number of X-linked CpGs with Beta-values in [0.0, 0.2].
+   * - ``Mid_beta_CpGs``
+     - Number of X-linked CpGs with Beta-values in [0.3, 0.7].
+   * - ``High_beta_CpGs``
+     - Number of X-linked CpGs with Beta-values in [0.8, 1.0].
+
+Undefined numeric ratios are written as ``NaN``.
+
+
+Example Data
+------------
+
+* `Beta-value matrix
+  <https://sourceforge.net/projects/cpgtools/files/test/test_10.tsv.gz>`_
+* `X-chromosome CpG list
+  <https://sourceforge.net/projects/cpgtools/files/test/chrX_CpGs.txt.gz>`_
+
+
+Evaluation
+----------
+
+In the original CpGtools evaluation using Illumina HumanMethylation450
+BeadChip data from `GSE105018
+<https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE105018>`_, the
+classifier was reported to correctly classify 832 male and 826 female
+samples.
 
 .. image:: ../_static/predict_sex.png
-   :height: 650 px
-   :width: 650 px
-   :scale: 100 %
+   :height: 650px
+   :width: 650px
+   :scale: 100%
+   :alt: Evaluation of CpGtools sex prediction

@@ -1,53 +1,87 @@
-beta_stats.py
-==============
+beta_stats
+==========
 
-Description
--------------
-This program gives basic information on CpGs located in each genomic region. It adds 6
-columns to the input BED file:
+Overview
+--------
 
-1. Number of CpGs detected in the genomic region
-2. Min methylation level
-3. Max methylation level
-4. Average methylation level across all CpGs
-5. Median methylation level across all CpGs
-6. Standard deviation
+``beta_stats`` summarizes CpG methylation values within user-defined genomic
+regions.
 
-Options
-----------
+For each region, six columns are appended:
 
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        BED6+ file specifying the C position. This BED file
-                        should have at least six columns (Chrom, ChromStart,
-                        ChromeEnd, Name, Beta_value, Strand).  Note: the first
-                        base in a chromosome is numbered 0. This file can be a
-                        regular text file or compressed file (.gz, .bz2)
-  -r REGION_FILE, --region=REGION_FILE
-                        BED3+ file of genomic regions. This BED file should
-                        have at least 3 columns (Chrom, ChromStart,
-                        ChromeEnd).
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
- 
-                        
+* ``CpG_count``
+* ``Minimum_beta``
+* ``Maximum_beta``
+* ``Mean_beta``
+* ``Median_beta``
+* ``Standard_deviation``
 
-Input files (examples)
--------------------------
-
-- `test_02.bed6.gz <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
-- `hg19.RefSeq.union.1Kpromoter.bed <https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download>`_
+BED coordinates are interpreted as **0-based, half-open** intervals.
 
 
-Command
+Input Files
 -----------
-::
 
- $beta_stats.py -r hg19.RefSeq.union.1Kpromoter.bed.gz -i test_02.bed6.gz -o region_stats
+CpG methylation file
+~~~~~~~~~~~~~~~~~~~~
 
-Output files
----------------
+A BED6 or BED6+ file. Column 5 must contain Beta-values. Compressed input is
+supported.
 
-- region_stats.txt
+Example::
 
+   chr22   44021512    44021513    cg24055475    0.9231    -
+   chr13   111568382   111568383   cg06540715    0.1071    +
+   chr20   44033594    44033595    cg21482942    0.6122    -
+
+
+Region file
+~~~~~~~~~~~
+
+A BED3 or BED3+ file containing the genomic regions to summarize. All original
+region columns are preserved in the output.
+
+Example::
+
+   chr1    15864    15865
+   chr1    18826    18827
+   chr1    29406    29407
+
+
+Usage
+-----
+
+Basic usage::
+
+   beta_stats \
+       -i test_02.bed6.gz \
+       -r hg19.RefSeq.union.1Kpromoter.bed.gz \
+       -o region_stats
+
+Useful options include:
+
+* ``--header`` -- add a header row to the output
+* ``--na_rep`` -- text used when statistics are unavailable (default: ``NA``)
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   beta_stats -h
+
+
+Output
+------
+
+For output prefix ``region_stats``, the command writes:
+
+* ``region_stats.region_stats.tsv``
+
+Invalid region records are retained and filled with the value specified by
+``--na_rep``.
+
+
+Example Data
+------------
+
+* `CpG BED6 file <https://sourceforge.net/projects/cpgtools/files/test/test_02.bed6.gz>`_
+* `Example promoter regions <https://sourceforge.net/projects/cpgtools/files/test/hg19.RefSeq.union.1Kpromoter.bed.gz/download>`_

@@ -1,151 +1,159 @@
-CpG_anno_probe.py
-==================
+CpG_anno_probe
+==============
 
-Description
------------------
+Overview
+--------
 
-This program adds comprehensive annotation information to each 450K/850K array probe ID.
-It will add 17 columns to the original input data file. These 17 columns include
-(from left to right):
+``CpG_anno_probe`` appends probe-level annotations to a tabular input file by
+matching Illumina DNA methylation probe IDs, such as ``cg00000029``.
 
-+-----------------------+-------------------------------------------------------------------------+
-| Header Name           |Description                                                              |
-+-----------------------+-------------------------------------------------------------------------+
-| hg19_pos              |The genomic position of the CpG on human genome assembly `hg19 (or       |
-|                       |GRCh37) <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/>`_      |
-+-----------------------+-------------------------------------------------------------------------+
-| hg38_pos              |The genomic position of the CpG on human genome assembly `hg38 (or       |
-|                       |GRCh38) <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/>`_.     |
-+-----------------------+-------------------------------------------------------------------------+
-| strand                |Strand of the CpG. Value - "R" (reverse strand) or "F" (forward strand). |
-+-----------------------+-------------------------------------------------------------------------+
-| geneSymbol            |Genes the CpG has been assigned to. "N/A" indicates no genes were found. |
-|                       |This is retrieved from the Illumina `MethylationEpic v1.0 B4             |
-|                       |<https://support.illumina.com/downloads/infinium-methylationepic-v1-0-   |
-|                       |product-files.html>`_ manifest file.                                     |
-+-----------------------+-------------------------------------------------------------------------+
-| CpGisland             |The CpG island (CGI) that overlaps with this CpG. "N/A" indicates no     |
-|                       |CGIs were found.                                                         |
-+-----------------------+-------------------------------------------------------------------------+
-| with_450K             |Boolean indicating whether this CpG probe is also included in 450K.      |
-|                       |"0" - No, "1"- Yes.                                                      |
-+-----------------------+-------------------------------------------------------------------------+
-| SNP_ID                |SNPs (rsID) that are close to this CpG. Multiple SNPs are separated      |
-|                       |by ";". "N/A" indicates no SNPs were found.                              |
-+-----------------------+-------------------------------------------------------------------------+
-| SNP_distance          |The nucleotide distances between SNPs and the CpG.                       |
-+-----------------------+-------------------------------------------------------------------------+
-| SNP_MAF               |The `minor allele frequencies (MAF) <https://en.wikipedia.org/wiki       |
-|                       |/Minor_allele_frequency>`_ of SNPs.                                      |
-+-----------------------+-------------------------------------------------------------------------+
-| Cross_Reactive        |Boolean ("0" - No, "1"- Yes) indicating whether this CpG could be        |
-|                       |affected by cross-hybridization or underlying genetic variation as       |
-|                       |reported by this `paper <https://genomebiology.biomedcentral.com/        |
-|                       |articles/10.1186/s13059-016-1066-1>`_.                                   |
-+-----------------------+-------------------------------------------------------------------------+
-| ENCODE_TF_ChIP        |Transcription factor (TF) binding sites identified from ChIP-seq         |
-|                       |experiments performed by the `ENCODE <https://www.encodeproject.org/>`_  |
-|                       |project. Peaks from 1264 experiments representing 338 transcription      |
-|                       |factors in 130 cell types are combined (N = 10,560,472).                 |
-|                       |BED format file was downloaded from the `UCSC Tabel Browser              |
-|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and a detailed description |
-|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
-|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-encRegTfbsClustered>`_.  |
-+-----------------------+-------------------------------------------------------------------------+
-| ENCODE_DNaseI         |DNase I hypersensitivity sites identified from ENCODE `DNase-seq         |
-|                       |<https://en.wikipedia.org/wiki/DNase-Seq>`_ experiments. Peaks from      |
-|                       |125 cell types are combined (N - 1,867,665). BED format file was         |
-|                       |downloaded from the `UCSC Table Browser                                  |
-|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and a detailed description |
-|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
-|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-                         |
-|                       |wgEncodeRegDnaseClustered>`_.                                            |
-+-----------------------+-------------------------------------------------------------------------+
-|ENCODE_H3K27ac_ChIP    |H3K27ac peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
-|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 665,650)    | 
-+-----------------------+-------------------------------------------------------------------------+
-|ENCODE_H3K4me1_ChIP    |H3K4me1 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
-|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 1,435,550)  | 
-+-----------------------+-------------------------------------------------------------------------+
-|ENCODE_H3K4me3_ChIP    |H3K4me3 peaks identified from ENCODE histone ChIP-seq experiments. Peaks |
-|                       |from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,  |
-|                       |K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 525,824)    | 
-+-----------------------+-------------------------------------------------------------------------+
-|ENCODE_chromHMM        |Chromatin State Segmentation by `chromHMM <https://www.nature.com/       |
-|                       |articles/nmeth.1906>`_ from ENCODE. Chromatin states across 9 cell types |
-|                       |(GM12878,  H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were     |
-|                       |learned by computationally by integrating 9 factors (CTCF, H3K27ac,      |
-|                       |H3K27me3, H3K36me3, H3K4me1, H3K4me2, H3K4me3, H3K9ac, H4K20me1 )        |
-|                       |plus input. A total of 15 states were identified, include: State-1       |
-|                       |(Active Promoter), state-2 (Weak Promoter), state-3 (Inactive/poised     |
-|                       |Promoter), state-4 and 5 (Strong enhancer), state-6 and 7                |
-|                       |(Weak/poised enhancer), state-8 (insulator), state-9 (Transcriptional    |
-|                       |transition), state-10 (Transcriptional elongation), state-11 (Weak       |
-|                       |transcribed), state-12 (Polycomb-repressed), state-13 (Heterochromatin or| 
-|                       |low signal), state-14 and 15 (Repetitive/Copy Number Variation).         |
-|                       |Orignal chromatin state BED file was downloaded from `UCSC Table Browser |
-|                       |<https://genome.ucsc.edu/cgi-bin/hgTables>`_, and detailed description   |
-|                       |is provided `here <https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-      |
-|                       |732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&c-chr9&g-wgEncodeBroadHmm>`_.     |
-+-----------------------+-------------------------------------------------------------------------+
-|FANTOM_enhancer        |PHANTOM5 human enhancers downloaded from `here <http://fantom.gsc.riken. |
-|                       |jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_|
-|                       |and_2_expression_tpm_matrix.txt.gz>`_.                                   |
-+-----------------------+-------------------------------------------------------------------------+
+The input file may contain arbitrary columns. One column must contain probe
+IDs. The annotation file must contain a probe-ID column plus one or more
+annotation columns.
 
-Notes
--------
-
-- For peaks identified from ENCODE ChIP-seq and DNase-seq (ENCODE_TF_ChIP, ENCODE_H3K27ac_ChIP,
-  ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP, and ENCODE_DNaseI), we require the probe  must be
-  located in the 100 bp window centered on the **middle** of the peak.
-
-Options
--------
-
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        Input data file (Tab-separated) with a certain column
-                        containing 450K/850K array CpG IDs. This file can be
-                        a regular text file or compressed file (.gz, .bz2).
-  -a ANNO_FILE, --annotation=ANNO_FILE
-                        Annotation file. This file can be a regular text file 
-                        or compressed file (.gz, .bz2). 
-  -o OUT_FILE, --output=OUT_FILE
-                        Prefix of the output file.
-  -p PROBE_COL, --probe_column=PROBE_COL
-                        The number specifying which column contains probe IDs.
-                        Note: the column index starts with 0. default-0.
-  -l, --header          Input data file has a header row.
- 
+All original input columns are preserved, and annotation columns are appended.
 
 
-Input files (examples)
-----------------------
+Input Files
+-----------
 
-- `test_01.hg19.bed6 <https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6>`_
-- `MethylationEPIC_CpGtools.tsv.gz <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz>`_
+Input table
+~~~~~~~~~~~
 
-Command
--------
+The input may be a regular or compressed tabular file. Tabs are preferred;
+whitespace-delimited files are also accepted.
 
-::
- 
- # probe IDs are located in the 4th column (-p 3)
- 
- $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv -i test_01.hg19.bed6 -o output
- 
- or (take gzipped files as input) 
- 
- $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.bed6.gz -o output
+Example::
 
- @ 2019-06-28 09:12:41: Read annotation file "../epic/MethylationEPIC_CpGtools.tsv" ...
- @ 2019-06-28 09:12:52: Add annotation information to "test_01.hg19.bed6" ... 
+   Chrom   Start   End   Probe_ID     Beta     Strand
+   chr1    10847   10848 cg26928153   0.8965   +
+   chr1    10849   10850 cg16269199   0.7915   +
+   chr1    15864   15865 cg13869341   0.9325   +
 
-Output files
--------------
+Use ``-p`` / ``--probe_column`` to specify the **zero-based** column containing
+probe IDs. The default is column 0.
 
-- output.anno.txt
+If the input contains a header, use ``--header`` (or ``-l``).
+
+
+Annotation table
+~~~~~~~~~~~~~~~~
+
+The annotation file must contain a probe-ID column and at least one annotation
+column.
+
+Example::
+
+   Probe_ID      hg19_pos        hg38_pos        geneSymbol
+   cg26928153    chr1:10847      chr1:14465      DDX11L1
+   cg16269199    chr1:10849      chr1:14467      DDX11L1
+
+By default, the probe ID is expected in column 0. Use
+``--annotation_probe_column`` to select another zero-based column.
+
+Annotation-file headers can be controlled with::
+
+   --annotation_header auto
+   --annotation_header yes
+   --annotation_header no
+
+The default, ``auto``, recognizes common probe-ID header names including
+``probeID``, ``probe_id``, ``IlmnID``, ``cpg``, ``cpg_id``, and ``name``.
+
+If the annotation file has no header, generic annotation-column names are
+generated.
+
+
+Duplicate Probe IDs
+-------------------
+
+Duplicate probe IDs in the annotation file are controlled by
+``--duplicate_policy``:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 78
+
+   * - Policy
+     - Behavior
+   * - ``error``
+     - Stop when a duplicate probe ID is encountered. This is the default.
+   * - ``first``
+     - Keep the first annotation record.
+   * - ``last``
+     - Keep the last annotation record.
+
+
+Usage
+-----
+
+Basic usage::
+
+   CpG_anno_probe \
+       -i test_01.hg19.bed6 \
+       -a MethylationEPIC_CpGtools.tsv.gz \
+       -p 3 \
+       --header \
+       -o output
+
+Useful options include:
+
+* ``-p``, ``--probe_column`` -- zero-based probe-ID column in the input
+  (default: 0)
+* ``--annotation_probe_column`` -- zero-based probe-ID column in the annotation
+  file (default: 0)
+* ``-l``, ``--header`` -- treat the first input line as a header
+* ``--annotation_header {auto,yes,no}`` -- annotation-header handling
+  (default: ``auto``)
+* ``--na_rep`` -- value appended when a probe has no matching annotation
+  (default: ``NA``)
+* ``--duplicate_policy {first,last,error}`` -- duplicate annotation handling
+  (default: ``error``)
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   CpG_anno_probe -h
+
+
+Output
+------
+
+For output prefix ``output``, the command writes:
+
+* ``output.anno.tsv``
+
+The output contains all original input columns followed by the annotation
+columns.
+
+When an input probe is absent from the annotation table, each appended
+annotation field is filled with ``--na_rep``.
+
+If ``--header`` is used, annotation-column names from the annotation file are
+appended to the input header. For headerless annotation files, generic names
+such as ``annotation_1`` and ``annotation_2`` are used.
+
+Input rows with an inconsistent number of columns are preserved and receive
+missing annotation values.
+
+
+Example Data
+------------
+
+* `Example CpG file
+  <https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6>`_
+* `MethylationEPIC annotation table
+  <https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz>`_
+
+
+Annotation Content
+------------------
+
+The exact annotation fields are determined by the annotation file supplied to
+``CpG_anno_probe``. For example, the CpGtools MethylationEPIC annotation table
+may include genomic positions, gene annotations, CpG-island annotations, SNP
+information, cross-reactivity flags, and regulatory annotations.
+
+``CpG_anno_probe`` does not require a fixed set or fixed number of annotation
+columns; it appends whatever annotation fields are present in the selected
+annotation table.

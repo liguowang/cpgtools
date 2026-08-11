@@ -1,74 +1,142 @@
-CpG_distrb_gene_centered.py
-============================
+CpG_distrb_gene_centered
+========================
 
-Description
-------------
-This program calculates the distribution of CpG over gene-centered genomic regions
-including 'Coding exons', 'UTR exons', 'Introns', ' Upstream intergenic regions', and
-'Downsteam intergenic regions'.
-
-**Notes**
-
-Please note, a particular genomic region can be assigned to different groups listed above,
-because most genes have multiple transcripts, and different genes could overlap on the
-genome. For example, an exon of gene A could be located in an intron of gene B. To address
-this issue, we define the priority order as  below:
-
-- Coding exons
-- UTR exons
-- Introns
-- Upstream intergenic regions
-- Downstream intergenic regions
-
-Higher-priority group override the low-priority group. For example, if a certain part
-of an intron is overlapped with an exon of other transcripts/genes, the overlapped part will
-be considered as exon (i.e., removed from intron) since "exon" has higher priority.
-
-Options
+Overview
 --------
 
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -i INPUT_FILE, --input_file=INPUT_FILE
-                        BED file specifying the C position. This BED file
-                        should have at least three columns (Chrom, ChromStart,
-                        ChromeEnd).  Note: the first base in a chromosome is
-                        numbered 0. This file can be a regular text file or
-                        compressed file (.gz, .bz2).
-  -r GENE_FILE, --refgene=GENE_FILE
-                        Reference gene model in standard BED-12 format
-                        (https://genome.ucsc.edu/FAQ/FAQformat.html#format1).
-  -d DOWNSTREAM_SIZE, --downstream=DOWNSTREAM_SIZE
-                        Size of down-stream intergenic region w.r.t. TES
-                        (transcription end site). default=2000 (bp)
-  -u UPSTREAM_SIZE, --upstream=UPSTREAM_SIZE
-                        Size of up-stream intergenic region w.r.t. TSS
-                        (transcription start site). default=2000 (bp)
-  -o OUT_FILE, --output=OUT_FILE
-                        The prefix of the output file.
-                        
+``CpG_distrb_gene_centered`` summarizes CpG distribution across prioritized
+gene-centered genomic annotations.
 
-Input files (examples)
-----------------------
+The genome is partitioned into five annotation classes:
 
-- `850K_probe.hg19.bed3.gz <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
-- `hg19.RefSeq.union.bed.gz <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_                        
+* coding exons
+* UTR exons
+* introns
+* upstream regions of transcription start sites (TSS)
+* downstream regions of transcription end sites (TES)
 
-Command
+Because transcript annotations can overlap, the classes are made
+non-overlapping using the following priority:
+
+#. Coding exons
+#. UTR exons
+#. Introns
+#. Upstream of TSS
+#. Downstream of TES
+
+Higher-priority annotations override lower-priority annotations. For example,
+a region annotated as both exon and intron is counted as exon.
+
+
+Input Files
 -----------
 
-::
+CpG file
+~~~~~~~~
 
- $ CpG_distrb_gene_centered.py -i 850K_probe.hg19.bed3.gz -r hg19.RefSeq.union.bed.gz -o geneDist
+The CpG input must be BED3 or BED3+ and contain genomic CpG positions.
 
-Output files
--------------
+Example::
 
-- geneDist.tsv
-- geneDist.r
-- geneDist.pdf
+   chr1    10847    10848
+   chr1    10849    10850
+   chr1    15864    15865
+
+Compressed input is supported by the CpGtools reader.
+
+
+Reference gene model
+~~~~~~~~~~~~~~~~~~~~
+
+The reference gene model must be in BED12 format.
+
+
+Usage
+-----
+
+Basic usage::
+
+   CpG_distrb_gene_centered \
+       -i 850K_probe.hg19.bed3.gz \
+       -r hg19.RefSeq.union.bed.gz \
+       -o geneDist
+
+Useful options include:
+
+* ``-u``, ``--upstream`` -- upstream region size relative to the TSS
+  (default: 2000 bp)
+* ``-d``, ``--downstream`` -- downstream region size relative to the TES
+  (default: 2000 bp)
+* ``--format {png,pdf,both}`` -- plot output format
+  (default: ``pdf``)
+* ``--dpi`` -- PNG resolution (default: 300)
+* ``--width`` -- plot width in inches (default: 8)
+* ``--height`` -- plot height in inches (default: 6)
+* ``--no_plot`` -- write the summary table without generating a plot
+* ``-o``, ``--out_prefix``, ``--output`` -- output prefix
+
+Display all options with::
+
+   CpG_distrb_gene_centered -h
+
+
+Output
+------
+
+For output prefix ``geneDist``, the command always writes:
+
+* ``geneDist.gene_centered_distribution.tsv`` -- gene-centered CpG summary
+
+The table contains:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 28 72
+
+   * - Column
+     - Description
+   * - ``Priority_order``
+     - Numeric priority of the annotation class.
+   * - ``Name``
+     - Annotation class.
+   * - ``Number_of_regions``
+     - Number of non-overlapping intervals in the class.
+   * - ``Size_of_regions_bp``
+     - Total number of annotated bases.
+   * - ``CpG_raw_count``
+     - Number of CpGs overlapping the class.
+   * - ``CpG_count_per_KB``
+     - CpG density per kilobase.
+
+CpG density is calculated as:
+
+.. math::
+
+   \mathrm{CpG\ count\ per\ KB}
+   =
+   \frac{\mathrm{CpG\ raw\ count} \times 1000}
+        {\mathrm{Size\ of\ regions\ in\ bp}}
+
+Unless ``--no_plot`` is used, the command also writes one or more plots:
+
+* ``geneDist.gene_centered_distribution.pdf``
+* ``geneDist.gene_centered_distribution.png``
+
+Use ``--format both`` to generate both plot formats.
+
+
+Example Data
+------------
+
+* `850K probe BED3 file <https://sourceforge.net/projects/cpgtools/files/test/850K_probe.hg19.bed3.gz>`_
+* `hg19 RefSeq BED12 gene model <https://sourceforge.net/projects/cpgtools/files/refgene/hg19.RefSeq.union.bed.gz>`_
+
+
+Example Figure
+--------------
 
 .. image:: ../_static/geneDist.png
-   :height: 400 px
-   :width: 600 px
-   :scale: 100 %  
+   :height: 400px
+   :width: 600px
+   :scale: 100%
+   :alt: CpG distribution across gene-centered genomic regions

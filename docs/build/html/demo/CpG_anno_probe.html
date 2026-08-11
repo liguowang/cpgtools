@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. CpG_anno_probe.py &mdash; CpGtools Documentation</title>
+  <title>3. CpG_anno_probe &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. CpG_density_gene_centered.py" href="CpG_density_gene_centered.html" />
-    <link rel="prev" title="2. CpG_anno_position.py" href="CpG_anno_position.html" /> 
+    <link rel="next" title="4. CpG_density_gene_centered" href="CpG_density_gene_centered.html" />
+    <link rel="prev" title="2. CpG_anno_position" href="CpG_anno_position.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,45 +60,52 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. CpG_anno_probe.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">3.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#notes">3.2. Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">3.3. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">3.4. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">3.5. Command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">3.6. Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. CpG_anno_probe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">3.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">3.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-table">3.2.1. Input table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-table">3.2.2. Annotation table</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#duplicate-probe-ids">3.3. Duplicate Probe IDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">3.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">3.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">3.6. Example Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#annotation-content">3.7. Annotation Content</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -107,7 +114,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -128,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">3. </span>CpG_anno_probe.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>CpG_anno_probe</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/CpG_anno_probe.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,173 +145,148 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cpg-anno-probe-py">
-<h1><span class="section-number">3. </span>CpG_anno_probe.py<a class="headerlink" href="#cpg-anno-probe-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">3.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program adds comprehensive annotation information to each 450K/850K array probe ID.
-It will add 17 columns to the original input data file. These 17 columns include
-(from left to right):</p>
+  <section id="cpg-anno-probe">
+<h1><span class="section-number">3. </span>CpG_anno_probe<a class="headerlink" href="#cpg-anno-probe" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">3.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CpG_anno_probe</span></code> appends probe-level annotations to a tabular input file by
+matching Illumina DNA methylation probe IDs, such as <code class="docutils literal notranslate"><span class="pre">cg00000029</span></code>.</p>
+<p>The input file may contain arbitrary columns. One column must contain probe
+IDs. The annotation file must contain a probe-ID column plus one or more
+annotation columns.</p>
+<p>All original input columns are preserved, and annotation columns are appended.</p>
+</section>
+<section id="input-files">
+<h2><span class="section-number">3.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="input-table">
+<h3><span class="section-number">3.2.1. </span>Input table<a class="headerlink" href="#input-table" title="Link to this heading"></a></h3>
+<p>The input may be a regular or compressed tabular file. Tabs are preferred;
+whitespace-delimited files are also accepted.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Chrom</span>   <span class="n">Start</span>   <span class="n">End</span>   <span class="n">Probe_ID</span>     <span class="n">Beta</span>     <span class="n">Strand</span>
+<span class="n">chr1</span>    <span class="mi">10847</span>   <span class="mi">10848</span> <span class="n">cg26928153</span>   <span class="mf">0.8965</span>   <span class="o">+</span>
+<span class="n">chr1</span>    <span class="mi">10849</span>   <span class="mi">10850</span> <span class="n">cg16269199</span>   <span class="mf">0.7915</span>   <span class="o">+</span>
+<span class="n">chr1</span>    <span class="mi">15864</span>   <span class="mi">15865</span> <span class="n">cg13869341</span>   <span class="mf">0.9325</span>   <span class="o">+</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">-p</span></code> / <code class="docutils literal notranslate"><span class="pre">--probe_column</span></code> to specify the <strong>zero-based</strong> column containing
+probe IDs. The default is column 0.</p>
+<p>If the input contains a header, use <code class="docutils literal notranslate"><span class="pre">--header</span></code> (or <code class="docutils literal notranslate"><span class="pre">-l</span></code>).</p>
+</section>
+<section id="annotation-table">
+<h3><span class="section-number">3.2.2. </span>Annotation table<a class="headerlink" href="#annotation-table" title="Link to this heading"></a></h3>
+<p>The annotation file must contain a probe-ID column and at least one annotation
+column.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Probe_ID</span>      <span class="n">hg19_pos</span>        <span class="n">hg38_pos</span>        <span class="n">geneSymbol</span>
+<span class="n">cg26928153</span>    <span class="n">chr1</span><span class="p">:</span><span class="mi">10847</span>      <span class="n">chr1</span><span class="p">:</span><span class="mi">14465</span>      <span class="n">DDX11L1</span>
+<span class="n">cg16269199</span>    <span class="n">chr1</span><span class="p">:</span><span class="mi">10849</span>      <span class="n">chr1</span><span class="p">:</span><span class="mi">14467</span>      <span class="n">DDX11L1</span>
+</pre></div>
+</div>
+<p>By default, the probe ID is expected in column 0. Use
+<code class="docutils literal notranslate"><span class="pre">--annotation_probe_column</span></code> to select another zero-based column.</p>
+<p>Annotation-file headers can be controlled with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">annotation_header</span> <span class="n">auto</span>
+<span class="o">--</span><span class="n">annotation_header</span> <span class="n">yes</span>
+<span class="o">--</span><span class="n">annotation_header</span> <span class="n">no</span>
+</pre></div>
+</div>
+<p>The default, <code class="docutils literal notranslate"><span class="pre">auto</span></code>, recognizes common probe-ID header names including
+<code class="docutils literal notranslate"><span class="pre">probeID</span></code>, <code class="docutils literal notranslate"><span class="pre">probe_id</span></code>, <code class="docutils literal notranslate"><span class="pre">IlmnID</span></code>, <code class="docutils literal notranslate"><span class="pre">cpg</span></code>, <code class="docutils literal notranslate"><span class="pre">cpg_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<p>If the annotation file has no header, generic annotation-column names are
+generated.</p>
+</section>
+</section>
+<section id="duplicate-probe-ids">
+<h2><span class="section-number">3.3. </span>Duplicate Probe IDs<a class="headerlink" href="#duplicate-probe-ids" title="Link to this heading"></a></h2>
+<p>Duplicate probe IDs in the annotation file are controlled by
+<code class="docutils literal notranslate"><span class="pre">--duplicate_policy</span></code>:</p>
 <table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Policy</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>Header Name</p></td>
-<td><p>Description</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">error</span></code></p></td>
+<td><p>Stop when a duplicate probe ID is encountered. This is the default.</p></td>
 </tr>
-<tr class="row-even"><td><p>hg19_pos</p></td>
-<td><p>The genomic position of the CpG on human genome assembly <a class="reference external" href="https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/">hg19 (or
-GRCh37)</a></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">first</span></code></p></td>
+<td><p>Keep the first annotation record.</p></td>
 </tr>
-<tr class="row-odd"><td><p>hg38_pos</p></td>
-<td><p>The genomic position of the CpG on human genome assembly <a class="reference external" href="https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/">hg38 (or
-GRCh38)</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>strand</p></td>
-<td><p>Strand of the CpG. Value - “R” (reverse strand) or “F” (forward strand).</p></td>
-</tr>
-<tr class="row-odd"><td><p>geneSymbol</p></td>
-<td><p>Genes the CpG has been assigned to. “N/A” indicates no genes were found.
-This is retrieved from the Illumina <a class="reference external" href="https://support.illumina.com/downloads/infinium-methylationepic-v1-0-product-files.html">MethylationEpic v1.0 B4</a> manifest file.</p></td>
-</tr>
-<tr class="row-even"><td><p>CpGisland</p></td>
-<td><p>The CpG island (CGI) that overlaps with this CpG. “N/A” indicates no
-CGIs were found.</p></td>
-</tr>
-<tr class="row-odd"><td><p>with_450K</p></td>
-<td><p>Boolean indicating whether this CpG probe is also included in 450K.
-“0” - No, “1”- Yes.</p></td>
-</tr>
-<tr class="row-even"><td><p>SNP_ID</p></td>
-<td><p>SNPs (rsID) that are close to this CpG. Multiple SNPs are separated
-by “;”. “N/A” indicates no SNPs were found.</p></td>
-</tr>
-<tr class="row-odd"><td><p>SNP_distance</p></td>
-<td><p>The nucleotide distances between SNPs and the CpG.</p></td>
-</tr>
-<tr class="row-even"><td><p>SNP_MAF</p></td>
-<td><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Minor_allele_frequency">minor allele frequencies (MAF)</a> of SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p>Cross_Reactive</p></td>
-<td><p>Boolean (“0” - No, “1”- Yes) indicating whether this CpG could be
-affected by cross-hybridization or underlying genetic variation as
-reported by this <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1066-1">paper</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>ENCODE_TF_ChIP</p></td>
-<td><p>Transcription factor (TF) binding sites identified from ChIP-seq
-experiments performed by the <a class="reference external" href="https://www.encodeproject.org/">ENCODE</a>
-project. Peaks from 1264 experiments representing 338 transcription
-factors in 130 cell types are combined (N = 10,560,472).
-BED format file was downloaded from the <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Tabel Browser</a>, and a detailed description
-is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&amp;c-chr9&amp;g-encRegTfbsClustered">here</a>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ENCODE_DNaseI</p></td>
-<td><p>DNase I hypersensitivity sites identified from ENCODE <a class="reference external" href="https://en.wikipedia.org/wiki/DNase-Seq">DNase-seq</a> experiments. Peaks from
-125 cell types are combined (N - 1,867,665). BED format file was
-downloaded from the <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a>, and a detailed description
-is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&amp;c-chr9&amp;g-wgEncodeRegDnaseClustered">here</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>ENCODE_H3K27ac_ChIP</p></td>
-<td><p>H3K27ac peaks identified from ENCODE histone ChIP-seq experiments. Peaks
-from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 665,650)</p></td>
-</tr>
-<tr class="row-odd"><td><p>ENCODE_H3K4me1_ChIP</p></td>
-<td><p>H3K4me1 peaks identified from ENCODE histone ChIP-seq experiments. Peaks
-from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 1,435,550)</p></td>
-</tr>
-<tr class="row-even"><td><p>ENCODE_H3K4me3_ChIP</p></td>
-<td><p>H3K4me3 peaks identified from ENCODE histone ChIP-seq experiments. Peaks
-from 11 cell types (GM12878, H1-hESC, HMEC, HSMM, HUVEC, HeLaS3, HepG2,
-K562, Monocytes-CD14+_RO01746, NHEK, NHLF) are combined (N = 525,824)</p></td>
-</tr>
-<tr class="row-odd"><td><p>ENCODE_chromHMM</p></td>
-<td><p>Chromatin State Segmentation by <a class="reference external" href="https://www.nature.com/articles/nmeth.1906">chromHMM</a> from ENCODE. Chromatin states across 9 cell types
-(GM12878,  H1-hESC, K562, HepG2, HUVEC, HMEC, HSMM, NHEK, NHLF) were
-learned by computationally by integrating 9 factors (CTCF, H3K27ac,
-H3K27me3, H3K36me3, H3K4me1, H3K4me2, H3K4me3, H3K9ac, H4K20me1 )
-plus input. A total of 15 states were identified, include: State-1
-(Active Promoter), state-2 (Weak Promoter), state-3 (Inactive/poised
-Promoter), state-4 and 5 (Strong enhancer), state-6 and 7
-(Weak/poised enhancer), state-8 (insulator), state-9 (Transcriptional
-transition), state-10 (Transcriptional elongation), state-11 (Weak
-transcribed), state-12 (Polycomb-repressed), state-13 (Heterochromatin or
-low signal), state-14 and 15 (Repetitive/Copy Number Variation).
-Orignal chromatin state BED file was downloaded from <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a>, and detailed description
-is provided <a class="reference external" href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid-732007223_QUJBO5BMeBu3R7xczOAWQ0UV9A1f&amp;c-chr9&amp;g-wgEncodeBroadHmm">here</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>FANTOM_enhancer</p></td>
-<td><p>PHANTOM5 human enhancers downloaded from <a class="reference external" href="http://fantom.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2_expression_tpm_matrix.txt.gz">here</a>.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">last</span></code></p></td>
+<td><p>Keep the last annotation record.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="notes">
-<h2><span class="section-number">3.2. </span>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<section id="usage">
+<h2><span class="section-number">3.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_anno_probe</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_01</span><span class="o">.</span><span class="n">hg19</span><span class="o">.</span><span class="n">bed6</span> \
+    <span class="o">-</span><span class="n">a</span> <span class="n">MethylationEPIC_CpGtools</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">p</span> <span class="mi">3</span> \
+    <span class="o">--</span><span class="n">header</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p>Useful options include:</p>
 <ul class="simple">
-<li><p>For peaks identified from ENCODE ChIP-seq and DNase-seq (ENCODE_TF_ChIP, ENCODE_H3K27ac_ChIP,
-ENCODE_H3K4me1_ChIP, ENCODE_H3K4me3_ChIP, and ENCODE_DNaseI), we require the probe  must be
-located in the 100 bp window centered on the <strong>middle</strong> of the peak.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--probe_column</span></code> – zero-based probe-ID column in the input
+(default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--annotation_probe_column</span></code> – zero-based probe-ID column in the annotation
+file (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span></code>, <code class="docutils literal notranslate"><span class="pre">--header</span></code> – treat the first input line as a header</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--annotation_header</span> <span class="pre">{auto,yes,no}</span></code> – annotation-header handling
+(default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--na_rep</span></code> – value appended when a probe has no matching annotation
+(default: <code class="docutils literal notranslate"><span class="pre">NA</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--duplicate_policy</span> <span class="pre">{first,last,error}</span></code> – duplicate annotation handling
+(default: <code class="docutils literal notranslate"><span class="pre">error</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--out_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
 </ul>
-</section>
-<section id="options">
-<h2><span class="section-number">3.3. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Input data file (Tab-separated) with a certain column
-containing 450K/850K array CpG IDs. This file can be
-a regular text file or compressed file (.gz, .bz2).</p>
-</dd>
-<dt><kbd><span class="option">-a <var>ANNO_FILE</var></span>, <span class="option">--annotation=<var>ANNO_FILE</var></span></kbd></dt>
-<dd><p>Annotation file. This file can be a regular text file
-or compressed file (.gz, .bz2).</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>Prefix of the output file.</p>
-</dd>
-<dt><kbd><span class="option">-p <var>PROBE_COL</var></span>, <span class="option">--probe_column=<var>PROBE_COL</var></span></kbd></dt>
-<dd><p>The number specifying which column contains probe IDs.
-Note: the column index starts with 0. default-0.</p>
-</dd>
-<dt><kbd><span class="option">-l</span>, <span class="option">--header</span></kbd></dt>
-<dd><p>Input data file has a header row.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">3.4. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6">test_01.hg19.bed6</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz">MethylationEPIC_CpGtools.tsv.gz</a></p></li>
-</ul>
-</section>
-<section id="command">
-<h2><span class="section-number">3.5. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># probe IDs are located in the 4th column (-p 3)
-
-$CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv -i test_01.hg19.bed6 -o output
-
-or (take gzipped files as input)
-
-$CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.bed6.gz -o output
-
-@ 2019-06-28 09:12:41: Read annotation file &quot;../epic/MethylationEPIC_CpGtools.tsv&quot; ...
-@ 2019-06-28 09:12:52: Add annotation information to &quot;test_01.hg19.bed6&quot; ...
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_anno_probe</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
-<section id="output-files">
-<h2><span class="section-number">3.6. </span>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h2>
+<section id="output">
+<h2><span class="section-number">3.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">output</span></code>, the command writes:</p>
 <ul class="simple">
-<li><p>output.anno.txt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output.anno.tsv</span></code></p></li>
 </ul>
+<p>The output contains all original input columns followed by the annotation
+columns.</p>
+<p>When an input probe is absent from the annotation table, each appended
+annotation field is filled with <code class="docutils literal notranslate"><span class="pre">--na_rep</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">--header</span></code> is used, annotation-column names from the annotation file are
+appended to the input header. For headerless annotation files, generic names
+such as <code class="docutils literal notranslate"><span class="pre">annotation_1</span></code> and <code class="docutils literal notranslate"><span class="pre">annotation_2</span></code> are used.</p>
+<p>Input rows with an inconsistent number of columns are preserved and receive
+missing annotation values.</p>
+</section>
+<section id="example-data">
+<h2><span class="section-number">3.6. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_01.hg19.bed6">Example CpG file</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/data/MethylationEPIC_CpGtools.tsv.gz">MethylationEPIC annotation table</a></p></li>
+</ul>
+</section>
+<section id="annotation-content">
+<h2><span class="section-number">3.7. </span>Annotation Content<a class="headerlink" href="#annotation-content" title="Link to this heading"></a></h2>
+<p>The exact annotation fields are determined by the annotation file supplied to
+<code class="docutils literal notranslate"><span class="pre">CpG_anno_probe</span></code>. For example, the CpGtools MethylationEPIC annotation table
+may include genomic positions, gene annotations, CpG-island annotations, SNP
+information, cross-reactivity flags, and regulatory annotations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CpG_anno_probe</span></code> does not require a fixed set or fixed number of annotation
+columns; it appends whatever annotation fields are present in the selected
+annotation table.</p>
 </section>
 </section>
 
@@ -312,15 +294,15 @@ $CpG_anno_probe.py -p 3 -l -a MethylationEPIC_CpGtools.tsv.gz -i test_01.hg19.be
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="CpG_anno_position.html" class="btn btn-neutral float-left" title="2. CpG_anno_position.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CpG_density_gene_centered.html" class="btn btn-neutral float-right" title="4. CpG_density_gene_centered.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CpG_anno_position.html" class="btn btn-neutral float-left" title="2. CpG_anno_position" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CpG_density_gene_centered.html" class="btn btn-neutral float-right" title="4. CpG_density_gene_centered" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

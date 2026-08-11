@@ -1,3 +1,31 @@
-.wy-table-responsive table td {
-white-space: normal;
+/* Keep the standard dark Read-the-Docs sidebar */
+.wy-nav-side {
+    background: #343131 !important;
+}
+
+/* Only the logo/search area should be white */
+.wy-side-nav-search {
+    background: #ffffff !important;
+}
+
+/* Project title above the logo */
+.wy-side-nav-search > a,
+.wy-side-nav-search .wy-dropdown > a {
+    color: #333333 !important;
+}
+
+/* Search box */
+.wy-side-nav-search input[type="text"] {
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+}
+
+/* Logo sizing */
+.wy-side-nav-search .wy-dropdown > a img.logo,
+.wy-side-nav-search > a img.logo {
+    width: 90%;
+    max-width: 280px;
+    height: auto;
+    margin: 10px auto 15px auto;
 }

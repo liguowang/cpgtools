@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>26. dmc_fisher.py &mdash; CpGtools Documentation</title>
+  <title>27. dmc_fisher &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. dmc_glm.py" href="dmc_glm.html" />
-    <link rel="prev" title="25. dmc_bb.py" href="dmc_bb.html" /> 
+    <link rel="next" title="28. dmc_glm" href="dmc_glm.html" />
+    <link rel="prev" title="26. dmc_bb" href="dmc_bb.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,45 +60,52 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">26. dmc_fisher.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">26.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-file-format">26.2. Input file format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">26.3. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">26.4. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#commands">26.5. Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#output">26.6. Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">27. dmc_fisher</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">27.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">27.2. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#methylation-count-matrix">27.2.1. Methylation count matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-file">27.2.2. Group file</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">28. dmc_logit.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method">27.3. Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">27.4. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">27.5. Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">27.6. Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">27.7. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_logit.html">29. dmc_logit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -107,7 +114,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -128,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">26. </span>dmc_fisher.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">27. </span>dmc_fisher</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/dmc_fisher.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,85 +145,154 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dmc-fisher-py">
-<h1><span class="section-number">26. </span>dmc_fisher.py<a class="headerlink" href="#dmc-fisher-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">26.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program performs differential CpG analysis using Fisher exact test on proportion value.
-It applies to two sample comparison with no biological/technical replicates. If biological/
-technical replicates are provided, methyl reads and total reads of all replicates will be
-merged (i.e. ignores biological/technical variations)</p>
+  <section id="dmc-fisher">
+<h1><span class="section-number">27. </span>dmc_fisher<a class="headerlink" href="#dmc-fisher" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">27.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dmc_fisher</span></code> performs two-group differential CpG analysis using
+<strong>Fisher’s exact test</strong> on methylated-read and total-read counts.</p>
+<p>If a group contains multiple biological or technical replicates, counts are
+summed across replicates before the test. Therefore, Fisher’s exact test does
+not model between-replicate variability.</p>
+<p>The input matrix must have <strong>CpGs in rows</strong> and <strong>samples in columns</strong>.</p>
 </section>
-<section id="input-file-format">
-<h2><span class="section-number">26.2. </span>Input file format<a class="headerlink" href="#input-file-format" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># number before &quot;,&quot; indicates number of methyl reads, and number after &quot;,&quot; indicates</span>
-<span class="c1"># number of total reads</span>
-<span class="n">cgID</span>        <span class="n">sample_1</span>    <span class="n">sample_2</span>
-<span class="n">CpG_1</span>       <span class="mi">129</span><span class="p">,</span><span class="mi">170</span>     <span class="mi">166</span><span class="p">,</span><span class="mi">178</span>
-<span class="n">CpG_2</span>       <span class="mi">24</span><span class="p">,</span><span class="mi">77</span>       <span class="mi">67</span><span class="p">,</span><span class="mi">99</span>
+<section id="input-files">
+<h2><span class="section-number">27.2. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="methylation-count-matrix">
+<h3><span class="section-number">27.2.1. </span>Methylation count matrix<a class="headerlink" href="#methylation-count-matrix" title="Link to this heading"></a></h3>
+<p>Each methylation value must be represented as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">methylated_count</span><span class="p">,</span><span class="n">total_count</span>
 </pre></div>
 </div>
+<p>where both values are non-negative integers,
+<code class="docutils literal notranslate"><span class="pre">methylated_count</span> <span class="pre">&lt;=</span> <span class="pre">total_count</span></code>, and <code class="docutils literal notranslate"><span class="pre">total_count</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>
+<span class="n">CpG_1</span>    <span class="mi">129</span><span class="p">,</span><span class="mi">170</span>     <span class="mi">166</span><span class="p">,</span><span class="mi">178</span>     <span class="mi">7</span><span class="p">,</span><span class="mi">9</span>          <span class="mi">6</span><span class="p">,</span><span class="mi">16</span>
+<span class="n">CpG_2</span>    <span class="mi">24</span><span class="p">,</span><span class="mi">77</span>       <span class="mi">67</span><span class="p">,</span><span class="mi">99</span>       <span class="mi">0</span><span class="p">,</span><span class="mi">85</span>         <span class="mi">1</span><span class="p">,</span><span class="mi">37</span>
+</pre></div>
+</div>
+<p>The first row contains sample IDs and the first column contains CpG/probe IDs.
+Sample IDs must be unique.</p>
+<p>Plain text, compressed files, and other input types supported by the CpGtools
+reader may be used.</p>
+<p>Fields that do not match the <code class="docutils literal notranslate"><span class="pre">methylated,total</span></code> format are treated as
+missing and ignored. Syntactically valid count pairs with zero total coverage
+or methylated counts greater than total counts are treated as errors.</p>
 </section>
-<section id="options">
-<h2><span class="section-number">26.3. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Data file containing methylation proportions
-(represented by “methyl_count,total_count”, eg.
-“20,30”) with the 1st row containing sample IDs (must
-be unique) and the 1st column containing CpG positions
-or probe IDs (must be unique). This file can be a
-regular text file or compressed file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.gz, <a href="#id3"><span class="problematic" id="id4">*</span></a>.bz2) or
-accessible url.</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
-<dd><p>Group file defining the biological groups of each
-sample. It is a comma-separated 2 columns file with
-the 1st column containing sample IDs, and the 2nd
-column containing group IDs.  It must have a header
-row. Sample IDs should match to the “Data file”.</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">26.4. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
+<section id="group-file">
+<h3><span class="section-number">27.2.2. </span>Group file<a class="headerlink" href="#group-file" title="Link to this heading"></a></h3>
+<p>The group file is a comma-separated, two-column file with a header:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_09.tsv.gz/download">test_09.tsv.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_09.grp.csv/download">test_09.grp.csv</a></p></li>
+<li><p>column 1: sample ID</p></li>
+<li><p>column 2: group ID</p></li>
 </ul>
+<p>Exactly two groups are required.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">Control</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">Control</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">Case</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">Case</span>
+</pre></div>
+</div>
+<p>Sample IDs in the group file must be unique and must occur in the methylation
+matrix. Samples present in the methylation matrix but absent from the group
+file are ignored.</p>
+<p>The two group IDs are sorted internally before constructing the contingency
+table.</p>
 </section>
-<section id="commands">
-<h2><span class="section-number">26.5. </span>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dmc_fisher.py -i test_09.tsv.gz -g test_09.grp.csv -o test_fisher
+</section>
+<section id="method">
+<h2><span class="section-number">27.3. </span>Method<a class="headerlink" href="#method" title="Link to this heading"></a></h2>
+<p>For each CpG, methylated and unmethylated reads are summed within each group.</p>
+<p>The resulting 2 x 2 table is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                  <span class="n">Methylated</span>    <span class="n">Unmethylated</span>
+<span class="n">Group</span> <span class="mi">1</span>               <span class="n">m1</span>           <span class="n">n1</span> <span class="o">-</span> <span class="n">m1</span>
+<span class="n">Group</span> <span class="mi">2</span>               <span class="n">m2</span>           <span class="n">n2</span> <span class="o">-</span> <span class="n">m2</span>
+</pre></div>
+</div>
+<p>Fisher’s exact test is then applied using <code class="docutils literal notranslate"><span class="pre">scipy.stats.fisher_exact</span></code>.</p>
+<p>P-values are adjusted for multiple testing using the CpGtools
+<code class="docutils literal notranslate"><span class="pre">multiple_testing_correction</span></code> implementation, which performs
+Benjamini-Hochberg false-discovery-rate correction.</p>
+</section>
+<section id="usage">
+<h2><span class="section-number">27.4. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_fisher</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_09</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_09</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">test_fisher</span>
+</pre></div>
+</div>
+<p>Available options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>, <code class="docutils literal notranslate"><span class="pre">--input_file</span></code> – methylated/total count matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>, <code class="docutils literal notranslate"><span class="pre">--group</span></code> – two-group sample file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--version</span></code> – show the CpGtools version</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_fisher</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </section>
 <section id="output">
-<h2><span class="section-number">26.6. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<h2><span class="section-number">27.5. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">test_fisher</span></code>, the command writes:</p>
 <ul class="simple">
-<li><p>3 columns (“Odds ratio”, “pvalue” and “FDR adjusted pvalue”) will append to the original
-table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_fisher.pval.txt</span></code></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ head -5 test_fisher.pval.txt
-ID     LTS_MCR-1008    LTS_MCR-1035    STS_MCR-1021    STS_MCR-1251    OddsRatio       pval    adj.pval
-chr10:100011340        12,14   26,37   0,18    10,24   9.353846153846154       1.2116597355208375e-06  6.343768248800197e-05
-chr10:100011341        0,21    0,54    0,26    0,19    nan     1.0     1.0
-chr10:100011387        0,14    0,40    0,20    0,24    nan     1.0     1.0
-chr10:100011388        18,18   47,54   19,23   18,19   1.2548262548262548      0.7574366471769988      1.0
-chr10:100026933        16,30   28,55   7,40    13,19   2.0926829268292684      0.04119183894184185     0.2617016451197068
+<p>The original input table is preserved and three columns are appended:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 76.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OddsRatio</span></code></p></td>
+<td><p>Fisher’s exact-test odds ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pval</span></code></p></td>
+<td><p>Fisher’s exact-test p-value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">adj.pval</span></code></p></td>
+<td><p>Benjamini-Hochberg FDR-adjusted p-value.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span>               <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>   <span class="n">OddsRatio</span>   <span class="n">pval</span>       <span class="n">adj</span><span class="o">.</span><span class="n">pval</span>
+<span class="n">chr10</span><span class="p">:</span><span class="mi">100011340</span>  <span class="mi">12</span><span class="p">,</span><span class="mi">14</span>       <span class="mi">26</span><span class="p">,</span><span class="mi">37</span>       <span class="mi">0</span><span class="p">,</span><span class="mi">18</span>        <span class="mi">10</span><span class="p">,</span><span class="mi">24</span>       <span class="mf">9.353846</span>    <span class="mf">1.21e-06</span>   <span class="mf">6.34e-05</span>
+<span class="n">chr10</span><span class="p">:</span><span class="mi">100011388</span>  <span class="mi">18</span><span class="p">,</span><span class="mi">18</span>       <span class="mi">47</span><span class="p">,</span><span class="mi">54</span>       <span class="mi">19</span><span class="p">,</span><span class="mi">23</span>       <span class="mi">18</span><span class="p">,</span><span class="mi">19</span>       <span class="mf">1.254826</span>    <span class="mf">0.7574</span>     <span class="mf">1.0</span>
 </pre></div>
 </div>
+<p>If Fisher’s exact test returns a missing statistic, it is written as <code class="docutils literal notranslate"><span class="pre">NA</span></code>.</p>
+</section>
+<section id="notes">
+<h2><span class="section-number">27.6. </span>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Exactly two groups are required.</p></li>
+<li><p>Replicate counts are pooled within each group; replicate-level variability is
+not modeled.</p></li>
+<li><p>Input rows with fewer data fields than the header are padded with missing
+values; extra fields are ignored with a warning.</p></li>
+<li><p>Missing statistical results are excluded from multiple-testing correction
+and retained as missing in the output.</p></li>
+</ul>
+</section>
+<section id="example-data">
+<h2><span class="section-number">27.7. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_09.tsv.gz/download">Count matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_09.grp.csv/download">Group file</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -224,15 +300,15 @@ chr10:100026933        16,30   28,55   7,40    13,19   2.0926829268292684      0
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dmc_bb.html" class="btn btn-neutral float-left" title="25. dmc_bb.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dmc_glm.html" class="btn btn-neutral float-right" title="27. dmc_glm.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dmc_bb.html" class="btn btn-neutral float-left" title="26. dmc_bb" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmc_glm.html" class="btn btn-neutral float-right" title="28. dmc_glm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 

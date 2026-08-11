@@ -6,22 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>28. dmc_logit.py &mdash; CpGtools Documentation</title>
+  <title>29. dmc_logit &mdash; CpGtools Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c97855ec" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=978f7b89" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09beee0d"></script>
+      <script src="../_static/documentation_options.js?v=acc74ff5"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="29. dmc_nonparametric.py" href="dmc_nonparametric.html" />
-    <link rel="prev" title="27. dmc_glm.py" href="dmc_glm.html" /> 
+    <link rel="next" title="30. dmc_nonparametric" href="dmc_nonparametric.html" />
+    <link rel="prev" title="28. dmc_glm" href="dmc_glm.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,8 +32,8 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            CpGtools
+          <a href="../index.html">
+            
               <img src="../_static/CpGtools_logo3.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -48,11 +48,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">3. CpGtools Release History</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Data Format</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input File and Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_format.html">1. Input Files and Data Formats</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Test and Demo Datasets</span></p>
 <ul>
@@ -60,43 +60,57 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">13. beta_impute.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">14. beta_jitter_plot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">15. beta_m_conversion.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">16. beta_profile_gene_centered.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">17. beta_profile_region.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">18. beta_selectNBest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">19. beta_stacked_barplot.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">20. beta_stats.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">21. beta_tSNE.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">22. beta_topN.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">23. beta_trichotmize.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">24. dmc_Bayes.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">25. dmc_bb.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">26. dmc_fisher.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">27. dmc_glm.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">28. dmc_logit.py</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">28.1. Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">28.2. Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-files-examples">28.3. Input files (examples)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#command">28.4. Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_aggregation.html">1. CpG_aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_position.html">2. CpG_anno_position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_anno_probe.html">3. CpG_anno_probe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_density_gene_centered.html">4. CpG_density_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_chrom.html">5. CpG_distrb_chrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_gene_centered.html">6. CpG_distrb_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_distrb_region.html">7. CpG_distrb_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_logo.html">8. CpG_logo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CpG_to_gene.html">9. CpG_to_gene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_PCA.html">10. beta_PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_UMAP.html">11. beta_UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_combat.html">12. beta_combat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_deconvolution.html">13. beta_deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_impute.html">14. beta_impute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_jitter_plot.html">15. beta_jitter_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_m_conversion.html">16. beta_m_conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_gene_centered.html">17. beta_profile_gene_centered</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_profile_region.html">18. beta_profile_region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_selectNBest.html">19. beta_selectNBest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stacked_barplot.html">20. beta_stacked_barplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_stats.html">21. beta_stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_tSNE.html">22. beta_tSNE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_topN.html">23. beta_topN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beta_trichotmize.html">24. beta_trichotmize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_Bayes.html">25. dmc_Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_bb.html">26. dmc_bb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_fisher.html">27. dmc_fisher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_glm.html">28. dmc_glm</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">29. dmc_logit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">29.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-model">29.2. Statistical Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">29.3. Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">29.4. Input Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#methylation-count-matrix">29.4.1. Methylation count matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-and-covariate-file">29.4.2. Group and Covariate File</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">29. dmc_nonparametric.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">30. dmc_ttest.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">31. predict_sex.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">29.5. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">29.6. Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#final-p-value-table">29.6.1. Final p-value Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-model-results">29.6.2. Full Model Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#important-behavior">29.7. Important Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data">29.8. Example Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_nonparametric.html">30. dmc_nonparametric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmc_ttest.html">31. dmc_ttest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epical.html">32. epical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_sex.html">33. predict_sex</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Compare Differential Analysis Tools</span></p>
 <ul>
@@ -105,7 +119,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Liscense</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../liscense.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../liscense.html">MIT License</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
@@ -126,7 +140,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">28. </span>dmc_logit.py</li>
+      <li class="breadcrumb-item active"><span class="section-number">29. </span>dmc_logit</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/demo/dmc_logit.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,66 +150,201 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dmc-logit-py">
-<h1><span class="section-number">28. </span>dmc_logit.py<a class="headerlink" href="#dmc-logit-py" title="Link to this heading"></a></h1>
-<section id="description">
-<h2><span class="section-number">28.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>This program performs differential CpG analysis using <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression model</a>
-based on proportion values. It allows for covariable analysis. Users can choose to use
-“binomial” or “quasibinomial” family to model the data. The quasibinomial family estimates
-an addition parameter indicating the amount of the overdispersion.</p>
-</section>
-<section id="options">
-<h2><span class="section-number">28.2. </span>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<blockquote>
-<div><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-i <var>INPUT_FILE</var></span>, <span class="option">--input_file=<var>INPUT_FILE</var></span></kbd></dt>
-<dd><p>Data file containing methylation proportions
-(represented by “methyl_count,total_count”, eg.
-“20,30”) with the 1st row containing sample IDs (must
-be unique) and the 1st column containing CpG positions
-or probe IDs (must be unique). This file can be a
-regular text file or compressed file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.gz, <a href="#id3"><span class="problematic" id="id4">*</span></a>.bz2) or
-accessible url.</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GROUP_FILE</var></span>, <span class="option">--group=<var>GROUP_FILE</var></span></kbd></dt>
-<dd><p>Group file defining the biological groups of each
-sample as well as other covariables such as gender,
-age. The first variable is grouping variable (must be
-categorical), all the other variables are considered
-as covariates (can be categorical or continuous).
-Sample IDs should match to the “Data file”.</p>
-</dd>
-<dt><kbd><span class="option">-f <var>FAMILY_FUNC</var></span>, <span class="option">--family=<var>FAMILY_FUNC</var></span></kbd></dt>
-<dd><p>Error distribution and link function to be used in the
-GLM model. Can be integer 1 or 2 with 1 =
-“quasibinomial” and 2 = “binomial”. Default=1.</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_FILE</var></span>, <span class="option">--output=<var>OUT_FILE</var></span></kbd></dt>
-<dd><p>The prefix of the output file.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="input-files-examples">
-<h2><span class="section-number">28.3. </span>Input files (examples)<a class="headerlink" href="#input-files-examples" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.tsv.gz">test_04_TwoGroup.tsv.gz</a></p></li>
-<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.grp.csv">test_04_TwoGroup.grp.csv</a></p></li>
-</ul>
-</section>
-<section id="command">
-<h2><span class="section-number">28.4. </span>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -o output_quasibin
-$ dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -f 2  -o output_bin
+  <section id="dmc-logit">
+<h1><span class="section-number">29. </span>dmc_logit<a class="headerlink" href="#dmc-logit" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">29.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dmc_logit</span></code> performs differential CpG analysis using logistic regression on
+methylated-read and total-read counts.</p>
+<p>The input matrix must have <strong>CpGs/probes in rows</strong> and <strong>samples in columns</strong>.
+Each methylation value is represented as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">methylated_count</span><span class="p">,</span><span class="n">total_count</span>
 </pre></div>
 </div>
+<p>where both values are non-negative integers,
+<code class="docutils literal notranslate"><span class="pre">methylated_count</span> <span class="pre">&lt;=</span> <span class="pre">total_count</span></code>, and <code class="docutils literal notranslate"><span class="pre">total_count</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+<p>The first variable in the group/covariate file is treated as the primary
+grouping variable. Additional variables are included as covariates.</p>
+</section>
+<section id="statistical-model">
+<h2><span class="section-number">29.2. </span>Statistical Model<a class="headerlink" href="#statistical-model" title="Link to this heading"></a></h2>
+<p>For each CpG, the model fitted in R is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span> <span class="o">~</span> <span class="n">covariates</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the methylated-read count and <code class="docutils literal notranslate"><span class="pre">t</span></code> is the total-read count.</p>
+<p>Two GLM families are available:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 28.0%" />
+<col style="width: 54.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Family</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">quasibinomial</span></code></p></td>
+<td><p>Default. Allows for overdispersion relative to a standard binomial
+model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">binomial</span></code></p></td>
+<td><p>Standard binomial logistic regression.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Raw p-values for the primary grouping variable are extracted from the R model
+output and adjusted using the CpGtools Benjamini-Hochberg multiple-testing
+procedure.</p>
+</section>
+<section id="requirements">
+<h2><span class="section-number">29.3. </span>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dmc_logit</span></code> requires <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> to be available in <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+</section>
+<section id="input-files">
+<h2><span class="section-number">29.4. </span>Input Files<a class="headerlink" href="#input-files" title="Link to this heading"></a></h2>
+<section id="methylation-count-matrix">
+<h3><span class="section-number">29.4.1. </span>Methylation count matrix<a class="headerlink" href="#methylation-count-matrix" title="Link to this heading"></a></h3>
+<p>The first row contains sample IDs and the first column contains CpG/probe IDs.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CpG_ID</span>   <span class="n">Sample_01</span>   <span class="n">Sample_02</span>   <span class="n">Sample_03</span>   <span class="n">Sample_04</span>
+<span class="n">cg_001</span>   <span class="mi">12</span><span class="p">,</span><span class="mi">14</span>       <span class="mi">26</span><span class="p">,</span><span class="mi">37</span>       <span class="mi">0</span><span class="p">,</span><span class="mi">18</span>        <span class="mi">10</span><span class="p">,</span><span class="mi">24</span>
+<span class="n">cg_002</span>   <span class="mi">18</span><span class="p">,</span><span class="mi">18</span>       <span class="mi">47</span><span class="p">,</span><span class="mi">54</span>       <span class="mi">19</span><span class="p">,</span><span class="mi">23</span>       <span class="mi">18</span><span class="p">,</span><span class="mi">19</span>
+</pre></div>
+</div>
+<p>Sample IDs must be unique.</p>
+<p>Plain text, <code class="docutils literal notranslate"><span class="pre">.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.bz2</span></code>, and other formats supported by the CpGtools
+reader may be used.</p>
+<p>Fields that do not match the <code class="docutils literal notranslate"><span class="pre">methylated,total</span></code> pattern are treated as
+missing values. Syntactically valid count pairs are considered errors when
+<code class="docutils literal notranslate"><span class="pre">total_count</span> <span class="pre">&lt;=</span> <span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">methylated_count</span> <span class="pre">&gt;</span> <span class="pre">total_count</span></code>.</p>
+</section>
+<section id="group-and-covariate-file">
+<h3><span class="section-number">29.4.2. </span>Group and Covariate File<a class="headerlink" href="#group-and-covariate-file" title="Link to this heading"></a></h3>
+<p>The group/covariate file may contain a primary grouping variable plus
+additional covariates.</p>
+<p>The first variable must be categorical. Additional variables may be
+categorical or continuous.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sample</span><span class="p">,</span><span class="n">Group</span><span class="p">,</span><span class="n">Sex</span><span class="p">,</span><span class="n">Age</span>
+<span class="n">Sample_01</span><span class="p">,</span><span class="n">Control</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="mi">52</span>
+<span class="n">Sample_02</span><span class="p">,</span><span class="n">Control</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="mi">47</span>
+<span class="n">Sample_03</span><span class="p">,</span><span class="n">Case</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="mi">61</span>
+<span class="n">Sample_04</span><span class="p">,</span><span class="n">Case</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="mi">58</span>
+</pre></div>
+</div>
+<p>Every sample listed in the group file must occur in the methylation matrix.</p>
+<p>Samples present in the methylation matrix but absent from the group file are
+ignored by assigning <code class="docutils literal notranslate"><span class="pre">NA</span></code> to their count and covariate values before model
+fitting.</p>
+</section>
+</section>
+<section id="usage">
+<h2><span class="section-number">29.5. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Quasibinomial model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_logit</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_04_TwoGroup</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_04_TwoGroup</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">output_quasibin</span>
+</pre></div>
+</div>
+<p>Binomial model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_logit</span> \
+    <span class="o">-</span><span class="n">i</span> <span class="n">test_04_TwoGroup</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span> \
+    <span class="o">-</span><span class="n">g</span> <span class="n">test_04_TwoGroup</span><span class="o">.</span><span class="n">grp</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="mi">2</span> \
+    <span class="o">-</span><span class="n">o</span> <span class="n">output_bin</span>
+</pre></div>
+</div>
+<p>Available options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>, <code class="docutils literal notranslate"><span class="pre">--input_file</span></code> – methylated/total count matrix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code>, <code class="docutils literal notranslate"><span class="pre">--group</span></code> – group/covariate file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--family</span> <span class="pre">{1,2}</span></code> – GLM family; 1 = <code class="docutils literal notranslate"><span class="pre">quasibinomial</span></code>,
+2 = <code class="docutils literal notranslate"><span class="pre">binomial</span></code> (default: 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span></code> – output prefix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--version</span></code> – show the CpGtools version</p></li>
+</ul>
+<p>Display all options with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmc_logit</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h2><span class="section-number">29.6. </span>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>For output prefix <code class="docutils literal notranslate"><span class="pre">output_quasibin</span></code>, the command writes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output_quasibin.r</span></code> – generated R script;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_quasibin.results.txt</span></code> – full model coefficient and p-value table;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_quasibin.warnings.txt</span></code> – stderr produced by <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_quasibin.pval.txt</span></code> – original methylation table with
+primary-variable p-values and adjusted p-values appended.</p></li>
+</ul>
+<section id="final-p-value-table">
+<h3><span class="section-number">29.6.1. </span>Final p-value Table<a class="headerlink" href="#final-p-value-table" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.pval.txt</span></code> preserves the original input rows and appends:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pval</span></code></p></td>
+<td><p>Raw p-value for the first coefficient associated with the primary
+grouping variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">adj.pval</span></code></p></td>
+<td><p>Benjamini-Hochberg FDR-adjusted p-value.</p></td>
+</tr>
+</tbody>
+</table>
+<p>If a valid primary-variable p-value is unavailable for a CpG, both fields are
+written as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+</section>
+<section id="full-model-results">
+<h3><span class="section-number">29.6.2. </span>Full Model Results<a class="headerlink" href="#full-model-results" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.results.txt</span></code> contains estimated coefficients and p-values for all
+terms returned by the R GLM, including the intercept, primary grouping
+variable, and additional covariates.</p>
+<p>For categorical variables, R creates factor-level coefficients. The exact
+column names therefore depend on the variable names and factor levels.</p>
+</section>
+</section>
+<section id="important-behavior">
+<h2><span class="section-number">29.7. </span>Important Behavior<a class="headerlink" href="#important-behavior" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Per-CpG fitting uses <code class="docutils literal notranslate"><span class="pre">na.omit</span></code> in R, so samples with missing count or
+covariate values are removed for that CpG.</p></li>
+<li><p>Input rows with fewer data fields than the header are padded with <code class="docutils literal notranslate"><span class="pre">NA</span></code>;
+extra values are ignored with a warning.</p></li>
+<li><p>The primary grouping variable must be categorical.</p></li>
+<li><p>If all methylated counts for a CpG sum to zero, the model p-values are set
+to missing.</p></li>
+<li><p>When the primary grouping variable has multiple factor levels,
+<code class="docutils literal notranslate"><span class="pre">dmc_logit</span></code> currently extracts the <strong>first</strong> p-value column whose name
+starts with the primary variable name. The final <code class="docutils literal notranslate"><span class="pre">pval</span></code> therefore
+represents one factor coefficient rather than an omnibus test of the entire
+factor.</p></li>
+<li><p>If the per-CpG R model fails, that CpG may be absent from
+<code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;.results.txt</span></code> and receives <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in the final p-value table.</p></li>
+</ul>
+</section>
+<section id="example-data">
+<h2><span class="section-number">29.8. </span>Example Data<a class="headerlink" href="#example-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.tsv.gz">Count matrix</a></p></li>
+<li><p><a class="reference external" href="https://sourceforge.net/projects/cpgtools/files/test/test_04_TwoGroup.grp.csv">Group file</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -203,15 +352,15 @@ $ dmc_logit.py -i test_04_TwoGroup.tsv.gz -g test_04_TwoGroup.grp.csv -f 2  -o o
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dmc_glm.html" class="btn btn-neutral float-left" title="27. dmc_glm.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dmc_nonparametric.html" class="btn btn-neutral float-right" title="29. dmc_nonparametric.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dmc_glm.html" class="btn btn-neutral float-left" title="28. dmc_glm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmc_nonparametric.html" class="btn btn-neutral float-right" title="30. dmc_nonparametric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024-2026, Liguo Wang.
-      <span class="lastupdated">Last updated on August 03, 2026.
+      <span class="lastupdated">Last updated on August 10, 2026.
       </span></p>
   </div>
 
