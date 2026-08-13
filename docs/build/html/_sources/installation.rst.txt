@@ -1,8 +1,7 @@
 Installation
 ============
 
-**CpGtools** is a Python package for DNA methylation analysis. It supports
-Python 3.9 or later and can be installed with ``pip``. Most Python
+**CpGtools** supports Python 3.9 or later and can be installed with ``pip``. Most Python
 dependencies are installed automatically.
 
 Some commands require additional software, such as R or TensorFlow.

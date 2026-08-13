@@ -15,20 +15,14 @@ matrix is expected to have:
 * **Samples in columns**
 
 The first row should contain sample IDs, and the first column should contain
-CpG IDs or genomic-locus identifiers.
+CpG IDs or genomic-locus identifiers. For example::
 
-For example::
+    CpG_ID      Sample_1    Sample_2    Sample_3    ...
+    cg00000029  0.432       0.517       0.481   ...
+    cg00000108  0.821       0.793       0.806   ...
+    cg00000165  0.135       0.164       0.142   ...
+    ...
 
-    CpG_ID      Sample_1    Sample_2    Sample_3
-    cg00000029  0.432       0.517       0.481
-    cg00000108  0.821       0.793       0.806
-    cg00000165  0.135       0.164       0.142
-
-In this example, each row represents one CpG and each column represents one
-sample.
-
-Unless otherwise specified in the documentation for an individual command,
-users should follow this **CpGs-by-samples** orientation.
 
 Missing values are generally represented as ``NA`` or ``NaN``. Some commands
 also support compressed input files and automatically detect common delimiters
@@ -41,8 +35,8 @@ Beta Values
 -----------
 
 A **Beta-value** represents the fraction of methylation at a CpG site or
-genomic locus. It ranges from 0 to 1, where values close to 0 indicate low
-methylation and values close to 1 indicate high methylation.
+genomic locus. It ranges from 0 to 1, where values close to 0 indicate hypo (low)
+methylation and values close to 1 indicate hyper (high) methylation.
 
 For array-based methylation data:
 
@@ -57,10 +51,6 @@ The Beta-value is defined as:
 
 For sequencing-based data, the same concept can be applied using methylated
 and unmethylated read counts.
-
-Because a Beta-value contains only the ratio between methylated and total
-signal or read count, the original methylated and unmethylated intensities or
-read counts cannot generally be recovered from the Beta-value alone.
 
 
 M Values
@@ -164,15 +154,13 @@ genomic intervals. Each line represents one genomic feature or interval and
 contains between 3 and 12 standard BED fields, depending on the BED variant.
 
 BED coordinates are **0-based and half-open**. The start coordinate is
-included and the end coordinate is excluded.
+excluded and the end coordinate is included.
 
 For example::
 
     chr1    10    15
 
-represents the BED interval ``chr1:10-15``. In 1-based inclusive coordinates,
-this corresponds to bases 11 through 15.
-
+represents the BED interval ``chr1:11-15`` (1-based both start and end are included)
 
 BED Variants
 ~~~~~~~~~~~~

@@ -2,7 +2,7 @@ Overview
 ========
 
 **CpGtools** is a Python package providing command-line tools for DNA
-methylation analysis. It supports data from Illumina methylation arrays
+methylation data analysis. It supports data from Illumina methylation arrays
 (450K, EPIC, and EPIC v2) and bisulfite sequencing platforms such as RRBS
 and WGBS.
 
@@ -12,13 +12,13 @@ individual command.
 
 Some key functions of CpGtools include:
 
-* CpG annotation, visualization, Beta-M transformation
-* dimensionality reduction
-* missing-value imputation;
-* cell-type deconvolution;
-* differential methylation analysis;
-* epigenetic clocks
-* phenotype prediction
+* **Basic data manipulation** (e.g., quality control, annotation, visualization, and Beta-to-M value transformation)
+* **Dimensionality reduction** (PCA, t-SNE, and UMAP)
+* **Missing-value imputation** (KNN, Random Forest, iterative linear regression, and MOREL [Ma2026]_)
+* **Cell-type deconvolution** (12 immune cell types)
+* **Differential methylation analysis** (linear regression, logistic regression, beta-binomial regression, t-test, ANOVA, and Bayesian methods)
+* **Epigenetic clock estimation** (30+ clocks for humans, mice, and mammals)
+* **Phenotype prediction** (multiple traits; under development)
 
 The main command groups are summarized below.
 
@@ -26,7 +26,7 @@ The main command groups are summarized below.
 CpG Position Analysis
 ---------------------
 
-Tools for annotating CpGs and characterizing their genomic distribution.
+Tools for annotating CpGs and characterizing/visualizing their genomic distribution.
 
 .. list-table::
    :header-rows: 1
@@ -93,100 +93,6 @@ methylation matrices.
    * - ``beta_UMAP``
      - Perform UMAP dimensionality reduction.
 
-
-Missing-value Imputation
-------------------------
-
-``beta_impute`` provides a unified interface for detecting, simulating,
-evaluating, and imputing missing values in methylation matrices. Imputation
-performance can optionally be evaluated against a truth matrix using MAE,
-RMSE, and :math:`R^2`.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 24 76
-
-   * - Method
-     - Brief description
-   * - ``constant``
-     - Replace all missing values with a user-specified constant.
-   * - ``mean``
-     - Replace missing values with row-wise or column-wise means.
-   * - ``median``
-     - Replace missing values with row-wise or column-wise medians.
-   * - ``min`` / ``max``
-     - Replace missing values with row-wise or column-wise minima or maxima.
-   * - ``rand``
-     - Replace missing values using randomly selected observed values from the
-       same row or column.
-   * - ``refknn``
-     - Use K-nearest neighbors from an external complete reference matrix.
-   * - ``mw``
-     - Impute from neighboring values in a moving window using the mean or
-       median.
-   * - ``knn``
-     - Use scikit-learn KNN imputation within the input methylation matrix.
-   * - ``buck``
-     - Iterative regression imputation based on the method of Buck (1960).
-   * - ``rf``
-     - Iteratively predict missing values with Random Forest regression.
-   * - ``softimpute``
-     - Low-rank matrix completion using iterative soft-thresholded SVD.
-   * - ``morel``
-     - Impute systematic block-wise missingness using Random Forest or a dense
-       neural network, with KNN for sporadic missing values.
-   * - ``gnn``
-     - Impute from genomically neighboring CpGs, optionally restricted by
-       candidate cis-regulatory elements.
-
-The command also provides utilities such as ``toy``, ``insertna``,
-``dropna``, and ``countna`` for generating test matrices and inspecting
-missingness.
-
-For details, see :doc:`demo/beta_impute`.
-
-Cell-type Deconvolution
------------------------
-
-``beta_deconvolution`` estimates cell-type proportions from bulk DNA
-methylation profiles using a reference methylation matrix and constrained
-least-squares methods.
-
-The current reference panel includes the following cell-type labels:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 22 78
-
-   * - Label
-     - Cell type
-   * - ``Bmem``
-     - B memory cells
-   * - ``Bnv``
-     - B naïve cells
-   * - ``CD4Tmem``
-     - CD4+ memory T cells
-   * - ``CD4Tnv``
-     - CD4+ naïve T cells
-   * - ``CD8Tmem``
-     - CD8+ memory T cells
-   * - ``CD8Tnv``
-     - CD8+ naïve T cells
-   * - ``Treg``
-     - Regulatory T cells
-   * - ``NK``
-     - Natural killer cells
-   * - ``Bas``
-     - Basophils
-   * - ``Neu``
-     - Neutrophils
-   * - ``Eos``
-     - Eosinophils
-   * - ``Mono``
-     - Monocytes
-
-Use ``beta_deconvolution -h`` for input requirements and available options.
-
 Differential Methylation Analysis
 ---------------------------------
 
@@ -215,8 +121,104 @@ Beta-values or sequencing-derived methylation counts.
      - Student's *t*-test for methylation-array data.
 
 
+Missing-value Imputation
+------------------------
+
+``beta_impute`` provides a unified interface for detecting, simulating,
+evaluating, and imputing missing values in methylation matrices. Imputation
+performance can optionally be evaluated against a truth matrix using MAE,
+RMSE, and :math:`R^2`.
+
+.. raw:: html
+
+   <style>
+   table.imputation-table {
+       width: 100%;
+       table-layout: fixed;
+   }
+   table.imputation-table th,
+   table.imputation-table td {
+       white-space: normal !important;
+       overflow-wrap: anywhere;
+       word-break: normal;
+   }
+   </style>
+
+.. list-table::
+   :header-rows: 1
+   :widths: 24 76
+   :class: imputation-table
+
+   * - Method
+     - Brief description
+   * - ``constant``
+     - Replace all missing values with a user-specified constant.
+   * - ``mean``
+     - Replace missing values with row-wise or column-wise means.
+   * - ``median``
+     - Replace missing values with row-wise or column-wise medians.
+   * - ``min`` / ``max``
+     - Replace missing values with row-wise or column-wise minima or maxima.
+   * - ``rand``
+     - Replace missing values using randomly selected observed values from the
+       same row or column.
+   * - ``refknn``
+     - Use K-nearest neighbors from an external complete reference matrix.
+   * - ``mw``
+     - Impute from neighboring values in a moving window using the mean or
+       median.
+   * - ``knn``
+     - Use scikit-learn KNN imputation within the input methylation matrix.
+   * - ``buck``
+     - Iterative regression imputation based on the method of Buck (1960).
+   * - ``rf``
+     - Iteratively predict missing values with Random Forest regression.
+   * - ``softimpute``
+     - Low-rank matrix completion using iterative soft-thresholded SVD.
+   * - ``morel`` [Ma2026]_
+     - Impute systematic block-wise missingness using Random Forest or a dense
+       neural network, with KNN for sporadic missing values.
+   * - ``gnn``
+     - Impute from genomically neighboring CpGs, optionally restricted by
+       candidate cis-regulatory elements.
+
+The command also provides utilities such as ``toy``, ``insertna``,
+``dropna``, and ``countna`` for generating test matrices and inspecting
+missingness.
+
+For details, see :doc:`demo/beta_impute`.
+
+.. [Ma2026] Tao Ma, Jinfu Nie, Jian Huang, Yong-Biao Zhang, Joanna M. Biernacka,
+   Liguo Wang. *Multi-output learning for systematic missing value imputation in
+   DNA methylation arrays*. Bioinformatics Advances, Volume 6, Issue 1, 2026,
+   vbag052. https://doi.org/10.1093/bioadv/vbag052
+
+Cell-type Deconvolution
+-----------------------
+
+``beta_deconvolution`` estimates cell-type proportions from bulk DNA
+methylation profiles using NNLS or constrained least-squares methods. 
+The current reference panel includes the following **12 cell types labeled in red text**:
+
+.. image:: _static/immune_cells.png
+   :height: 600px
+   :width: 800
+   :scale: 100%
+   :alt: 12 immune cell types
+
+
+Use ``beta_deconvolution -h`` for input requirements and available options.
+
+
 Epigenetic Aging Analysis
 -------------------------
+
+.. image:: _static/aging.png
+   :height: 200px
+   :width: 850px
+   :scale: 100%
+   :alt: aging
+
 
 ``epical`` provides a unified interface for DNA methylation age prediction
 and related epigenetic aging measures. It includes human, pediatric,
