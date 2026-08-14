@@ -14,13 +14,11 @@ from rpy2.robjects.packages import importr
 import rpy2.robjects as ro
 import rpy2.robjects.packages as rpackages
 from rpy2.robjects import pandas2ri
-from dmc.imputation import impute_beta
 from dmc.utils import plot_corr
 
 
 def DunedinPACE_clock(beta_file, outfile, metafile=None, delimiter=None,
-                      ff='pdf', na_percent=0.2, imputation_method=11,
-                      ext_file=None, ovr=False):
+                      ff='pdf', na_percent=0.2, ovr=False):
     try:
         devtools = importr('devtools')
     except:
@@ -67,18 +65,17 @@ def DunedinPACE_clock(beta_file, outfile, metafile=None, delimiter=None,
                 sys.exit(0)
 
     logging.info("Read input file: \"%s\"" % beta_file)
-    input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
-    (n_cpg, n_sample) = input_df2.shape
+    input_df = pd.read_csv(beta_file, sep=delimiter, index_col=0, engine="python")
+    (n_cpg, n_sample) = input_df.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
         (beta_file, n_cpg, n_sample))
 
     # calculate DunedinPACE
     with (ro.default_converter + pandas2ri.converter).context():
-        r_from_pd_df = ro.conversion.get_conversion().py2rpy(input_df2)
+        r_from_pd_df = ro.conversion.get_conversion().py2rpy(input_df)
     a = DunedinPACE.PACEProjector(betas=r_from_pd_df, proportionOfProbesRequired=1-na_percent)
-    names = list(input_df1.columns)
+    names = list(input_df.columns)
     values = list(a[0][:])
     output = pd.DataFrame(data={'DunedinPACE' : values}, index=names)
 
