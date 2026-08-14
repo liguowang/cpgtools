@@ -10,6 +10,7 @@ script_files = [
 "scripts/CpG_logo.py",
 "scripts/CpG_to_gene.py",
 "scripts/beta_impute.py",
+"scripts/beta_deconvolution.py",
 "scripts/beta_PCA.py",
 "scripts/beta_UMAP.py",
 "scripts/beta_jitter_plot.py",
@@ -31,7 +32,6 @@ script_files = [
 "scripts/dmc_nonparametric.py",
 "scripts/dmc_ttest.py",
 "scripts/predict_sex.py",
-"scripts/predict_missing.py",
 ]
 
 if __name__ == "__main__":

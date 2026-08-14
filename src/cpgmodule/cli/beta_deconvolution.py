@@ -2,8 +2,8 @@
 """Estimate cell/tissue fractions from a DNA methylation beta-value matrix.
 
 The input matrix must contain CpG identifiers in the first column and one or
-more sample beta-value columns. The selected reference atlas is loaded from
-``CpGtools/src/deconv_data`` relative to this script.
+more sample beta-value columns. Reference atlases are bundled with CpGtools
+as package data.
 """
 
 from __future__ import annotations
@@ -21,9 +21,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.optimize import lsq_linear, nnls
+from importlib.resources import files
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-ATLAS_DIR = SCRIPT_DIR.parent / "src" / "deconv_data"
+
+ATLAS_DIR = files("cpgmodule") / "deconv_data"
+
 ATLAS_FILES = {
     "CellTrace": "Reference_CellTrace.beta.tsv",
     "EpiDISH": "Reference_EpiDISH.beta.tsv",
