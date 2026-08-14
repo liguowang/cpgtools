@@ -142,14 +142,6 @@ def _add_common_arguments(parser, *, include_log=True):
             help=helpdoc.log_help,
         )
     parser.add_argument(
-        "--impute", type=int, choices=range(-1, 12), default=11,
-        help=helpdoc.imputation_help,
-    )
-    parser.add_argument(
-        "-r", "--ref", type=str, metavar="ref_file", default=None,
-        help=helpdoc.ext_ref_help,
-    )
-    parser.add_argument(
         "--overwrite", action="store_true",
         help="If set, over-write existing output files.",
     )
@@ -180,7 +172,7 @@ def _add_mammalian_species_arguments(parser):
 
 
 def _add_epm_arguments(parser):
-    """Add the EPM-specific interface without changing its current options."""
+    """Add arguments specific to the EPM subcommand."""
     parser.add_argument(
         "input", type=str, metavar="Input_file", help=helpdoc.input_help
     )
@@ -220,14 +212,6 @@ def _add_epm_arguments(parser):
     parser.add_argument(
         "-l", "--log", type=str, metavar="log_file", default=None,
         help=helpdoc.log_help,
-    )
-    parser.add_argument(
-        "--impute", type=int, choices=range(-1, 12), default=11,
-        help=helpdoc.imputation_help,
-    )
-    parser.add_argument(
-        "-r", "--ref", type=str, metavar="ref_file", default=None,
-        help=helpdoc.ext_ref_help,
     )
     parser.add_argument(
         "--debug", action="store_true", help=helpdoc.debug_help
@@ -285,8 +269,6 @@ def _common_clock_kwargs(args, command):
         "ff": args.format,
         "na_percent": args.percent,
         "ovr": args.overwrite,
-        "imputation_method": args.impute,
-        "ext_file": args.ref,
     }
 
 
@@ -357,8 +339,6 @@ def _run_epm(args):
         metafile=args.meta,
         outfile=args.output,
         delimiter=args.delimiter,
-        imputation_method=args.impute,
-        ext_file=args.ref,
         pcc_cut=args.pcc,
         iter_n=args.niter,
         error_tol=args.etol,
