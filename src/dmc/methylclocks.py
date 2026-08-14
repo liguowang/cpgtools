@@ -14,7 +14,6 @@ import importlib.resources
 import pickle
 import logging
 from dmc.utils import plot_coef, plot_corr
-from dmc.imputation import impute_beta
 from dmc.utils import plot_known_predicted_ages
 from dmc.utils import pearson_correlation
 import subprocess
@@ -31,7 +30,7 @@ __status__ = "Development"
 
 def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', metafile=None, delimiter=None,
                   ff='pdf', na_percent=0.2,
-                  ovr=False, imputation_method=11, ext_file=None):
+                  ovr=False):
     """
     Calculate Universal clocks 2. This age is relative to the maximum lifespan of 
     its species; generating relative age estimates between 0 and 1.
@@ -74,13 +73,6 @@ def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', met
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -167,7 +159,7 @@ def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', met
     logging.info("Read input file: \"%s\"" % beta_file)
     input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
 
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
@@ -301,7 +293,7 @@ def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', met
 
 def clock_general(beta_file, outfile, cname, metafile=None, delimiter=None,
                   ff='pdf', na_percent=0.2,
-                  ovr=False, imputation_method=11, ext_file=None):
+                  ovr=False):
     """
     Calculate DNAm age using the "Weidner" or "Lin" clocks.
 
@@ -339,13 +331,6 @@ def clock_general(beta_file, outfile, cname, metafile=None, delimiter=None,
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -408,7 +393,7 @@ def clock_general(beta_file, outfile, cname, metafile=None, delimiter=None,
     logging.info("Read input file: \"%s\"" % beta_file)
     input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
 
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
@@ -507,7 +492,7 @@ def clock_general(beta_file, outfile, cname, metafile=None, delimiter=None,
 
 def clock_blup_en(beta_file, outfile, metafile=None, delimiter=None,
                   cname="Zhang_BLUP", ff='pdf', na_percent=0.2,
-                  ovr=False, imputation_method=11, ext_file=None):
+                  ovr=False):
     """
     Calculate DNAm age using the "Zhang_BLUP" or "Zhang_EN" clocks.
 
@@ -546,13 +531,6 @@ def clock_blup_en(beta_file, outfile, metafile=None, delimiter=None,
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -615,7 +593,7 @@ def clock_blup_en(beta_file, outfile, metafile=None, delimiter=None,
     logging.info("Read input file: \"%s\"" % beta_file)
     input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
 
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
@@ -709,8 +687,7 @@ def clock_blup_en(beta_file, outfile, metafile=None, delimiter=None,
 
 
 def clock_horvath(beta_file, outfile, metafile=None, delimiter=None, adult_age=20,
-                  cname="Horvath_2013", ff='pdf', na_percent=0.2, ovr=False,
-                  imputation_method=11, ext_file=None):
+                  cname="Horvath_2013", ff='pdf', na_percent=0.2, ovr=False):
     """
     Calculate DNAm age using the "Horvath_2013", "Horvath13_shrunk", 
     "Horvath_2018", "PedPE", "Ped_Wu", "MEAT" or "Cortical" clocks.
@@ -751,13 +728,6 @@ def clock_horvath(beta_file, outfile, metafile=None, delimiter=None, adult_age=2
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -820,7 +790,7 @@ def clock_horvath(beta_file, outfile, metafile=None, delimiter=None, adult_age=2
     input_df1 = pd.read_csv(
         beta_file, sep=delimiter, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
@@ -928,8 +898,7 @@ def clock_horvath(beta_file, outfile, metafile=None, delimiter=None, adult_age=2
 
 
 def clock_levine_hannum(beta_file, outfile, metafile=None, delimiter=None,
-                        cname="Levine", ff='pdf', na_percent=0.2, ovr=False,
-                        imputation_method=11, ext_file=None):
+                        cname="Levine", ff='pdf', na_percent=0.2, ovr=False):
     """
     Calculate DNAm age using the "Levine", "Hannum", or "Lu_DNAmTL" clock.
     Note, the output of "Lu_DNAmTL" clock is "Kb" (DNA telomere length)
@@ -968,13 +937,6 @@ def clock_levine_hannum(beta_file, outfile, metafile=None, delimiter=None,
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -1036,7 +998,7 @@ def clock_levine_hannum(beta_file, outfile, metafile=None, delimiter=None,
     logging.info("Read input file: \"%s\"" % beta_file)
     input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
@@ -1131,8 +1093,7 @@ def clock_levine_hannum(beta_file, outfile, metafile=None, delimiter=None,
 
 
 def clock_GA(beta_file, outfile, metafile=None, delimiter=None,
-             cname="GA_Knight", ff='pdf', na_percent=0.2, ovr=False,
-             imputation_method=11, ext_file=None):
+             cname="GA_Knight", ff='pdf', na_percent=0.2, ovr=False):
     """
     Calculate DNAm age (gestational) using the 'Knight', 'Bohlin', 'Mayne',
     'Haftorn', 'Lee_CPC', 'Lee_RPC', or 'Lee_cRPC' clock.
@@ -1172,13 +1133,6 @@ def clock_GA(beta_file, outfile, metafile=None, delimiter=None,
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -1239,7 +1193,7 @@ def clock_GA(beta_file, outfile, metafile=None, delimiter=None,
     logging.info("Read input file: \"%s\"" % beta_file)
     input_df1 = pd.read_csv(beta_file, sep=None, index_col=0, engine='python')
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
@@ -1331,8 +1285,7 @@ def clock_GA(beta_file, outfile, metafile=None, delimiter=None,
 
 
 def altum_age(beta_file, outfile, metafile=None, delimiter=None,
-              cname="AltumAge", ff='pdf', na_percent=0.2, ovr=False,
-              imputation_method=11, ext_file=None):
+              cname="AltumAge", ff='pdf', na_percent=0.2, ovr=False):
     """
     Calculate DNAm age (gestational) using the 'Knight', 'Bohlin', 'Mayne',
     'Haftorn', or 'Lee' clock.
@@ -1370,13 +1323,6 @@ def altum_age(beta_file, outfile, metafile=None, delimiter=None,
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
     Returns
     -------
@@ -1460,7 +1406,7 @@ def altum_age(beta_file, outfile, metafile=None, delimiter=None,
         # create a new dataframe with all zeros
         df_missed = pd.DataFrame(0, index=missed_cpgs, columns=input_df1.columns) 
         input_df1 = pd.concat([input_df1, df_missed], ignore_index=False)
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
 
     logging.info("Transpose input data frame ...")
     df_transpose = input_df2.T
@@ -1528,7 +1474,7 @@ def altum_age(beta_file, outfile, metafile=None, delimiter=None,
 
 
 def clock_epm(beta_file, metafile, outfile, delimiter=None,
-              imputation_method=11, ext_file=None, pcc_cut=0.85,
+              pcc_cut=0.85,
               iter_n=100, error_tol=1e-5, cv_folds=10, frmt='pdf',
               cname='EPM'):
     """
@@ -1554,8 +1500,6 @@ def clock_epm(beta_file, metafile, outfile, delimiter=None,
     beta_df = pd.read_csv(
         beta_file, sep=delimiter, index_col=0, engine='python')
 
-    # Imputate input beta values
-    beta_df = impute_beta(beta_df, method=imputation_method, ref=ext_file)
     (n_cpg, n_sample) = beta_df.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
@@ -1753,8 +1697,7 @@ def clock_epm(beta_file, metafile, outfile, delimiter=None,
 
 
 def clock_mouse(beta_file, outfile, cname, genome, metafile=None, delimiter=None,
-                ff='pdf', na_percent=0.2, ovr=False,
-                imputation_method=11, ext_file=None):
+                ff='pdf', na_percent=0.2, ovr=False):
     """
     Compute mouse DNAm age using four clocks ("WLMT", "YOMT", "Liver", or
     "Blood"). Note that unlike human DNAm clocks, the input DNA methylation
@@ -1799,13 +1742,6 @@ def clock_mouse(beta_file, outfile, cname, genome, metafile=None, delimiter=None
         The default is 0.2 (20%).
     ovr : bool, optional
         If set, over write existing files. The default is False
-    imputation_method : int
-        Must be one of [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]. See
-        imputation.py for details. default is 6.
-    ext_file : str
-        This is must be exisit if imputation_method is set to 10.
-        Two-column, Tab or comma separated file: 1st column is CpG ID, the 2nd
-        column is beta value.
 
 
     Returns
@@ -1884,7 +1820,7 @@ def clock_mouse(beta_file, outfile, cname, genome, metafile=None, delimiter=None
         logging.info("Change the range of beta values from (0, 1) to (0, 100)")
         input_df1 = input_df1/100
 
-    input_df2 = impute_beta(input_df1, method=imputation_method, ref=ext_file)
+    input_df2 = input_df1
     (n_cpg, n_sample) = input_df2.shape
     logging.info(
         "Input file: \"%s\", Number of CpGs: %d, Number of samples: %d" %
