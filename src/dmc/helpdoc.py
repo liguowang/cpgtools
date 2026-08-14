@@ -107,19 +107,6 @@ LOG_HELP = (
     "Optional log file. If omitted, log messages are written to the terminal."
 )
 
-IMPUTATION_HELP = (
-    "Missing-value imputation method: -1=remove CpGs with any missing values; "
-    "0=fill with 0.0; 1=fill with 1.0; 2=column mean; 3=column median; "
-    "4=column minimum; 5=column maximum; 6=row mean; 7=row median; "
-    "8=row minimum; 9=row maximum; 10=external reference; 11=KNN "
-    "(K=sqrt(n)). Method 10 requires an external reference file."
-)
-
-EXT_REF_HELP = (
-    "External reference file containing two columns separated by tabs or "
-    "commas. The first column contains probe IDs and the second contains "
-    "reference beta values."
-)
 
 # Backward-compatible lowercase aliases used by existing CpGtools code.
 general_help = GENERAL_HELP
@@ -138,5 +125,3 @@ mmLiver_help = MMLIVER_HELP
 mmBlood_help = MMBLOOD_HELP
 epm_output_help = EPM_OUTPUT_HELP
 log_help = LOG_HELP
-imputation_help = IMPUTATION_HELP
-ext_ref_help = EXT_REF_HELP
