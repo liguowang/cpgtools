@@ -1,6 +1,6 @@
 [project]
 name = "cpgtools"
-version = "3.0.1"
+version = "3.0.2"
 
 description = "Python tools for DNA methylation analysis, imputation, epigenetic clocks, and cell-type deconvolution."
 
@@ -88,4 +88,14 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+cpgmodule = [
+    "deconv_data/*",
+    "deconv_data/**/*",
+]
+dmc = [
+    "data/*",
+    "data/**/*",
+]
 
