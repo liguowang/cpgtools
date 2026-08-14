@@ -24,6 +24,7 @@ dependencies = [
     "bx-python>=0.11",
     "weblogo>=3.7",
     "pycombat>=0.20",
+    "EpigeneticPacemaker",
 ]
 
 keywords = [
