@@ -25,6 +25,7 @@ dependencies = [
     "weblogo>=3.7",
     "pycombat>=0.20",
     "EpigeneticPacemaker",
+    "rpy2",
 ]
 
 keywords = [
