@@ -32,6 +32,7 @@ script_files = [
 "scripts/dmc_nonparametric.py",
 "scripts/dmc_ttest.py",
 "scripts/predict_sex.py",
+"scripts/epical.py"
 ]
 
 if __name__ == "__main__":

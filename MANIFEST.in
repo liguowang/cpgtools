@@ -5,6 +5,13 @@ include setup.py
 recursive-include src *.pyx
 recursive-include src *.py
 recursive-include src *.pkl
+recursive-include src/dmc/data *
+recursive-include src/cpgmodule/deconv_data *
 
 recursive-include scripts *
-recursive-include docs * 
+recursive-include docs *
+
+recursive-exclude src __pycache__ *
+recursive-exclude src *.py[cod]
+
+

@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul  5 21:43:13 2024
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: "deep.omics.lab@gmail.com"
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
 
-@author: m102324
-"""
 
 import sys,os
 import pandas as pd

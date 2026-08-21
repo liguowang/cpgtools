@@ -218,6 +218,44 @@ def _add_epm_arguments(parser):
     )
 
 
+def _add_gp_age_arguments(parser):
+    """Add arguments specific to the GP-Age subcommand."""
+    parser.add_argument(
+        "input", type=str, metavar="Input_file", help=helpdoc.input_help
+    )
+    parser.add_argument(
+        "-m", "--model", choices=("10", "30", "71", "a", "b", "c"),
+        default="30",
+        help="GP-Age model to use.",
+    )
+    parser.add_argument(
+        "-a", "--age", type=str, metavar="age_file", default=None,
+        help="Optional file containing chronological ages.",
+    )
+    parser.add_argument(
+        "-o", "--output", type=str, metavar="out_prefix", default=None,
+        help=(
+            "Output prefix. Predictions are written to "
+            "PREFIX.GP_age.txt and statistics to PREFIX.GP_age.stats.txt. "
+            "If omitted, predictions are written to stdout."
+        ),
+    )
+    parser.add_argument(
+        "--model-dir", type=str, metavar="DIR", default=None,
+        help=(
+            "Directory containing GP-Age model and CpG files. "
+            "If omitted, GP-Age uses its bundled model-data directory."
+        ),
+    )
+    parser.add_argument(
+        "-l", "--log", type=str, metavar="log_file", default=None,
+        help=helpdoc.log_help,
+    )
+    parser.add_argument(
+        "--debug", action="store_true", help=helpdoc.debug_help
+    )
+
+
 def build_parser():
     """Build and return the epical argument parser."""
     parser = argparse.ArgumentParser(
@@ -243,6 +281,13 @@ def build_parser():
         "DunedinPACE", help=_clock_help("DunedinPACE")
     )
     _add_common_arguments(dunedin, include_log=False)
+
+    gp_age = subparsers.add_parser(
+        "GP-Age",
+        help="Gaussian Process-based epigenetic age predictor.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    _add_gp_age_arguments(gp_age)
 
     epm = subparsers.add_parser("EPM", help=_clock_help("EPM"))
     _add_epm_arguments(epm)
@@ -389,6 +434,21 @@ def _run_dunedinpace(args):
     DunedinPACE.DunedinPACE_clock(**kwargs)
 
 
+def _run_gp_age(args):
+    """Run GP-Age through the CpGtools command-line interface."""
+    from dmc import GP_Age
+
+    _configure_logging(args)
+
+    GP_Age.run_gp_age(
+        methylation_file=args.input,
+        model=args.model,
+        age_file=args.age,
+        output_prefix=args.output,
+        model_dir=args.model_dir,
+    )
+
+
 def _build_command_handlers():
     """Build the command-to-handler registry.
 
@@ -401,6 +461,7 @@ def _build_command_handlers():
         "EPM": _run_epm,
         "mammClock1": _run_mammalian,
         "DunedinPACE": _run_dunedinpace,
+        "GP-Age": _run_gp_age,
     }
 
     for command in HORVATH_CLOCKS:

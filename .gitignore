@@ -52,3 +52,9 @@ htmlcov/
 
 # Logs
 *.log
+
+# Editor backup files
+*~
+*.swp
+*.swo
+

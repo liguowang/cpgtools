@@ -2,7 +2,7 @@
 # Copyright (c) 2024-2026 Liguo Wang
 #
 # Author: Liguo Wang
-# Email: wangliguo78@gmail.com
+# Email: "deep.omics.lab@gmail.com"
 # Project: https://github.com/liguowang/cpgtools
 #
 # This file is part of CpGtools and is distributed under the MIT License.

@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: "deep.omics.lab@gmail.com"
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
 # -*- coding: utf-8 -*-
+
 """Help text used by the CpGtools ``epical`` command-line interface."""
 
 GENERAL_HELP = "Epical: a DNA methylation-based epigenetic age calculator."

@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+#
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
+#
+# Author: Liguo Wang
+# Email: "deep.omics.lab@gmail.com"
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
 
 """
 Description
@@ -17,19 +28,11 @@ from dmc.utils import plot_coef, plot_corr
 from dmc.utils import plot_known_predicted_ages
 from dmc.utils import pearson_correlation
 import subprocess
-from EpigeneticPacemaker.EpigeneticPacemaker import EpigeneticPacemaker
 from EpigeneticPacemaker.EpigeneticPacemakerCV import EpigeneticPacemakerCV
 
 
-__author__ = "Liguo Wang"
-__copyright__ = "Copyleft"
-__credits__ = []
-__maintainer__ = "Liguo Wang"
-__email__ = "wang.liguo@mayo.edu"
-__status__ = "Development"
-
-def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', metafile=None, delimiter=None,
-                  ff='pdf', na_percent=0.2,
+def clock_mammalian(beta_file, outfile, species='human', cname='mammClock2', 
+                    metafile=None, delimiter=None, ff='pdf', na_percent=0.2,
                   ovr=False):
     """
     Calculate Universal clocks 2. This age is relative to the maximum lifespan of 

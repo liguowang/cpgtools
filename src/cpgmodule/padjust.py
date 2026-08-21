@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
 
-# Copyright 2017 Francisco Pina Martins <f.pinamartins@gmail.com>
-# This file is part of structure_threader.
-# structure_threader is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# structure_threader is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-
-# Modifications Copyright (c) 2024-2026 Liguo Wang
-# Modified for use in CpGtools.
+# CpGtools
+# Copyright (c) 2024-2026 Liguo Wang
 #
-# See LICENSE.txt and the relevant third-party license notices for details.
+# Author: Liguo Wang
+# Email: "deep.omics.lab@gmail.com"
+# Project: https://github.com/liguowang/cpgtools
+#
+# This file is part of CpGtools and is distributed under the MIT License.
+# See the LICENSE.txt file in the project root for the full license text.
+
 
 import numpy as np
 
