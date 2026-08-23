@@ -28,6 +28,7 @@ dependencies = [
     "rpy2",
     "GPy",
     "biolearn",
+    "seaborn",
 ]
 
 keywords = [
