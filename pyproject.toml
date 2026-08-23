@@ -27,6 +27,7 @@ dependencies = [
     "EpigeneticPacemaker",
     "rpy2",
     "GPy",
+    "biolearn",
 ]
 
 keywords = [
