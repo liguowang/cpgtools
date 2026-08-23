@@ -106,6 +106,42 @@ GESTATIONAL_CLOCKS = {
 GENERAL_CLOCKS = {"Weidner", "Lin", "ENCen100", "ENCen40"}
 
 
+# BioLearn models exposed as dedicated epical subcommands.  These are kept
+# separate from CpGtools-native clocks so overlapping biological concepts do
+# not change the implementation used by existing commands.
+BIOLEARN_CLOCKS = (
+    "YingCausAge",
+    "YingDamAge",
+    "YingAdaptAge",
+    "DunedinPoAm38",
+    "GrimAgeV1",
+    "GrimAgeV2",
+    "VidalBralo",
+    "AlcoholMcCartney",
+    "HRSInCHPhenoAge",
+    "EpiTOC1",
+    "EpiTOC2",
+    "SmokingMcCartney",
+    "DownSyndrome",
+    "StocZ",
+    "StocP",
+    "StocH",
+    "BMI_McCartney",
+    "EducationMcCartney",
+    "TotalCholesterolMcCartney",
+    "HDLCholesterolMcCartney",
+    "LDLCholesterolMcCartney",
+    "BodyFatMcCartney",
+    "BMI_Reed",
+    "ProstateCancerKirby",
+    "HepatoXu",
+    "CVD_Westerman",
+    "AD_Bahado-Singh",
+    "DepressionBarbu",
+    "Bocklandt",
+)
+
+
 def _clock_help(name):
     """Return the existing CpGtools description for a clock."""
     if name == "EPM":
@@ -150,6 +186,40 @@ def _add_common_arguments(parser, *, include_log=True):
     )
 
 
+
+
+def _add_biolearn_arguments(parser):
+    """Add arguments used by BioLearn-backed subcommands."""
+    parser.add_argument(
+        "input",
+        type=str,
+        metavar="Input_file",
+        help="Methylation beta-value table (CpGs as rows, samples as columns).",
+    )
+    parser.add_argument(
+        "-m",
+        "--metadata",
+        type=str,
+        metavar="meta_file",
+        required=True,
+        help=(
+            "Sample metadata table. Rows must be samples matching the beta "
+            "matrix columns. 'Age'/'Sex' columns are normalized to 'age'/'sex'."
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        metavar="out_prefix",
+        required=True,
+        help=(
+            "Output prefix. Results are written to "
+            "PREFIX_<BioLearn_model>.tsv."
+        ),
+    )
+
+
 def _add_mouse_arguments(parser):
     _add_common_arguments(parser)
     parser.add_argument(
@@ -157,9 +227,7 @@ def _add_mouse_arguments(parser):
         default="mm10",
         help=(
             "Reference genome used for mouse RRBS/WGBS read alignment. "
-            "Must be 'mm10' or 'mm39'."
-        ),
-    )
+            "Must be 'mm10' or 'mm39'."),)
 
 
 def _add_mammalian_species_arguments(parser):
@@ -167,8 +235,7 @@ def _add_mammalian_species_arguments(parser):
     parser.add_argument(
         "-s", "--species", type=str, choices=("human", "mouse"),
         default="human",
-        help="Mammalian species. Currently supports 'human' or 'mouse'.",
-    )
+        help="Mammalian species. Currently supports 'human' or 'mouse'.",)
 
 
 def _add_epm_arguments(parser):
@@ -299,6 +366,17 @@ def build_parser():
     for name in MAMMALIAN_CLOCKS:
         subparser = subparsers.add_parser(name, help=_clock_help(name))
         _add_mammalian_species_arguments(subparser)
+
+
+    # Selected BioLearn models.  They intentionally use their BioLearn model
+    # names as subcommands, even when CpGtools provides a related clock.
+    for name in BIOLEARN_CLOCKS:
+        subparser = subparsers.add_parser(
+            name,
+            help=helpdoc.BIOLEARN_CLOCK_HELP[name],
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        )
+        _add_biolearn_arguments(subparser)
 
     return parser
 
@@ -434,6 +512,67 @@ def _run_dunedinpace(args):
     DunedinPACE.DunedinPACE_clock(**kwargs)
 
 
+
+
+def _build_biolearn_geodata(beta_path, meta_path):
+    """Build a BioLearn GeoData object from beta and metadata tables."""
+    import pandas as pd
+    from biolearn.data_library import GeoData
+
+    beta_df = pd.read_csv(beta_path, sep=None, index_col=0, engine="python")
+    meta_df = pd.read_csv(meta_path, sep=None, index_col=0, engine="python")
+    meta_df.rename(columns={"Sex": "sex", "Age": "age"}, inplace=True)
+
+    common_samples = meta_df.index.intersection(beta_df.columns)
+    if len(common_samples) == 0:
+        raise ValueError(
+            "No matching sample IDs found between metadata and beta values."
+        )
+
+    meta_df = meta_df.loc[common_samples]
+    beta_df = beta_df.loc[:, common_samples]
+    return GeoData(metadata=meta_df, dnam=beta_df)
+
+
+def _run_biolearn(args):
+    """Run one of the selected BioLearn models."""
+    import pandas as pd
+    from biolearn.model_gallery import ModelGallery
+
+    command = args.command
+    print(
+        f"Reading '{args.input}' and '{args.metadata}' ...",
+        file=sys.stderr,
+    )
+    geodata = _build_biolearn_geodata(args.input, args.metadata)
+
+    print(f"Calculating '{command}' ...", file=sys.stderr)
+    output = ModelGallery().get(command).predict(geodata)
+
+    # BioLearn models may return a Series, a one-column DataFrame, or a
+    # multi-column DataFrame (e.g. GrimAge and deconvolution models).
+    if isinstance(output, pd.Series):
+        output = output.to_frame(name=command)
+    else:
+        output = output.copy()
+
+    output.index.name = "sampleID"
+
+    if command in {"GrimAgeV1", "GrimAgeV2"}:
+        renamed = [str(col).replace("DNAm", f"{command}.") for col in output.columns]
+        if len(renamed) >= 2:
+            renamed[-2] = f"{command}.Prediction"
+            renamed[-1] = f"{command}.AgeAcce"
+        output.columns = renamed
+    elif len(output.columns) == 1:
+        output.columns = [command]
+
+    outfile = f"{args.output}_{command}.tsv"
+    output.to_csv(outfile, index=True, sep="\t")
+    print(f"Wrote '{outfile}'.", file=sys.stderr)
+
+
+
 def _run_gp_age(args):
     """Run GP-Age through the CpGtools command-line interface."""
     from dmc import GP_Age
@@ -478,6 +617,8 @@ def _build_command_handlers():
         handlers[command] = _run_mammalian_species
     for command in MOUSE_CLOCKS:
         handlers[command] = _run_mouse
+    for command in BIOLEARN_CLOCKS:
+        handlers[command] = _run_biolearn
 
     return handlers
 
