@@ -55,7 +55,7 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from combat.pycombat import pycombat
+from pycombat import Combat
 from sklearn.impute import KNNImputer
 
 from cpgmodule._version import __version__
